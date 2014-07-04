@@ -10,8 +10,6 @@ SRC_URI += "file://drm-vivante-Add-00-sufix-in-returned-bus-Id.patch \
             file://0001-perf-tools-Fix-getrusage-related-build-failure-on-gl.patch \
             file://0002-ARM-7668-1-fix-memset-related-crashes-caused-by-rece.patch \
             file://0003-ARM-7670-1-fix-the-memset-fix.patch \
-            file://0004-ENGR00271136-Fix-build-break-when-CONFIG_CLK_DEBUG-i.patch \
-            file://0005-ENGR00271359-Add-Multi-touch-support.patch \
-            file://0007-ARM-mach-mx6-board-mx6q_sabresd-Register-SDHC3-first.patch"
+            file://0004-ENGR00271136-Fix-build-break-when-CONFIG_CLK_DEBUG-i.patch"
 
 COMPATIBLE_MACHINE = "(mx6curie)"
