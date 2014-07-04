@@ -10,7 +10,7 @@ inherit core-image distro_features_check
 CONFLICT_DISTRO_FEATURES = "directfb x11 wayland"
 
 # SOC_EXTRA_IMAGE_FEATURES ?= "tools-testapps"
-SOC_EXTRA_IMAGE_FEATURES=""
+SOC_EXTRA_IMAGE_FEATURES?=""
 
 # Add extra image features
 EXTRA_IMAGE_FEATURES += " \
@@ -22,6 +22,7 @@ EXTRA_IMAGE_FEATURES += " \
 
 IMAGE_INSTALL += " \
 	${CORE_IMAGE_BASE_INSTALL} \
+	${MACHINE_FIRMWARE} \
 	packagegroup-core-basic \
 	libsdl \
 	libxml2 \
@@ -39,7 +40,6 @@ IMAGE_INSTALL += " \
 	ntp \
 	ntp-utils \
 	util-linux \
-	firmware-imx-vpu-imx6d \
 	ethtool \
 	xz \
 	lsof \
