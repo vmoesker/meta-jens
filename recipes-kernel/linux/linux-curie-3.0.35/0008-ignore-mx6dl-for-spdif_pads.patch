@@ -1,0 +1,25 @@
+From efa8f9870c9db636fe43b4f25b66eb099b7da9ef Mon Sep 17 00:00:00 2001
+From: Jens Rehsack <sno@netbsd.org>
+Date: Wed, 9 Jul 2014 16:25:06 +0200
+Subject: [PATCH 8/8] ignore mx6dl for spdif_pads
+
+---
+ arch/arm/mach-mx6/board-mx6q_sabresd.c | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/arch/arm/mach-mx6/board-mx6q_sabresd.c b/arch/arm/mach-mx6/board-mx6q_sabresd.c
+index 5568140..05249582 100644
+--- a/arch/arm/mach-mx6/board-mx6q_sabresd.c
++++ b/arch/arm/mach-mx6/board-mx6q_sabresd.c
+@@ -784,8 +784,6 @@ static void __init mx6_sabresd_board_init(void)
+ 	// spdif
+ 	if (cpu_is_mx6q())
+ 		mxc_iomux_v3_setup_multiple_pads(mx6q_sabresd_spdif_pads, ARRAY_SIZE(mx6q_sabresd_spdif_pads));
+-	else if (cpu_is_mx6dl())
+-		mxc_iomux_v3_setup_multiple_pads(mx6dl_sabresd_spdif_pads, ARRAY_SIZE(mx6dl_sabresd_spdif_pads));
+ 
+ #ifdef CONFIG_FEC_1588
+ 	/* Set GPIO_16 input for IEEE-1588 ts_clk and RMII reference clock
+-- 
+1.9.1
+

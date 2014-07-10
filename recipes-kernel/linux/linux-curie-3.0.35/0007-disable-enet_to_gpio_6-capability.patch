@@ -1,0 +1,57 @@
+From fa7cfbfdccf55e4b6a6f41ebf4a7602f64a154ad Mon Sep 17 00:00:00 2001
+From: Jens Rehsack <sno@netbsd.org>
+Date: Wed, 9 Jul 2014 15:17:22 +0200
+Subject: [PATCH 7/7] disable enet_to_gpio_6 capability
+
+This feature seems not be acknowledged by WindSolve - wait for their
+feedback
+---
+ arch/arm/mach-mx6/board-mx6q_sabresd.c | 4 +++-
+ arch/arm/mach-mx6/cpu.c                | 2 +-
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/mach-mx6/board-mx6q_sabresd.c b/arch/arm/mach-mx6/board-mx6q_sabresd.c
+index 464292a..5568140 100644
+--- a/arch/arm/mach-mx6/board-mx6q_sabresd.c
++++ b/arch/arm/mach-mx6/board-mx6q_sabresd.c
+@@ -243,7 +243,6 @@ static struct fec_platform_data fec_data __initdata = {
+ 	.gpio_irq = MX6_ENET_IRQ,
+ };
+ 
+-
+ static struct imxi2c_platform_data mx6q_sabresd_i2c_data = {
+ 	.bitrate = 100000,
+ };
+@@ -754,6 +753,8 @@ static void __init mx6_sabresd_board_init(void)
+ 	if (cpu_is_mx6q()) {
+ 		mxc_iomux_v3_setup_multiple_pads(mx6q_sabresd_pads,
+ 			ARRAY_SIZE(mx6q_sabresd_pads));
++#if 0
++		/* disable because WindSolve not in 4.0.0 */
+ 		if (enet_to_gpio_6) {
+ 			iomux_v3_cfg_t enet_gpio_pad =
+ 				MX6Q_PAD_GPIO_6__ENET_IRQ_TO_GPIO_6;
+@@ -763,6 +764,7 @@ static void __init mx6_sabresd_board_init(void)
+ 				MX6Q_PAD_GPIO_6__I2C3_SDA;
+ 			mxc_iomux_v3_setup_pad(i2c3_pad);
+ 		}
++#endif
+ 	} else if (cpu_is_mx6dl()) {
+ 		mxc_iomux_v3_setup_multiple_pads(mx6dl_sabresd_pads,
+ 			ARRAY_SIZE(mx6dl_sabresd_pads));
+diff --git a/arch/arm/mach-mx6/cpu.c b/arch/arm/mach-mx6/cpu.c
+index 495f62e..605ad19 100644
+--- a/arch/arm/mach-mx6/cpu.c
++++ b/arch/arm/mach-mx6/cpu.c
+@@ -344,7 +344,7 @@ early_param("mem_clk_on", enable_mem_clk_in_wait);
+ 
+ static int __init set_enet_irq_to_gpio(char *p)
+ {
+-	enet_to_gpio_6 = true;
++	enet_to_gpio_6 = false;
+ 	return 0;
+ }
+ 
+-- 
+1.9.1
+

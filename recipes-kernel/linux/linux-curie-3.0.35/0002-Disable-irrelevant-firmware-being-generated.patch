@@ -1,0 +1,31 @@
+From 3714c051cb4b15ead99a1e6b2ddb6f5eab763e32 Mon Sep 17 00:00:00 2001
+From: Jens Rehsack <sno@netbsd.org>
+Date: Wed, 9 Jul 2014 13:12:18 +0200
+Subject: [PATCH 2/7] Disable irrelevant firmware being generated
+
+---
+ firmware/Makefile | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/firmware/Makefile b/firmware/Makefile
+index b1d024d..9824b5b8 100644
+--- a/firmware/Makefile
++++ b/firmware/Makefile
+@@ -148,10 +148,13 @@ fw-shipped-$(CONFIG_SOC_IMX53) += imx/sdma/sdma-imx53-to1.bin
+ fw-shipped-$(CONFIG_SOC_IMX6Q) += imx/sdma/sdma-imx6q-to1.bin
+ endif
+ fw-shipped-$(CONFIG_FB_MXC_SIPIX_PANEL) += imx/spdc_pvi.fw
++# XXX should be 'ifdef CONFIG_IMX_CURIE'
++ifeq (1,0)
+ fw-shipped-$(CONFIG_FB_MXC_EINK_PANEL) += imx/epdc_E60_V110.fw \
+                 imx/epdc_E60_V220.fw \
+                 imx/epdc_E97_V110.fw \
+-                imx/epdc_E060SCM.fw \
++                imx/epdc_E060SCM.fw
++endif
+ 
+ fw-shipped-all := $(fw-shipped-y) $(fw-shipped-m) $(fw-shipped-)
+ 
+-- 
+1.9.1
+

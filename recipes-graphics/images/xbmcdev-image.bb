@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3
 
 inherit core-image distro_features_check
 
-CONFLICT_DISTRO_FEATURES = "directfb x11 wayland"
+CONFLICT_DISTRO_FEATURES = "directfb wayland"
 
 # SOC_EXTRA_IMAGE_FEATURES ?= "tools-testapps"
 SOC_EXTRA_IMAGE_FEATURES?=""
@@ -31,6 +31,8 @@ IMAGE_INSTALL += " \
 	dropbear \
 	packagegroup-core-sdk \
 	xbmc \
+	xbmc-image-custom-rfs \
+	openjdk-7-jre \
 	procps \
 	util-linux-mount \
 	libntfs-3g \

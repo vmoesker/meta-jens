@@ -1,0 +1,93 @@
+diff --git a/arch/arm/mach-mx6/board-mx6q_sabresd.c b/arch/arm/mach-mx6/board-mx6q_sabresd.c
+index 05249582..5bec33e 100644
+--- a/arch/arm/mach-mx6/board-mx6q_sabresd.c
++++ b/arch/arm/mach-mx6/board-mx6q_sabresd.c
+@@ -502,8 +502,10 @@ static struct fsl_mxc_hdmi_platform_data hdmi_data = {
+ 	.init = hdmi_init,
+ 	.enable_pins = hdmi_enable_ddc_pin,
+ 	.disable_pins = hdmi_disable_ddc_pin,
++#if 0
+ 	.phy_reg_vlev = 0x0294,
+ 	.phy_reg_cksymtx = 0x800d,
++#endif
+ };
+ 
+ static struct fsl_mxc_hdmi_core_platform_data hdmi_core_data = {
+@@ -532,6 +534,7 @@ static struct imx_ipuv3_platform_data ipu_data[] = {
+ 	},
+ };
+ 
++#if 0
+ struct imx_vout_mem {
+ 	resource_size_t res_mbase;
+ 	resource_size_t res_msize;
+@@ -540,6 +543,7 @@ struct imx_vout_mem {
+ static struct imx_vout_mem vout_mem __initdata = {
+ 	.res_msize = SZ_128M,
+ };
++#endif
+ 
+ static void sabresd_suspend_enter(void)
+ {
+@@ -942,16 +946,16 @@ static void __init mx6_sabresd_board_init(void)
+ 	imx6q_add_hdmi_soc();
+ 	imx6q_add_hdmi_soc_dai();
+ 
++#if 0
+ 	if (cpu_is_mx6dl()) {
+ 		//imx6dl_add_imx_pxp();
+ 		//imx6dl_add_imx_pxp_client();
+-#if 0
+ 		if (epdc_enabled) {
+ 			mxc_register_device(&max17135_sensor_device, NULL);
+ 			imx6dl_add_imx_epdc(&epdc_data);
+ 		}
+-#endif
+ 	}
++#endif
+ 
+ 	clko2 = clk_get(NULL, "clko2_clk");
+ 	if (IS_ERR(clko2))
+@@ -1034,13 +1038,14 @@ static void __init mx6q_sabresd_reserve(void)
+ 			sabresd_fb_data[i].res_base[0] = phys;
+ 		}
+ 	}
+-
++#if 0
+ 	if (vout_mem.res_msize) {
+ 		phys = memblock_alloc_base(vout_mem.res_msize,
+ 					   SZ_4K, SZ_1G);
+ 		memblock_remove(phys, vout_mem.res_msize);
+ 		vout_mem.res_mbase = phys;
+ 	}
++#endif
+ }
+ 
+ /*
+diff --git a/arch/arm/plat-mxc/include/mach/iomux-mx6q.h b/arch/arm/plat-mxc/include/mach/iomux-mx6q.h
+index 16cd87f..4d6a48a 100644
+--- a/arch/arm/plat-mxc/include/mach/iomux-mx6q.h
++++ b/arch/arm/plat-mxc/include/mach/iomux-mx6q.h
+@@ -85,7 +85,7 @@
+ #define MX6Q_ECSPI_PAD_CTRL	(PAD_CTL_SRE_FAST | PAD_CTL_SPEED_MED | \
+ 		PAD_CTL_DSE_40ohm | PAD_CTL_HYS)
+ 
+-#define MX6Q_HDMICEC_PAD_CTRL	(PAD_CTL_HYS | PAD_CTL_PUS_100K_UP | \
++#define MX6Q_HDMICEC_PAD_CTRL	(PAD_CTL_HYS | PAD_CTL_PUS_22K_UP | \
+ 		PAD_CTL_PUE | PAD_CTL_PKE | PAD_CTL_ODE | PAD_CTL_SPEED_MED | \
+ 		PAD_CTL_DSE_40ohm | PAD_CTL_SRE_SLOW)
+ 
+@@ -5936,11 +5936,12 @@
+ 		(_MX6Q_PAD_GPIO_3__USBOH3_USBH1_OC | MUX_PAD_CTRL(NO_PAD_CTRL))
+ #define  MX6Q_PAD_GPIO_3__MLB_MLBCLK		\
+ 		(_MX6Q_PAD_GPIO_3__MLB_MLBCLK | MUX_PAD_CTRL(MX6Q_MLB150_PAD_CTRL))
+-
++#if 0
+ #define  MX6Q_PAD_GPIO_6__ENET_IRQ_TO_GPIO_6		\
+ 		(_MX6Q_PAD_GPIO_6__ENET_IRQ_TO_GPIO_6 | MUX_PAD_CTRL(ENET_IRQ_PAD_CTRL))
+ #define  MX6Q_PAD_GPIO_6__OBSERVE_MUX_OBSRV_INT_OUT1		\
+ 		(_MX6Q_PAD_GPIO_6__OBSERVE_MUX_OBSRV_INT_OUT1 | MUX_PAD_CTRL(NO_PAD_CTRL))
++#endif
+ #define  MX6Q_PAD_GPIO_6__ESAI1_SCKT		\
+ 		(_MX6Q_PAD_GPIO_6__ESAI1_SCKT | MUX_PAD_CTRL(NO_PAD_CTRL))
+ #define  MX6Q_PAD_GPIO_6__GPIO_1_6		\

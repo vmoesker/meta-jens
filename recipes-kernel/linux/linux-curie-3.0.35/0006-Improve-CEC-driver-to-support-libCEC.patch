@@ -1,3 +1,15 @@
+From fe92fc44105aec5b31e68faf924e1f55e3453f2d Mon Sep 17 00:00:00 2001
+From: Jens Rehsack <sno@netbsd.org>
+Date: Wed, 9 Jul 2014 13:16:09 +0200
+Subject: [PATCH 6/7] Improve CEC driver to support libCEC ...
+
+cf http://stephan-rafin.net/blog/2013/09/30/i-mx6-cec/ for details
+check https://github.com/wolfgar/utilite/tree/master/drivers/mxc/hdmi-cec
+for updates, too
+---
+ drivers/mxc/hdmi-cec/mxc_hdmi-cec.c | 206 ++++++++++++++++++++++--------------
+ 1 file changed, 125 insertions(+), 81 deletions(-)
+
 diff --git a/drivers/mxc/hdmi-cec/mxc_hdmi-cec.c b/drivers/mxc/hdmi-cec/mxc_hdmi-cec.c
 index 1764623..381fc9f 100644
 --- a/drivers/mxc/hdmi-cec/mxc_hdmi-cec.c
@@ -414,3 +426,6 @@ index 1764623..381fc9f 100644
  	if (hdmi_cec_major > 0) {
  		device_destroy(hdmi_cec_class, MKDEV(hdmi_cec_major, 0));
  		class_destroy(hdmi_cec_class);
+-- 
+1.9.1
+
