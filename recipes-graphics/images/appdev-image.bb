@@ -18,6 +18,8 @@ EXTRA_IMAGE_FEATURES += " \
     nfs-server \
     tools-debug \
     tools-profile \
+    dbg-pkgs \
+    dev-pkgs \
 "
 
 IMAGE_INSTALL += " \
