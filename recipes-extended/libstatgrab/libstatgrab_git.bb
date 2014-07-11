@@ -8,7 +8,7 @@ DEPENDS = "ncurses"
 
 PV = "0.91"
 
-SRCREV = "b8698cb49858f03804a54fd4a7a1f02363b7175c"
+SRCREV = "28151cc18d65bc0dc3568b2f48d1a528bb296e9d"
 SRC_URI = "git://github.com/i-scream/libstatgrab.git"
 
 S = "${WORKDIR}/git"
