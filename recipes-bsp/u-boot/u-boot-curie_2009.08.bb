@@ -16,7 +16,8 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-${PV}:"
 # Revision of imx_v2009.08_3.0.35_4.1.0
 SRCREV = "aa2be38ed4a16a6c3c100ac2d0449d54360cb892"
 
-SRC_URI = "git://git.freescale.com/imx/uboot-imx.git"
+SRCBRANCH = "imx_v2009.08_3.0.35_4.1.0"
+SRC_URI = "git://git.freescale.com/imx/uboot-imx.git;branch=${SRCBRANCH}"
 SRC_URI += "file://u-boot-curie.patch"
 
 # UBOOT_MACHINE_imx53qsb = "mx53_loco_config"

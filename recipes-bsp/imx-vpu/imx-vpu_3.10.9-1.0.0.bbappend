@@ -1,1 +1,0 @@
-PLATFORM = "IMX6Q"
