@@ -1,0 +1,25 @@
+From 62a5237f140a21f0ba7d74f46d253503c5e1621d Mon Sep 17 00:00:00 2001
+From: gao.cui <gao.cui@windsolve.com>
+Date: Sun, 13 Jul 2014 19:06:04 +0800
+Subject: [PATCH 24/30] watchdog driver init for Curie
+
+---
+ arch/arm/mach-mx6/board-mx6q_curie.c |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
+
+diff --git a/arch/arm/mach-mx6/board-mx6q_curie.c b/arch/arm/mach-mx6/board-mx6q_curie.c
+index 50489b8..cfda887 100644
+--- a/arch/arm/mach-mx6/board-mx6q_curie.c
++++ b/arch/arm/mach-mx6/board-mx6q_curie.c
+@@ -564,6 +564,8 @@ static void __init mx6_curie_board_init(void)
+ 	mx6q_curie_init_leds();
+ 	/* Button */
+ 	mx6q_curie_init_buttons();
++	/* WDT */
++	imx6q_add_imx2_wdt(0, NULL);
+ }
+ 
+ extern void __iomem *twd_base;
+-- 
+1.7.0.4
+

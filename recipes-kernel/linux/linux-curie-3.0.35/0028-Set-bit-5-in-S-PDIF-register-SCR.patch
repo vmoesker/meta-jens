@@ -1,26 +1,25 @@
-From af5709f3d414eb5d91dd6daf85233e49ee051336 Mon Sep 17 00:00:00 2001
-From: Jens Rehsack <sno@netbsd.org>
-Date: Wed, 9 Jul 2014 13:13:26 +0200
-Subject: [PATCH 3/7] Set bit 5 in register SPDIF SCR
+From 18ddb25750d170ba66fb6e629f620c12ca1addb8 Mon Sep 17 00:00:00 2001
+From: gao.cui <gao.cui@windsolve.com>
+Date: Sun, 13 Jul 2014 22:55:32 +0800
+Subject: [PATCH 28/30] Set bit 5 in S/PDIF register SCR
+ clear outgoing validity bit
 
-... to always clear outgoing validity bit.
 ---
- sound/soc/codecs/mxc_spdif.c | 2 ++
- 1 file changed, 2 insertions(+)
+ sound/soc/codecs/mxc_spdif.c |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
 diff --git a/sound/soc/codecs/mxc_spdif.c b/sound/soc/codecs/mxc_spdif.c
-index b358f71..ba04f69 100644
+index b358f71..54adb84 100644
 --- a/sound/soc/codecs/mxc_spdif.c
 +++ b/sound/soc/codecs/mxc_spdif.c
-@@ -577,6 +577,8 @@ static int mxc_spdif_playback_start(struct snd_pcm_substream *substream,
+@@ -577,6 +577,7 @@ static int mxc_spdif_playback_start(struct snd_pcm_substream *substream,
  	regval &= ~SCR_LOW_POWER;
  	regval |= SCR_TXFIFO_AUTOSYNC | SCR_TXFIFO_NORMAL |
  	    SCR_TXSEL_NORMAL | SCR_USRC_SEL_CHIP | (2 << SCR_TXFIFO_ESEL_BIT);
-+	// to clear VAL
 +	regval |= SCR_VAL_CLEAR;
  	__raw_writel(regval, SPDIF_REG_SCR + spdif_base_addr);
  
  	/* Default clock source from EXTAL, divider by 8, generate 44.1kHz
 -- 
-1.9.1
+1.7.0.4
 

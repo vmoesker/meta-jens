@@ -1,17 +1,16 @@
-From fe92fc44105aec5b31e68faf924e1f55e3453f2d Mon Sep 17 00:00:00 2001
-From: Jens Rehsack <sno@netbsd.org>
-Date: Wed, 9 Jul 2014 13:16:09 +0200
-Subject: [PATCH 6/7] Improve CEC driver to support libCEC ...
+From adf2327026e702dd69ccbbfe3c0106bd4edb8b96 Mon Sep 17 00:00:00 2001
+From: gao.cui <gao.cui@windsolve.com>
+Date: Mon, 14 Jul 2014 20:14:50 +0800
+Subject: [PATCH 30/30] Merge patches for CEC issues from wolfgar
+   https://github.com/xbmc-imx6/xbmc/issues/54#issuecomment-41498389
 
-cf http://stephan-rafin.net/blog/2013/09/30/i-mx6-cec/ for details
-check https://github.com/wolfgar/utilite/tree/master/drivers/mxc/hdmi-cec
-for updates, too
 ---
- drivers/mxc/hdmi-cec/mxc_hdmi-cec.c | 206 ++++++++++++++++++++++--------------
- 1 file changed, 125 insertions(+), 81 deletions(-)
+ drivers/mxc/hdmi-cec/mxc_hdmi-cec.c |  207 +++++++++++++++++++++--------------
+ drivers/video/mxc_hdmi.c            |   85 +++++++++++++-
+ 2 files changed, 205 insertions(+), 87 deletions(-)
 
 diff --git a/drivers/mxc/hdmi-cec/mxc_hdmi-cec.c b/drivers/mxc/hdmi-cec/mxc_hdmi-cec.c
-index 1764623..381fc9f 100644
+index 1764623..1246c1d 100644
 --- a/drivers/mxc/hdmi-cec/mxc_hdmi-cec.c
 +++ b/drivers/mxc/hdmi-cec/mxc_hdmi-cec.c
 @@ -1,3 +1,4 @@
@@ -426,6 +425,166 @@ index 1764623..381fc9f 100644
  	if (hdmi_cec_major > 0) {
  		device_destroy(hdmi_cec_class, MKDEV(hdmi_cec_major, 0));
  		class_destroy(hdmi_cec_class);
+@@ -582,3 +626,4 @@ MODULE_LICENSE("GPL");
+ 
+ module_init(hdmi_cec_init);
+ module_exit(hdmi_cec_exit);
++
+diff --git a/drivers/video/mxc_hdmi.c b/drivers/video/mxc_hdmi.c
+index c5069aa..434b571 100644
+--- a/drivers/video/mxc_hdmi.c
++++ b/drivers/video/mxc_hdmi.c
+@@ -1360,7 +1360,7 @@ static void hdmi_config_AVI(struct mxc_hdmi *hdmi)
+ 	 ********************************************/
+ 
+ 	val = HDMI_FC_AVICONF2_IT_CONTENT_NO_DATA | ext_colorimetry |
+-		HDMI_FC_AVICONF2_RGB_QUANT_DEFAULT |
++		HDMI_FC_AVICONF2_RGB_QUANT_FULL_RANGE |
+ 		HDMI_FC_AVICONF2_SCALING_NONE;
+ 	hdmi_writeb(val, HDMI_FC_AVICONF2);
+ 
+@@ -1698,8 +1698,12 @@ static void mxc_hdmi_enable_video_path(struct mxc_hdmi *hdmi)
+ 	hdmi_writeb(0x16, HDMI_FC_CH1PREAM);
+ 	hdmi_writeb(0x21, HDMI_FC_CH2PREAM);
+ 
++	/* Save CEC clock */
++	clkdis = hdmi_readb(HDMI_MC_CLKDIS) & HDMI_MC_CLKDIS_CECCLK_DISABLE;
++	clkdis |= ~HDMI_MC_CLKDIS_CECCLK_DISABLE;
++
+ 	/* Enable pixel clock and tmds data path */
+-	clkdis = 0x7F;
++	clkdis = 0x7F & clkdis;
+ 	clkdis &= ~HDMI_MC_CLKDIS_PIXELCLK_DISABLE;
+ 	hdmi_writeb(clkdis, HDMI_MC_CLKDIS);
+ 
+@@ -1785,10 +1789,32 @@ static void mxc_hdmi_notify_fb(struct mxc_hdmi *hdmi)
+ 	dev_dbg(&hdmi->pdev->dev, "%s exit\n", __func__);
+ }
+ 
++static bool mxc_hdmi_reject_videomode(const struct fb_videomode *mode,
++				      struct list_head *head)
++{
++	struct list_head *pos;
++	struct fb_modelist *modelist;
++	struct fb_videomode *m;
++
++	list_for_each(pos, head) {
++		modelist = list_entry(pos, struct fb_modelist, list);
++		m = &modelist->mode;
++		if ((mode->xres == m->xres) &&
++		    (mode->yres == m->yres) &&
++		    (mode->refresh == m->refresh)) {
++
++			return true;
++		}
++	}
++
++	return false;
++}
++
+ static void mxc_hdmi_edid_rebuild_modelist(struct mxc_hdmi *hdmi)
+ {
+ 	int i;
+ 	struct fb_videomode *mode;
++	struct list_head cea_modelist;
+ 
+ 	dev_dbg(&hdmi->pdev->dev, "%s\n", __func__);
+ 
+@@ -1797,6 +1823,8 @@ static void mxc_hdmi_edid_rebuild_modelist(struct mxc_hdmi *hdmi)
+ 	fb_destroy_modelist(&hdmi->fbi->modelist);
+ 	fb_add_videomode(&vga_mode, &hdmi->fbi->modelist);
+ 
++	INIT_LIST_HEAD(&cea_modelist);
++
+ 	for (i = 0; i < hdmi->fbi->monspecs.modedb_len; i++) {
+ 		/*
+ 		 * We might check here if mode is supported by HDMI.
+@@ -1805,8 +1833,8 @@ static void mxc_hdmi_edid_rebuild_modelist(struct mxc_hdmi *hdmi)
+ 		 */
+ 		mode = &hdmi->fbi->monspecs.modedb[i];
+ 
+-		if (!(mode->vmode & FB_VMODE_INTERLACED) &&
+-				(mxc_edid_mode_to_vic(mode) != 0)) {
++		if (!(mode->vmode & FB_VMODE_INTERLACED)
++		    && (mxc_edid_mode_to_vic(mode) != 0)) {
+ 
+ 			dev_dbg(&hdmi->pdev->dev, "Added mode %d:", i);
+ 			dev_dbg(&hdmi->pdev->dev,
+@@ -1818,8 +1846,34 @@ static void mxc_hdmi_edid_rebuild_modelist(struct mxc_hdmi *hdmi)
+ 				hdmi->fbi->monspecs.modedb[i].flag);
+ 
+ 			fb_add_videomode(mode, &hdmi->fbi->modelist);
++			fb_add_videomode(mode, &cea_modelist);
+ 		}
+ 	}
++	/*
++	 * Add the rest of the non-CEA modes to the modelist,
++	 * rejecting modes that have a CEA match.
++	 */
++	for (i = 0; i < hdmi->fbi->monspecs.modedb_len; i++) {
++		mode = &hdmi->fbi->monspecs.modedb[i];
++
++		if (!(mode->vmode & FB_VMODE_INTERLACED)
++		    && (mxc_edid_mode_to_vic(mode) == 0)
++		    && !mxc_hdmi_reject_videomode(mode, &cea_modelist)) {
++
++			dev_dbg(&hdmi->pdev->dev, "Added mode %d:", i);
++			dev_dbg(&hdmi->pdev->dev,
++				"xres = %d, yres = %d, freq = %d, vmode = %d, flag = %d\n",
++				hdmi->fbi->monspecs.modedb[i].xres,
++				hdmi->fbi->monspecs.modedb[i].yres,
++				hdmi->fbi->monspecs.modedb[i].refresh,
++				hdmi->fbi->monspecs.modedb[i].vmode,
++				hdmi->fbi->monspecs.modedb[i].flag);
++
++			fb_add_videomode(mode, &hdmi->fbi->modelist);
++		}
++	}
++
++	fb_destroy_modelist(&cea_modelist);
+ 
+ 	console_unlock();
+ }
+@@ -1979,10 +2033,15 @@ static void mxc_hdmi_power_off(struct mxc_dispdrv_handle *disp)
+ 
+ static void mxc_hdmi_cable_disconnected(struct mxc_hdmi *hdmi)
+ {
++	u8 clkdis;
+ 	dev_dbg(&hdmi->pdev->dev, "%s\n", __func__);
+ 
++	/* Save CEC clock */
++	clkdis = hdmi_readb(HDMI_MC_CLKDIS) & HDMI_MC_CLKDIS_CECCLK_DISABLE;
++	clkdis |= ~HDMI_MC_CLKDIS_CECCLK_DISABLE;
++
+ 	/* Disable All HDMI clock */
+-	hdmi_writeb(0xff, HDMI_MC_CLKDIS);
++	hdmi_writeb(0xff & clkdis, HDMI_MC_CLKDIS);
+ 
+ 	mxc_hdmi_phy_disable(hdmi);
+ 
+@@ -2156,7 +2215,21 @@ static void mxc_hdmi_setup(struct mxc_hdmi *hdmi, unsigned long event)
+ 	fb_var_to_videomode(&m, &hdmi->fbi->var);
+ 	dump_fb_videomode(&m);
+ 
+-	dev_dbg(&hdmi->pdev->dev, "%s - video mode changed\n", __func__);
++	/* Exit the setup if we get mode change and are already set to
++	 * this video mode */
++	if ((event == FB_EVENT_MODE_CHANGE) &&
++		fb_mode_is_equal(&hdmi->previous_mode, &m)) {
++		dev_dbg(&hdmi->pdev->dev,
++			"%s video mode did not change.\n", __func__);
++		mxc_hdmi_phy_init(hdmi);
++		return;
++	}
++
++	dev_dbg(&hdmi->pdev->dev, "%s: video mode changed: "
++		"%ux%u@%u-%u -> %ux%u@%u-%u \n", __func__,
++		hdmi->previous_mode.xres, hdmi->previous_mode.yres,
++		hdmi->previous_mode.refresh, hdmi->previous_mode.pixclock,
++		m.xres, m.yres, m.refresh, m.pixclock);
+ 
+ 	/* Save mode as 'previous_mode' so that we can know if mode changed. */
+ 	memcpy(&hdmi->previous_mode, &m, sizeof(struct fb_videomode));
 -- 
-1.9.1
+1.7.0.4
 

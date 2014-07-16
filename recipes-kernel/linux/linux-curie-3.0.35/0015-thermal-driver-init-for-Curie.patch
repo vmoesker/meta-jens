@@ -1,0 +1,38 @@
+From 5f8503bb30aaef19212bf4fecf03154473ab4392 Mon Sep 17 00:00:00 2001
+From: gao.cui <gao.cui@windsolve.com>
+Date: Sun, 13 Jul 2014 17:44:54 +0800
+Subject: [PATCH 15/30] thermal driver init for Curie
+
+---
+ arch/arm/mach-mx6/board-mx6q_curie.c |    8 ++++++++
+ 1 files changed, 8 insertions(+), 0 deletions(-)
+
+diff --git a/arch/arm/mach-mx6/board-mx6q_curie.c b/arch/arm/mach-mx6/board-mx6q_curie.c
+index e546674..6457df9 100644
+--- a/arch/arm/mach-mx6/board-mx6q_curie.c
++++ b/arch/arm/mach-mx6/board-mx6q_curie.c
+@@ -200,6 +200,12 @@ static void mx6q_curie_snvs_poweroff(void)
+ 	/* do nothing */
+ }
+ 
++/* Thermal */
++static const struct anatop_thermal_platform_data
++		mx6q_curie_anatop_thermal_data __initconst = {
++		.name = "anatop_thermal",
++};
++
+ /* Board Functions */
+ static void __init fixup_mxc_board(struct machine_desc *desc, struct tag *tags,
+ 				   char **cmdline, struct meminfo *mi)
+@@ -246,6 +252,8 @@ static void __init mx6_curie_board_init(void)
+ 	/* PM */
+ 	imx6q_add_pm_imx(0, &mx6q_curie_pm_data);
+ 	pm_power_off = mx6q_curie_snvs_poweroff;
++	/* Thermal */
++	imx6q_add_anatop_thermal_imx(1, &mx6q_curie_anatop_thermal_data);
+ }
+ 
+ extern void __iomem *twd_base;
+-- 
+1.7.0.4
+

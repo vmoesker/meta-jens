@@ -15,7 +15,7 @@ SRC_URI += "file://physeries.scc \
            "
 
 # patch for the hardware of "Marie Curie" board
-SRC_URI += "file://0006-Improve-CEC-driver-to-support-libCEC.patch"
+# SRC_URI += "file://0006-Improve-CEC-driver-to-support-libCEC.patch"
 
 do_install_append () {
   rm -f ${D}/boot/uImage

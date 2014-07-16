@@ -1,0 +1,37 @@
+From a793cf5755f5c0c8f014abb5384a46df1a4d3246 Mon Sep 17 00:00:00 2001
+From: gao.cui <gao.cui@windsolve.com>
+Date: Sun, 13 Jul 2014 04:04:46 +0800
+Subject: [PATCH 09/30] reset phy before fec_init
+
+---
+ arch/arm/mach-mx6/board-mx6q_curie.c |    7 +++++++
+ 1 files changed, 7 insertions(+), 0 deletions(-)
+
+diff --git a/arch/arm/mach-mx6/board-mx6q_curie.c b/arch/arm/mach-mx6/board-mx6q_curie.c
+index ebbbebb..44eee79 100644
+--- a/arch/arm/mach-mx6/board-mx6q_curie.c
++++ b/arch/arm/mach-mx6/board-mx6q_curie.c
+@@ -107,6 +107,8 @@ static void __init mx6q_curie_init_usb(void)
+ }
+ 
+ /* Ethernet FEC */
++#define CURIE_RGMII_RST        IMX_GPIO_NR(1, 25)
++
+ static int mx6q_curie_fec_phy_init(struct phy_device *phydev)
+ {
+ 	// RTL8211E: disable Green Ethernet
+@@ -144,6 +146,11 @@ static void __init mx6_curie_board_init(void)
+ 	/* USB Host & OTG */
+ 	mx6q_curie_init_usb();
+ 	/* Ethernet: FEC */
++	gpio_request(CURIE_RGMII_RST, "rgmii_reset");
++	gpio_direction_output(CURIE_RGMII_RST, 0);
++	mdelay(15);
++	gpio_direction_output(CURIE_RGMII_RST, 1);
++	mdelay(200);
+ 	imx6_init_fec(fec_data);
+ }
+ 
+-- 
+1.7.0.4
+
