@@ -26,6 +26,8 @@ IMAGE_INSTALL += " \
 	${CORE_IMAGE_BASE_INSTALL} \
 	${MACHINE_FIRMWARE} \
 	packagegroup-core-basic \
+	valgrind \
+	strace \
 	libsdl \
 	libxml2 \
 	libftdi \
