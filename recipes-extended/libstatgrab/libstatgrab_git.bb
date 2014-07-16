@@ -8,8 +8,13 @@ DEPENDS = "ncurses"
 
 PV = "0.91"
 
-SRCREV = "28151cc18d65bc0dc3568b2f48d1a528bb296e9d"
-SRC_URI = "git://github.com/i-scream/libstatgrab.git"
+FILESEXTRAPATHS_prepend := "${THISDIR}/patches:"
+
+SRCREV = "d8d6c819ee007eb03bc95a48a614bcefec229b42"
+SRC_URI = "git://github.com/i-scream/libstatgrab.git \
+           file://linux-proctbl.patch \
+           file://serialize-docbooc2x.patch \
+          "
 
 S = "${WORKDIR}/git"
 
