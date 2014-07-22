@@ -1,20 +1,17 @@
-From 026479c00723fb86bf0a064e34011115dcf98318 Mon Sep 17 00:00:00 2001
+From 7726988bbe855f38cffe27b64db1a831ff292f5d Mon Sep 17 00:00:00 2001
 From: gao.cui <gao.cui@windsolve.com>
 Date: Sun, 13 Jul 2014 18:05:31 +0800
-Subject: [PATCH 18/30] addition of SDHC driver for Curie
- SDHC2 is used for the Wi-Fi module
- SDHC3 is used for the SD Card slot
- SDHC4 is used for the on-board eMMC
+Subject: [PATCH 18/30] addition of SDHC driver for Curie SDHC2 is used for the Wi-Fi module SDHC3 is used for the SD Card slot SDHC4 is used for the on-board eMMC
 
 Wi-Fi module works at 4-bit mode
 SD Card requires another 2 GPIOs for card-detection and write-protection which are GPIO(6,8) and GPIO(6,15)
 ---
- arch/arm/mach-mx6/board-mx6q_curie.c |   38 ++++++++++++++++++++++++++++++++++++
- arch/arm/mach-mx6/board-mx6q_curie.h |   35 +++++++++++++++++++++++++++++++++
+ arch/arm/mach-mx6/board-mx6q_curie.c |   38 ++++++++++++++++++++++++++++++++++
+ arch/arm/mach-mx6/board-mx6q_curie.h |   35 +++++++++++++++++++++++++++++++
  2 files changed, 73 insertions(+), 0 deletions(-)
 
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.c b/arch/arm/mach-mx6/board-mx6q_curie.c
-index c5bc4c2..59e77c3 100644
+index 0b89d66..fb6c969 100644
 --- a/arch/arm/mach-mx6/board-mx6q_curie.c
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.c
 @@ -232,6 +232,37 @@ static struct platform_device mx6q_curie_vmmc_reg_devices = {
@@ -70,7 +67,7 @@ index c5bc4c2..59e77c3 100644
  
  extern void __iomem *twd_base;
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.h b/arch/arm/mach-mx6/board-mx6q_curie.h
-index 6b9d053..e539137 100644
+index 5be19f9..367a904 100644
 --- a/arch/arm/mach-mx6/board-mx6q_curie.h
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.h
 @@ -60,6 +60,41 @@ static iomux_v3_cfg_t mx6q_curie_pads[] = {

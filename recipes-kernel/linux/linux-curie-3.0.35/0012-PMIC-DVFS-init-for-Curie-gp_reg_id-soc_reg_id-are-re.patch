@@ -1,17 +1,16 @@
-From 0253332e89b4672ecb0aa4a854628ea8875ca429 Mon Sep 17 00:00:00 2001
+From 8b687c25f0709913dfa4efd43d6dd990d63fa184 Mon Sep 17 00:00:00 2001
 From: gao.cui <gao.cui@windsolve.com>
 Date: Sun, 13 Jul 2014 17:10:54 +0800
-Subject: [PATCH 12/30] PMIC & DVFS init for Curie
- gp_reg_id & soc_reg_id are required by mx6_cpu_regulator_init(). These two variables are initialized by DVFS platform data, otherwise, the kernel will fail to find the cpu regulator and crash. So pFuze & DVFS init are both added in board init.
+Subject: [PATCH 12/30] PMIC & DVFS init for Curie gp_reg_id & soc_reg_id are required by mx6_cpu_regulator_init(). These two variables are initialized by DVFS platform data, otherwise, the kernel will fail to find the cpu regulator and crash. So pFuze & DVFS init are both added in board init.
 
 ---
- arch/arm/mach-mx6/board-mx6q_curie.c         |   50 ++++++++++++++++++++++++++++
+ arch/arm/mach-mx6/board-mx6q_curie.c         |   50 ++++++++++++++++++++++++++
  arch/arm/mach-mx6/board-mx6q_curie.h         |    2 +
  arch/arm/mach-mx6/mx6q_curie_pmic_pfuze100.c |   15 +++++---
  3 files changed, 62 insertions(+), 5 deletions(-)
 
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.c b/arch/arm/mach-mx6/board-mx6q_curie.c
-index e959d54..11d660c 100644
+index 17a10e1..239f49c 100644
 --- a/arch/arm/mach-mx6/board-mx6q_curie.c
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.c
 @@ -78,6 +78,11 @@
@@ -86,7 +85,7 @@ index e959d54..11d660c 100644
  
  extern void __iomem *twd_base;
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.h b/arch/arm/mach-mx6/board-mx6q_curie.h
-index 7e72801..6b9d053 100644
+index c169b35..5be19f9 100644
 --- a/arch/arm/mach-mx6/board-mx6q_curie.h
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.h
 @@ -58,6 +58,8 @@ static iomux_v3_cfg_t mx6q_curie_pads[] = {
@@ -99,7 +98,7 @@ index 7e72801..6b9d053 100644
  
  #endif
 diff --git a/arch/arm/mach-mx6/mx6q_curie_pmic_pfuze100.c b/arch/arm/mach-mx6/mx6q_curie_pmic_pfuze100.c
-index c18a014..73bad15 100644
+index c18a014..7b44c3c 100644
 --- a/arch/arm/mach-mx6/mx6q_curie_pmic_pfuze100.c
 +++ b/arch/arm/mach-mx6/mx6q_curie_pmic_pfuze100.c
 @@ -485,13 +485,18 @@ static int pfuze100_init(struct mc_pfuze *pfuze)

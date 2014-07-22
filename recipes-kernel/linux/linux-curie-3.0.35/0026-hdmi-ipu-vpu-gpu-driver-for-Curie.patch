@@ -1,15 +1,15 @@
-From a88be4d6a0730035150085ffcf6701889769eac1 Mon Sep 17 00:00:00 2001
+From 3ce9781912cb8ae4a80c830b151a2b942f6453c5 Mon Sep 17 00:00:00 2001
 From: gao.cui <gao.cui@windsolve.com>
 Date: Sun, 13 Jul 2014 22:03:07 +0800
 Subject: [PATCH 26/30] hdmi/ipu/vpu/gpu driver for Curie
 
 ---
- arch/arm/mach-mx6/board-mx6q_curie.c |  157 ++++++++++++++++++++++++++++++++++++
+ arch/arm/mach-mx6/board-mx6q_curie.c |  157 ++++++++++++++++++++++++++++++++++
  arch/arm/mach-mx6/board-mx6q_curie.h |   13 +++
  2 files changed, 170 insertions(+), 0 deletions(-)
 
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.c b/arch/arm/mach-mx6/board-mx6q_curie.c
-index ed4ffaa..75902fe 100644
+index 29a58b2..0953cd0 100644
 --- a/arch/arm/mach-mx6/board-mx6q_curie.c
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.c
 @@ -489,6 +489,143 @@ static void __init mx6q_curie_init_buttons(void)
@@ -191,7 +191,7 @@ index ed4ffaa..75902fe 100644
  
  /*
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.h b/arch/arm/mach-mx6/board-mx6q_curie.h
-index 3926380..93846a2 100644
+index e2c3893..d4e91fc 100644
 --- a/arch/arm/mach-mx6/board-mx6q_curie.h
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.h
 @@ -111,6 +111,19 @@ static iomux_v3_cfg_t mx6q_curie_pads[] = {

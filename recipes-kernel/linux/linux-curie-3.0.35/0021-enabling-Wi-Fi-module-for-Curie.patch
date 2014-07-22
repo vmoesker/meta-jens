@@ -1,4 +1,4 @@
-From 7bf663714c80e855a07ebd957fc149ac0478d57b Mon Sep 17 00:00:00 2001
+From 6515d2424f4dcf55315fe897fd7cafbb2cfee84b Mon Sep 17 00:00:00 2001
 From: gao.cui <gao.cui@windsolve.com>
 Date: Sun, 13 Jul 2014 18:36:13 +0800
 Subject: [PATCH 21/30] enabling Wi-Fi module for Curie
@@ -9,7 +9,7 @@ Subject: [PATCH 21/30] enabling Wi-Fi module for Curie
  2 files changed, 15 insertions(+), 0 deletions(-)
 
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.c b/arch/arm/mach-mx6/board-mx6q_curie.c
-index 1f6247f..f6d555d 100644
+index 9e6895c..268f17c 100644
 --- a/arch/arm/mach-mx6/board-mx6q_curie.c
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.c
 @@ -388,6 +388,17 @@ static struct ahci_platform_data mx6q_curie_sata_data = {
@@ -40,7 +40,7 @@ index 1f6247f..f6d555d 100644
  
  extern void __iomem *twd_base;
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.h b/arch/arm/mach-mx6/board-mx6q_curie.h
-index e539137..9c574af 100644
+index 367a904..09b8e52 100644
 --- a/arch/arm/mach-mx6/board-mx6q_curie.h
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.h
 @@ -95,6 +95,8 @@ static iomux_v3_cfg_t mx6q_curie_pads[] = {

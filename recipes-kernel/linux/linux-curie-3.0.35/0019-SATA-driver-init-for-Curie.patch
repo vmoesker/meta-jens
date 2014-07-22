@@ -1,14 +1,14 @@
-From 0b744427df978060a5e9b27a443a9f6f5376dd79 Mon Sep 17 00:00:00 2001
+From 2faf6616eb2f5383c8fd07516087389ae1ad3a5b Mon Sep 17 00:00:00 2001
 From: gao.cui <gao.cui@windsolve.com>
 Date: Sun, 13 Jul 2014 18:15:26 +0800
 Subject: [PATCH 19/30] SATA driver init for Curie
 
 ---
- arch/arm/mach-mx6/board-mx6q_curie.c |  134 ++++++++++++++++++++++++++++++++++++
+ arch/arm/mach-mx6/board-mx6q_curie.c |  134 ++++++++++++++++++++++++++++++++++
  1 files changed, 134 insertions(+), 0 deletions(-)
 
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.c b/arch/arm/mach-mx6/board-mx6q_curie.c
-index 59e77c3..68521e0 100644
+index fb6c969..52791ad 100644
 --- a/arch/arm/mach-mx6/board-mx6q_curie.c
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.c
 @@ -262,6 +262,131 @@ static const struct esdhc_platform_data mx6q_curie_sd4_data __initconst = {

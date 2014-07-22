@@ -1,4 +1,4 @@
-From 5f5da55c65f580a06686586f2614702f4b47722b Mon Sep 17 00:00:00 2001
+From 0f47baabfc59d206d8a36793b7582ccff4816dde Mon Sep 17 00:00:00 2001
 From: gao.cui <gao.cui@windsolve.com>
 Date: Sun, 13 Jul 2014 01:55:57 +0800
 Subject: [PATCH 05/30] remove unused UART3
@@ -8,7 +8,7 @@ Subject: [PATCH 05/30] remove unused UART3
  1 files changed, 0 insertions(+), 1 deletions(-)
 
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.c b/arch/arm/mach-mx6/board-mx6q_curie.c
-index 265710d..2a5ebaf 100644
+index 9767c7d..f3787a2 100644
 --- a/arch/arm/mach-mx6/board-mx6q_curie.c
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.c
 @@ -81,7 +81,6 @@

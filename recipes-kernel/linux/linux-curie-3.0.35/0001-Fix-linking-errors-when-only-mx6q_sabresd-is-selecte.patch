@@ -1,4 +1,4 @@
-From c2866ea85159d5323eb5ea27623625330f20e625 Mon Sep 17 00:00:00 2001
+From 1ff59d54c944f227a42abeb6c64430d73da4c842 Mon Sep 17 00:00:00 2001
 From: gao.cui <gao.cui@windsolve.com>
 Date: Sat, 12 Jul 2014 15:00:37 +0800
 Subject: [PATCH 01/30] Fix linking errors when only mx6q_sabresd is selected
@@ -8,10 +8,10 @@ Subject: [PATCH 01/30] Fix linking errors when only mx6q_sabresd is selected
  1 files changed, 6 insertions(+), 0 deletions(-)
 
 diff --git a/arch/arm/mach-mx6/Kconfig b/arch/arm/mach-mx6/Kconfig
-index 5f59fd8..bd02f69 100644
+index 64ce4d4..f2c74a6 100644
 --- a/arch/arm/mach-mx6/Kconfig
 +++ b/arch/arm/mach-mx6/Kconfig
-@@ -215,6 +215,12 @@ config MACH_MX6Q_SABRESD
+@@ -210,6 +210,12 @@ config MACH_MX6Q_SABRESD
  	select IMX_HAVE_PLATFORM_FLEXCAN
  	select IMX_HAVE_PLATFORM_IMX_PCIE
  	select IMX_HAVE_PLATFORM_IMX_CAAM

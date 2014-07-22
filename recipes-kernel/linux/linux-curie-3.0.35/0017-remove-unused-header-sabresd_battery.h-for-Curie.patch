@@ -1,4 +1,4 @@
-From 38e76334e2a9109926292fa2ca05a0f6c9148b9e Mon Sep 17 00:00:00 2001
+From d88ac7f30e52b8eecf32f8fcdb6108903b0777bb Mon Sep 17 00:00:00 2001
 From: gao.cui <gao.cui@windsolve.com>
 Date: Sun, 13 Jul 2014 17:52:28 +0800
 Subject: [PATCH 17/30] remove unused header sabresd_battery.h for Curie
@@ -8,7 +8,7 @@ Subject: [PATCH 17/30] remove unused header sabresd_battery.h for Curie
  1 files changed, 0 insertions(+), 1 deletions(-)
 
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.c b/arch/arm/mach-mx6/board-mx6q_curie.c
-index 6cb4659..c5bc4c2 100644
+index 27df051..0b89d66 100644
 --- a/arch/arm/mach-mx6/board-mx6q_curie.c
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.c
 @@ -46,7 +46,6 @@

@@ -1,4 +1,4 @@
-From 2033003f81bb5374509feb6ad8e996e8818536c5 Mon Sep 17 00:00:00 2001
+From ed7620bd173d3670aaa828c7e69b3651d8aae13d Mon Sep 17 00:00:00 2001
 From: gao.cui <gao.cui@windsolve.com>
 Date: Sun, 13 Jul 2014 16:18:57 +0800
 Subject: [PATCH 11/30] i2c init for Curie
@@ -9,7 +9,7 @@ Subject: [PATCH 11/30] i2c init for Curie
  2 files changed, 25 insertions(+), 0 deletions(-)
 
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.c b/arch/arm/mach-mx6/board-mx6q_curie.c
-index c6fe612..e959d54 100644
+index 225c993..17a10e1 100644
 --- a/arch/arm/mach-mx6/board-mx6q_curie.c
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.c
 @@ -125,6 +125,18 @@ static struct fec_platform_data fec_data __initdata = {
@@ -44,7 +44,7 @@ index c6fe612..e959d54 100644
  
  extern void __iomem *twd_base;
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.h b/arch/arm/mach-mx6/board-mx6q_curie.h
-index 0fc03cd..7e72801 100644
+index 6fcbc35..c169b35 100644
 --- a/arch/arm/mach-mx6/board-mx6q_curie.h
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.h
 @@ -50,6 +50,14 @@ static iomux_v3_cfg_t mx6q_curie_pads[] = {

@@ -1,4 +1,4 @@
-From 1f2327674ba33340ae2ad864524c7c3dd1046e51 Mon Sep 17 00:00:00 2001
+From d37ce648556ad37f9e65ab86b0a0070ef1e6da6c Mon Sep 17 00:00:00 2001
 From: gao.cui <gao.cui@windsolve.com>
 Date: Sun, 13 Jul 2014 02:02:46 +0800
 Subject: [PATCH 07/30] remove unused variable ret to avoid warning in Curie usb init function
@@ -8,7 +8,7 @@ Subject: [PATCH 07/30] remove unused variable ret to avoid warning in Curie usb 
  1 files changed, 0 insertions(+), 2 deletions(-)
 
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.c b/arch/arm/mach-mx6/board-mx6q_curie.c
-index eac108b..ebbbebb 100644
+index 509bcc2..7f9e35c 100644
 --- a/arch/arm/mach-mx6/board-mx6q_curie.c
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.c
 @@ -87,8 +87,6 @@ static inline void mx6q_curie_init_uart(void)

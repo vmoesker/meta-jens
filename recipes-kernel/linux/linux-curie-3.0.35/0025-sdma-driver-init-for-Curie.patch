@@ -1,4 +1,4 @@
-From da6f02904dfd739302a9ad9b286ca2d864f2f168 Mon Sep 17 00:00:00 2001
+From 516d687663d5d9d2c9358e7ac8b17931d119fab6 Mon Sep 17 00:00:00 2001
 From: gao.cui <gao.cui@windsolve.com>
 Date: Sun, 13 Jul 2014 19:13:18 +0800
 Subject: [PATCH 25/30] sdma driver init for Curie
@@ -8,7 +8,7 @@ Subject: [PATCH 25/30] sdma driver init for Curie
  1 files changed, 2 insertions(+), 0 deletions(-)
 
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.c b/arch/arm/mach-mx6/board-mx6q_curie.c
-index cfda887..ed4ffaa 100644
+index 00a2850..29a58b2 100644
 --- a/arch/arm/mach-mx6/board-mx6q_curie.c
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.c
 @@ -566,6 +566,8 @@ static void __init mx6_curie_board_init(void)

@@ -1,15 +1,15 @@
-From 9ccc4dc37fc779478afaa793f64ce293d367938e Mon Sep 17 00:00:00 2001
+From 23231103ca6fad71ff3278aede6888d6a76c5a41 Mon Sep 17 00:00:00 2001
 From: gao.cui <gao.cui@windsolve.com>
 Date: Sun, 13 Jul 2014 22:51:07 +0800
 Subject: [PATCH 27/30] spdif driver init for Curie
 
 ---
- arch/arm/mach-mx6/board-mx6q_curie.c |   40 ++++++++++++++++++++++++++++++++++++
+ arch/arm/mach-mx6/board-mx6q_curie.c |   40 ++++++++++++++++++++++++++++++++++
  arch/arm/mach-mx6/board-mx6q_curie.h |    3 ++
  2 files changed, 43 insertions(+), 0 deletions(-)
 
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.c b/arch/arm/mach-mx6/board-mx6q_curie.c
-index 75902fe..286df3e 100644
+index 0953cd0..bde39e5 100644
 --- a/arch/arm/mach-mx6/board-mx6q_curie.c
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.c
 @@ -626,6 +626,44 @@ static void __init mx6q_curie_init_video(void)
@@ -67,7 +67,7 @@ index 75902fe..286df3e 100644
  }
  
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.h b/arch/arm/mach-mx6/board-mx6q_curie.h
-index 93846a2..41de170 100644
+index d4e91fc..661187a 100644
 --- a/arch/arm/mach-mx6/board-mx6q_curie.h
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.h
 @@ -114,6 +114,9 @@ static iomux_v3_cfg_t mx6q_curie_pads[] = {

@@ -1,4 +1,4 @@
-From a793cf5755f5c0c8f014abb5384a46df1a4d3246 Mon Sep 17 00:00:00 2001
+From 056d2d5f69a694a683cff3d0952af5e42c046065 Mon Sep 17 00:00:00 2001
 From: gao.cui <gao.cui@windsolve.com>
 Date: Sun, 13 Jul 2014 04:04:46 +0800
 Subject: [PATCH 09/30] reset phy before fec_init
@@ -8,7 +8,7 @@ Subject: [PATCH 09/30] reset phy before fec_init
  1 files changed, 7 insertions(+), 0 deletions(-)
 
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.c b/arch/arm/mach-mx6/board-mx6q_curie.c
-index ebbbebb..44eee79 100644
+index 7f9e35c..6208d6f 100644
 --- a/arch/arm/mach-mx6/board-mx6q_curie.c
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.c
 @@ -107,6 +107,8 @@ static void __init mx6q_curie_init_usb(void)

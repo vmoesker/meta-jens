@@ -1,4 +1,4 @@
-From 5f8503bb30aaef19212bf4fecf03154473ab4392 Mon Sep 17 00:00:00 2001
+From 834d9bc5959bb5c7da93c784f03ebe5e39481ba3 Mon Sep 17 00:00:00 2001
 From: gao.cui <gao.cui@windsolve.com>
 Date: Sun, 13 Jul 2014 17:44:54 +0800
 Subject: [PATCH 15/30] thermal driver init for Curie
@@ -8,7 +8,7 @@ Subject: [PATCH 15/30] thermal driver init for Curie
  1 files changed, 8 insertions(+), 0 deletions(-)
 
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.c b/arch/arm/mach-mx6/board-mx6q_curie.c
-index e546674..6457df9 100644
+index 40fc6c0..bad401d 100644
 --- a/arch/arm/mach-mx6/board-mx6q_curie.c
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.c
 @@ -200,6 +200,12 @@ static void mx6q_curie_snvs_poweroff(void)

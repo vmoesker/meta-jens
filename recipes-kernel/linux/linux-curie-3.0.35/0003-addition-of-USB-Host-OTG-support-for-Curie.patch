@@ -1,4 +1,4 @@
-From b2bb26930b889bc1805922d33fb1e7459993d07b Mon Sep 17 00:00:00 2001
+From e9a554a7f90d5d32f72616d9301fe256047b6ac2 Mon Sep 17 00:00:00 2001
 From: gao.cui <gao.cui@windsolve.com>
 Date: Sun, 13 Jul 2014 00:52:21 +0800
 Subject: [PATCH 03/30] addition of USB Host & OTG support for Curie
@@ -9,7 +9,7 @@ Subject: [PATCH 03/30] addition of USB Host & OTG support for Curie
  2 files changed, 30 insertions(+), 0 deletions(-)
 
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.c b/arch/arm/mach-mx6/board-mx6q_curie.c
-index 57e7af3..caf522d 100644
+index e3ca29c..da2a7b8 100644
 --- a/arch/arm/mach-mx6/board-mx6q_curie.c
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.c
 @@ -78,12 +78,35 @@
@@ -60,7 +60,7 @@ index 57e7af3..caf522d 100644
  
  extern void __iomem *twd_base;
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.h b/arch/arm/mach-mx6/board-mx6q_curie.h
-index fa266e7..95801a9 100644
+index 2aba734..3877e72 100644
 --- a/arch/arm/mach-mx6/board-mx6q_curie.h
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.h
 @@ -25,6 +25,10 @@ static iomux_v3_cfg_t mx6q_curie_pads[] = {

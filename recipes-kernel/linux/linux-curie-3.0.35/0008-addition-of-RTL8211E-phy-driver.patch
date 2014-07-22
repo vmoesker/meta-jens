@@ -1,4 +1,4 @@
-From 23a2591710a47bd27b09ebb8015a179ff1b72cde Mon Sep 17 00:00:00 2001
+From 4bd8839a98d305a306c060a85d6dd6843407487f Mon Sep 17 00:00:00 2001
 From: gao.cui <gao.cui@windsolve.com>
 Date: Sun, 13 Jul 2014 03:46:25 +0800
 Subject: [PATCH 08/30] addition of RTL8211E phy driver

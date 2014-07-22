@@ -1,25 +1,24 @@
-From cf249ebbdefdd737bd112b6eeab81603c9b3924b Mon Sep 17 00:00:00 2001
+From 4015a78c3c0aff46d5af4195173ac96e1d003179 Mon Sep 17 00:00:00 2001
 From: gao.cui <gao.cui@windsolve.com>
 Date: Sat, 12 Jul 2014 15:47:55 +0800
-Subject: [PATCH 02/30] Create a new board MX6Q_CURIE for Curie.
- Keep using the machine ID of SABRESD until we have one for Curie
+Subject: [PATCH 02/30] Create a new board MX6Q_CURIE for Curie. Keep using the machine ID of SABRESD until we have one for Curie
 
 ---
- arch/arm/mach-mx6/Kconfig                  |   40 ++
- arch/arm/mach-mx6/Makefile                 |    1 +
- arch/arm/mach-mx6/board-mx6q_curie.c         |  138 ++++++++
+ arch/arm/mach-mx6/Kconfig                    |   40 ++
+ arch/arm/mach-mx6/Makefile                   |    1 +
+ arch/arm/mach-mx6/board-mx6q_curie.c         |  138 +++++++
  arch/arm/mach-mx6/board-mx6q_curie.h         |   31 ++
- arch/arm/mach-mx6/mx6q_curie_pmic_pfuze100.c |  529 ++++++++++++++++++++++++++++
+ arch/arm/mach-mx6/mx6q_curie_pmic_pfuze100.c |  529 ++++++++++++++++++++++++++
  5 files changed, 739 insertions(+), 0 deletions(-)
  create mode 100644 arch/arm/mach-mx6/board-mx6q_curie.c
  create mode 100644 arch/arm/mach-mx6/board-mx6q_curie.h
  create mode 100644 arch/arm/mach-mx6/mx6q_curie_pmic_pfuze100.c
 
 diff --git a/arch/arm/mach-mx6/Kconfig b/arch/arm/mach-mx6/Kconfig
-index bd02f69..f90f7a3 100644
+index f2c74a6..9f7854a 100644
 --- a/arch/arm/mach-mx6/Kconfig
 +++ b/arch/arm/mach-mx6/Kconfig
-@@ -293,6 +293,46 @@ config MACH_MX6Q_HDMIDONGLE
+@@ -288,6 +288,46 @@ config MACH_MX6Q_HDMIDONGLE
  	  Include support for i.MX 6Quad HDMI Dongle platform. This includes specific
  	  configurations for the board and its peripherals.
  
@@ -67,7 +66,7 @@ index bd02f69..f90f7a3 100644
  
  config IMX_PCIE
 diff --git a/arch/arm/mach-mx6/Makefile b/arch/arm/mach-mx6/Makefile
-index e89f559..cd4d0c7 100644
+index 8c1d754..396ee64 100644
 --- a/arch/arm/mach-mx6/Makefile
 +++ b/arch/arm/mach-mx6/Makefile
 @@ -15,6 +15,7 @@ obj-$(CONFIG_MACH_MX6Q_SABRELITE) += board-mx6q_sabrelite.o
@@ -80,7 +79,7 @@ index e89f559..cd4d0c7 100644
  obj-$(CONFIG_IMX_PCIE) += pcie.o
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.c b/arch/arm/mach-mx6/board-mx6q_curie.c
 new file mode 100644
-index 0000000..57e7af3
+index 0000000..e3ca29c
 --- /dev/null
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.c
 @@ -0,0 +1,138 @@
@@ -224,7 +223,7 @@ index 0000000..57e7af3
 +MACHINE_END
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.h b/arch/arm/mach-mx6/board-mx6q_curie.h
 new file mode 100644
-index 0000000..fa266e7
+index 0000000..2aba734
 --- /dev/null
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.h
 @@ -0,0 +1,31 @@

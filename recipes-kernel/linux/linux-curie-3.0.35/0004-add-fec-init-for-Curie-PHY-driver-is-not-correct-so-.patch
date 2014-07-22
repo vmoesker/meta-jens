@@ -1,8 +1,7 @@
-From 22f5f2bb1d996603ebe8552a1813cfc7d97f4582 Mon Sep 17 00:00:00 2001
+From 7fdbcf709025d75bef1b563ef55b5c48ec3d33a1 Mon Sep 17 00:00:00 2001
 From: gao.cui <gao.cui@windsolve.com>
 Date: Sun, 13 Jul 2014 01:48:51 +0800
-Subject: [PATCH 04/30] add fec init for Curie
- PHY driver is not correct, so it will work in 100Mbps mode
+Subject: [PATCH 04/30] add fec init for Curie PHY driver is not correct, so it will work in 100Mbps mode
 
 ---
  arch/arm/mach-mx6/board-mx6q_curie.c |   17 +++++++++++++++++
@@ -10,7 +9,7 @@ Subject: [PATCH 04/30] add fec init for Curie
  2 files changed, 38 insertions(+), 0 deletions(-)
 
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.c b/arch/arm/mach-mx6/board-mx6q_curie.c
-index caf522d..265710d 100644
+index da2a7b8..9767c7d 100644
 --- a/arch/arm/mach-mx6/board-mx6q_curie.c
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.c
 @@ -104,7 +104,22 @@ static void __init mx6q_curie_init_usb(void)
@@ -46,7 +45,7 @@ index caf522d..265710d 100644
  
  extern void __iomem *twd_base;
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.h b/arch/arm/mach-mx6/board-mx6q_curie.h
-index 95801a9..0fc03cd 100644
+index 3877e72..6fcbc35 100644
 --- a/arch/arm/mach-mx6/board-mx6q_curie.h
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.h
 @@ -29,6 +29,27 @@ static iomux_v3_cfg_t mx6q_curie_pads[] = {

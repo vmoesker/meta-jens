@@ -1,4 +1,4 @@
-From 43ff56e74c12e5b8b68d92e4e059d0908e026951 Mon Sep 17 00:00:00 2001
+From 2efbe18cab18ac651ee6db50f1efb92bb2002ce4 Mon Sep 17 00:00:00 2001
 From: gao.cui <gao.cui@windsolve.com>
 Date: Sun, 13 Jul 2014 17:34:28 +0800
 Subject: [PATCH 13/30] bus freq driver init
@@ -8,7 +8,7 @@ Subject: [PATCH 13/30] bus freq driver init
  1 files changed, 2 insertions(+), 0 deletions(-)
 
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.c b/arch/arm/mach-mx6/board-mx6q_curie.c
-index 11d660c..13d765b 100644
+index 239f49c..b696baa 100644
 --- a/arch/arm/mach-mx6/board-mx6q_curie.c
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.c
 @@ -221,6 +221,8 @@ static void __init mx6_curie_board_init(void)

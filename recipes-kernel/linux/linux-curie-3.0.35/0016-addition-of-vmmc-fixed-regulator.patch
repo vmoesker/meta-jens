@@ -1,4 +1,4 @@
-From ed266f7d46631bbef924c8a45e4c4002b69c8304 Mon Sep 17 00:00:00 2001
+From f932bf7461b2348b8b63a3f3bc81234a8fff742f Mon Sep 17 00:00:00 2001
 From: gao.cui <gao.cui@windsolve.com>
 Date: Sun, 13 Jul 2014 17:51:15 +0800
 Subject: [PATCH 16/30] addition of vmmc fixed regulator
@@ -8,7 +8,7 @@ Subject: [PATCH 16/30] addition of vmmc fixed regulator
  1 files changed, 29 insertions(+), 0 deletions(-)
 
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.c b/arch/arm/mach-mx6/board-mx6q_curie.c
-index 6457df9..6cb4659 100644
+index bad401d..27df051 100644
 --- a/arch/arm/mach-mx6/board-mx6q_curie.c
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.c
 @@ -206,6 +206,33 @@ static const struct anatop_thermal_platform_data

@@ -1,15 +1,15 @@
-From 95effa070e3bde943f2eb21acec39a8744ac22c7 Mon Sep 17 00:00:00 2001
+From ebfc73d2cf0855ad25522276d0d5d0a829df0a34 Mon Sep 17 00:00:00 2001
 From: gao.cui <gao.cui@windsolve.com>
 Date: Sun, 13 Jul 2014 18:46:11 +0800
 Subject: [PATCH 22/30] gpio led driver for Curie
 
 ---
- arch/arm/mach-mx6/board-mx6q_curie.c |   51 ++++++++++++++++++++++++++++++++++++
- arch/arm/mach-mx6/board-mx6q_curie.h |   11 ++++++++
+ arch/arm/mach-mx6/board-mx6q_curie.c |   51 ++++++++++++++++++++++++++++++++++
+ arch/arm/mach-mx6/board-mx6q_curie.h |   11 +++++++
  2 files changed, 62 insertions(+), 0 deletions(-)
 
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.c b/arch/arm/mach-mx6/board-mx6q_curie.c
-index f6d555d..1f316d1 100644
+index 268f17c..7466a31 100644
 --- a/arch/arm/mach-mx6/board-mx6q_curie.c
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.c
 @@ -398,6 +398,55 @@ static void __init mx6q_curie_init_wifi(void)
@@ -78,7 +78,7 @@ index f6d555d..1f316d1 100644
  
  extern void __iomem *twd_base;
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.h b/arch/arm/mach-mx6/board-mx6q_curie.h
-index 9c574af..f25da07 100644
+index 09b8e52..f5a3127 100644
 --- a/arch/arm/mach-mx6/board-mx6q_curie.h
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.h
 @@ -97,6 +97,17 @@ static iomux_v3_cfg_t mx6q_curie_pads[] = {

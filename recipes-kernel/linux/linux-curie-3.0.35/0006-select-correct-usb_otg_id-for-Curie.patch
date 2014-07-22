@@ -1,4 +1,4 @@
-From ba786ebf2a027896d131ad2f1bdd9dad771cc6e6 Mon Sep 17 00:00:00 2001
+From b4e1ce725c37eb0aaac33acffd8623f493742108 Mon Sep 17 00:00:00 2001
 From: gao.cui <gao.cui@windsolve.com>
 Date: Sun, 13 Jul 2014 02:00:27 +0800
 Subject: [PATCH 06/30] select correct usb_otg_id for Curie
@@ -8,7 +8,7 @@ Subject: [PATCH 06/30] select correct usb_otg_id for Curie
  1 files changed, 9 insertions(+), 4 deletions(-)
 
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.c b/arch/arm/mach-mx6/board-mx6q_curie.c
-index 2a5ebaf..eac108b 100644
+index f3787a2..509bcc2 100644
 --- a/arch/arm/mach-mx6/board-mx6q_curie.c
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.c
 @@ -84,16 +84,21 @@ static inline void mx6q_curie_init_uart(void)

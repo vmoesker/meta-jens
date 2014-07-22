@@ -1,4 +1,4 @@
-From ffbf589e658ae0d8de3c2552067ba8b03de35a94 Mon Sep 17 00:00:00 2001
+From 3ec3aa40c4fc4b021022b500b39da3d6bd7f4dc9 Mon Sep 17 00:00:00 2001
 From: gao.cui <gao.cui@windsolve.com>
 Date: Sun, 13 Jul 2014 17:37:35 +0800
 Subject: [PATCH 14/30] addition of low-level PM driver
@@ -8,7 +8,7 @@ Subject: [PATCH 14/30] addition of low-level PM driver
  1 files changed, 23 insertions(+), 0 deletions(-)
 
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.c b/arch/arm/mach-mx6/board-mx6q_curie.c
-index 13d765b..e546674 100644
+index b696baa..40fc6c0 100644
 --- a/arch/arm/mach-mx6/board-mx6q_curie.c
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.c
 @@ -180,6 +180,26 @@ static void __init mx6q_curie_init_pmic(void)

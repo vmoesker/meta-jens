@@ -12,6 +12,7 @@ SRC_URI += "file://physeries.scc \
             file://physeries.cfg \
             file://physeries-user-config.cfg \
             file://physeries-user-patches.scc \
+            file://Merge-patches-for-CEC-issues-from-wolfgar.patch \
            "
 
 # patch for the hardware of "Marie Curie" board

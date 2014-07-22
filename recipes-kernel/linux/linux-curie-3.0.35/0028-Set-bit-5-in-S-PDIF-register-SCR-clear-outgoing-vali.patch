@@ -1,8 +1,7 @@
-From 18ddb25750d170ba66fb6e629f620c12ca1addb8 Mon Sep 17 00:00:00 2001
+From 608f58a55b6f39416f6b8b344154e6283808f09a Mon Sep 17 00:00:00 2001
 From: gao.cui <gao.cui@windsolve.com>
 Date: Sun, 13 Jul 2014 22:55:32 +0800
-Subject: [PATCH 28/30] Set bit 5 in S/PDIF register SCR
- clear outgoing validity bit
+Subject: [PATCH 28/30] Set bit 5 in S/PDIF register SCR clear outgoing validity bit
 
 ---
  sound/soc/codecs/mxc_spdif.c |    1 +

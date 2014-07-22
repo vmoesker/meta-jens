@@ -1,4 +1,4 @@
-From 9e5105294ee481b5afdb3f1b1bc0430afbb025fb Mon Sep 17 00:00:00 2001
+From f2833905548ed89478905b9e999c40faee88fcec Mon Sep 17 00:00:00 2001
 From: gao.cui <gao.cui@windsolve.com>
 Date: Sun, 13 Jul 2014 23:04:57 +0800
 Subject: [PATCH 29/30] PMU driver init
@@ -8,7 +8,7 @@ Subject: [PATCH 29/30] PMU driver init
  1 files changed, 5 insertions(+), 0 deletions(-)
 
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.c b/arch/arm/mach-mx6/board-mx6q_curie.c
-index 286df3e..e7e2bbc 100644
+index bde39e5..5c0c14f 100644
 --- a/arch/arm/mach-mx6/board-mx6q_curie.c
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.c
 @@ -748,6 +748,11 @@ static void __init mx6_curie_board_init(void)

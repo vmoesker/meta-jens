@@ -1,15 +1,15 @@
-From 586a9446f4f490b5649f0ea46d8db56068d40052 Mon Sep 17 00:00:00 2001
+From 8ba98e297cd9d07c14e9a91406cd43ef0f356663 Mon Sep 17 00:00:00 2001
 From: gao.cui <gao.cui@windsolve.com>
 Date: Sun, 13 Jul 2014 18:54:44 +0800
 Subject: [PATCH 23/30] button driver init for Curie
 
 ---
- arch/arm/mach-mx6/board-mx6q_curie.c |   43 ++++++++++++++++++++++++++++++++++++
+ arch/arm/mach-mx6/board-mx6q_curie.c |   43 ++++++++++++++++++++++++++++++++++
  arch/arm/mach-mx6/board-mx6q_curie.h |    3 ++
  2 files changed, 46 insertions(+), 0 deletions(-)
 
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.c b/arch/arm/mach-mx6/board-mx6q_curie.c
-index 1f316d1..50489b8 100644
+index 7466a31..2d97662 100644
 --- a/arch/arm/mach-mx6/board-mx6q_curie.c
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.c
 @@ -448,6 +448,47 @@ static void __init mx6q_curie_init_leds(void)
@@ -70,7 +70,7 @@ index 1f316d1..50489b8 100644
  
  extern void __iomem *twd_base;
 diff --git a/arch/arm/mach-mx6/board-mx6q_curie.h b/arch/arm/mach-mx6/board-mx6q_curie.h
-index f25da07..3926380 100644
+index f5a3127..e2c3893 100644
 --- a/arch/arm/mach-mx6/board-mx6q_curie.h
 +++ b/arch/arm/mach-mx6/board-mx6q_curie.h
 @@ -108,6 +108,9 @@ static iomux_v3_cfg_t mx6q_curie_pads[] = {
