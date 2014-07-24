@@ -1,0 +1,31 @@
+From 06ec43ebc6f5aaf1edf7c4c0eb93e9e2fadb1af8 Mon Sep 17 00:00:00 2001
+From: Xianzhong <b07117@freescale.com>
+Date: Mon, 1 Jul 2013 20:04:33 +0800
+Subject: [PATCH 02/14] ENGR00263482 fix random dma flush hang in monkey test
+
+The random hang is still found in one SabreSD RevB board
+
+Signed-off-by: Xianzhong <b07117@freescale.com>
+Acked-by: Lily Zhang
+---
+ drivers/mxc/gpu-viv/hal/os/linux/kernel/gc_hal_kernel_os.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/drivers/mxc/gpu-viv/hal/os/linux/kernel/gc_hal_kernel_os.c b/drivers/mxc/gpu-viv/hal/os/linux/kernel/gc_hal_kernel_os.c
+index e7edc39..3c2fb22 100644
+--- a/drivers/mxc/gpu-viv/hal/os/linux/kernel/gc_hal_kernel_os.c
++++ b/drivers/mxc/gpu-viv/hal/os/linux/kernel/gc_hal_kernel_os.c
+@@ -5430,6 +5430,10 @@ OnError:
+         {
+             for (i = 0; i < pageCount; i++)
+             {
++#ifdef CONFIG_ARM
++                gctUINT32 data;
++                get_user(data, (gctUINT32*)((memory & PAGE_MASK) + i * PAGE_SIZE));
++#endif
+                 /* Flush(clean) the data cache. */
+                 gcmkONERROR(gckOS_CacheFlush(Os, _GetProcessID(), gcvNULL,
+                                  (gctPOINTER)(gctUINTPTR_T)page_to_phys(pages[i]),
+-- 
+1.9.1
+

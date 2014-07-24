@@ -43,6 +43,25 @@ SRC_URI += "file://0001-Fix-linking-errors-when-only-mx6q_sabresd-is-selecte.pat
             file://0028-Set-bit-5-in-S-PDIF-register-SCR-clear-outgoing-vali.patch \
             file://0029-PMU-driver-init.patch \
             file://0030-fix-compiling-errors-in-sata-init.patch \
-          "
+           "
+
+SRC_URI += "file://0001-ENGR00266882-fix-SabreAuto-random-system-hang-issue.patch \
+            file://0002-ENGR00263482-fix-random-dma-flush-hang-in-monkey-tes.patch \
+            file://0003-ENGR00274782-fixed-gpu-crash-when-baseAddress-is-not.patch \
+            file://0004-ENGR00274478-fix-gpu-memory-multi-lock-failure.patch \
+            file://0005-ENGR00277045-1-fix-system-reboot-with-video-playback.patch \
+            file://0006-ENGR00278701-use-alloc_pages-instead-of-alloc_pages_.patch \
+            file://0007-ENGR00277045-2-align-gpu-baseaddr-with-ram-base-addr.patch \
+            file://0008-ENGR00277333-gpu-Enable-OT-limitation-for-gc880.patch \
+            file://0009-ENGR00284988-Camera-recording-kernel-crash-on-WFD-so.patch \
+            file://0010-ENGR00283031-GPU-Integrate-4.6.9p13-release-kernel-d.patch \
+            file://0011-ENGR00289999-fixed-gc880-invalid-command-state-messa.patch \
+            file://0012-ENGR00303820-887-refine-physical-address-check-for-e.patch \
+            file://0013-ENGR00306257-1027-fix-system-hang-up-issue-caused-by.patch \
+            file://0014-ENGR00278179-query-gpu-memory-with-seperate-types.patch \
+           "
+
+SRC_URI += "file://0001-Import-driver-for-RTL8189ES.patch \
+           "
 
 COMPATIBLE_MACHINE = "(mx6curie)"

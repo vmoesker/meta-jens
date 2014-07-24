@@ -1,0 +1,71 @@
+From 66ecad1cacb5933698f526bd03458af54f03a1cf Mon Sep 17 00:00:00 2001
+From: Xianzhong <b07117@freescale.com>
+Date: Tue, 18 Mar 2014 20:40:59 +0800
+Subject: [PATCH 12/14] ENGR00303820 [#887] refine physical address check for
+ external memory
+
+2G above address will cause system reboot and fixed in original patch,
+error check code is added based on the original logic.
+
+Signed-off-by: Xianzhong <b07117@freescale.com>
+Acked-by: Jason Liu
+---
+ drivers/mxc/gpu-viv/hal/kernel/gc_hal_kernel.c | 31 +++++++++++++++-----------
+ 1 file changed, 18 insertions(+), 13 deletions(-)
+
+diff --git a/drivers/mxc/gpu-viv/hal/kernel/gc_hal_kernel.c b/drivers/mxc/gpu-viv/hal/kernel/gc_hal_kernel.c
+index 299162c..b6225e3 100644
+--- a/drivers/mxc/gpu-viv/hal/kernel/gc_hal_kernel.c
++++ b/drivers/mxc/gpu-viv/hal/kernel/gc_hal_kernel.c
+@@ -743,22 +743,27 @@ _AllocateMemory_Retry:
+                     gctUINT32 physAddr=0;
+                     gctUINT32 baseAddress = 0;
+ 
+-                    gckOS_LockPages(Kernel->os,
+-                                    node->Virtual.physical,
+-                                    node->Virtual.bytes,
+-                                    gcvFALSE,
+-                                    &node->Virtual.logical,
+-                                    &node->Virtual.pageCount);
++                    gcmkONERROR(
++                        gckOS_LockPages(Kernel->os,
++                                        node->Virtual.physical,
++                                        node->Virtual.bytes,
++                                        gcvFALSE,
++                                        &node->Virtual.logical,
++                                        &node->Virtual.pageCount));
+ 
+                     /* Convert logical address into a physical address. */
+-                    gckOS_GetPhysicalAddress(Kernel->os, node->Virtual.logical, &physAddr);
++                    gcmkONERROR(
++                        gckOS_GetPhysicalAddress(Kernel->os,
++                                                 node->Virtual.logical,
++                                                 &physAddr));
+ 
+-                    gckOS_UnlockPages(Kernel->os,
+-                                      node->Virtual.physical,
+-                                      node->Virtual.bytes,
+-                                      node->Virtual.logical);
++                    gcmkONERROR(
++                        gckOS_UnlockPages(Kernel->os,
++                                          node->Virtual.physical,
++                                          node->Virtual.bytes,
++                                          node->Virtual.logical));
+ 
+-                    gckOS_GetBaseAddress(Kernel->os, &baseAddress);
++                    gcmkONERROR(gckOS_GetBaseAddress(Kernel->os, &baseAddress));
+ 
+                     gcmkASSERT(physAddr >= baseAddress);
+ 
+@@ -769,7 +774,7 @@ _AllocateMemory_Retry:
+                     {
+                         gckOS_Print("gpu virtual memory 0x%x cannot be allocated for external use !\n", physAddr);
+ 
+-                        gckVIDMEM_Free(node);
++                        gcmkONERROR(gckVIDMEM_Free(node));
+ 
+                         node = gcvNULL;
+                     }
+-- 
+1.9.1
+

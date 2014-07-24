@@ -1,0 +1,45 @@
+From caf12bb19c1c608f9c87338be216c6aeaa2a54d6 Mon Sep 17 00:00:00 2001
+From: Xianzhong <b07117@freescale.com>
+Date: Thu, 10 Oct 2013 00:24:05 +0800
+Subject: [PATCH 10/14] ENGR00283031 [GPU]Integrate 4.6.9p13 release kernel
+ driver
+
+Integrate GPU 4.6.9p13 release kernel driver for Android.
+
+Signed-off-by: Xianzhong <b07117@freescale.com>
+Acked-by: Jason Liu
+
+Conflicts:
+	drivers/mxc/gpu-viv/hal/kernel/gc_hal_kernel.h
+	drivers/mxc/gpu-viv/hal/kernel/gc_hal_kernel_db.c
+	drivers/mxc/gpu-viv/hal/kernel/inc/gc_hal_driver.h
+	drivers/mxc/gpu-viv/hal/os/linux/kernel/gc_hal_kernel_driver.c
+	drivers/mxc/gpu-viv/hal/os/linux/kernel/gc_hal_kernel_os.c
+---
+ drivers/mxc/gpu-viv/hal/os/linux/kernel/gc_hal_kernel_driver.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/drivers/mxc/gpu-viv/hal/os/linux/kernel/gc_hal_kernel_driver.c b/drivers/mxc/gpu-viv/hal/os/linux/kernel/gc_hal_kernel_driver.c
+index bacd531..100d7a7 100644
+--- a/drivers/mxc/gpu-viv/hal/os/linux/kernel/gc_hal_kernel_driver.c
++++ b/drivers/mxc/gpu-viv/hal/os/linux/kernel/gc_hal_kernel_driver.c
+@@ -1,7 +1,7 @@
+ /****************************************************************************
+ *
+ *    Copyright (C) 2005 - 2013 by Vivante Corp.
+-*    Copyright (C) 2011-2012 Freescale Semiconductor, Inc.
++*    Copyright (C) 2011-2013 Freescale Semiconductor, Inc.
+ *
+ *    This program is free software; you can redistribute it and/or modify
+ *    it under the terms of the GNU General Public License as published by
+@@ -19,7 +19,6 @@
+ *
+ *****************************************************************************/
+ 
+-
+ #include <linux/device.h>
+ #include <linux/slab.h>
+ #include <linux/notifier.h>
+-- 
+1.9.1
+

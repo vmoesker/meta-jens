@@ -1,0 +1,66 @@
+From aa1732b1af4d9ead2012ea970c87d94bd32ea427 Mon Sep 17 00:00:00 2001
+From: Xianzhong <b07117@freescale.com>
+Date: Thu, 29 Aug 2013 01:33:39 +0800
+Subject: [PATCH 05/14] ENGR00277045-1 fix system reboot with video playback
+
+gpu virtual memory cannot be allocated for external use
+
+this issue occurs in ARD board with 2G above memory address
+
+Signed-off-by: Xianzhong <b07117@freescale.com>
+Acked-by: Jason Liu
+---
+ drivers/mxc/gpu-viv/hal/kernel/gc_hal_kernel.c | 37 ++++++++++++++++++++++++++
+ 1 file changed, 37 insertions(+)
+
+diff --git a/drivers/mxc/gpu-viv/hal/kernel/gc_hal_kernel.c b/drivers/mxc/gpu-viv/hal/kernel/gc_hal_kernel.c
+index b7b0d28..299162c 100644
+--- a/drivers/mxc/gpu-viv/hal/kernel/gc_hal_kernel.c
++++ b/drivers/mxc/gpu-viv/hal/kernel/gc_hal_kernel.c
+@@ -738,6 +738,43 @@ _AllocateMemory_Retry:
+             if (gcmIS_SUCCESS(status) || forceContiguous == gcvTRUE)
+             {
+                 /* Memory allocated. */
++                if(node && forceContiguous == gcvTRUE)
++                {
++                    gctUINT32 physAddr=0;
++                    gctUINT32 baseAddress = 0;
++
++                    gckOS_LockPages(Kernel->os,
++                                    node->Virtual.physical,
++                                    node->Virtual.bytes,
++                                    gcvFALSE,
++                                    &node->Virtual.logical,
++                                    &node->Virtual.pageCount);
++
++                    /* Convert logical address into a physical address. */
++                    gckOS_GetPhysicalAddress(Kernel->os, node->Virtual.logical, &physAddr);
++
++                    gckOS_UnlockPages(Kernel->os,
++                                      node->Virtual.physical,
++                                      node->Virtual.bytes,
++                                      node->Virtual.logical);
++
++                    gckOS_GetBaseAddress(Kernel->os, &baseAddress);
++
++                    gcmkASSERT(physAddr >= baseAddress);
++
++                    /* Subtract baseAddress to get a GPU address used for programming. */
++                    physAddr -= baseAddress;
++
++                    if((physAddr & 0x80000000) || ((physAddr + Bytes) & 0x80000000))
++                    {
++                        gckOS_Print("gpu virtual memory 0x%x cannot be allocated for external use !\n", physAddr);
++
++                        gckVIDMEM_Free(node);
++
++                        node = gcvNULL;
++                    }
++                }
++
+                 break;
+             }
+         }
+-- 
+1.9.1
+
