@@ -179,7 +179,7 @@ index 212abb7..18d79f1 100644
  			if (ret)
  				dup_spd = _100BASET | (FULL << 16);
 diff --git a/include/configs/mx6dl_sabresd.h b/include/configs/mx6dl_sabresd.h
-index 70ed3db..d3ce51d 100644
+index 70ed3db..05e4317 100644
 --- a/include/configs/mx6dl_sabresd.h
 +++ b/include/configs/mx6dl_sabresd.h
 @@ -24,6 +24,8 @@
@@ -202,21 +202,21 @@ index 70ed3db..d3ce51d 100644
  #define CONFIG_CMD_IMXOTP
  
  /* Enable below configure when supporting nand */
-@@ -122,22 +124,25 @@
+@@ -120,24 +122,25 @@
+ #define CONFIG_LOADADDR		0x10800000	/* loadaddr env var */
+ #define CONFIG_RD_LOADADDR	(CONFIG_LOADADDR + 0x300000)
  
- #define	CONFIG_EXTRA_ENV_SETTINGS					\
- 		"netdev=eth0\0"						\
-+		"ethaddr=b0:1f:de:ad:be:ef\0"    \
- 		"ethprime=FEC0\0"					\
- 		"uboot=u-boot.bin\0"			\
- 		"kernel=uImage\0"				\
+-#define	CONFIG_EXTRA_ENV_SETTINGS					\
+-		"netdev=eth0\0"						\
+-		"ethprime=FEC0\0"					\
+-		"uboot=u-boot.bin\0"			\
+-		"kernel=uImage\0"				\
 -		"nfsroot=/opt/eldk/arm\0"				\
-+		"nfsroot=/nfs_root/rootfs\0"				\
- 		"bootargs_base=setenv bootargs console=ttymxc0,115200\0"\
- 		"bootargs_nfs=setenv bootargs ${bootargs} root=/dev/nfs "\
- 			"ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp\0"\
- 		"bootcmd_net=run bootargs_base bootargs_nfs; "		\
- 			"tftpboot ${loadaddr} ${kernel}; bootm\0"	\
+-		"bootargs_base=setenv bootargs console=ttymxc0,115200\0"\
+-		"bootargs_nfs=setenv bootargs ${bootargs} root=/dev/nfs "\
+-			"ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp\0"\
+-		"bootcmd_net=run bootargs_base bootargs_nfs; "		\
+-			"tftpboot ${loadaddr} ${kernel}; bootm\0"	\
 -		"bootargs_mmc=setenv bootargs ${bootargs} ip=dhcp "     \
 -			"root=/dev/mmcblk0p1 rootwait\0"                \
 -		"bootcmd_mmc=run bootargs_base bootargs_mmc; "   \
@@ -224,19 +224,29 @@ index 70ed3db..d3ce51d 100644
 -		"mmc read ${loadaddr} 0x800 0x2000; bootm\0"	\
 -		"bootcmd=run bootcmd_net\0"                             \
 -
-+		"bootargs_sd=setenv bootargs ${bootargs} ip=none "	\
-+			"root=/dev/mmcblk1p2 rootwait consoleblank=0\0"	\
-+		"bootcmd_sd=run bootargs_base bootargs_sd; mmc dev 2; " \
-+			"fatload mmc 2:1 ${loadaddr} /uimage; bootm\0"	\
-+		"bootargs_mmc=setenv bootargs ${bootargs} ip=none "	\
-+			"root=/dev/mmcblk0p2 rootwait consoleblank=0\0"	\
-+		"bootcmd_mmc=run bootargs_base bootargs_mmc; mmc dev 3; " \
-+			"fatload mmc 3:1 ${loadaddr} /uimage; bootm\0"	\
-+		"bootcmd=run bootcmd_sd; run bootcmd_mmc\0"
++#define	CONFIG_EXTRA_ENV_SETTINGS                                        \
++		"netdev=eth0\0"                                          \
++		"ethaddr=b0:1f:de:ad:be:ef\0"                            \
++		"ethprime=FEC0\0"                                        \
++		"uboot=u-boot.bin\0"                                     \
++		"kernel=uImage\0"                                        \
++		"bootargs_base=setenv bootargs console=ttymxc0,115200\0" \
++		"bootargs_nfs=setenv bootargs ${bootargs_base} ip=dhcp " \
++		        "root=/dev/nfs ro rootwait consoleblank=0'\0"    \
++		"bootcmd_nfs=run bootargs_nfs; dhcp ${loadaddr}; bootm\0"\
++		"bootargs_sd=setenv bootargs ${bootargs_base} ip=none "	 \
++			"root=/dev/mmcblk1p2 rootwait consoleblank=0\0"	 \
++		"bootcmd_sd=run bootargs_sd; mmc dev 2; "                \
++			"fatload mmc 2:1 ${loadaddr} /uimage; bootm\0"	 \
++		"bootargs_mmc=setenv bootargs ${bootargs_base} ip=none " \
++			"root=/dev/mmcblk0p2 rootwait consoleblank=0\0"	 \
++		"bootcmd_mmc=run bootargs_mmc; mmc dev 3; "              \
++			"fatload mmc 3:1 ${loadaddr} /uimage; bootm\0"	 \
++		"bootcmd=run bootcmd_sd; run bootcmd_mmc; run bootcmd_nfs\0"
  
  #define CONFIG_ARP_TIMEOUT	200UL
  
-@@ -145,7 +150,7 @@
+@@ -145,7 +148,7 @@
   * Miscellaneous configurable options
   */
  #define CONFIG_SYS_LONGHELP		/* undef to save memory */
@@ -246,7 +256,7 @@ index 70ed3db..d3ce51d 100644
  #define CONFIG_SYS_CBSIZE		1024	/* Console I/O Buffer Size */
  /* Print Buffer Size */
 diff --git a/include/configs/mx6q_sabresd.h b/include/configs/mx6q_sabresd.h
-index 6f07961..72c9b59 100644
+index 6f07961..c803c57 100644
 --- a/include/configs/mx6q_sabresd.h
 +++ b/include/configs/mx6q_sabresd.h
 @@ -90,8 +90,8 @@
@@ -260,21 +270,20 @@ index 6f07961..72c9b59 100644
  #define CONFIG_CMD_IMXOTP
  
  /* Enable below configure when supporting nand */
-@@ -117,6 +117,7 @@
+@@ -116,23 +116,24 @@
+ #define CONFIG_RD_LOADADDR	(0x1300000)
  
  #define	CONFIG_EXTRA_ENV_SETTINGS					\
- 		"netdev=eth0\0"						\
-+		"ethaddr=b0:1f:de:ad:be:ef\0"    \
- 		"ethprime=FEC0\0"					\
- 		"uboot=u-boot.bin\0"			\
- 		"kernel=uImage\0"				\
-@@ -124,15 +125,17 @@
- 		"bootargs_base=setenv bootargs console=ttymxc0,115200\0"\
- 		"bootargs_nfs=setenv bootargs ${bootargs} root=/dev/nfs "\
- 			"ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp\0"\
+-		"netdev=eth0\0"						\
+-		"ethprime=FEC0\0"					\
+-		"uboot=u-boot.bin\0"			\
+-		"kernel=uImage\0"				\
+-		"nfsroot=/opt/eldk/arm\0"				\
+-		"bootargs_base=setenv bootargs console=ttymxc0,115200\0"\
+-		"bootargs_nfs=setenv bootargs ${bootargs} root=/dev/nfs "\
+-			"ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp\0"\
 -		"bootcmd_net=run bootargs_base bootargs_nfs; "		\
-+		"bootcmd_nfs=run bootargs_base bootargs_nfs; "		\
- 			"tftpboot ${loadaddr} ${kernel}; bootm\0"	\
+-			"tftpboot ${loadaddr} ${kernel}; bootm\0"	\
 -		"bootargs_mmc=setenv bootargs ${bootargs} ip=dhcp "     \
 -			"root=/dev/mmcblk0p1 rootwait\0"                \
 -		"bootcmd_mmc=run bootargs_base bootargs_mmc; "   \
@@ -282,19 +291,28 @@ index 6f07961..72c9b59 100644
 -		"mmc read ${loadaddr} 0x800 0x2000; bootm\0"	\
 -		"bootcmd=run bootcmd_net\0"                             \
 -
-+		"bootargs_sd=setenv bootargs ${bootargs} ip=none "	\
-+			"root=/dev/mmcblk1p2 rootwait consoleblank=0\0"	\
-+		"bootcmd_sd=run bootargs_base bootargs_sd; mmc dev 2; " \
-+			"fatload mmc 2:1 ${loadaddr} /uimage; bootm\0"	\
-+		"bootargs_mmc=setenv bootargs ${bootargs} ip=none "	\
-+			"root=/dev/mmcblk0p2 rootwait consoleblank=0\0"	\
-+		"bootcmd_mmc=run bootargs_base bootargs_mmc; mmc dev 3; " \
-+			"fatload mmc 3:1 ${loadaddr} /uimage; bootm\0"	\
-+		"bootcmd=run bootcmd_sd; run bootcmd_mmc\0"
++		"netdev=eth0\0"                                          \
++		"ethaddr=b0:1f:de:ad:be:ef\0"                            \
++		"ethprime=FEC0\0"                                        \
++		"uboot=u-boot.bin\0"                                     \
++		"kernel=uImage\0"                                        \
++		"bootargs_base=setenv bootargs console=ttymxc0,115200\0" \
++		"bootargs_nfs=setenv bootargs ${bootargs_base} ip=dhcp " \
++		        "root=/dev/nfs ro rootwait consoleblank=0'\0"    \
++		"bootcmd_nfs=run bootargs_nfs; dhcp ${loadaddr}; bootm\0"\
++		"bootargs_sd=setenv bootargs ${bootargs_base} ip=none "	 \
++			"root=/dev/mmcblk1p2 rootwait consoleblank=0\0"	 \
++		"bootcmd_sd=run bootargs_sd; mmc dev 2; "                \
++			"fatload mmc 2:1 ${loadaddr} /uimage; bootm\0"	 \
++		"bootargs_mmc=setenv bootargs ${bootargs_base} ip=none " \
++			"root=/dev/mmcblk0p2 rootwait consoleblank=0\0"	 \
++		"bootcmd_mmc=run bootargs_mmc; mmc dev 3; "              \
++			"fatload mmc 3:1 ${loadaddr} /uimage; bootm\0"	 \
++		"bootcmd=run bootcmd_sd; run bootcmd_mmc; run bootcmd_nfs\0"
  
  #define CONFIG_ARP_TIMEOUT	200UL
  
-@@ -140,7 +143,7 @@
+@@ -140,7 +141,7 @@
   * Miscellaneous configurable options
   */
  #define CONFIG_SYS_LONGHELP		/* undef to save memory */
@@ -303,7 +321,7 @@ index 6f07961..72c9b59 100644
  #define CONFIG_AUTO_COMPLETE
  #define CONFIG_SYS_CBSIZE		1024	/* Console I/O Buffer Size */
  /* Print Buffer Size */
-@@ -171,8 +174,8 @@
+@@ -171,8 +172,8 @@
  #define CONFIG_CMD_MII
  #define CONFIG_CMD_DHCP
  #define CONFIG_CMD_PING
