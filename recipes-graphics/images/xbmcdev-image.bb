@@ -5,6 +5,8 @@ PR="r0"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58 \
                     file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 
+include recipes-core/images/core-image-base.bb
+
 inherit core-image distro_features_check
 
 CONFLICT_DISTRO_FEATURES = "directfb wayland"
@@ -34,8 +36,11 @@ IMAGE_INSTALL += " \
 	libcec \
 	dropbear \
 	libstatgrab \
+	fsl-rc-local \
 	packagegroup-core-sdk \
 	xbmc \
+	xbmc-nm-addon \
+	networkmanager \
 	xbmc-image-custom-rfs \
 	openjdk-7-jre \
 	procps \
@@ -49,10 +54,10 @@ IMAGE_INSTALL += " \
 	util-linux \
 	ethtool \
 	xz \
+	nano \
 	lsof \
 	fbida \
 	imagemagick \
 "
 
 export IMAGE_BASENAME = "xbmcdev-image"
-
