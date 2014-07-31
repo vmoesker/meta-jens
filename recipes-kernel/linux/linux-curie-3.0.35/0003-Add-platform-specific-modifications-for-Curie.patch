@@ -1,12 +1,12 @@
-From ed575b9b33c40e44387b7b3759d46d7c82e30eea Mon Sep 17 00:00:00 2001
+From 44fb275b5382abc2a0dda48c09bcc300d7960c2a Mon Sep 17 00:00:00 2001
 From: Jens Rehsack <sno@netbsd.org>
 Date: Wed, 30 Jul 2014 14:20:52 +0200
 Subject: [PATCH 3/3] Add platform specific modifications for Curie
 
 ---
  drivers/net/wireless/rtl8189es/Makefile           | 11 +++++++++--
- drivers/net/wireless/rtl8189es/include/autoconf.h | 10 +++++-----
- 2 files changed, 14 insertions(+), 7 deletions(-)
+ drivers/net/wireless/rtl8189es/include/autoconf.h | 12 ++++++------
+ 2 files changed, 15 insertions(+), 8 deletions(-)
 
 diff --git a/drivers/net/wireless/rtl8189es/Makefile b/drivers/net/wireless/rtl8189es/Makefile
 index 5a3ca7c..3afe93f 100644
@@ -51,7 +51,7 @@ index 5a3ca7c..3afe93f 100644
  EXTRA_CFLAGS += -DCONFIG_LITTLE_ENDIAN
  EXTRA_CFLAGS += -DCONFIG_PLATFORM_ARM_SUN7I
 diff --git a/drivers/net/wireless/rtl8189es/include/autoconf.h b/drivers/net/wireless/rtl8189es/include/autoconf.h
-index b650674..df4d07e 100644
+index b650674..0f360e5 100644
 --- a/drivers/net/wireless/rtl8189es/include/autoconf.h
 +++ b/drivers/net/wireless/rtl8189es/include/autoconf.h
 @@ -37,7 +37,7 @@
@@ -63,6 +63,15 @@ index b650674..df4d07e 100644
  
  #ifdef CONFIG_IOCTL_CFG80211
  	//#define RTW_USE_CFG80211_STA_EVENT /* Indecate new sta asoc through cfg80211_new_sta */
+@@ -56,7 +56,7 @@
+ #define CONFIG_80211N_HT
+ #define CONFIG_RECV_REORDERING_CTRL
+ 
+-//#define CONFIG_CONCURRENT_MODE
++#define CONFIG_CONCURRENT_MODE
+ #ifdef CONFIG_CONCURRENT_MODE
+ 	#define CONFIG_TSF_RESET_OFFLOAD		// For 2 PORT TSF SYNC.
+ 	//#define CONFIG_HWPORT_SWAP				//Port0->Sec , Port1 -> Pri
 @@ -284,15 +284,15 @@
  /*
   * Debug Related Config
