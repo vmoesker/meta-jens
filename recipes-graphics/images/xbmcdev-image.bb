@@ -58,7 +58,6 @@ IMAGE_INSTALL += " \
 	xz \
 	nano \
 	lsof \
-	fbida \
 	imagemagick \
 "
 
