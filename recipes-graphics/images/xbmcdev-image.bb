@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3
                     file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 
 include recipes-core/images/core-image-base.bb
+include zway.inc
 
 inherit core-image distro_features_check
 
@@ -27,6 +28,7 @@ EXTRA_IMAGE_FEATURES += " \
 IMAGE_INSTALL += " \
 	${CORE_IMAGE_BASE_INSTALL} \
 	${MACHINE_FIRMWARE} \
+	${ZWAY_DEPS} \
 	packagegroup-core-basic \
 	valgrind \
 	strace \
