@@ -41,8 +41,7 @@ IMAGE_INSTALL += " \
 	fsl-rc-local \
 	packagegroup-core-sdk \
 	xbmc \
-	xbmc-nm-addon \
-	networkmanager \
+	xbmc-rdm-hp-addon \
 	xbmc-image-custom-rfs \
 	openjdk-7-jre \
 	procps \
