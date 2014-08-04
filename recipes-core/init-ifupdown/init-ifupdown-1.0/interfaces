@@ -12,6 +12,5 @@ iface wlan0 inet dhcp
 	wpa-conf /etc/wpa_supplicant.conf
 
 # Wired or wireless interfaces
-auto eth0
 iface eth0 inet dhcp
-	hwaddress ether b0:1f:81:bf:ff:ab
+#	hwaddress ether b0:1f:81:bf:ff:ab
