@@ -21,8 +21,6 @@ EXTRA_IMAGE_FEATURES += " \
     nfs-server \
     tools-debug \
     tools-profile \
-    dbg-pkgs \
-    dev-pkgs \
 "
 
 IMAGE_INSTALL += " \
@@ -30,6 +28,10 @@ IMAGE_INSTALL += " \
 	${MACHINE_FIRMWARE} \
 	${ZWAY_DEPS} \
 	packagegroup-core-basic \
+	dancer2-perl \
+	tcpdump \
+	ifplugd \
+	udev-extraconf \
 	valgrind \
 	strace \
 	libsdl \
@@ -43,7 +45,7 @@ IMAGE_INSTALL += " \
 	xbmc \
 	xbmc-rdm-hp-addon \
 	xbmc-image-custom-rfs \
-	openjdk-7-jre \
+	openjdk-7-jdk \
 	procps \
 	util-linux-mount \
 	libntfs-3g \
@@ -60,4 +62,4 @@ IMAGE_INSTALL += " \
 	imagemagick \
 "
 
-export IMAGE_BASENAME = "xbmcdev-image"
+export IMAGE_BASENAME = "rdm-hp2-xbmc-image"
