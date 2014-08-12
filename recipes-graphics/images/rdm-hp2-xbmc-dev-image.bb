@@ -29,8 +29,9 @@ IMAGE_INSTALL += " \
 	${CORE_IMAGE_BASE_INSTALL} \
 	${MACHINE_FIRMWARE} \
 	${ZWAY_DEPS} \
-	tcpdump \
 	packagegroup-core-basic \
+	tcpdump \
+	dancer2-perl \
 	ifplugd \
 	udev-extraconf \
 	valgrind \
