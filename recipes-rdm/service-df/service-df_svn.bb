@@ -28,5 +28,4 @@ do_configure() {
 }
 
 FILES_${PN} += "/opt/homepilot"
-FILES_${PN}-dbg += "/opt/homepilot"
-
+FILES_${PN}-dbg += "/opt/homepilot/bin/.debug"
