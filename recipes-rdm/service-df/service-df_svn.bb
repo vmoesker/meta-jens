@@ -9,8 +9,7 @@ DEPENDS = "libxml2 libftdi"
 
 PV = "1.2.0"
 
-SRCREV = "3473"
-SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=DuoFern_Service"
+SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=DuoFern_Service;rev=3485"
 
 S = "${WORKDIR}/DuoFern_Service"
 
@@ -29,3 +28,4 @@ do_configure() {
 
 FILES_${PN} += "/opt/homepilot"
 FILES_${PN}-dbg += "/opt/homepilot/bin/.debug"
+
