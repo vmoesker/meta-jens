@@ -1,12 +1,16 @@
 # Copyright (C) 2012-2013 Freescale Semiconductor
-# Copyright (C) 2012-2013 O.S. Systems Software LTDA.
+# Copyright (C) 2012-2014 O.S. Systems Software LTDA.
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 DESCRIPTION = "GPU driver and apps for imx6"
 SECTION = "libs"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://usr/include/gc_vdk.h;endline=11;md5=19f5925343fa3da65596eeaa4ddb5fd3"
-DEPENDS += "${@base_contains('DISTRO_FEATURES', 'x11', 'virtual/libx11 libxdamage libxext libxfixes mesa', '', d)}"
+
+DEPENDS += "${@base_contains('DISTRO_FEATURES', 'x11', 'virtual/libx11 libxdamage libxext libxfixes mesa', \
+                             base_contains('DISTRO_FEATURES', 'wayland', 'wayland', \
+                                           '', d), d)}"
+
 PROVIDES += "virtual/wayland-egl virtual/libgl virtual/libgal-x11 virtual/egl virtual/libgles1 virtual/libgles2 virtual/libopenvg"
 
 PE = "1"
@@ -25,6 +29,7 @@ SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true \
            file://gc_wayland_protocol.pc \
            file://wayland-egl.pc \
            file://wayland-viv.pc \
+           file://directfbrc \
           "
 
 PACKAGES =+ "libclc-mx6 libclc-mx6-dev libclc-mx6-dbg \
@@ -57,6 +62,7 @@ python __anonymous () {
                 raise bb.parse.SkipPackage("Package Float-Point is not compatible with the machine")
 }
 
+#USE_X11 = "${@base_contains("DISTRO_FEATURES", "x11", "yes", "no", d)}"
 USE_X11 = "no"
 USE_DFB = "${@base_contains("DISTRO_FEATURES", "directfb", "yes", "no", d)}"
 USE_WL = "${@base_contains("DISTRO_FEATURES", "wayland", "yes", "no", d)}"
@@ -141,6 +147,9 @@ do_install () {
         install -m 0644 ${WORKDIR}/vg.pc ${D}${libdir}/pkgconfig/vg.pc
 
         if [ "${USE_DFB}" = "yes" ]; then
+            install -d ${D}/${sysconfdir}
+            install -m 644 ${WORKDIR}/directfbrc ${D}/${sysconfdir}/directfbrc
+
             cp -r ${S}/usr/lib/directfb-1.6-0 ${D}${libdir}
             backend=dfb
         else
@@ -160,6 +169,15 @@ do_install () {
     mv ${D}${libdir}/libGAL-${backend}.so ${D}${libdir}/libGAL.so
     mv ${D}${libdir}/libVIVANTE-${backend}.so ${D}${libdir}/libVIVANTE.so
 
+    if [ -f ${S}/usr/lib/libGLESv2-${backend}.so ]
+    then
+        # update libglesv2 as backend dependent
+        rm -rf ${D}${libdir}/libGLESv2*
+        cp -a ${S}/usr/lib/libGLESv2-${backend}.so ${D}${libdir}/libGLESv2.so.2.0.0
+        ln -sf libGLESv2.so.2.0.0 ${D}${libdir}/libGLESv2.so.2
+        ln -sf libGLESv2.so.2.0.0 ${D}${libdir}/libGLESv2.so
+    fi
+
     for backend in wl x11 fb dfb; do
         find ${D}${libdir} -name "*-$backend.so" -exec rm '{}' ';'
     done
@@ -167,8 +185,6 @@ do_install () {
     find ${D}${libdir} -type f -exec chmod 644 {} \;
     find ${D}${includedir} -type f -exec chmod 644 {} \;
 }
-
-S = "${WORKDIR}/${PN}-${PV}"
 
 FILES_${PN} += "/opt"
 FILES_${PN}-dev = "${includedir}"
@@ -191,7 +207,6 @@ FILES_libgal-mx6-dbg = "${libdir}/.debug/libGAL${SOLIBS}"
 FILES_libgl-mx6 = "${libdir}/libGL${REALSOLIBS}"
 FILES_libgl-mx6-dev = "${libdir}/libGL${SOLIBSDEV}"
 FILES_libgl-mx6-dbg = "${libdir}/.debug/libGL.${SOLIBS}"
-RDEPENDS_libgl-mx6-dev = "libgl-mesa-dev"
 
 # libEGL needs to open libGLESv1.so
 INSANE_SKIP_libgles-mx6 += "dev-so"
@@ -242,5 +257,7 @@ FILES_libgc-wayland-protocol-mx6-dev = "${libdir}/libgc_wayland_protocol${SOLIBS
 FILES_libgc-wayland-protocol-mx6-dbg = "${libdir}/libgc_wayland_protocol${SOLIBS}"
 
 FILES_libwayland-egl-mx6-dev = "${libdir}/pkgconfig/wayland-egl.pc"
+
+FILES_libvivante-dfb-mx6 += "${sysconfdir}/directfbrc"
 
 COMPATIBLE_MACHINE = "(mx6)"
