@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3
 include recipes-core/images/core-image-base.bb
 include zway.inc
 include rdm-hp2.inc
+include rdm-xbmc.inc
 
 inherit core-image distro_features_check
 
@@ -29,6 +30,7 @@ IMAGE_INSTALL += " \
 	${MACHINE_FIRMWARE} \
 	${ZWAY_DEPS} \
 	${HP2_INSTALL} \
+	${XBMC_INSTALL} \
 	packagegroup-core-basic \
 	dancer2-perl \
 	tcpdump \
@@ -36,15 +38,10 @@ IMAGE_INSTALL += " \
 	udev-extraconf \
 	valgrind \
 	strace \
-	libsdl \
-	libcec \
 	dropbear \
 	libstatgrab \
 	fsl-rc-local \
 	packagegroup-core-sdk \
-	xbmc \
-	xbmc-rdm-hp-addon \
-	xbmc-image-custom-rfs \
 	procps \
 	util-linux-mount \
 	libntfs-3g \
