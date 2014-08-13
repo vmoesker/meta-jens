@@ -1,16 +1,15 @@
 DESCRIPTION = "RDM DF Service"
 HOMEPAGE = "http://www.rademacher.de"
 
-LICENSE = "GPLv3"
-LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-3.0;md5=c79ff39f19dfec6d293b95dea7b07891"
-
+LICENSE = "commercial"
+LIC_FILES_CHKSUM = "file://${THISDIR}/files/license.txt;md5=3ebe3464e841ddbf115af1f7019017c5"
+FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 DEPENDS = "libxml2 libftdi"
 
 PV = "1.2.0"
 
-SRCREV = "3473"
-SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=DuoFern_Service"
+SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=DuoFern_Service;rev=3485"
 
 S = "${WORKDIR}/DuoFern_Service"
 
