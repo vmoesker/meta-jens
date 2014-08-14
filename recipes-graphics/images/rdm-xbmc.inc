@@ -1,4 +1,5 @@
 XBMC_INSTALL = "libsdl \
+	alsa-utils \
 	libcec \
 	xbmc \
 	xbmc-rdm-hp-addon \
