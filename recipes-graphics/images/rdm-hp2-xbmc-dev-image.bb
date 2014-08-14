@@ -34,6 +34,7 @@ IMAGE_INSTALL += " \
 	${HP2_INSTALL} \
 	${XBMC_INSTALL} \
 	vivante-gpu-sdk \
+	tzdata \
 	packagegroup-core-basic \
 	tcpdump \
 	dancer2-perl \
