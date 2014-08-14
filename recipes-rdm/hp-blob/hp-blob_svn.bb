@@ -6,12 +6,14 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 DEPENDS = "tar "
 PV = "4.0.0.0"
-SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=HomePilot_Blob;rev=3489"
+SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=HomePilot_Blob;rev=3490"
 
 S = "${WORKDIR}/HomePilot_Blob"
 
 INST_DEST_PREFIX="/opt/homepilot"
 TARBALL_NAME="hp-dist_4.0.0.0.tar.gz"
+
+inherit update-rc.d
 
 do_install() {
 	#create init.d directory
@@ -32,3 +34,6 @@ do_install() {
 
 FILES_${PN} += "/opt/homepilot \
 		"
+
+INITSCRIPT_NAME = "homepilot"
+INITSCRIPT_PARAMS = "start 99 S . stop 20 0 1 6 ."
