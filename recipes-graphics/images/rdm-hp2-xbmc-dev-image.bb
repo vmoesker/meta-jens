@@ -23,6 +23,8 @@ EXTRA_IMAGE_FEATURES += " \
     nfs-server \
     tools-debug \
     tools-profile \
+    tools-sdk \
+    ssh-server-dropbear \
     dbg-pkgs \
     dev-pkgs \
 "
@@ -41,7 +43,6 @@ IMAGE_INSTALL += " \
 	ifplugd \
 	udev-extraconf \
 	valgrind \
-	strace \
 	dropbear \
 	libstatgrab \
 	fsl-rc-local \

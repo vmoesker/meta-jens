@@ -23,6 +23,8 @@ EXTRA_IMAGE_FEATURES += " \
     nfs-server \
     tools-debug \
     tools-profile \
+    tools-sdk \
+    ssh-server-dropbear \
 "
 
 IMAGE_INSTALL += " \
@@ -33,17 +35,14 @@ IMAGE_INSTALL += " \
 	${XBMC_INSTALL} \
 	vivante-gpu-sdk \
 	tzdata \
-	packagegroup-core-basic \
 	dancer2-perl \
 	tcpdump \
 	ifplugd \
 	udev-extraconf \
 	valgrind \
-	strace \
 	dropbear \
 	libstatgrab \
 	fsl-rc-local \
-	packagegroup-core-sdk \
 	procps \
 	util-linux-mount \
 	libntfs-3g \
