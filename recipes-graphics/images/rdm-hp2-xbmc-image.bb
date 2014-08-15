@@ -36,11 +36,11 @@ IMAGE_INSTALL += " \
 	vivante-gpu-sdk \
 	tzdata \
 	dancer2-perl \
+	yaml-libyaml-perl \
 	tcpdump \
 	ifplugd \
 	udev-extraconf \
 	valgrind \
-	dropbear \
 	libstatgrab \
 	fsl-rc-local \
 	procps \
@@ -56,7 +56,6 @@ IMAGE_INSTALL += " \
 	xz \
 	nano \
 	lsof \
-	imagemagick \
 "
 
 export IMAGE_BASENAME = "rdm-hp2-xbmc-image"

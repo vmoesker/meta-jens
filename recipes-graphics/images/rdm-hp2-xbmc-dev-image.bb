@@ -37,16 +37,14 @@ IMAGE_INSTALL += " \
 	${XBMC_INSTALL} \
 	vivante-gpu-sdk \
 	tzdata \
-	packagegroup-core-basic \
 	tcpdump \
 	dancer2-perl \
+	yaml-libyaml-perl \
 	ifplugd \
 	udev-extraconf \
 	valgrind \
-	dropbear \
 	libstatgrab \
 	fsl-rc-local \
-	packagegroup-core-sdk \
 	procps \
 	util-linux-mount \
 	libntfs-3g \
@@ -60,7 +58,6 @@ IMAGE_INSTALL += " \
 	xz \
 	nano \
 	lsof \
-	imagemagick \
 "
 
 export IMAGE_BASENAME = "rdm-hp2-xbmc-dev-image"
