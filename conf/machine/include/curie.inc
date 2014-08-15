@@ -27,5 +27,5 @@ PREFERRED_VERSION_imx-vpu = "3.10.17-1.0.0"
 PREFERRED_VERSION_gpu-viv-bin-mx6q = "3.10.17-1.0.0-hfp"
 PREFERRED_VERSION_gpu-viv-bin-mx6dl = "3.10.17-1.0.0-hfp"
 
-MACHINE_FEATURES += " wifi"
-
+MACHINE_FEATURES += " alsa wifi"
+DISTRO_FEATURES_append += " wifi"
