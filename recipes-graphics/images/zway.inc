@@ -3,4 +3,5 @@ ZWAY_DEPS = "libarchive \
 	openssl \
 	yajl \
 	curl \
+	v8 \
 	zlib"
