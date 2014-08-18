@@ -58,6 +58,8 @@ IMAGE_INSTALL += " \
 	xz \
 	nano \
 	lsof \
+	git \
+	subversion \
 "
 
 export IMAGE_BASENAME = "rdm-hp2-xbmc-dev-image"
