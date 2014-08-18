@@ -35,5 +35,7 @@ do_install() {
 FILES_${PN} += "/opt/homepilot \
 		"
 
+RDEPENDS_${PN} = "gnupg"
+
 INITSCRIPT_NAME = "homepilot"
 INITSCRIPT_PARAMS = "start 99 S . stop 20 0 1 6 ."
