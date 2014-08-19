@@ -21,14 +21,15 @@ SOC_EXTRA_IMAGE_FEATURES?=""
 EXTRA_IMAGE_FEATURES += " \
     ${SOC_EXTRA_IMAGE_FEATURES} \
     nfs-server \
+    tools-debug \
+    tools-profile \
+    tools-sdk \
     ssh-server-dropbear \
 "
 
 IMAGE_INSTALL += " \
 	${CORE_IMAGE_BASE_INSTALL} \
 	${MACHINE_FIRMWARE} \
-	${ZWAY_DEPS} \
-	${HP2_INSTALL} \
 	${XBMC_INSTALL} \
 	tzdata \
 	dancer2-perl \
@@ -53,4 +54,4 @@ IMAGE_INSTALL += " \
 	lsof \
 "
 
-export IMAGE_BASENAME = "rdm-hp2-xbmc-image"
+export IMAGE_BASENAME = "rdm-xbmc-image"

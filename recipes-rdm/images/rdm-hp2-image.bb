@@ -30,12 +30,14 @@ IMAGE_INSTALL += " \
 	${ZWAY_DEPS} \
 	${HP2_INSTALL} \
 	${XBMC_INSTALL} \
+	vivante-gpu-sdk \
 	tzdata \
 	dancer2-perl \
 	yaml-libyaml-perl \
 	tcpdump \
 	ifplugd \
 	udev-extraconf \
+	valgrind \
 	libstatgrab \
 	fsl-rc-local \
 	procps \

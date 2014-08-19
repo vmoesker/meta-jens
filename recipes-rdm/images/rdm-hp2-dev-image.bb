@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3
                     file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 
 include recipes-core/images/core-image-base.bb
+include dev.inc
 include zway.inc
 include rdm-hp2.inc
-include rdm-xbmc.inc
 
 inherit core-image distro_features_check
 
@@ -22,6 +22,7 @@ EXTRA_IMAGE_FEATURES += " \
     ${SOC_EXTRA_IMAGE_FEATURES} \
     nfs-server \
     ssh-server-dropbear \
+    ${EXTRA_IMAGE_FEATURES_dev} \
 "
 
 IMAGE_INSTALL += " \
@@ -29,11 +30,11 @@ IMAGE_INSTALL += " \
 	${MACHINE_FIRMWARE} \
 	${ZWAY_DEPS} \
 	${HP2_INSTALL} \
-	${XBMC_INSTALL} \
+	${DEV_INSTALL} \
 	tzdata \
+	tcpdump \
 	dancer2-perl \
 	yaml-libyaml-perl \
-	tcpdump \
 	ifplugd \
 	udev-extraconf \
 	libstatgrab \
@@ -53,4 +54,4 @@ IMAGE_INSTALL += " \
 	lsof \
 "
 
-export IMAGE_BASENAME = "rdm-hp2-xbmc-image"
+export IMAGE_BASENAME = "rdm-hp2-dev-image"

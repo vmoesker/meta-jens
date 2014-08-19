@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3
                     file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 
 include recipes-core/images/core-image-base.bb
+include dev.inc
 include zway.inc
 include rdm-hp2.inc
 include rdm-xbmc.inc
@@ -21,12 +22,8 @@ SOC_EXTRA_IMAGE_FEATURES?=""
 EXTRA_IMAGE_FEATURES += " \
     ${SOC_EXTRA_IMAGE_FEATURES} \
     nfs-server \
-    tools-debug \
-    tools-profile \
-    tools-sdk \
     ssh-server-dropbear \
-    dbg-pkgs \
-    dev-pkgs \
+    ${EXTRA_IMAGE_FEATURES_dev} \
 "
 
 IMAGE_INSTALL += " \
@@ -35,14 +32,13 @@ IMAGE_INSTALL += " \
 	${ZWAY_DEPS} \
 	${HP2_INSTALL} \
 	${XBMC_INSTALL} \
-	vivante-gpu-sdk \
+	${DEV_INSTALL} \
 	tzdata \
 	tcpdump \
 	dancer2-perl \
 	yaml-libyaml-perl \
 	ifplugd \
 	udev-extraconf \
-	valgrind \
 	libstatgrab \
 	fsl-rc-local \
 	procps \
@@ -58,8 +54,6 @@ IMAGE_INSTALL += " \
 	xz \
 	nano \
 	lsof \
-	git \
-	subversion \
 "
 
 export IMAGE_BASENAME = "rdm-hp2-xbmc-dev-image"
