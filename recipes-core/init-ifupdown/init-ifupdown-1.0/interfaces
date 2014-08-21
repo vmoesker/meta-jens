@@ -9,6 +9,7 @@ iface wlan0 inet dhcp
 	wireless_mode managed
 	wireless_essid any
 	wpa-driver wext
+	post-up iwconfig wlan0 power off
 	wpa-conf /etc/wpa_supplicant.conf
 
 # Wired or wireless interfaces
