@@ -9,9 +9,7 @@ DEPENDS = "fbset imagemagick"
 
 PV = "0.1"
 
-SRCREV = "3479"
-SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=IEBF"
-
+SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=IEBF;rev=3479"
 S = "${WORKDIR}/IEBF/src"
 
 inherit update-rc.d
