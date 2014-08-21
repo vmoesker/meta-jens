@@ -6,7 +6,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 DEPENDS = "tar "
 PV = "4.0.0.0"
-SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=HomePilot_Blob;rev=3492"
+SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=HomePilot_Blob;rev=3518"
 
 S = "${WORKDIR}/HomePilot_Blob"
 
@@ -16,12 +16,12 @@ TARBALL_NAME="hp-dist_4.0.0.0.tar.gz"
 inherit update-rc.d
 
 do_install() {
-	#create init.d directory
+	# create init.d directory
 	install -d ${D}${sysconfdir}/init.d/
 	
-	#install init.d script and make it executable
+	# install init.d script and make it executable
 	install -m 0755 ${S}/init.d/homepilot ${D}${sysconfdir}/init.d/homepilot
-
+	
 	# create INST_DEST_PREFIX folder
 	install -d ${D}${INST_DEST_PREFIX}
 
@@ -30,6 +30,9 @@ do_install() {
 
 	# Clean-up messed up so-files from Jetty distribution ... 
 	find ${D}${INST_DEST_PREFIX} -name '*.so' | xargs rm -f
+	
+	# fix rights of gpg keyfolder
+	chmod -R 700 ${D}${INST_DEST_PREFIX}/etc/homepilot/2/gpg
 }
 
 FILES_${PN} += "/opt/homepilot \
