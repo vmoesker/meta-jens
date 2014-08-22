@@ -29,6 +29,7 @@ IMAGE_INSTALL += " \
 	${MACHINE_FIRMWARE} \
 	${ZWAY_DEPS} \
 	${DEV_INSTALL} \
+	fb-init \
 	tzdata \
 	tcpdump \
 	ifplugd \

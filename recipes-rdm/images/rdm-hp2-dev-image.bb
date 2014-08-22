@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3
 
 include recipes-core/images/core-image-base.bb
 include dev.inc
-include zway.inc
 include rdm-hp2.inc
 
 inherit core-image distro_features_check
@@ -28,9 +27,9 @@ EXTRA_IMAGE_FEATURES += " \
 IMAGE_INSTALL += " \
 	${CORE_IMAGE_BASE_INSTALL} \
 	${MACHINE_FIRMWARE} \
-	${ZWAY_DEPS} \
 	${HP2_INSTALL} \
 	${DEV_INSTALL} \
+	fb-init \
 	tzdata \
 	tcpdump \
 	ifplugd \
