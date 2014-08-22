@@ -14,4 +14,5 @@ iface wlan0 inet dhcp
 
 # Wired or wireless interfaces
 iface eth0 inet dhcp
+	hostname homepilot
 #	hwaddress ether b0:1f:81:bf:ff:ab
