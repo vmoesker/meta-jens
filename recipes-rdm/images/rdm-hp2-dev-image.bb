@@ -33,8 +33,6 @@ IMAGE_INSTALL += " \
 	${DEV_INSTALL} \
 	tzdata \
 	tcpdump \
-	dancer2-perl \
-	yaml-libyaml-perl \
 	ifplugd \
 	udev-extraconf \
 	libstatgrab \

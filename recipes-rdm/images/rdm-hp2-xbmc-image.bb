@@ -31,8 +31,6 @@ IMAGE_INSTALL += " \
 	${HP2_INSTALL} \
 	${XBMC_INSTALL} \
 	tzdata \
-	dancer2-perl \
-	yaml-libyaml-perl \
 	tcpdump \
 	ifplugd \
 	udev-extraconf \
