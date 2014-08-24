@@ -10,10 +10,9 @@ PV = "0.91"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/patches:"
 
-SRCREV = "d8d6c819ee007eb03bc95a48a614bcefec229b42"
+SRCREV = "c39988855a9d1eb54adadb899b3865304da2cf84"
 SRC_URI = "git://github.com/i-scream/libstatgrab.git \
-           file://linux-proctbl.patch \
-           file://serialize-docbooc2x.patch \
+           file://linux-proctbl-names-with-spaces.patch \
           "
 
 S = "${WORKDIR}/git"
