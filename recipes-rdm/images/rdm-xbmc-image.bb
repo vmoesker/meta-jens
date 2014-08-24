@@ -19,9 +19,6 @@ SOC_EXTRA_IMAGE_FEATURES?=""
 EXTRA_IMAGE_FEATURES += " \
     ${SOC_EXTRA_IMAGE_FEATURES} \
     nfs-server \
-    tools-debug \
-    tools-profile \
-    tools-sdk \
     ssh-server-dropbear \
 "
 
