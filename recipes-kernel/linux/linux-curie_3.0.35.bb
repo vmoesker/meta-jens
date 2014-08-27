@@ -66,4 +66,6 @@ SRC_URI += "file://0001-Add-directory-inclusion-for-coming-rtl8189es-drv.patch \
             file://0003-Add-platform-specific-modifications-for-Curie.patch \
            "
 
+SRC_URI += "file://unionfs-2.6_for_3.0.101.diff"
+
 COMPATIBLE_MACHINE = "(mx6curie)"
