@@ -202,7 +202,7 @@ index 70ed3db..29ff727 100644
  #define CONFIG_CMD_IMXOTP
  
  /* Enable below configure when supporting nand */
-@@ -120,24 +122,25 @@
+@@ -120,24 +122,29 @@
  #define CONFIG_LOADADDR		0x10800000	/* loadaddr env var */
  #define CONFIG_RD_LOADADDR	(CONFIG_LOADADDR + 0x300000)
  
@@ -237,12 +237,16 @@ index 70ed3db..29ff727 100644
 +		"bootargs_sd=setenv bootargs ${bootargs_base} ip=none "	 \
 +			"root=/dev/mmcblk1p2 rootwait consoleblank=0\0"	 \
 +		"bootcmd_sd=run bootargs_sd; mmc dev 2; "                \
-+			"fatload mmc 2:1 ${loadaddr} /uimage; bootm\0"	 \
++			"ext2load mmc 2:1 ${loadaddr} /uImage; bootm\0"	 \
 +		"bootargs_mmc=setenv bootargs ${bootargs_base} ip=none " \
 +			"root=/dev/mmcblk0p2 rootwait consoleblank=0\0"	 \
 +		"bootcmd_mmc=run bootargs_mmc; mmc dev 3; "              \
-+			"fatload mmc 3:1 ${loadaddr} /uimage; bootm\0"	 \
-+		"bootcmd=run bootcmd_sd; run bootcmd_mmc; run bootcmd_nfs\0"
++			"ext2load mmc 3:1 ${loadaddr} /uImage; bootm\0"	 \
++		"bootargs_rec=setenv bootargs ${bootargs_base} ip=none " \
++			"root=/dev/mmcblk0p3 rootwait consoleblank=0\0"	 \
++		"bootcmd_rec=run bootargs_rec; mmc dev 3; "              \
++			"ext2load mmc 3:1 ${loadaddr} /uImage; bootm\0"	 \
++		"bootcmd=run bootcmd_sd; run bootcmd_mmc; run bootcmd_rec; run bootcmd_nfs\0"
  
  #define CONFIG_ARP_TIMEOUT	200UL
  
@@ -270,7 +274,7 @@ index 6f07961..d3409e6 100644
  #define CONFIG_CMD_IMXOTP
  
  /* Enable below configure when supporting nand */
-@@ -115,24 +115,25 @@
+@@ -115,24 +115,29 @@
  #define CONFIG_LOADADDR		0x10800000	/* loadaddr env var */
  #define CONFIG_RD_LOADADDR	(0x1300000)
  
@@ -305,12 +309,16 @@ index 6f07961..d3409e6 100644
 +		"bootargs_sd=setenv bootargs ${bootargs_base} ip=none "	 \
 +			"root=/dev/mmcblk1p2 rootwait consoleblank=0\0"	 \
 +		"bootcmd_sd=run bootargs_sd; mmc dev 2; "                \
-+			"fatload mmc 2:1 ${loadaddr} /uimage; bootm\0"	 \
++			"ext2load mmc 2:1 ${loadaddr} /uImage; bootm\0"	 \
 +		"bootargs_mmc=setenv bootargs ${bootargs_base} ip=none " \
 +			"root=/dev/mmcblk0p2 rootwait consoleblank=0\0"	 \
 +		"bootcmd_mmc=run bootargs_mmc; mmc dev 3; "              \
-+			"fatload mmc 3:1 ${loadaddr} /uimage; bootm\0"	 \
-+		"bootcmd=run bootcmd_sd; run bootcmd_mmc; run bootcmd_nfs\0"
++			"ext2load mmc 3:1 ${loadaddr} /uImage; bootm\0"	 \
++		"bootargs_rec=setenv bootargs ${bootargs_base} ip=none " \
++			"root=/dev/mmcblk0p3 rootwait consoleblank=0\0"	 \
++		"bootcmd_rec=run bootargs_rec; mmc dev 3; "              \
++			"ext2load mmc 3:1 ${loadaddr} /uImage; bootm\0"	 \
++		"bootcmd=run bootcmd_sd; run bootcmd_mmc; run bootcmd_rec; run bootcmd_nfs\0"
  
  #define CONFIG_ARP_TIMEOUT	200UL
  
