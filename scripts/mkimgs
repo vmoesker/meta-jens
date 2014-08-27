@@ -1,0 +1,78 @@
+#!/bin/sh
+
+#if [ "$1" = "-dev" ]
+#then
+#    IMAGES="rdm-core-dev-image rdm-hp2-dev-image rdm-hp2-xbmc-dev-image rdm-xbmc-dev-image rdm-zway-dev-image"
+#else
+#    IMAGES="rdm-core-image rdm-hp2-image rdm-hp2-xbmc-image rdm-xbmc-image"
+#fi
+
+IMAGE="$1"
+RECOVERY_IMAGE="rdm-core-image"
+DEV=0
+UBOOT_SUFFIX="bin"
+
+echo $IMAGE | fgrep -e "-dev-image"
+test $? -eq 0 && DEV=1
+if test $DEV -eq 1
+then
+    RECOVERY_IMAGE="rdm-core-dev-image"
+fi
+
+IMAGES="${IMAGE} ${RECOVERY_IMAGE}"
+
+set -x
+set -e
+
+for img in ${IMAGES}
+do
+    bitbake $img
+done
+
+MACHINE=`grep MACHINE conf/local.conf | sed -E -e "s/[^']+'([^']+)'.*/\\1/"`
+DEPLOY_DIR_IMAGE="tmp/deploy/images/${MACHINE}"
+KERNEL_IMAGETYPE="uImage"
+KERNEL_DEVICE_TREE=`bitbake -e rdm-core-image | grep KERNEL_DEVICETREE= | sed -E -e 's/[^"]+"([^"]+)".*/\\1/'`
+
+kernel_bin="`readlink ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${MACHINE}.bin`"
+kernel_dtb="`readlink ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${MACHINE}.dtb || true`"
+
+KERNEL="${KERNEL_IMAGETYPE}-${MACHINE}.bin"
+FILES=".settings ${KERNEL_IMAGETYPE}-${MACHINE}.bin ${kernel_bin}"
+if [ -n "${KERNEL_DEVICE_TREE}" ]
+then
+    for DTS_FILE in ${KERNEL_DEVICE_TREE}
+    do
+	DTS_BASE_NAME=`basename ${DTS_FILE} | awk -F "." '{print $1}'`
+	if [ -e "${KERNEL_IMAGETYPE}-${DTS_BASE_NAME}.dtb" ]
+	then
+	    kernel_bin_for_dtb="`readlink ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${DTS_BASE_NAME}.dtb | sed "s,$DTS_BASE_NAME,${MACHINE},g;s,\.dtb$,.bin,g"`"
+	    if [ $kernel_bin = $kernel_bin_for_dtb ]
+	    then
+		FILES="${FILES} ${KERNEL_IMAGETYPE}-${DTS_BASE_NAME}.dtb ${kernel_bin_for_dtb}"
+		KERNEL="${KERNEL} ${KERNEL_IMAGETYPE}-${DTS_BASE_NAME}.dtb"
+	    fi
+	fi
+    done
+fi
+
+cat >${DEPLOY_DIR_IMAGE}/.settings <<EOS
+MACHINE=${MACHINE}
+UBOOT_BIN=u-boot-${MACHINE}.${UBOOT_SUFFIX}
+UBOOT_PADDING="2"
+KERNEL="${KERNEL}"
+ROOTIMG=${IMAGE}
+RECOVERIMG=${RECOVERY_IMAGE}
+EOS
+
+uboot_bin="`readlink ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.${UBOOT_SUFFIX}`"
+FILES="${FILES} u-boot-${MACHINE}.${UBOOT_SUFFIX} ${uboot_bin}"
+
+for img in ${IMAGES}
+do
+    FILES="${FILES} ${img}-${MACHINE}.squashfs-xz"
+    rootfs="`readlink ${DEPLOY_DIR_IMAGE}/${img}-${MACHINE}.squashfs-xz`"
+    FILES="${FILES} ${rootfs}"
+done
+
+(cd ${DEPLOY_DIR_IMAGE} && tar cjf ${IMAGE}-complete.cpi ${FILES})

@@ -1,0 +1,116 @@
+#!/bin/sh
+
+IMAGE="$1"
+RECOVERY_IMAGE="rdm-core-image"
+DEV=0
+
+BOOT_SPACE="8192"
+IMAGE_ROOTFS_ALIGNMENT="4096"
+
+BOOTFS_SIZE=$(expr 1024 \* 32)
+ROOTFS_SIZE=$(expr 1024 \* 512)
+RECOVERY_SIZE=$(expr 1024 \* 128)
+
+SDCARD_SIZE=$(expr 1024 \* 1024 \* 4)
+
+PATH=tmp/sysroots/x86_64-linux/bin:tmp/sysroots/x86_64-linux/sbin:tmp/sysroots/x86_64-linux/usr/bin:tmp/sysroots/x86_64-linux/usr/sbin:$PATH
+
+echo $IMAGE | fgrep -e "-dev-image"
+test $? -eq 0 && DEV=1
+if test $DEV -eq 1
+then
+    RECOVERY_IMAGE="rdm-core-dev-image"
+    ROOTFS_SIZE=$(expr 1024 \* 1024)
+    RECOVERY_SIZE=$(expr 1024 \* 512)
+fi
+
+IMAGE_BOOTLOADER="u-boot"
+
+# Handle u-boot suffixes
+UBOOT_SUFFIX="bin"
+UBOOT_PADDING="2"
+
+MACHINE=`grep MACHINE conf/local.conf | sed -E -e "s/[^']+'([^']+)'.*/\\1/"`
+
+set -x
+set -e
+
+bitbake "${RECOVERY_IMAGE}"
+bitbake "${IMAGE}"
+
+DEPLOY_DIR_IMAGE="tmp/deploy/images/${MACHINE}"
+KERNEL_IMAGETYPE="uImage"
+KERNEL_DEVICE_TREE=`bitbake -e rdm-core-image | grep KERNEL_DEVICETREE= | sed -E -e 's/[^"]+"([^"]+)".*/\\1/'`
+
+kernel_bin="`readlink ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${MACHINE}.bin`"
+kernel_dtb="`readlink ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${MACHINE}.dtb || true`"
+
+SDCARD=${DEPLOY_DIR_IMAGE}/${IMAGE}.sdcard
+
+# Initialize a sparse file
+dd if=/dev/zero of=${SDCARD} bs=1024 count=0 seek=${SDCARD_SIZE}
+
+BOOT_SPACE_ALIGNED=$(expr ${BOOTFS_SIZE} + ${IMAGE_ROOTFS_ALIGNMENT} - 1)
+BOOT_SPACE_ALIGNED=$(expr ${BOOT_SPACE_ALIGNED} - ${BOOT_SPACE_ALIGNED} % ${IMAGE_ROOTFS_ALIGNMENT})
+
+BOOT_SPACE_START=${IMAGE_ROOTFS_ALIGNMENT}
+BOOT_SPACE_END=$(expr ${IMAGE_ROOTFS_ALIGNMENT} \+ ${BOOT_SPACE_ALIGNED})
+
+ROOTFS_SIZE_ALIGNED=$(expr ${ROOTFS_SIZE} + ${IMAGE_ROOTFS_ALIGNMENT} - 1)
+ROOTFS_SIZE_ALIGNED=$(expr ${ROOTFS_SIZE_ALIGNED} - ${ROOTFS_SIZE_ALIGNED} % ${IMAGE_ROOTFS_ALIGNMENT})
+
+ROOTFS_SPACE_START=${BOOT_SPACE_END}
+ROOTFS_SPACE_END=$(expr ${ROOTFS_SPACE_START} \+ ${ROOTFS_SIZE_ALIGNED})
+
+RECOVERY_SIZE_ALIGNED=$(expr ${RECOVERY_SIZE} + ${IMAGE_ROOTFS_ALIGNMENT} - 1)
+RECOVERY_SIZE_ALIGNED=$(expr ${RECOVERY_SIZE_ALIGNED} - ${RECOVERY_SIZE_ALIGNED} % ${IMAGE_ROOTFS_ALIGNMENT})
+
+RECOVERFS_SPACE_START=${ROOTFS_SPACE_END}
+RECOVERFS_SPACE_END=$(expr ${RECOVERFS_SPACE_START} \+ ${RECOVERY_SIZE_ALIGNED})
+
+parted -s ${SDCARD} mklabel msdos
+parted -s ${SDCARD} unit KiB mkpart primary ${BOOT_SPACE_START} ${BOOT_SPACE_END}
+parted -s ${SDCARD} unit KiB mkpart primary ${ROOTFS_SPACE_START} ${ROOTFS_SPACE_END}
+parted -s ${SDCARD} unit KiB mkpart primary ${RECOVERFS_SPACE_START} ${RECOVERFS_SPACE_END}
+parted -s ${SDCARD} unit KiB mkpart primary ${RECOVERFS_SPACE_END} $(expr ${SDCARD_SIZE} - 1)
+parted ${SDCARD} print
+
+rm -f ${DEPLOY_DIR_IMAGE}/boot.img ${DEPLOY_DIR_IMAGE}/data.img
+dd if=/dev/zero of=${DEPLOY_DIR_IMAGE}/boot.img bs=1024 count=0 seek=${BOOTFS_SIZE}
+dd if=/dev/zero of=${DEPLOY_DIR_IMAGE}/data.img bs=1024 count=0 seek=$(expr ${SDCARD_SIZE} \- 1 \- ${RECOVERFS_SPACE_END})
+
+mkdir ${DEPLOY_DIR_IMAGE}/bootmnt
+mkdir ${DEPLOY_DIR_IMAGE}/datamnt
+
+cp ${DEPLOY_DIR_IMAGE}/${kernel_bin} ${DEPLOY_DIR_IMAGE}/bootmnt/uImage
+cp ${DEPLOY_DIR_IMAGE}/${kernel_bin} ${DEPLOY_DIR_IMAGE}/bootmnt/uImage-recover
+
+if [ -n "${KERNEL_DEVICE_TREE}" ]
+then
+    for DTS_FILE in ${KERNEL_DEVICE_TREE}
+    do
+	DTS_BASE_NAME=`basename ${DTS_FILE} | awk -F "." '{print $1}'`
+	if [ -e "${KERNEL_IMAGETYPE}-${DTS_BASE_NAME}.dtb" ]
+	then
+	    kernel_bin_for_dtb="`readlink ${KERNEL_IMAGETYPE}-${DTS_BASE_NAME}.dtb | sed "s,$DTS_BASE_NAME,${MACHINE},g;s,\.dtb$,.bin,g"`"
+	    if [ $kernel_bin = $kernel_bin_for_dtb ]
+	    then
+		cp ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${DTS_BASE_NAME}.dtb ${DEPLOY_DIR_IMAGE}/bootmnt/${DTS_BASE_NAME}.dtb
+		cp ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${DTS_BASE_NAME}.dtb ${DEPLOY_DIR_IMAGE}/bootmnt/${DTS_BASE_NAME}-rcvr.dtb
+	    fi
+	fi
+    done
+fi
+
+mkdir -p ${DEPLOY_DIR_IMAGE}/datamnt/tmp ${DEPLOY_DIR_IMAGE}/datamnt/.shadow/.etc ${DEPLOY_DIR_IMAGE}/datamnt/.shadow/.home
+
+echo "y" | mkfs.ext2 -I128 -L "boot-${MACHINE}" ${DEPLOY_DIR_IMAGE}/boot.img -d ${DEPLOY_DIR_IMAGE}/bootmnt
+echo "y" | mkfs.ext4 -L "data-${MACHINE}" ${DEPLOY_DIR_IMAGE}/data.img -d ${DEPLOY_DIR_IMAGE}/datamnt
+rm -rf ${DEPLOY_DIR_IMAGE}/bootmnt
+rm -rf ${DEPLOY_DIR_IMAGE}/datamnt
+
+dd if=${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.${UBOOT_SUFFIX} of=${SDCARD} conv=notrunc seek=2 skip=${UBOOT_PADDING} bs=512
+dd if=${DEPLOY_DIR_IMAGE}/boot.img of=${SDCARD} conv=notrunc seek=1 bs=$(expr ${IMAGE_ROOTFS_ALIGNMENT} \* 1024)
+dd if=${DEPLOY_DIR_IMAGE}/${IMAGE}-${MACHINE}.squashfs-xz of=${SDCARD} conv=notrunc seek=1 bs=$(expr ${ROOTFS_SPACE_START} \* 1024)
+dd if=${DEPLOY_DIR_IMAGE}/${RECOVERY_IMAGE}-${MACHINE}.squashfs-xz of=${SDCARD} conv=notrunc seek=1 bs=$(expr ${RECOVERFS_SPACE_START} \* 1024)
+dd if=${DEPLOY_DIR_IMAGE}/data.img of=${SDCARD} conv=notrunc seek=1 bs=$(expr ${RECOVERFS_SPACE_END} \* 1024)
