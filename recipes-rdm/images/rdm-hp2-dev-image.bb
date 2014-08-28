@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3
 
 include recipes-core/images/core-image-base.bb
 include dev.inc
+include rdm.inc
 include rdm-hp2.inc
 
 inherit core-image distro_features_check
@@ -28,26 +29,22 @@ IMAGE_INSTALL += " \
 	${CORE_IMAGE_BASE_INSTALL} \
 	${MACHINE_FIRMWARE} \
 	${HP2_INSTALL} \
+	${RDM_INSTALL} \
 	${DEV_INSTALL} \
 	fb-init \
 	tzdata \
 	tcpdump \
 	ifplugd \
-	udev-extraconf \
 	libstatgrab \
 	fsl-rc-local \
 	procps \
 	util-linux-mount \
 	libntfs-3g \
-	ntfsprogs \
-	ntfs-3g \
-	nfs-utils-client \
 	ntp \
 	ntp-utils \
 	util-linux \
 	ethtool \
 	xz \
-	nano \
 	lsof \
 "
 
