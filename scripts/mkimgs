@@ -37,7 +37,8 @@ KERNEL_DEVICE_TREE=`bitbake -e rdm-core-image | grep KERNEL_DEVICETREE= | sed -E
 kernel_bin="`readlink ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${MACHINE}.bin`"
 kernel_dtb="`readlink ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${MACHINE}.dtb || true`"
 
-KERNEL="${KERNEL_IMAGETYPE}-${MACHINE}.bin"
+KERNEL="${kernel_bin}"
+KERNEL_SANITIZE="mv \"${kernel_bin}\" uImage"
 FILES=".settings ${KERNEL_IMAGETYPE}-${MACHINE}.bin ${kernel_bin}"
 if [ -n "${KERNEL_DEVICE_TREE}" ]
 then
@@ -50,7 +51,8 @@ then
 	    if [ $kernel_bin = $kernel_bin_for_dtb ]
 	    then
 		FILES="${FILES} ${KERNEL_IMAGETYPE}-${DTS_BASE_NAME}.dtb ${kernel_bin_for_dtb}"
-		KERNEL="${KERNEL} ${KERNEL_IMAGETYPE}-${DTS_BASE_NAME}.dtb"
+		KERNEL="${KERNEL} ${kernel_bin_for_dtb}"
+		KERNEL_SANITIZE="${KERNEL_SANITIZE} && mv \"${kernel_bin_for_dtb}\" \"${KERNEL_IMAGETYPE}-${DTS_BASE_NAME}.dtb\""
 	    fi
 	fi
     done
@@ -59,21 +61,21 @@ fi
 uboot_bin="`readlink ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.${UBOOT_SUFFIX}`"
 FILES="${FILES} u-boot-${MACHINE}.${UBOOT_SUFFIX} ${uboot_bin}"
 
+rootimg="`readlink ${DEPLOY_DIR_IMAGE}/${IMAGE}-${MACHINE}.squashfs-xz`"
+FILES="${FILES} ${rootimg}"
+
+recimg="`readlink ${DEPLOY_DIR_IMAGE}/${RECOVERY_IMAGE}-${MACHINE}.squashfs-xz`"
+FILES="${FILES} ${recimg}"
+
 cat >${DEPLOY_DIR_IMAGE}/.settings <<EOS
-DEV="${DEV}
+DEV=${DEV}
 MACHINE=${MACHINE}
 UBOOT_BIN=${uboot_bin}
 UBOOT_PADDING="2"
 KERNEL="${KERNEL}"
-ROOTIMG=${IMAGE}
-RECOVERIMG=${RECOVERY_IMAGE}
+ROOTIMG=${rootimg}
+RECOVERIMG=${recimg}
+KERNEL_SANITIZE="${KERNEL_SANITIZE}"
 EOS
-
-for img in ${IMAGES}
-do
-    FILES="${FILES} ${img}-${MACHINE}.squashfs-xz"
-    rootfs="`readlink ${DEPLOY_DIR_IMAGE}/${img}-${MACHINE}.squashfs-xz`"
-    FILES="${FILES} ${rootfs}"
-done
 
 (cd ${DEPLOY_DIR_IMAGE} && tar cjf ${IMAGE}-complete.cpi ${FILES})
