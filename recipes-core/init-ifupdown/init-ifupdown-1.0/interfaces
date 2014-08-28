@@ -4,15 +4,23 @@
 auto lo
 iface lo inet loopback
 
-# Wireless interfaces
+auto lo
+iface lo inet loopback
+
+auto eth0
+	iface eth0 inet dhcp
+	pre-up /etc/network/eth/pre_up.sh
+	post-up /etc/network/eth/post_up.sh
+	pre-down /etc/network/eth/pre_down.sh
+	post-down /etc/network/eth/post_down.sh
+
 iface wlan0 inet dhcp
 	wireless_mode managed
-	wireless_essid any
-	wpa-driver wext
-	post-up iwconfig wlan0 power off
+	wirless_essid any
+	wpa-dirver wext
 	wpa-conf /etc/wpa_supplicant.conf
+	pre-up /etc/network/wifi/pre_up.sh
+	post-up /etc/network/wifi/post_up.sh
+	pre-down /etc/network/wifi/pre_down.sh
+	post-down /etc/network/wifi/post_down.sh
 
-# Wired or wireless interfaces
-iface eth0 inet dhcp
-	hostname homepilot
-#	hwaddress ether b0:1f:81:bf:ff:ab
