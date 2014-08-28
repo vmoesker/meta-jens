@@ -11,48 +11,43 @@
 
 zway_home="/opt/z-way"
 
-exec_zway="$zway_home/z-way-server"
-exec_zway_pid="/var/run/z-way-server.pid"
+LD_LIBRARY_PATH="./libzway:./libzwayhttp:./libzwayjs:/opt/v8/lib"
+export LD_LIBRARY_PATH                   
+                                                         
+exec_zway_pid="/var/run/z-way-server.pid" 
 
-function _start_zway {
-	# XXX check status!
-	if [ ! -e /dev/ttyUSB0 ];
-	then
-		echo "Creating symlink..."
-		ln -s /dev/ttyUSB1 /dev/ttyUSB0
-		echo "Done"
-	fi
-	echo "Starting Z-Way"
-	exec "${exec_zway}" &
-	echo $! > ${exec_zway_pid}
-}
+function _start_zway {                    
+    	cd $zway_home                                           
+	[ -e /dev/ttyUSB0 ] && ./z-way-server -D /dev/ttyUSB0 &
+	[ -e /dev/ttyUSB1 ] && ./z-way-server -D /dev/ttyUSB1 &
+	echo $! > ${exec_zway_pid}             
+}  
 
-function _stop_zway {
-      	if [ -e "${exec_zway_pid}" ];
-	then
-                echo "Stopping Z-Way"
-		kill $(cat "${exec_zway_pid}")
-		rm -f "${exec_zway_pid}"
-	fi
-}
-
-set -e
-
+function _stop_zway {                
+        if [ -e "${exec_zway_pid}" ];
+        then                                  
+                echo "Stopping Z-Way"         
+                kill $(cat "${exec_zway_pid}")
+                rm -f "${exec_zway_pid}"      
+        fi                                    
+}                                             
+                                              
+set -e                                        
+                                        
 # Some things that run always
-touch /var/lock/homepilot
-
-case "$1" in
-        start)
-		_start_zway
-	;;	
-        stop)
-		_stop_zway
-	;;
-        *)
+touch /var/lock/homepilot    
+                             
+case "$1" in                 
+        start)               
+                _start_zway  
+        ;;                 
+        stop)              
+                _stop_zway 
+        ;;                                                         
+        *)                                                         
                 echo "Usage: /etc/init.d/z-way-server {start|stop}"
-                exit 1
-        ;;
-esac
-
-exit 0
-
+                exit 1                                             
+        ;;                                                         
+esac                                                               
+                                                                   
+exit 0    
