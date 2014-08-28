@@ -56,17 +56,18 @@ then
     done
 fi
 
+uboot_bin="`readlink ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.${UBOOT_SUFFIX}`"
+FILES="${FILES} u-boot-${MACHINE}.${UBOOT_SUFFIX} ${uboot_bin}"
+
 cat >${DEPLOY_DIR_IMAGE}/.settings <<EOS
+DEV="${DEV}
 MACHINE=${MACHINE}
-UBOOT_BIN=u-boot-${MACHINE}.${UBOOT_SUFFIX}
+UBOOT_BIN=${uboot_bin}
 UBOOT_PADDING="2"
 KERNEL="${KERNEL}"
 ROOTIMG=${IMAGE}
 RECOVERIMG=${RECOVERY_IMAGE}
 EOS
-
-uboot_bin="`readlink ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.${UBOOT_SUFFIX}`"
-FILES="${FILES} u-boot-${MACHINE}.${UBOOT_SUFFIX} ${uboot_bin}"
 
 for img in ${IMAGES}
 do
