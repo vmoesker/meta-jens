@@ -4,15 +4,17 @@ LICENSE = "commercial"
 LIC_FILES_CHKSUM = "file://${THISDIR}/files/license.txt;md5=3ebe3464e841ddbf115af1f7019017c5"
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
-PV = "0.001"
-SRC_URI = "http://internal.rdm.local/blobs/rdm-zway-0.001.tar.gz \
-           file://z-way-server"
+PV = "0.002"
+SRC_URI = "http://internal.rdm.local/blobs/rdm-zway-${PV}.tar.gz \
+           file://z-way-server \
+	   file://config.xml"
 
-S = "${WORKDIR}/rdm"
+S = "${WORKDIR}/z-way-http-test"
 
 INST_DEST_PREFIX="/opt/z-way"
 
-inherit update-rc.d
+# Do not start Z-Way on boot. HP will do this for you.
+# inherit update-rc.d 
 
 do_install() {
         #create init.d directory
@@ -32,8 +34,18 @@ do_install() {
 	      ${D}${INST_DEST_PREFIX}/htdocs/expert/.gitignore \
 	      ${D}${INST_DEST_PREFIX}/htdocs/z-way-ha-tv/.git \
 	      ${D}${INST_DEST_PREFIX}/htdocs/z-way-ha-tv/.gitignore
+	
+	# Install custom config file
+	install ${WORKDIR}/config.xml ${D}${INST_DEST_PREFIX}/config.xml
 
-        # Clean-up messed up so-files from Jetty distribution ... 
+	# Clean-up ZDDX device files
+	cd ${D}${INST_DEST_PREFIX}/ZDDX/
+	rm *.xml
+	python2 MakeIndex.py
+
+	# Clean-up config-files 
+	rm -rf ${D}${INST_DEST_PREFIX}/config/zddx
+	ln -sf /home/root/.homepilot/zway ${D}${INST_DEST_PREFIX}/config/zddx
 }
 
 INSANE_SKIP_${PN} += "already-stripped"
@@ -42,6 +54,8 @@ FILES_${PN} += "${INST_DEST_PREFIX}"
 FILES_${PN}-dbg += "${INST_DEST_PREFIX}/.debug ${INST_DEST_PREFIX}/*/.debug"
 FILES_${PN}-dev += "${INST_DEST_PREFIX}/*/*.h"
 FILES_${PN}-staticdev += "${INST_DEST_PREFIX}/*/*.a"
+
+
 
 RDEPENDS_${PN} = "libarchive \
         libxml2 \
