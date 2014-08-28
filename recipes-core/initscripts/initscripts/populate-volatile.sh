@@ -196,7 +196,6 @@ apply_cfgfile() {
 	return 0
 }
 
-mount -a -t unionfs
 clearcache=0
 exec 9</proc/cmdline
 while read line <&9
