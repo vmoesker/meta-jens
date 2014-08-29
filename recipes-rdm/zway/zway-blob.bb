@@ -36,7 +36,9 @@ do_install() {
 	      ${D}${INST_DEST_PREFIX}/htdocs/z-way-ha-tv/.gitignore
 	
 	# Install custom config file
-	install ${WORKDIR}/config.xml ${D}${INST_DEST_PREFIX}/config.xml
+	install ${WORKDIR}/config.xml ${D}${sysconfdir}/z-way.conf
+	rm -f ${D}${INST_DEST_PREFIX}/config.xml
+	ln -sf ${D}${INST_DEST_PREFIX}/config.xml ${D}${sysconfdir}/z-way.conf
 
 	# Clean-up ZDDX device files
 	cd ${D}${INST_DEST_PREFIX}/ZDDX/
@@ -46,11 +48,14 @@ do_install() {
 	# Clean-up config-files 
 	rm -rf ${D}${INST_DEST_PREFIX}/config/zddx
 	ln -sf /home/root/.homepilot/zway ${D}${INST_DEST_PREFIX}/config/zddx
+
+
 }
 
 INSANE_SKIP_${PN} += "already-stripped"
 
-FILES_${PN} += "${INST_DEST_PREFIX}"
+FILES_${PN} += "${INST_DEST_PREFIX} \
+	${sysconfdir}/z-way.conf"
 FILES_${PN}-dbg += "${INST_DEST_PREFIX}/.debug ${INST_DEST_PREFIX}/*/.debug"
 FILES_${PN}-dev += "${INST_DEST_PREFIX}/*/*.h"
 FILES_${PN}-staticdev += "${INST_DEST_PREFIX}/*/*.a"
