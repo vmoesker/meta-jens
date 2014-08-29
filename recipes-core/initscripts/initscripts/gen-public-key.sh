@@ -13,12 +13,12 @@ PATH="/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin"
 
 case "$1" in
 start)
-	if [ -f /etc/dropbear/id_rsa.pub ]
+	if [ -f /var/lib/dropbear/id_rsa.pub ]
 	then
 		echo "Public Key already exists."
 	else
 		echo "Creating Public Key.."
-		dropbearkey -y -f /etc/dropbear/dropbear_rsa_host_key > /etc/dropbear/id_rsa.pub
+		dropbearkey -y -f /var/lib/dropbear/dropbear_rsa_host_key > /var/lib/dropbear/id_rsa.pub
 		echo "DONE!"
 	fi
 	;;
