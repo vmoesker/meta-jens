@@ -14,9 +14,14 @@ PATH="/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin"
 
 [ -x /sbin/ifup ] || exit 0
 
+if grep unknown /sys/class/net/eth0/operstate
+then
+	sleep 3
+fi
+
 case "$1" in
 start)
-	if ip link show | egrep "eth0.*NO-CARRIER"
+	if test `cat /sys/class/net/eth0/carrier` -eq 0
 	then
     		echo "eth0 got no-carrier, starting wifi instead .."
 		ifup wlan0
