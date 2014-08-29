@@ -4,16 +4,15 @@
 auto lo
 iface lo inet loopback
 
-auto lo
-iface lo inet loopback
-
-auto eth0
-	iface eth0 inet dhcp
+# Wired or wireless interfaces
+iface eth0 inet dhcp
+	hostname homepilot
 	pre-up /etc/network/eth/pre_up.sh
 	post-up /etc/network/eth/post_up.sh
 	pre-down /etc/network/eth/pre_down.sh
 	post-down /etc/network/eth/post_down.sh
 
+# Wireless interfaces
 iface wlan0 inet dhcp
 	wireless_mode managed
 	wirless_essid any
