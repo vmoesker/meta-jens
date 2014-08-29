@@ -38,7 +38,7 @@ do_install() {
 	# Install custom config file
 	install ${WORKDIR}/config.xml ${D}${sysconfdir}/z-way.conf
 	rm -f ${D}${INST_DEST_PREFIX}/config.xml
-	ln -sf ${D}${INST_DEST_PREFIX}/config.xml ${D}${sysconfdir}/z-way.conf
+	ln -sf ${sysconfdir}/z-way.conf ${D}${INST_DEST_PREFIX}/config.xml 
 
 	# Clean-up ZDDX device files
 	cd ${D}${INST_DEST_PREFIX}/ZDDX/
