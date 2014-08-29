@@ -16,7 +16,7 @@ EXTRA_OECONF_append = "--disable-lynx"
 
 INITSCRIPT_PACKAGES = "${PN}"
 INITSCRIPT_NAME_${PN} = "${PN}"
-INITSCRIPT_PARAMS_${PN} = "defaults 90"
+INITSCRIPT_PARAMS_${PN} = "defaults 05"
 
 do_install_append() {
 	install -m 644 ${WORKDIR}/ifplugd.conf ${D}${sysconfdir}/ifplugd/
