@@ -1,5 +1,6 @@
-hostname := "homepilot"
 FILESEXTRAPATHS_prepend := "${THISDIR}/base-files:"
+
+hostname := "homepilot"
 volatiles := ""
 
 do_install_append () {
