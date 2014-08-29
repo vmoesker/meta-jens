@@ -1,9 +1,11 @@
-RDM_INSTALL = "hp2sm \
+RDM_BASE_INSTALL = "hp2sm \
+	nano \
+"
+RDM_INSTALL = "${RDM_BASE_INSTALL} \
 	udev-extraconf \
 	libntfs-3g \
 	ntfsprogs \
 	ntfs-3g \
-	nano \
 "
 RECOVER_INSTALL="parted \
 	e2fsprogs \
