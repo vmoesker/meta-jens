@@ -102,3 +102,5 @@ mkdir -p ${TEMP_DIR}/flashimg/root/data/.shadow/.etc ${TEMP_DIR}/flashimg/root/d
 
 umount ${TEMP_DIR}/flashimg/root/boot
 umount ${TEMP_DIR}/flashimg/root/data
+
+test -e /dev/mmcblk1 || reboot
