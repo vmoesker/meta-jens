@@ -1,6 +1,6 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-${PV}:"
 
-SRC_URI = "file://eth/pre_up.sh \
+SRC_URI += "file://eth/pre_up.sh \
 	file://eth/post_up.sh \
 	file://eth/pre_down.sh \
 	file://eth/post_down.sh \
