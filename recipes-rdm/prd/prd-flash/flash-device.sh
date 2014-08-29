@@ -98,7 +98,7 @@ fi
 
 mkdir -p ${TEMP_DIR}/flashimg/root/data/tmp
 chmod 01777 ${TEMP_DIR}/flashimg/root/data/tmp
-mkdir -p ${TEMP_DIR}/flashimg/root/data/.shadow/.etc ${TEMP_DIR}/flashimg/root/data/.shadow/.home ${TEMP_DIR}/flashimg/root/data/.shadow/.var_lib
+mkdir -p ${TEMP_DIR}/flashimg/root/data/.shadow/.etc ${TEMP_DIR}/flashimg/root/data/.shadow/.home ${TEMP_DIR}/flashimg/root/data/.shadow/.var_lib  ${TEMP_DIR}/flashimg/root/data/.shadow/.frickel 
 
 umount ${TEMP_DIR}/flashimg/root/boot
 umount ${TEMP_DIR}/flashimg/root/data
