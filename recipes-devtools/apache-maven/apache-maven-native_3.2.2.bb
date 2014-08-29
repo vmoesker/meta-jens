@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7ca
 
 DEPENDS = "ant-native "
 
-inherit java-library java-native
+#inherit java-library java-native
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
