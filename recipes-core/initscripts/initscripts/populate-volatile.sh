@@ -165,6 +165,9 @@ apply_cfgfile() {
 			TSOURCE="$TLTARGET"
 			[ "${VERBOSE}" != "no" ] && echo "Creating link -${TNAME}- pointing to -${TSOURCE}-."
 			mount --bind "${TSOURCE}" "${TNAME}"
+			EXEC="
+	mount --bind \"${TSOURCE}\" \"${TNAME}\""
+			test "$VOLATILE_ENABLE_CACHE" = yes && echo "$EXEC" >> /etc/volatile.cache.build
 			continue
 		}
 

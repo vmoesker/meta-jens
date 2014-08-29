@@ -23,13 +23,13 @@
 # link the file defined as /var/test will actually be created as /tmp/testfile.
 d root root 1777 /run/lock none
 d root root 0755 /var/volatile/log none
-d root root 1777 /var/volatile/media none
+d root root 0755 /var/volatile/media none
 d root root 1777 /var/volatile/tmp none
-d root root 1777 /var/volatile/tmp/temp none
 b root root 1777 /var/lock /run/lock
 b root root 0755 /var/log /var/volatile/log
 b root root 0755 /var/run /run
-b root root 1777 /tmp /var/tmp
+b root root 1777 /tmp /var/volatile/tmp
+d root root 1777 /tmp/temp none
 b root root 1777 /media /var/volatile/media
 b root root 1777 /var/tmp /data/tmp
 d root root 0755 /var/lock/subsys none

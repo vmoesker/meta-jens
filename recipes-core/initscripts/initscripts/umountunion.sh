@@ -18,13 +18,13 @@ test -f /etc/fstab && (
 #
 #	Read through fstab line by line and unount network file systems
 #
-while read device mountpt fstype options
+cat /etc/fstab | sed -E 's/#.*//g' | while read device mountpt fstype options
 do
 	if test "$fstype" = unionfs
 	then
 		umount -f $mountpt
 	fi
 done
-) < /etc/fstab
+)
 
 : exit 0
