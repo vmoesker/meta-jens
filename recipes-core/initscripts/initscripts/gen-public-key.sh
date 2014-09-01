@@ -18,7 +18,7 @@ start)
 		echo "Public Key already exists."
 	else
 		echo "Creating Public Key.."
-		dropbearkey -y -f /var/lib/dropbear/dropbear_rsa_host_key > /var/lib/dropbear/id_rsa.pub
+		dropbearkey -y -f /var/lib/dropbear/dropbear_rsa_host_key | grep "^ssh-rsa" > /var/lib/dropbear/id_rsa.pub
 		echo "DONE!"
 	fi
 	;;
