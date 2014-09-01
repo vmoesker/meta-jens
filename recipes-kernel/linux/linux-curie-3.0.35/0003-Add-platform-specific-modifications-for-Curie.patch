@@ -1,12 +1,12 @@
-From 7a1a9c9c2b2bcf96c2a0b8611fbad088686fbcde Mon Sep 17 00:00:00 2001
+From fd88db0270b8104742527da44d319d983eb43aa4 Mon Sep 17 00:00:00 2001
 From: Jens Rehsack <sno@netbsd.org>
 Date: Wed, 30 Jul 2014 14:20:52 +0200
 Subject: [PATCH 3/3] Add platform specific modifications for Curie
 
 ---
  drivers/net/wireless/rtl8189es/Makefile           | 11 +++++++++--
- drivers/net/wireless/rtl8189es/include/autoconf.h | 14 +++++++-------
- 2 files changed, 16 insertions(+), 9 deletions(-)
+ drivers/net/wireless/rtl8189es/include/autoconf.h | 12 ++++++------
+ 2 files changed, 15 insertions(+), 8 deletions(-)
 
 diff --git a/drivers/net/wireless/rtl8189es/Makefile b/drivers/net/wireless/rtl8189es/Makefile
 index 5a3ca7c..3afe93f 100644
@@ -51,7 +51,7 @@ index 5a3ca7c..3afe93f 100644
  EXTRA_CFLAGS += -DCONFIG_LITTLE_ENDIAN
  EXTRA_CFLAGS += -DCONFIG_PLATFORM_ARM_SUN7I
 diff --git a/drivers/net/wireless/rtl8189es/include/autoconf.h b/drivers/net/wireless/rtl8189es/include/autoconf.h
-index b650674..d9c7ff8 100644
+index b650674..0f360e5 100644
 --- a/drivers/net/wireless/rtl8189es/include/autoconf.h
 +++ b/drivers/net/wireless/rtl8189es/include/autoconf.h
 @@ -37,7 +37,7 @@
@@ -83,8 +83,7 @@ index b650674..d9c7ff8 100644
 +//#define CONFIG_DEBUG /* DBG_871X, etc... */
  //#define CONFIG_DEBUG_RTL871X /* RT_TRACE, RT_PRINT_DATA, _func_enter_, _func_exit_ */
  
--#define CONFIG_PROC_DEBUG
-+//#define CONFIG_PROC_DEBUG
+ #define CONFIG_PROC_DEBUG
  
 -#define DBG_CONFIG_ERROR_DETECT
 -#define DBG_CONFIG_ERROR_RESET
