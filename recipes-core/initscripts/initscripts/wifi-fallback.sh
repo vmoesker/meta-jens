@@ -14,10 +14,12 @@ PATH="/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin"
 
 [ -x /sbin/ifup ] || exit 0
 
-if grep unknown /sys/class/net/eth0/operstate
-then
-	sleep 3
-fi
+for i in `seq 5`; do
+    if grep unknown /sys/class/net/eth0/operstate
+    then
+	sleep 1
+    fi
+done
 
 case "$1" in
 start)
