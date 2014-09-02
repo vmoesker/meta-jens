@@ -244,8 +244,8 @@ index 70ed3db..29ff727 100644
 +		"bootargs_rec=setenv bootargs ${bootargs_base} ip=none " \
 +			"root=/dev/mmcblk0p3 rootwait consoleblank=0\0"	 \
 +		"bootcmd_rec=run bootargs_rec; mmc dev 3; "              \
-+			"ext2load mmc 3:1 ${loadaddr} /uImage; bootm\0"	 \
-+		"bootcmd=run bootcmd_sd; run bootcmd_mmc; run bootcmd_rec; run bootcmd_nfs\0"
++			"ext2load mmc 3:1 ${loadaddr} /uImage-curie; bootm\0"	 \
++		"bootcmd=run bootcmd_sd; run bootcmd_rec; run bootcmd_mmc; run bootcmd_nfs\0"
  
  #define CONFIG_ARP_TIMEOUT	200UL
  
@@ -315,8 +315,8 @@ index 6f07961..d3409e6 100644
 +		"bootargs_rec=setenv bootargs ${bootargs_base} ip=none " \
 +			"root=/dev/mmcblk0p3 rootwait consoleblank=0\0"	 \
 +		"bootcmd_rec=run bootargs_rec; mmc dev 3; "              \
-+			"ext2load mmc 3:1 ${loadaddr} /uImage; bootm\0"	 \
-+		"bootcmd=run bootcmd_sd; run bootcmd_mmc; run bootcmd_rec; run bootcmd_nfs\0"
++			"ext2load mmc 3:1 ${loadaddr} /uImage-curie; bootm\0"	 \
++		"bootcmd=run bootcmd_sd; run bootcmd_rec; run bootcmd_mmc; run bootcmd_nfs\0"
  
  #define CONFIG_ARP_TIMEOUT	200UL
  
