@@ -1,4 +1,8 @@
 RDM_BASE_INSTALL = "hp2sm \
+	e2fsprogs \
+	btrfs-tools \
+	dosfstools \
+	prd-flash \
 	nano \
 "
 RDM_INSTALL = "${RDM_BASE_INSTALL} \
@@ -8,7 +12,4 @@ RDM_INSTALL = "${RDM_BASE_INSTALL} \
 	ntfs-3g \
 "
 RECOVER_INSTALL="parted \
-	e2fsprogs \
-	btrfs-tools \
-	prd-flash \
 "
