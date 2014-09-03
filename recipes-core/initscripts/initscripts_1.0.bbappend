@@ -17,4 +17,7 @@ do_install_append () {
 
     update-rc.d -r ${D} wifi-fallback.sh start 98 3 5 .
     update-rc.d -r ${D} wr-connect.sh start 95 3 5 .
+
+    # mount by-* requires udev being started
+    mv -f ${D}/${sysconfdir}/rcS.d/S03mountall.sh ${D}/${sysconfdir}/rcS.d/S04mountall.sh 
 }

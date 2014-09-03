@@ -19,6 +19,7 @@ PATH=/sbin:/bin:/usr/sbin:/usr/bin
 # about this. So we mount "proc" filesystems without -v.
 #
 test "$VERBOSE" != no && echo "Mounting overlay filesystems..."
+
 test -f /etc/fstab && (
 
 #
