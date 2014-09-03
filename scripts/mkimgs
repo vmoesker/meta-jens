@@ -32,13 +32,15 @@ done
 MACHINE=`grep MACHINE conf/local.conf | sed -E -e "s/[^']+'([^']+)'.*/\\1/"`
 DEPLOY_DIR_IMAGE="tmp/deploy/images/${MACHINE}"
 KERNEL_IMAGETYPE="uImage"
-KERNEL_DEVICE_TREE=`bitbake -e rdm-core-image | grep KERNEL_DEVICETREE= | sed -E -e 's/[^"]+"([^"]+)".*/\\1/'`
+KERNEL_DEVICE_TREE=`bitbake -e ${IMAGE} | grep KERNEL_DEVICETREE= | sed -E -e 's/[^"]+"([^"]+)".*/\\1/'`
 
 kernel_bin="`readlink ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${MACHINE}.bin`"
 kernel_dtb="`readlink ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${MACHINE}.dtb || true`"
 
 KERNEL="${kernel_bin}"
-KERNEL_SANITIZE="mv \"${kernel_bin}\" uImage"
+KERNEL_PREPARE="mv ${kernel_bin} ${KERNEL_IMAGETYPE}-${MACHINE}"
+KERNEL_RECOVERY="ln -f ${KERNEL_IMAGETYPE} ${KERNEL_IMAGETYPE}-${MACHINE}"
+KERNEL_SANITIZE="mv ${KERNEL_IMAGETYPE}-${MACHINE} ${KERNEL_IMAGETYPE}"
 FILES=".settings ${KERNEL_IMAGETYPE}-${MACHINE}.bin ${kernel_bin}"
 if [ -n "${KERNEL_DEVICE_TREE}" ]
 then
@@ -52,7 +54,9 @@ then
 	    then
 		FILES="${FILES} ${KERNEL_IMAGETYPE}-${DTS_BASE_NAME}.dtb ${kernel_bin_for_dtb}"
 		KERNEL="${KERNEL} ${kernel_bin_for_dtb}"
-		KERNEL_SANITIZE="${KERNEL_SANITIZE} && mv \"${kernel_bin_for_dtb}\" \"${KERNEL_IMAGETYPE}-${DTS_BASE_NAME}.dtb\""
+		KERNEL_PREPARE="${KERNEL_PREPARE} && mv ${kernel_bin_for_dtb} ${KERNEL_IMAGETYPE}-${MACHINE}-${DTS_BASE_NAME}.dtb"
+		KERNEL_RECOVERY="${KERNEL_RECOVERY} && ln -f ${KERNEL_IMAGETYPE}-${MACHINE}-${DTS_BASE_NAME}.dtb ${KERNEL_IMAGETYPE}-${DTS_BASE_NAME}.dtb"
+		KERNEL_SANITIZE="${KERNEL_SANITIZE} && mv ${KERNEL_IMAGETYPE}-${MACHINE}-${DTS_BASE_NAME}.dtb ${KERNEL_IMAGETYPE}-${DTS_BASE_NAME}.dtb"
 	    fi
 	fi
     done
@@ -75,7 +79,10 @@ UBOOT_PADDING="2"
 KERNEL="${KERNEL}"
 ROOTIMG=${rootimg}
 RECOVERIMG=${recimg}
+KERNEL_PREPARE="${KERNEL_PREPARE}"
+KERNEL_RECOVERY="${KERNEL_RECOVERY}"
 KERNEL_SANITIZE="${KERNEL_SANITIZE}"
 EOS
 
+(cd ${DEPLOY_DIR_IMAGE} && rm -f ${IMAGE}-complete.cpi)
 (cd ${DEPLOY_DIR_IMAGE} && tar cjf ${IMAGE}-complete.cpi ${FILES})
