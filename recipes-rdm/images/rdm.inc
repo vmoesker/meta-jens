@@ -4,6 +4,7 @@ RDM_BASE_INSTALL = "hp2sm \
 	dosfstools \
 	prd-flash \
 	nano \
+	ledctrl \
 "
 RDM_INSTALL = "${RDM_BASE_INSTALL} \
 	udev-extraconf \
