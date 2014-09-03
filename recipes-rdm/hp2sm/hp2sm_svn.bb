@@ -34,4 +34,4 @@ do_install() {
 FILES_${PN} += "/opt/rdm/hp2sm"
 
 INITSCRIPT_NAME = "hp2sm"
-INITSCRIPT_PARAMS = "start 99 S . stop 20 0 1 6 ."
+INITSCRIPT_PARAMS = "start 99 3 5 . stop 20 0 1 6 ."
