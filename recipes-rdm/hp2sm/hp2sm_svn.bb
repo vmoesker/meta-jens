@@ -5,12 +5,12 @@ LICENSE = "commercial"
 LIC_FILES_CHKSUM = "file://${THISDIR}/files/license.txt;md5=3ebe3464e841ddbf115af1f7019017c5"
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
-RDEPENDS_${PN} += "dancer2-perl yaml-libyaml-perl"
+RDEPENDS_${PN} += "dancer2-perl yaml-libyaml-perl file-slurp-tiny-perl"
 RDEPENDS_${PN} += "perl-modules"
 
 PV = "0.1"
 
-SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=hp2sm;rev=3551"
+SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=hp2sm;rev=3584"
 S = "${WORKDIR}/hp2sm/src"
 
 inherit update-rc.d
