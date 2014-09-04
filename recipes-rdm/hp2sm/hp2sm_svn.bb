@@ -12,7 +12,7 @@ RDEPENDS_${PN} += "perl-modules"
 
 PV = "0.1"
 
-SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=hp2sm;rev=3589"
+SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=hp2sm;rev=3595"
 S = "${WORKDIR}/hp2sm/src"
 
 inherit update-rc.d
