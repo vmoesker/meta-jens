@@ -6,6 +6,8 @@ LIC_FILES_CHKSUM = "file://${THISDIR}/files/license.txt;md5=3ebe3464e841ddbf115a
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 RDEPENDS_${PN} += "dancer2-perl yaml-libyaml-perl file-slurp-tiny-perl"
+RDEPENDS_${PN} += "unix-statgrab-perl"
+RDEPENDS_${PN} += "scalar-list-utils-perl"
 RDEPENDS_${PN} += "perl-modules"
 
 PV = "0.1"
