@@ -9,7 +9,7 @@ RDEPENDS_${PN} = "fbset imagemagick liberation-fonts"
 
 PV = "0.1"
 
-SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=IEBF;rev=3590"
+SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=IEBF;rev=3594"
 S = "${WORKDIR}/IEBF/src"
 
 inherit update-rc.d
@@ -37,4 +37,4 @@ do_install() {
 FILES_${PN} += "/opt/rdm/fb"
 
 INITSCRIPT_NAME = "init_fb"
-INITSCRIPT_PARAMS = "start 99 5 S . stop 20 0 1 6 ."
+INITSCRIPT_PARAMS = "start 99 5 S. stop 20 0 1 6 ."
