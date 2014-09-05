@@ -11,12 +11,7 @@
 for led in `cd /sys/class/leds/ && echo *`
 do
     echo 255 >/sys/class/leds/${led}/brightness
-done
-
-sleep 2
-
-for led in `cd /sys/class/leds/ && echo *`
-do
+    sleep 1
     echo 0 >/sys/class/leds/${led}/brightness
 done
 
