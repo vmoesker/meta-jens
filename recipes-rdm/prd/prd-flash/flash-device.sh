@@ -14,11 +14,6 @@ then
     SDCARD_DEVICE="/dev/mmcblk1"
 fi
 
-echo 0 >/sys/class/leds/user1/brightness
-echo mmc0 >/sys/class/leds/user1/trigger
-echo 0 >/sys/class/leds/user2/brightness
-echo mmc1 >/sys/class/leds/user2/trigger
-
 UNION_SHADOWS=".shadow/.etc .shadow/.home .shadow/.var_lib .shadow/.frickel"
 
 # use last image container
@@ -27,6 +22,12 @@ do
     if [ -f $c -o -d $c ]
     then
 	IMAGE_CONTAINER="$c"
+
+	echo 0 >/sys/class/leds/user1/brightness
+	echo mmc0 >/sys/class/leds/user1/trigger
+	echo 0 >/sys/class/leds/user2/brightness
+	echo mmc1 >/sys/class/leds/user2/trigger
+
 	break
     fi
 done
