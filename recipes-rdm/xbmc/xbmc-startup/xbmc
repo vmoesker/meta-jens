@@ -1,0 +1,4 @@
+#!/bin/sh
+
+export HOME=/home/root
+exec start-stop-daemon --pidfile /run/xbmc.pid --make-pidfile --start --exec /imx6/xbmc/lib/xbmc/xbmc.bin
