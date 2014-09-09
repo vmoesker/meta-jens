@@ -7,4 +7,5 @@ HP2_INSTALL = "service-df \
 	zway-blob \
 	hp-blob \
         wrkeyupload \
+	wrc-startup \
 	"
