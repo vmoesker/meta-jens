@@ -1,0 +1,5 @@
+#!/bin/sh
+
+MAC=`sed -e 's/://g' /sys/class/net/eth0/address`
+PORT=`ssh -T -i /var/lib/dropbear/dropbear_rsa_host_key -p 22 ${MAC}@homepilot.de | awk '{print $2}'`
+ssh -T -i /var/lib/dropbear/dropbear_rsa_host_key -p 22 -R ${PORT}:localhost:80 ${MAC}@homepilot.de -N
