@@ -6,5 +6,5 @@ HP2_INSTALL = "service-df \
 	oracle-jse-jdk-arm7 \
 	zway-blob \
 	hp-blob \
-        wrconnect \
+        wrkeyupload \
 	"

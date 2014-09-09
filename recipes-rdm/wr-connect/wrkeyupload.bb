@@ -1,18 +1,18 @@
 DESCRIPTION = "This recipe provides WR-Connect production steps" 
 HOMEPAGE = "http://www.rademacher.de"
 LICENSE = "commercial"
-LIC_FILES_CHKSUM = "file://${THISDIR}/files/license.txt;md5=3ebe3464e841ddbf115af1f7019017c5"
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+LIC_FILES_CHKSUM = "file://${THISDIR}/wrkeyupload/license.txt;md5=3ebe3464e841ddbf115af1f7019017c5"
+FILESEXTRAPATHS_prepend := "${THISDIR}/wrkeyupload:"
 
 #XXX add ssh dependency
 PV = "0.1"
-SRC_URI += "file://wr-connect.sh"
+SRC_URI += "file://wrkeyupload.sh"
 
 inherit update-rc.d
 
 do_install() {
     	install -d ${D}${sysconfdir}/init.d/
-	install -m 0755 ${WORKDIR}/wr-connect.sh ${D}${sysconfdir}/init.d/wr-connect.sh
+	install -m 0755 ${WORKDIR}/wrkeyupload.sh ${D}${sysconfdir}/init.d/wrkeyupload.sh
 	
 	#create known_hosts for homepilot.de
 	mkdir -p ${D}/home/root/.ssh
@@ -22,7 +22,7 @@ chmod 700 -R ${D}/home/root/.ssh/known_hosts
 	chmod 600 ${D}/home/root/.ssh/known_hosts 
 }
 FILES_${PN} += "/home/root/.ssh"
-INITSCRIPT_NAME = "wr-connect.sh"
+INITSCRIPT_NAME = "wrkeyupload.sh"
 INITSCRIPT_PARAMS = "start 99 5 S. stop 20 0 1 6 ."
 
 	
