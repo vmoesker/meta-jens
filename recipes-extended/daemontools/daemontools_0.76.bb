@@ -13,6 +13,7 @@ S = "${WORKDIR}/admin/${PN}-${PV}"
 SRC_URI = "http://cr.yp.to/daemontools/daemontools-0.76.tar.gz \
            file://error.h-use-errno.h.patch \
            file://Makefile-no-run-crosscompiled.patch \
+           file://svscanboot-target-fs-adoptions.patch \
           "
 
 SRC_URI[md5sum] = "1871af2453d6e464034968a0fbcb2bfc"
@@ -22,5 +23,5 @@ do_install () {
     djbware_do_install
 
     # prepare for installing base-dir for services
-    # install -d 0755 ${D}/service
+    install -d 0755 ${D}/etc/daemontools/service
 }
