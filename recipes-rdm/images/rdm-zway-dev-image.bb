@@ -35,7 +35,6 @@ IMAGE_INSTALL += " \
 	ifplugd \
 	udev-extraconf \
 	libstatgrab \
-	fsl-rc-local \
 	procps \
 	util-linux-mount \
 	libntfs-3g \

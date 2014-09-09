@@ -32,7 +32,6 @@ IMAGE_INSTALL += " \
 	tcpdump \
 	ifplugd \
 	libstatgrab \
-	fsl-rc-local \
 	procps \
 	util-linux-mount \
 	libntfs-3g \
