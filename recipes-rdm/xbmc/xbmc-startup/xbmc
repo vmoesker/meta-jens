@@ -1,4 +1,5 @@
 #!/bin/sh
 
 export HOME=/home/root
+echo 3 > /proc/sys/vm/drop_caches
 exec start-stop-daemon --pidfile /run/xbmc.pid --make-pidfile --start --exec /imx6/xbmc/lib/xbmc/xbmc.bin
