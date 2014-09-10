@@ -15,7 +15,8 @@ WRC_SERVICE_DIR = "${SERVICE_ROOT}/wrc"
 
 do_install () {
         install -d ${D}${WRC_SERVICE_DIR}
-	install -m 0755 ${WORKDIR}/run ${D}${WRC_SERVICE_DIR}/run.maybe
+	install -m 0755 ${WORKDIR}/run ${D}${WRC_SERVICE_DIR}/run
+	touch ${D}${WRC_SERVICE_DIR}/down
 }
 
 FILES_${PN} += "${SERVICE_ROOT}"
