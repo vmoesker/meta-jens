@@ -3,5 +3,5 @@
 while true
 do
     echo 1 > /proc/sys/vm/drop_caches
-    sleep 600
+    sleep 60
 done
