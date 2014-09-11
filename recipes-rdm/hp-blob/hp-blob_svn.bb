@@ -6,12 +6,12 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 DEPENDS = "tar "
 PV = "4.0.0.0"
-SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=HomePilot_Blob;rev=3580"
+SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=HomePilot_Blob;rev=3615"
 
 S = "${WORKDIR}/HomePilot_Blob"
 
 INST_DEST_PREFIX="/opt/homepilot"
-TARBALL_NAME="hp-dist_4.0.0.0.tar.gz"
+TARBALL_NAME="hp-dist_${PV}.tar.gz"
 
 inherit update-rc.d
 
