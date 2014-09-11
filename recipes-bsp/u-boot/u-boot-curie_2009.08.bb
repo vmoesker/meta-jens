@@ -18,7 +18,9 @@ SRCREV = "aa2be38ed4a16a6c3c100ac2d0449d54360cb892"
 
 SRCBRANCH = "imx_v2009.08_3.0.35_4.1.0"
 SRC_URI = "git://git.freescale.com/imx/uboot-imx.git;branch=${SRCBRANCH}"
-SRC_URI += "file://u-boot-curie.patch"
+SRC_URI += "file://u-boot-curie.patch \
+        file://0001-Back-port-the-DDR-calibration-parameters-for-iMX6Q-6.patch \
+"
 
 # UBOOT_MACHINE_imx53qsb = "mx53_loco_config"
 # UBOOT_MACHINE_imx53ard = "mx53_ard_ddr3_config"
