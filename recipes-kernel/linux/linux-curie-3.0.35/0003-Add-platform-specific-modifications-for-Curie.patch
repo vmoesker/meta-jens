@@ -77,7 +77,7 @@ index b650674..0f360e5 100644
   * Debug Related Config
   */
 -#define DBG	1
-+//#define DBG	1
++#define DBG	0
  
 -#define CONFIG_DEBUG /* DBG_871X, etc... */
 +//#define CONFIG_DEBUG /* DBG_871X, etc... */

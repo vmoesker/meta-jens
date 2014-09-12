@@ -43,6 +43,7 @@ SRC_URI += "file://0001-Fix-linking-errors-when-only-mx6q_sabresd-is-selecte.pat
             file://0028-Set-bit-5-in-S-PDIF-register-SCR-clear-outgoing-vali.patch \
             file://0029-PMU-driver-init.patch \
             file://0030-fix-compiling-errors-in-sata-init.patch \
+            file://0031-disable-alloc-of-video-memory-for-v4l2.patch \
            "
 
 SRC_URI += "file://0001-ENGR00266882-fix-SabreAuto-random-system-hang-issue.patch \
@@ -64,6 +65,7 @@ SRC_URI += "file://0001-ENGR00266882-fix-SabreAuto-random-system-hang-issue.patc
 SRC_URI += "file://0001-Add-directory-inclusion-for-coming-rtl8189es-drv.patch \
             file://0002-import-rtl8189es-driver.patch \
             file://0003-Add-platform-specific-modifications-for-Curie.patch \
+            file://0004-don-t-printout-debug-message-when-DBG-is-off.patch \
            "
 
 SRC_URI += "file://unionfs-2.6_for_3.0.101.diff"
