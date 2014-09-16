@@ -4,12 +4,13 @@ LICENSE = "commercial"
 LIC_FILES_CHKSUM = "file://${THISDIR}/files/license.txt;md5=3ebe3464e841ddbf115af1f7019017c5"
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
-PV = "0.002"
+PV = "0.003"
 SRC_URI = "http://internal.rdm.local/blobs/rdm-zway-${PV}.tar.gz \
            file://z-way-server \
 	   file://config.xml"
 
 S = "${WORKDIR}/z-way-http-test"
+S2 = "${WORKDIR}/z-get-tty"
 
 INST_DEST_PREFIX="/opt/z-way"
 
@@ -28,6 +29,7 @@ do_install() {
 
         # Extract tarball into INST_DEST_PREFIX dir of target
 	(cd ${S} && tar cf - .) | (cd ${D}${INST_DEST_PREFIX} && tar xf -)
+	(cd ${S2} && tar cf - z-get-tty-config ZDDX.indxml z-get-tty) | (cd ${D}${INST_DEST_PREFIX} && tar xf -)
 	rm -f ${D}${INST_DEST_PREFIX}/.gitignore \
 	      ${D}${INST_DEST_PREFIX}/htdocs/z-way-ha/.gitignore \
 	      ${D}${INST_DEST_PREFIX}/htdocs/expert/.git \
