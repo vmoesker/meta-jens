@@ -2,6 +2,7 @@ RDM_BASE_INSTALL = "hp2sm \
 	e2fsprogs \
 	btrfs-tools \
 	dosfstools \
+	system-image-update \
 	prd-flash \
 	nano \
 	ledctrl \
@@ -11,6 +12,7 @@ RDM_INSTALL = "${RDM_BASE_INSTALL} \
 	libntfs-3g \
 	ntfsprogs \
 	ntfs-3g \
+	ksm-init \
 "
 RECOVER_INSTALL="parted \
 "
