@@ -6,7 +6,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 DEPENDS = "tar "
 PV = "4.0.0.0"
-SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=HomePilot_Blob;rev=3637"
+SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=HomePilot_Blob;rev=3655"
 
 S = "${WORKDIR}/HomePilot_Blob"
 
@@ -38,7 +38,8 @@ do_install() {
 FILES_${PN} += "/opt/homepilot \
 		"
 
-RDEPENDS_${PN} = "gnupg"
+RDEPENDS_${PN} += "at"
+RDEPENDS_${PN} += "gnupg"
 
 INITSCRIPT_NAME = "homepilot"
 INITSCRIPT_PARAMS = "start 95 S . stop 20 0 1 6 ."
