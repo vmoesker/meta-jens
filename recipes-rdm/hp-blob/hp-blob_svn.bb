@@ -42,4 +42,4 @@ RDEPENDS_${PN} += "at"
 RDEPENDS_${PN} += "gnupg"
 
 INITSCRIPT_NAME = "homepilot"
-INITSCRIPT_PARAMS = "start 95 S . stop 20 0 1 6 ."
+INITSCRIPT_PARAMS = "start 99 5 . stop 20 0 1 6 ."
