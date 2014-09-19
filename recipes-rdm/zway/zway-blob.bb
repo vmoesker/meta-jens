@@ -36,6 +36,8 @@ do_install() {
 	      ${D}${INST_DEST_PREFIX}/htdocs/expert/.gitignore \
 	      ${D}${INST_DEST_PREFIX}/htdocs/z-way-ha-tv/.git \
 	      ${D}${INST_DEST_PREFIX}/htdocs/z-way-ha-tv/.gitignore
+	mv ${D}${INST_DEST_PREFIX}/z-get-tty-config ${D}${INST_DEST_PREFIX}/config/z-get-tty-config
+	(cd ${D}${INST_DEST_PREFIX} && ln -s config/z-get-tty-config)
 	
 	# Install custom config file
 	install ${WORKDIR}/config.xml ${D}${sysconfdir}/z-way.conf
