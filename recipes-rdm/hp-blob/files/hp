@@ -1,0 +1,10 @@
+#!/bin/sh
+
+listen_port=80
+log_out="/dev/null"
+jetty_home="/opt/homepilot/opt/jetty"
+java_home="/usr/java"
+java_elf="$java_home/bin/java"
+
+cd $jetty_home
+exec $java_elf -jar start.jar -Djetty.port=$listen_port &> $log_out
