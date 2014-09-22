@@ -1,0 +1,6 @@
+# HP2 rules, Radio devices
+ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0403", ATTR{idProduct}=="6001", ATTR{manufacturer}!="Rademacher", RUN += "/etc/udev/scripts/update_tty_zwave.sh"
+ACTION=="remove", SUBSYSTEM=="tty", RUN += "/etc/udev/scripts/update_tty_zwave.sh"
+
+ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0403", ATTR{idProduct}=="6001", ATTRS{manufacturer}=="Rademacher", RUN += "/etc/udev/scripts/update_tty_df.sh"
+ACTION=="remove", SUBSYSTEM=="tty", RUN += "/etc/udev/scripts/update_tty_df.sh"

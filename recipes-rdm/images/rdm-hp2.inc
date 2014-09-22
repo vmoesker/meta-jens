@@ -8,4 +8,5 @@ HP2_INSTALL = "service-df \
 	hp-blob \
         wrkeyupload \
 	wrc-startup \
-	"
+	udev-hp \
+"
