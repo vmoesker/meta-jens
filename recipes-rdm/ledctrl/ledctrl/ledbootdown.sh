@@ -10,6 +10,6 @@
 
 echo 0 >/sys/class/leds/boot/brightness
 echo 255 >/sys/class/leds/boot/brightness
-echo heartbeat >/sys/class/leds/boot/trigger
+echo 255 >/sys/class/leds/error/brightness
 
 exit 0
