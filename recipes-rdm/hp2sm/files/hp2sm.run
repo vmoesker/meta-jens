@@ -1,0 +1,12 @@
+#!/bin/sh 
+
+# Start a Plack daemon.i
+NAME="HomePilot2 Service Monitor"
+PLACK_APP="/opt/rdm/hp2sm/bin/app.pl"
+PLACK_PORT=81
+CWD=`pwd`
+OPTIONS="--port ${PLACK_PORT} ${PLACK_APP} "
+
+PIDFILE="/var/run/$NAME.pid"
+
+exec start-stop-daemon -m --start --quiet --pidfile "$PIDFILE" --exec plackup -- $OPTIONS

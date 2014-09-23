@@ -9,23 +9,23 @@ RDEPENDS_${PN} += "dancer2-perl yaml-libyaml-perl file-slurp-tiny-perl"
 RDEPENDS_${PN} += "unix-statgrab-perl"
 RDEPENDS_${PN} += "scalar-list-utils-perl"
 RDEPENDS_${PN} += "perl-modules"
+RDEPENDS_${PN} += "daemontools"
 
 PV = "0.1"
 
 SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=hp2sm;rev=3609"
+SRC_URI += "file://hp2sm.run"
 S = "${WORKDIR}/hp2sm/src"
 
-inherit update-rc.d
-
-ALTERNATIVE_PRIORITY = "100"
-ALTERNATIVE_LINK_NAME[hp2sm] = "${D}${sysconfdir}/init.d/hp2sm"
+SERVICE_ROOT = "${sysconfdir}/daemontools/service"
+HP2SM_SERVICE_DIR = "${SERVICE_ROOT}/hp2sm"
 
 do_install() {
 	#create init.d directory
-	install -d ${D}${sysconfdir}/init.d
+	install -d ${D}${HP2SM_SERVICE_DIR}
 	
-	#install init.d script and make it executable
-	install -m 0755 ${THISDIR}/files/hp2sm ${D}${sysconfdir}/init.d/
+	#install svc run script and make it executable
+	install -m 0755 ${WORKDIR}/hp2sm.run ${D}${HP2SM_SERVICE_DIR}/run
 	
 	#create directory for source
 	install -d ${D}/opt/rdm/hp2sm
@@ -33,7 +33,6 @@ do_install() {
 	(cd ${S} && tar cf - .) | (cd ${D}/opt/rdm/hp2sm && tar xf -)
 }
 
-FILES_${PN} += "/opt/rdm/hp2sm"
-
-INITSCRIPT_NAME = "hp2sm"
-INITSCRIPT_PARAMS = "start 99 3 5 . stop 20 0 1 6 ."
+FILES_${PN} += "/opt/rdm/hp2sm \
+                ${SERVICE_ROOT} \
+"
