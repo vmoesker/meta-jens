@@ -32,7 +32,7 @@ else
     #commit private key to git of production server
     key=$(< /var/lib/dropbear/id_rsa.pub)
     mac=$(sed -e 's/://g' /sys/class/net/eth0/address)
-    ssh -y -y -i /tmp/prdkey/id_rsa_dropbear hpkeyupload@192.168.2.1 "cd ~/keys && git pull --rebase && echo $key > $mac && git add $mac && git commit -m '$mac added.'"
+    ssh -i /tmp/prdkey/id_rsa_dropbear hpkeyupload@192.168.2.1 "cd ~/keys && git pull --rebase; echo $key > $mac && git add $mac && git commit -m '$mac added.' $mac"
 fi
 
 rm /etc/init.d/wrkeyupload.sh /etc/rc5.d/S99wrkeyupload.sh
