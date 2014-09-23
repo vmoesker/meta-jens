@@ -9,7 +9,7 @@ DEPENDS = "libxml2 libftdi"
 
 PV = "1.2.0"
 
-SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=DuoFern_Service;rev=3524"
+SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=DuoFern_Service;rev=3658"
 
 S = "${WORKDIR}/DuoFern_Service"
 
