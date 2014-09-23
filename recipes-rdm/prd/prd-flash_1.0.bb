@@ -12,5 +12,5 @@ do_install () {
 
 	install -m 0755 ${WORKDIR}/flash-device.sh ${D}${sysconfdir}/init.d
 
-	update-rc.d -r ${D} flash-device.sh start 99 3 5 .
+	update-rc.d -r ${D} flash-device.sh start 25 3 5 .
 }

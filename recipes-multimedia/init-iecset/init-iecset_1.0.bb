@@ -17,5 +17,5 @@ do_install () {
 	install -m 0755 ${WORKDIR}/init-iecset.sh ${D}${sysconfdir}/init.d
 	install -m 0644 ${WORKDIR}/iecset.defaults ${D}${sysconfdir}/default/iecset
 
-	update-rc.d -r ${D} init-iecset.sh start 75 3 5 .
+	update-rc.d -r ${D} init-iecset.sh start 19 3 5 .
 }
