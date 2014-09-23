@@ -6,14 +6,16 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 DEPENDS = "tar "
 RDEPENDS_${PN} += "daemontools"
+RDEPENDS_${PN} += "at"
+RDEPENDS_${PN} += "gnupg"
 
 PV = "4.0.0.0"
 SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=HomePilot_Blob;rev=3655 \
-		file://dfs \
-		file://hp \
-		file://jetty \
-		file://z-way \
-		"
+                file://dfs \
+                file://hp \
+                file://jetty \
+                file://z-way \
+"
 
 S = "${WORKDIR}/HomePilot_Blob"
 
@@ -55,11 +57,8 @@ do_install() {
 }
 
 FILES_${PN} += "/opt/homepilot \
-		${SVC_SERVICES}/dfs \
-		${SVC_SERVICES}/hp \
-		${SVC_SERVICES}/jetty \
-		${SVC_SERVICES}/z-way \
-		"
-
-RDEPENDS_${PN} += "at"
-RDEPENDS_${PN} += "gnupg"
+                ${SVC_SERVICES}/dfs \
+                ${SVC_SERVICES}/hp \
+                ${SVC_SERVICES}/jetty \
+                ${SVC_SERVICES}/z-way \
+"
