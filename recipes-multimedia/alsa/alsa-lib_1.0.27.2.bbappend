@@ -6,8 +6,7 @@ SRC_URI_append_mx6 = "file://alsa-lib-1.0.24-fix_s24_3le_downmix.patch \
         file://imx-spdif.conf \
 "
 
-do_install () {
-    autotools_do_install
+do_install_append_mx6 () {
     install -m 0644 ${WORKDIR}/imx-hdmi-soc.conf ${D}/${datadir}/alsa/cards
     install -m 0644 ${WORKDIR}/imx-spdif.conf ${D}/${datadir}/alsa/cards
 }
