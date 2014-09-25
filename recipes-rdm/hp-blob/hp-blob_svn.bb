@@ -9,6 +9,8 @@ RDEPENDS_${PN} += "daemontools"
 RDEPENDS_${PN} += "at"
 RDEPENDS_${PN} += "gnupg"
 
+inherit useradd
+
 PV = "4.0.0.0"
 SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=HomePilot_Blob;rev=3655 \
                 file://dfs \
@@ -55,6 +57,10 @@ do_install() {
 	touch ${D}${SVC_SERVICES}/jetty/down
 	touch ${D}${SVC_SERVICES}/z-way/down
 }
+
+USERADD_PACKAGES = "${PN}"
+
+USERADD_PARAM_${PN} = "-u 800 -d /home/homepilot -g users -r -m -s /bin/sh homepilot"
 
 FILES_${PN} += "/opt/homepilot \
                 ${SVC_SERVICES}/dfs \
