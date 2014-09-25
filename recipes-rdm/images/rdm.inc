@@ -8,6 +8,8 @@ RDM_BASE_INSTALL = "hp2sm \
 	prd-flash \
 	nano \
 	ledctrl \
+	sudo \
+	nginx \
 "
 RDM_INSTALL = "${RDM_BASE_INSTALL} \
 	udev-extraconf \
