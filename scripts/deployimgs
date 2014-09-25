@@ -1,0 +1,53 @@
+#!/bin/sh
+
+set -e
+set -x
+
+test -n "$MATURITY" || exit 1
+test -n "$APPLY_TS" || exit 1
+test -n "$TARGETS" || exit 1
+
+MACHINE=`grep MACHINE conf/local.conf | sed -E -e "s/[^']+'([^']+)'.*/\\1/"`
+DEPLOY_DIR_IMAGE="tmp/deploy/images/${MACHINE}"
+KERNEL_IMAGETYPE="uImage"
+
+KERNEL_FILE="${DEPLOY_DIR_IMAGE}/`readlink ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${MACHINE}.bin`"
+KERNEL_TS="`file "${KERNEL_FILE}" | sed -e 's/.*bytes, //g' -e 's/,.*//g'`"
+KERNEL_ISO="`date -d "${KERNEL_TS}" --iso-8601=seconds | sed -e 's/+.*//g'`"
+KERNEL_DATE="`date -d "${KERNEL_TS}" --iso-8601`"
+
+(cd ${DEPLOY_DIR_IMAGE} && ln -sf rdm-hp2-image-complete.cpi "${KERNEL_DATE}-rdm-hp2-image-complete.cpi")
+(cd ${DEPLOY_DIR_IMAGE} && ln -sf rdm-hp2-xbmc-image-complete.cpi "${KERNEL_DATE}-rdm-hp2-xbmc-image-complete.cpi")
+
+# possible values are md5 rmd160 sha1 sha256 sha384 sha512 tiger whirlpool
+ALGORITHMS="md5 rmd160 sha1"
+
+SPC=""
+for alg in ${ALGORITHMS}
+do
+    HASH="${HASH}${SPC}${alg}=`/opt/pkg/bin/digest ${alg} ${DEPLOY_DIR_IMAGE}/rdm-hp2-image-complete.cpi | awk '{print $4}'`"
+    XHASH="${XHASH}${SPC}${alg}=`/opt/pkg/bin/digest ${alg} ${DEPLOY_DIR_IMAGE}/rdm-hp2-xbmc-image-complete.cpi | awk '{print $4}'`"
+    SPC=";"
+done
+
+APPLY_ISO="$APPLY_TS"
+test "x$APPLY_TS" = "xundef" || APPLY_ISO="\"`date -d "${APPLY_TS}" --iso-8601=seconds | sed -e 's/+.*//g'`\""
+
+MANIFEST="{
+    \"${KERNEL_ISO}\": {
+        \"hp2\": \"${KERNEL_DATE}-rdm-hp2-image-complete.cpi;${HASH}\",
+        \"hp2+xbmc\": \"${KERNEL_DATE}-rdm-hp2-xbmc-image-complete.cpi;${XHASH}\",
+        \"apply\": ${APPLY_ISO},
+        \"release_status\": \"${MATURITY}\"
+    }
+}"
+
+# XXX do a rsync instead ...
+for target in ${TARGETS}
+do
+    ssh "${USER}@${target}" "mkdir -p /var/tmp/${KERNEL_DATE}-${MATURITY}"
+    echo "$MANIFEST" | ssh "${USER}@${target}" "cat >/var/tmp/${KERNEL_DATE}-${MATURITY}/manifest.json"
+    (cd ${DEPLOY_DIR_IMAGE} && scp "${KERNEL_DATE}-rdm-hp2-image-complete.cpi" "${KERNEL_DATE}-rdm-hp2-xbmc-image-complete.cpi" post-flash.tar.bz2 "${USER}@${target}:/var/tmp/${KERNEL_DATE}-${MATURITY}/")
+
+    ssh "${USER}@${target}" "/opt/pkg/bin/image-import -d /var/tmp/${KERNEL_DATE}-${MATURITY}/"
+done
