@@ -11,14 +11,15 @@ SRC_URI = "file://advancedsettings.xml \
            file://guisettings.xml \
 "
 
-XBMC_USER = "root"
-XBMC_HOME = "/home/root/.xbmc"
+XBMC_USER = "xbmc"
+XBMC_HOME = "/home/xbmc/.xbmc"
 XBMC_USERDATA = "${XBMC_HOME}/userdata"
 
 do_install () {
-        install -d ${D}${XBMC_USERDATA}
-        install -m 0644 ${WORKDIR}/advancedsettings.xml ${D}/home/root/.xbmc/userdata/
-        install -m 0644 ${WORKDIR}/guisettings.xml ${D}/home/root/.xbmc/userdata/
+        install -o xbmc -g users -d ${D}${XBMC_HOME}
+        install -o xbmc -g users -d ${D}${XBMC_USERDATA}
+        install -o xbmc -g users -m 0644 ${WORKDIR}/advancedsettings.xml ${D}${XBMC_USERDATA}
+        install -o xbmc -g users -m 0644 ${WORKDIR}/guisettings.xml ${D}${XBMC_USERDATA}
 }
 
-FILES_${PN} += "${XBMC_USERDATA}"
+FILES_${PN} += "${XBMC_HOME}"

@@ -1,5 +1,8 @@
 #!/bin/sh
 
-export HOME=/home/root
+export HOME=/home/xbmc
 echo 3 > /proc/sys/vm/drop_caches
-exec start-stop-daemon --pidfile /run/xbmc.pid --make-pidfile --start --exec /imx6/xbmc/lib/xbmc/xbmc.bin
+test -d /tmp/xbmc || setuidgid xbmc mkdir /tmp/xbmc
+rm -f ${HOME}/.xbmc/temp
+setuidgid xbmc ln -s /tmp/xbmc ${HOME}/.xbmc/temp
+exec setuidgid xbmc start-stop-daemon --pidfile /run/xbmc.pid --make-pidfile --start --exec /imx6/xbmc/lib/xbmc/xbmc.bin
