@@ -1,0 +1,3 @@
+# Anyone has r/w permission to HDMI/CEC
+KERNEL=="mxc_hdmi",  MODE="0666"
+KERNEL=="mxc_hdmi_cec",  MODE="0666"
