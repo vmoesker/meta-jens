@@ -1,0 +1,8 @@
+#!/bin/sh 
+
+if [ `stat -c "%s" /var/log/sysimg_update.log` -gt 1048576 ]
+then
+    mv /var/log/sysimg_update.log /var/log/sysimg_update.log.old
+    xz /var/log/sysimg_update.log.old
+fi
+exec /usr/bin/sysimg_update
