@@ -10,6 +10,9 @@ PR = "r0"
 PV = "0.9.13.1"
 SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=XBMC_WR_Plugin_Ctrl;rev=3647"
 
+DEPENDS += "xbmc-startup"
+RDEPENDS_${PN} += "xbmc-startup"
+
 XBMC_USER = "xbmc"
 XBMC_HOME = "/home/xbmc/.xbmc"
 XBMC_ADDONS = "${XBMC_HOME}/addons"
