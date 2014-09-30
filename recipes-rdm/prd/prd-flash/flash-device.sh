@@ -8,6 +8,8 @@
 # Short-Description:  Flash internal/external sd-card
 ### END INIT INFO
 
+set -x
+
 SDCARD_DEVICE="/dev/mmcblk0"
 if test -e /dev/mmcblk1
 then
@@ -17,7 +19,7 @@ fi
 UNION_SHADOWS=".shadow/.etc .shadow/.home .shadow/.var_lib .shadow/.frickel"
 
 # use last image container
-for c in /var/tmp/flashimg/*-complete.cpi /data/flashimg/*-complete
+for c in /data/.flashimg/*-complete.cpi /data/flashimg/*-complete
 do
     if [ -f $c -o -d $c ]
     then
