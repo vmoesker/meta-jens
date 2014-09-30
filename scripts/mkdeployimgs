@@ -1,11 +1,13 @@
 #!/bin/sh
 
 set -x
+set -e
 
 MKIMGS="`echo $0 | sed -e 's/mkdeployimgs/mkimgs/'`"
 MACHINE=`grep MACHINE conf/local.conf | sed -E -e "s/[^']+'([^']+)'.*/\\1/"`
 DEPLOY_DIR_IMAGE="tmp/deploy/images/${MACHINE}"
 
+bitbake -c configure -f virtual/kernel
 bitbake -c compile -f virtual/kernel
 "${MKIMGS}" rdm-hp2-xbmc-image
 "${MKIMGS}" rdm-hp2-image

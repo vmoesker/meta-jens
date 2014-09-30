@@ -49,5 +49,5 @@ do
     echo "$MANIFEST" | ssh "${USER}@${target}" "cat >/var/tmp/${KERNEL_DATE}-${MATURITY}/manifest.json"
     (cd ${DEPLOY_DIR_IMAGE} && scp "${KERNEL_DATE}-rdm-hp2-image-complete.cpi" "${KERNEL_DATE}-rdm-hp2-xbmc-image-complete.cpi" post-flash.tar.bz2 "${USER}@${target}:/var/tmp/${KERNEL_DATE}-${MATURITY}/")
 
-    ssh "${USER}@${target}" "/opt/pkg/bin/image-import -d /var/tmp/${KERNEL_DATE}-${MATURITY}/"
+    ssh "${USER}@${target}" "sudo /opt/pkg/bin/image-import --directory /var/tmp/${KERNEL_DATE}-${MATURITY}/"
 done
