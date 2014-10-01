@@ -22,10 +22,12 @@ XBMC_USER_HOME = "/home/xbmc/"
 
 USERADD_PACKAGES = "${PN}"
 
-USERADD_PARAM_${PN} = "-u 888 -d ${XBMC_USER_HOME} -g users -G tty -r -m -s /bin/sh xbmc"
+USERADD_PARAM_${PN} = "-u 888 -d ${XBMC_USER_HOME} -g users -G tty,audio,video,input -r -m -s /bin/sh xbmc"
 
 do_install () {
-        install -d ${D}${XBMC_SERVICE_DIR}
+        install -o xbmc -g users -d ${D}${XBMC_USER_HOME}
+	
+	install -d ${D}${XBMC_SERVICE_DIR}
         install -d ${D}${CLEAR_PAGE_CACHE_SERVICE_DIR}
 
 	install -m 0755 ${WORKDIR}/xbmc ${D}${XBMC_SERVICE_DIR}/run
