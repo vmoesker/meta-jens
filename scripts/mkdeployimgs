@@ -11,4 +11,4 @@ bitbake -c configure -f virtual/kernel
 bitbake -c compile -f virtual/kernel
 "${MKIMGS}" rdm-hp2-xbmc-image
 "${MKIMGS}" rdm-hp2-image
-(cd `dirname $0`/post-flash && tar cjf - .) >${DEPLOY_DIR_IMAGE}/post-flash.tar.bz2
+(cd `dirname $0`/post-flash/etc && tar cjf - .) >${DEPLOY_DIR_IMAGE}/post-flash.tar.bz2
