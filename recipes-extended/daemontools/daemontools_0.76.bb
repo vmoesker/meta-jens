@@ -15,6 +15,7 @@ SRC_URI = "http://cr.yp.to/daemontools/daemontools-0.76.tar.gz \
            file://Makefile-no-run-crosscompiled.patch \
            file://svscanboot-target-fs-adoptions.patch \
 	   file://init-daemontools.sh \
+	   file://sv-as-users.sudoers \
           "
 
 SRC_URI[md5sum] = "1871af2453d6e464034968a0fbcb2bfc"
@@ -32,4 +33,8 @@ do_install () {
 
     # prepare for installing base-dir for services
     install -d 0755 ${D}${sysconfdir}/daemontools/service
+
+    # allow %users to call svc
+    install -d ${D}${sysconfdir}/sudoers.d
+    install -m 600 ${WORKDIR}/sv-as-users.sudoers ${D}${sysconfdir}/sudoers.d
 }
