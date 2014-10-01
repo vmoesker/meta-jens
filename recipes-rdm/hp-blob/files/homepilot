@@ -1,6 +1,6 @@
 #!/bin/sh
 
-setuidgid homepilot /bin/sh /etc/daemontools/service/hp/init_userdir.sh
+sudo -i -u homepilot /bin/sh /home/homepilot/bin/init_appdir.sh
 
 # XXX must be able to be deleted
 mkdir -p /etc/modules-load.d
@@ -10,4 +10,4 @@ java_home="/usr/java"
 java_elf="$java_home/bin/java"
 
 cd $hp_home/lib/java
-exec sudo -u homepilot $java_elf -jar homepilot.jar
+exec sudo -i -u homepilot $java_elf -jar homepilot.jar
