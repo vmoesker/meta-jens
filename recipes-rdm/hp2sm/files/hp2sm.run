@@ -3,7 +3,7 @@
 # Start a Plack daemon.i
 NAME="HomePilot2 Service Monitor"
 PLACK_APP="/opt/rdm/hp2sm/bin/app.pl"
-PLACK_PORT=81
+PLACK_PORT=8081
 CWD=`pwd`
 OPTIONS="--port ${PLACK_PORT} ${PLACK_APP} "
 
