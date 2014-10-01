@@ -5,4 +5,4 @@ java_home="/usr/java"
 java_elf="$java_home/bin/java"
 
 cd $hp_home/lib/java
-exec $java_elf -jar homepilot.jar
+exec $java_elf -jar $hp_home/lib/java/networkingservice-1.0.0.jar

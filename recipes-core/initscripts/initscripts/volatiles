@@ -23,6 +23,7 @@
 # link the file defined as /var/test will actually be created as /tmp/testfile.
 d root root 1777 /run/lock none
 d root root 0755 /data/.var/log none
+d homepilot users 0755 /data/.var/log/hp2 none
 d root root 0755 /var/volatile/media none
 d root root 1777 /var/volatile/tmp none
 d root root 1770 /data/.var/spool/at/jobs none

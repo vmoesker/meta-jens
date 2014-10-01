@@ -4,23 +4,30 @@ LICENSE = "commercial"
 LIC_FILES_CHKSUM = "file://${THISDIR}/files/license.txt;md5=3ebe3464e841ddbf115af1f7019017c5"
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
-DEPENDS = "tar "
+DEPENDS = "tar zway-blob "
 RDEPENDS_${PN} += "daemontools"
 RDEPENDS_${PN} += "at"
 RDEPENDS_${PN} += "gnupg"
+RDEPENDS_${PN} += "service-df"
+RDEPENDS_${PN} += "zway-blob"
 
 inherit useradd
 
 PV = "4.0.0.0"
-SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=HomePilot_Blob;rev=3655 \
-                file://dfs \
-                file://hp \
+SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=HomePilot_Blob;rev=3711 \
+                file://dfservice \
+                file://homepilot \
+                file://homepilot-network-manager \
                 file://jetty \
                 file://z-way \
+                file://init_userdir.sh \
 "
 
 S = "${WORKDIR}/HomePilot_Blob"
 
+HOMEPILOT_USER_HOME = "/home/homepilot/"
+
+ZWAY_DEST_PREFIX="/opt/z-way"
 INST_DEST_PREFIX="/opt/homepilot"
 TARBALL_NAME="hp-dist_${PV}.tar.gz"
 
@@ -35,36 +42,40 @@ do_install() {
 
 	# Clean-up messed up so-files from Jetty distribution ... 
 	find ${D}${INST_DEST_PREFIX} -name '*.so' | xargs rm -f
-	
+
+	# add link for zddx (z-way) for local control
+	install -d ${D}${ZWAY_DEST_PREFIX}/config
+	ln -sf ${HOMEPILOT_USER_HOME}/.homepilot/zway ${D}${ZWAY_DEST_PREFIX}/config/zddx
+
 	# fix rights of gpg keyfolder
 	chmod -R 700 ${D}${INST_DEST_PREFIX}/etc/homepilot/2/gpg
 
 	# Install all the init-scripts
 	# 1 Create all the folders
-	install -d ${D}${SVC_SERVICES}/dfs
-	install -d ${D}${SVC_SERVICES}/hp
-	install -d ${D}${SVC_SERVICES}/jetty
-	install -d ${D}${SVC_SERVICES}/z-way
+	install -d ${D}${SVC_SERVICES}/homepilot-network-manager
+	install -o homepilot -g users -d ${D}${SVC_SERVICES}/dfservice
+	install -o homepilot -g users -d ${D}${SVC_SERVICES}/homepilot
+	install -o homepilot -g users -d ${D}${SVC_SERVICES}/jetty
+	install -o homepilot -g users -d ${D}${SVC_SERVICES}/z-way
 
 	# 2 Move all the run-files
-	install -m 0755 ${WORKDIR}/dfs ${D}${SVC_SERVICES}/dfs/run
-	install -m 0755 ${WORKDIR}/hp ${D}${SVC_SERVICES}/hp/run
-	install -m 0755 ${WORKDIR}/jetty ${D}${SVC_SERVICES}/jetty/run
-	install -m 0755 ${WORKDIR}/z-way ${D}${SVC_SERVICES}/z-way/run
+	install -m 0755 ${WORKDIR}/homepilot-network-manager ${D}${SVC_SERVICES}/homepilot-network-manager/run
+	install -o homepilot -g users -m 0755 ${WORKDIR}/dfservice ${D}${SVC_SERVICES}/dfservice/run
+	install -o homepilot -g users -m 0755 ${WORKDIR}/homepilot ${D}${SVC_SERVICES}/homepilot/run
+	install -o homepilot -g users -m 0755 ${WORKDIR}/jetty ${D}${SVC_SERVICES}/jetty/run
+	install -o homepilot -g users -m 0755 ${WORKDIR}/z-way ${D}${SVC_SERVICES}/z-way/run
 
 	# 3 Disable all but hp
-	touch ${D}${SVC_SERVICES}/dfs/down
+	touch ${D}${SVC_SERVICES}/dfservice/down
 	touch ${D}${SVC_SERVICES}/jetty/down
 	touch ${D}${SVC_SERVICES}/z-way/down
 }
 
 USERADD_PACKAGES = "${PN}"
 
-USERADD_PARAM_${PN} = "-u 800 -d /home/homepilot -g users -r -m -s /bin/sh homepilot"
+USERADD_PARAM_${PN} = "-u 800 -d ${HOMEPILOT_USER_HOME} -g users -G dialout -r -m -s /bin/sh homepilot"
 
-FILES_${PN} += "/opt/homepilot \
-                ${SVC_SERVICES}/dfs \
-                ${SVC_SERVICES}/hp \
-                ${SVC_SERVICES}/jetty \
-                ${SVC_SERVICES}/z-way \
+FILES_${PN} += "${INST_DEST_PREFIX} \
+                ${ZWAY_DEST_PREFIX} \
+		${SVC_SERVICES} \
 "

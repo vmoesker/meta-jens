@@ -6,4 +6,4 @@ tty="/dev/ttyZWave"
 cd $zway_home
 LD_LIBRARY_PATH="./libzway:./libzwayhttp:./libzwayjs:/opt/v8/lib"                            
 export LD_LIBRARY_PATH                                                                       
-exec ./z-way-server -D $tty
+exec sudo -u homepilot ./z-way-server -D $tty

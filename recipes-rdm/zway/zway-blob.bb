@@ -52,9 +52,7 @@ do_install() {
 
 	# Clean-up config-files 
 	rm -rf ${D}${INST_DEST_PREFIX}/config/zddx
-	ln -sf /home/root/.homepilot/zway ${D}${INST_DEST_PREFIX}/config/zddx
-
-
+	# remind that this results in inoperable z-way without homepilot
 }
 
 INSANE_SKIP_${PN} += "already-stripped"
