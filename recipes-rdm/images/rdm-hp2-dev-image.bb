@@ -32,19 +32,6 @@ IMAGE_INSTALL += " \
 	${RDM_INSTALL} \
 	${DEV_INSTALL} \
 	fb-init \
-	tzdata \
-	tcpdump \
-	ifplugd \
-	libstatgrab \
-	procps \
-	util-linux-mount \
-	libntfs-3g \
-	ntp \
-	ntp-utils \
-	util-linux \
-	ethtool \
-	xz \
-	lsof \
 "
 
 export IMAGE_BASENAME = "rdm-hp2-dev-image"

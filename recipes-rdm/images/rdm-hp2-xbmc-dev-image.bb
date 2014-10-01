@@ -33,19 +33,6 @@ IMAGE_INSTALL += " \
 	${XBMC_INSTALL} \
 	${RDM_INSTALL} \
 	${DEV_INSTALL} \
-	tzdata \
-	tcpdump \
-	ifplugd \
-	libstatgrab \
-	procps \
-	util-linux-mount \
-	nfs-utils-client \
-	ntp \
-	ntp-utils \
-	util-linux \
-	ethtool \
-	xz \
-	lsof \
 "
 
 export IMAGE_BASENAME = "rdm-hp2-xbmc-dev-image"

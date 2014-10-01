@@ -29,19 +29,6 @@ IMAGE_INSTALL += " \
 	${HP2_INSTALL} \
 	${RDM_INSTALL} \
 	fb-init \
-	tzdata \
-	tcpdump \
-	ifplugd \
-	libstatgrab \
-	procps \
-	util-linux-mount \
-	nfs-utils-client \
-	ntp \
-	ntp-utils \
-	util-linux \
-	ethtool \
-	xz \
-	lsof \
 "
 
 export IMAGE_BASENAME = "rdm-hp2-image"

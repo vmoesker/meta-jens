@@ -29,25 +29,6 @@ IMAGE_INSTALL += " \
 	${MACHINE_FIRMWARE} \
 	${ZWAY_DEPS} \
 	${DEV_INSTALL} \
-	fb-init \
-	tzdata \
-	tcpdump \
-	ifplugd \
-	udev-extraconf \
-	libstatgrab \
-	procps \
-	util-linux-mount \
-	libntfs-3g \
-	ntfsprogs \
-	ntfs-3g \
-	nfs-utils-client \
-	ntp \
-	ntp-utils \
-	util-linux \
-	ethtool \
-	xz \
-	nano \
-	lsof \
 "
 
 export IMAGE_BASENAME = "rdm-zway-dev-image"

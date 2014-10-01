@@ -9,7 +9,21 @@ RDM_BASE_INSTALL = "hp2sm \
 	nano \
 	ledctrl \
 	sudo \
+	qbrqry \
 	nginx \
+	tzdata \
+	tcpdump \
+	ifplugd \
+	libstatgrab \
+	procps \
+	util-linux-mount \
+	nfs-utils-client \
+	ntp \
+	ntp-utils \
+	util-linux \
+	ethtool \
+	xz \
+	lsof \
 "
 RDM_INSTALL = "${RDM_BASE_INSTALL} \
 	udev-extraconf \
