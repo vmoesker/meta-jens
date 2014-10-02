@@ -11,7 +11,7 @@ HOMEPAGE=	"https://metacpan.org/release/Unix-Statgrab"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Artistic-1.0;md5=cda03bbdc3c1951996392b872397b798 \
 file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
 
-SRC_URI = "git://github.com/rehsack/System-Image-Update.git;rev=22ec7ee2d2fb37bbd4083a842f12530b543019e2 \
+SRC_URI = "git://github.com/rehsack/System-Image-Update.git;rev=f4b45f577ad80398f55ebf1e92390a5977375f85 \
            file://run \
 	   file://sysimg_update.json \
 "
