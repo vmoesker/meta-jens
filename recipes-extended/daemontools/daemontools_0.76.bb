@@ -36,5 +36,5 @@ do_install () {
 
     # allow %users to call svc
     install -d ${D}${sysconfdir}/sudoers.d
-    install -m 600 ${WORKDIR}/sv-as-users.sudoers ${D}${sysconfdir}/sudoers.d
+    install -m 600 ${WORKDIR}/sv-as-users.sudoers ${D}${sysconfdir}/sudoers.d/sv-as-users
 }
