@@ -14,13 +14,17 @@ RDEPENDS_${PN} += "zway-blob"
 inherit useradd
 
 PV = "4.0.0.0"
-SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=HomePilot_Blob;rev=3713 \
+SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=HomePilot_Blob;rev=3715 \
                 file://dfservice \
                 file://homepilot \
                 file://homepilot-network-manager \
                 file://jetty \
                 file://z-way \
                 file://init_appdir.sh \
+                file://gpg/pubring.gpg \
+                file://gpg/random_seed \
+                file://gpg/secring.gpg \
+                file://gpg/trustdb.gpg \
 "
 
 S = "${WORKDIR}/HomePilot_Blob"
@@ -52,8 +56,13 @@ do_install() {
 	install -d ${D}${ZWAY_DEST_PREFIX}/config
 	ln -sf ${HOMEPILOT_USER_HOME}/.homepilot/zway ${D}${ZWAY_DEST_PREFIX}/config/zddx
 
-	# fix rights of gpg keyfolder
-	chmod -R 700 ${D}${INST_DEST_PREFIX}/etc/homepilot/2/gpg
+        # Install some gpg stuff
+        install -o homepilot -g users -m 0700 -d ${D}${HOMEPILOT_USER_HOME}/.gpg
+        install -o homepilot -g users -m 0600 ${WORKDIR}/gpg/pubring.gpg ${D}${HOMEPILOT_USER_HOME}/.gpg/pubring.gpg
+        install -o homepilot -g users -m 0600 ${WORKDIR}/gpg/random_seed ${D}${HOMEPILOT_USER_HOME}/.gpg/random_seed
+        install -o homepilot -g users -m 0600 ${WORKDIR}/gpg/secring.gpg ${D}${HOMEPILOT_USER_HOME}/.gpg/secring.gpg
+        install -o homepilot -g users -m 0600 ${WORKDIR}/gpg/trustdb.gpg ${D}${HOMEPILOT_USER_HOME}/.gpg/trustdb.gpg
+
 
 	# Install all the init-scripts
 	# 1 Create all the folders
