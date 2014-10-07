@@ -8,6 +8,7 @@ PR = "r0"
 
 SRC_URI = "file://xbmc \
            file://clear-page-cache \
+           file://51-tty.rules \
 "
 
 inherit useradd
@@ -32,6 +33,9 @@ do_install () {
 
 	install -m 0755 ${WORKDIR}/xbmc ${D}${XBMC_SERVICE_DIR}/run
 	install -m 0755 ${WORKDIR}/clear-page-cache ${D}${CLEAR_PAGE_CACHE_SERVICE_DIR}/run
+
+	install -d ${D}${sysconfdir}/udev/rules.d
+	install -m 0644 ${WORKDIR}/51-tty.rules ${D}${sysconfdir}/udev/rules.d/
 }
 
 FILES_${PN} += "${SERVICE_ROOT} ${XBMC_USER_HOME}"
