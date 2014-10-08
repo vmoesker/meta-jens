@@ -29,7 +29,7 @@ SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=HomePilot_
 
 S = "${WORKDIR}/HomePilot_Blob"
 
-HOMEPILOT_USER_HOME = "/home/homepilot/"
+HOMEPILOT_USER_HOME = "/home/homepilot"
 
 ZWAY_DEST_PREFIX="/opt/z-way"
 INST_DEST_PREFIX="/opt/homepilot"
