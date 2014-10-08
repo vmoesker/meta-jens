@@ -6,4 +6,4 @@ jetty_home="/opt/homepilot/opt/jetty"
 java_home="/usr/java"
 java_elf="$java_home/bin/java"
 
-exec sudo -i -u homepilot -- /bin/sh -c "cd $jetty_home && $java_elf -jar start.jar -Djetty.port=$listen_port > $log_out 2>&1"
+exec sudo -i -u homepilot -- /bin/sh -c "cd $jetty_home && exec $java_elf -jar start.jar -Djetty.port=$listen_port > $log_out 2>&1"
