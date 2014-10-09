@@ -1,11 +1,10 @@
 #!/bin/sh
 
-homedir="/home/homepilot"
+homedir="@HOMEPILOT_USER_HOME@"
 appdir=".homepilot"
 datadir="$homedir/$appdir"
 valid_file="validated"
 current_datadir=""
-
 
 function create_initial() {
         initial="${datadir}_1"

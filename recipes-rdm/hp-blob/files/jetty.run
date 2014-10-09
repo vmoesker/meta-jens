@@ -1,0 +1,3 @@
+#!/bin/sh
+
+exec sudo -i -u @HOMEPILOT_USER@ -- /bin/sh -c @HOMEPILOT_BASE@/bin/jetty

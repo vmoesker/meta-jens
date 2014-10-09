@@ -1,6 +1,0 @@
-#!/bin/sh
-
-zway_home="/opt/z-way"
-tty="/dev/ttyZWave"
-
-exec sudo -u homepilot -- /bin/sh -c "cd $zway_home && LD_LIBRARY_PATH='./libzway:./libzwayhttp:./libzwayjs:/opt/v8/lib' ./z-way-server -D $tty"
