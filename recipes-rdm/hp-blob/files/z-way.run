@@ -2,4 +2,4 @@
 
 tty="/dev/ttyZWave"
 
-exec sudo -u @HOMEPILOT_USER@ -- /bin/sh -c "cd @ZWAY_BASE@ && LD_LIBRARY_PATH='./libzway:./libzwayhttp:./libzwayjs:/opt/v8/lib' ./z-way-server -D $tty"
+exec sudo -u @HOMEPILOT_USER@ -- /bin/sh -c "cd @ZWAY_BASE@ && LD_LIBRARY_PATH='./libzway:./libzwayhttp:./libzwayjs:/opt/v8/lib' exec ./z-way-server -D $tty"
