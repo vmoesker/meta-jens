@@ -20,17 +20,9 @@ CONF_DEST_PREFIX="/home/homepilot/z-way"
 # inherit update-rc.d 
 
 do_install() {
-        #create init.d directory
-        install -d ${D}${sysconfdir}/init.d/
-
-        #install init.d script and make it executable
-        install -m 0755  ${WORKDIR}/z-way-server ${D}${sysconfdir}/init.d/z-way-server
-
-        # create INST_DEST_PREFIX folder
+        # create target install folders
         install -d ${D}${INST_DEST_PREFIX}
-
-	# create CONF_DEST_PREFIX folder
-	install -d ${D}${CONF_DEST_PREFIX}
+	install -d ${D}${sysconfdir}
 
         # Extract tarball into INST_DEST_PREFIX dir of target
 	(cd ${S} && tar cf - .) | (cd ${D}${INST_DEST_PREFIX} && tar xf -)
@@ -43,13 +35,13 @@ do_install() {
 	      ${D}${INST_DEST_PREFIX}/htdocs/z-way-ha-tv/.gitignore
 	
 	# Move config directory into CONF_DEST_PREFIX dir of target
+	install -o homepilot -g users -d ${D}${CONF_DEST_PREFIX}
 	mv ${D}${INST_DEST_PREFIX}/config ${D}${CONF_DEST_PREFIX}
+	chown -R homepilot:users ${D}${CONF_DEST_PREFIX}
 
-	# Move tty-config directory into CONF_DEST_PREFIX dir of target
-	mv ${D}${INST_DEST_PREFIX}/z-get-tty-config ${D}${CONF_DEST_PREFIX}/z-get-tty-config
-	(cd ${D}${INST_DEST_PREFIX} && ln -s ${CONF_DEST_PREFIX}/z-get-tty-config)
-
-	chown -R homepilot ${D}${CONF_DEST_PREFIX}
+	# Move tty-config directory into sysconfig dir of target
+	mv ${D}${INST_DEST_PREFIX}/z-get-tty-config ${D}${sysconfdir}
+	(cd ${D}${INST_DEST_PREFIX} && ln -s ${sysconfdir}/z-get-tty-config)
 
 	# Install custom config file
 	install ${WORKDIR}/config.xml ${D}${sysconfdir}/z-way.conf
@@ -70,12 +62,10 @@ INSANE_SKIP_${PN} += "already-stripped"
 
 FILES_${PN} += "${INST_DEST_PREFIX} \
         ${CONF_DEST_PREFIX} \
-	${sysconfdir}/z-way.conf"
+	${sysconfdir}"
 FILES_${PN}-dbg += "${INST_DEST_PREFIX}/.debug ${INST_DEST_PREFIX}/*/.debug"
 FILES_${PN}-dev += "${INST_DEST_PREFIX}/*/*.h"
 FILES_${PN}-staticdev += "${INST_DEST_PREFIX}/*/*.a"
-
-
 
 RDEPENDS_${PN} = "libarchive \
         libxml2 \
