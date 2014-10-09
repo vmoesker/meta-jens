@@ -86,7 +86,7 @@
         <enablejoystick>true</enablejoystick>
         <enablemouse default="true">true</enablemouse>
         <enablesystemkeys default="true">false</enablesystemkeys>
-        <remoteaskeyboard default="true">false</remoteaskeyboard>
+        <remoteaskeyboard default="true">true</remoteaskeyboard>
     </input>
     <karaoke>
         <autopopupselector default="true">false</autopopupselector>
