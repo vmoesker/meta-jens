@@ -58,10 +58,6 @@ do_install() {
 	# Clean-up messed up so-files from Jetty distribution ... 
 	find ${D}${INST_DEST_PREFIX} -name '*.so' | xargs rm -f
 
-	# add link for zddx (z-way) for local control
-	install -d ${D}${ZWAY_DEST_PREFIX}/config
-	ln -sf ${HOMEPILOT_USER_HOME}/.homepilot/zway ${D}${ZWAY_DEST_PREFIX}/config/zddx
-
         # Install some gpg stuff
         install -o homepilot -g users -m 0700 -d ${D}${HOMEPILOT_USER_HOME}/.gpg
         install -o homepilot -g users -m 0600 ${WORKDIR}/gpg/pubring.gpg ${D}${HOMEPILOT_USER_HOME}/.gpg/pubring.gpg

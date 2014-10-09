@@ -1,10 +1,10 @@
 <config>
-    <device>/dev/ttyUSB0</device>
-    <config-dir></config-dir>                                  
-    <translations-dir></translations-dir>              
-    <zddx-dir></zddx-dir>      
+    <device>/dev/ttyZWave</device>
+    <config-dir>/home/homepilot/z-way/config</config-dir>
+    <translations-dir>/opt/z-way/translations</translations-dir>
+    <zddx-dir>/home/homepilot/.homepilot/z-way</zddx-dir>
     <port>8083</port>
-    <http-root-dir>./htdocs</http-root-dir>
+    <http-root-dir>/opt/z-way/htdocs</http-root-dir>
     <default-ui>/expert/</default-ui>
     <automation-dir>automation</automation-dir>
     <shell-script-on-save-xml>sync</shell-script-on-save-xml>                            

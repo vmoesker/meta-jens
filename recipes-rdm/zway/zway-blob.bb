@@ -14,6 +14,7 @@ S = "${WORKDIR}/z-way-http-test"
 S2 = "${WORKDIR}/z-get-tty"
 
 INST_DEST_PREFIX="/opt/z-way"
+CONF_DEST_PREFIX="/home/homepilot/z-way"
 
 # Do not start Z-Way on boot. HP will do this for you.
 # inherit update-rc.d 
@@ -28,6 +29,9 @@ do_install() {
         # create INST_DEST_PREFIX folder
         install -d ${D}${INST_DEST_PREFIX}
 
+	# create CONF_DEST_PREFIX folder
+	install -d ${D}${CONF_DEST_PREFIX}
+
         # Extract tarball into INST_DEST_PREFIX dir of target
 	(cd ${S} && tar cf - .) | (cd ${D}${INST_DEST_PREFIX} && tar xf -)
 	(cd ${S2} && tar cf - z-get-tty-config ZDDX.indxml z-get-tty) | (cd ${D}${INST_DEST_PREFIX} && tar xf -)
@@ -37,9 +41,16 @@ do_install() {
 	      ${D}${INST_DEST_PREFIX}/htdocs/expert/.gitignore \
 	      ${D}${INST_DEST_PREFIX}/htdocs/z-way-ha-tv/.git \
 	      ${D}${INST_DEST_PREFIX}/htdocs/z-way-ha-tv/.gitignore
-	mv ${D}${INST_DEST_PREFIX}/z-get-tty-config ${D}${INST_DEST_PREFIX}/config/z-get-tty-config
-	(cd ${D}${INST_DEST_PREFIX} && ln -s config/z-get-tty-config)
 	
+	# Move config directory into CONF_DEST_PREFIX dir of target
+	mv ${D}${INST_DEST_PREFIX}/config ${D}${CONF_DEST_PREFIX}
+
+	# Move tty-config directory into CONF_DEST_PREFIX dir of target
+	mv ${D}${INST_DEST_PREFIX}/z-get-tty-config ${D}${CONF_DEST_PREFIX}/z-get-tty-config
+	(cd ${D}${INST_DEST_PREFIX} && ln -s ${CONF_DEST_PREFIX}/z-get-tty-config)
+
+	chown -R homepilot ${D}${CONF_DEST_PREFIX}
+
 	# Install custom config file
 	install ${WORKDIR}/config.xml ${D}${sysconfdir}/z-way.conf
 	rm -f ${D}${INST_DEST_PREFIX}/config.xml
@@ -51,13 +62,14 @@ do_install() {
 	python2 MakeIndex.py
 
 	# Clean-up config-files 
-	rm -rf ${D}${INST_DEST_PREFIX}/config/zddx
+	rm -rf ${D}${CONF_DEST_PREFIX}/config/zddx
 	# remind that this results in inoperable z-way without homepilot
 }
 
 INSANE_SKIP_${PN} += "already-stripped"
 
 FILES_${PN} += "${INST_DEST_PREFIX} \
+        ${CONF_DEST_PREFIX} \
 	${sysconfdir}/z-way.conf"
 FILES_${PN}-dbg += "${INST_DEST_PREFIX}/.debug ${INST_DEST_PREFIX}/*/.debug"
 FILES_${PN}-dev += "${INST_DEST_PREFIX}/*/*.h"
