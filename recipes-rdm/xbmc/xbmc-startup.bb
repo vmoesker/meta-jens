@@ -7,6 +7,8 @@ DEPENDS = "xbmc"
 PR = "r0"
 
 SRC_URI = "file://xbmc \
+           file://xbmc-log \
+           file://xbmc-volatile.conf \
            file://clear-page-cache \
            file://51-tty.rules \
 "
@@ -17,6 +19,7 @@ RDEPENDS_${PN} += "daemontools xbmc"
 
 SERVICE_ROOT = "${sysconfdir}/daemontools/service"
 XBMC_SERVICE_DIR = "${SERVICE_ROOT}/xbmc"
+XBMC_LOG_DIR = "/var/log/daemontools/xbmc"
 CLEAR_PAGE_CACHE_SERVICE_DIR = "${SERVICE_ROOT}/clear-page-cache"
 
 XBMC_USER_HOME = "/home/xbmc/"
@@ -36,6 +39,12 @@ do_install () {
 
 	install -d ${D}${sysconfdir}/udev/rules.d
 	install -m 0644 ${WORKDIR}/51-tty.rules ${D}${sysconfdir}/udev/rules.d/
+
+	install -d ${D}${XBMC_SERVICE_DIR}/log
+	install -m 0755 ${WORKDIR}/xbmc-log ${D}${XBMC_SERVICE_DIR}/log/run
+
+	install -d ${D}${sysconfdir}/default/volatiles
+	install -m 0644 ${WORKDIR}/xbmc-volatile.conf ${D}${sysconfdir}/default/volatiles/99_xbmc
 }
 
 FILES_${PN} += "${SERVICE_ROOT} ${XBMC_USER_HOME}"
