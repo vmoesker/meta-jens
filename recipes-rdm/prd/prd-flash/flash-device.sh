@@ -16,7 +16,7 @@ then
     SDCARD_DEVICE="/dev/mmcblk1"
 fi
 
-UNION_SHADOWS=".shadow/.etc .shadow/.home .shadow/.var_lib .shadow/.frickel"
+UNION_SHADOWS=".shadow/.etc .shadow/.home .shadow/.var_lib"
 
 # use last image container
 for c in /data/.flashimg/*-complete.cpi /data/flashimg/*-complete
