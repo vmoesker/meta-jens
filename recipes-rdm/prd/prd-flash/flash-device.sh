@@ -140,6 +140,8 @@ then
 	(cd /boot && ${KERNEL_SANITIZE})
 	(cd /data && mkdir -p ${UNION_SHADOWS})
 
+        rm -f /etc/volatile.cache
+
 	rm -f "${IMAGE_CONTAINER}"
 
 	reboot
