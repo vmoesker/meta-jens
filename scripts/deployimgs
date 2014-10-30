@@ -33,7 +33,7 @@ HASH="${HASH}${SPC}size=`stat -c %s ${DEPLOY_DIR_IMAGE}/rdm-hp2-image-complete.c
 XHASH="${XHASH}${SPC}size=`stat -c %s ${DEPLOY_DIR_IMAGE}/rdm-hp2-xbmc-image-complete.cpi`"
 
 APPLY_ISO="$APPLY_TS"
-test "x$APPLY_TS" = "xundef" || APPLY_ISO="\"`date -d "${APPLY_TS}" --iso-8601=seconds | sed -e 's/+.*//g'`\""
+test "x$APPLY_TS" = "xnull" || APPLY_ISO="\"`date -d "${APPLY_TS}" --iso-8601=seconds | sed -e 's/+.*//g'`\""
 
 MANIFEST="{
     \"${KERNEL_ISO}\": {
