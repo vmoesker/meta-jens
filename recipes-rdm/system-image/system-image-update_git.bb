@@ -11,7 +11,7 @@ HOMEPAGE=	"https://github.com/rehsack/Archive-Peek-Libarchive"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Artistic-1.0;md5=cda03bbdc3c1951996392b872397b798 \
 file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
 
-SRC_URI = "git://github.com/rehsack/System-Image-Update.git;rev=565358a8d26d498e1240b6b123ad6ab2b86e5b2f \
+SRC_URI = "git://github.com/rehsack/System-Image-Update.git;rev=f61c3ac1b971652e5cc5661667239514d53e98a7 \
            file://run \
 	   file://sysimg_update.json \
 "
