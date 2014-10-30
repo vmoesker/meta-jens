@@ -6,16 +6,17 @@ LICENSE = "Artistic-1.0 | GPL-2.0"
 PR = "r0"
 
 MAINTAINER=	"Poky <poky@yoctoproject.org>"
-HOMEPAGE=	"https://metacpan.org/release/Unix-Statgrab"
+HOMEPAGE=	"https://github.com/rehsack/Archive-Peek-Libarchive"
 
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Artistic-1.0;md5=cda03bbdc3c1951996392b872397b798 \
 file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
 
-SRC_URI = "git://github.com/rehsack/System-Image-Update.git;rev=f4b45f577ad80398f55ebf1e92390a5977375f85 \
+SRC_URI = "git://github.com/rehsack/System-Image-Update.git;rev=565358a8d26d498e1240b6b123ad6ab2b86e5b2f \
            file://run \
 	   file://sysimg_update.json \
 "
 
+RDEPENDS_${PN} += "archive-peek-libarchive-perl"
 RDEPENDS_${PN} += "crypt-ripemd160-perl"
 RDEPENDS_${PN} += "datetime-format-strptime-perl"
 RDEPENDS_${PN} += "file-libmagic-perl"
