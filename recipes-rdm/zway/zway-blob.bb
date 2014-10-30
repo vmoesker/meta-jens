@@ -39,6 +39,9 @@ do_install() {
 	mv ${D}${INST_DEST_PREFIX}/config ${D}${CONF_DEST_PREFIX}
 	chown -R homepilot:users ${D}${CONF_DEST_PREFIX}
 
+	# Create link to zddx configuration
+	(cd ${D}${CONF_DEST_PREFIX}/config && rm -rf zddx && ln -sf /home/homepilot/.homepilot/z-way zddx)
+
 	# Move tty-config directory into sysconfig dir of target
 	mv ${D}${INST_DEST_PREFIX}/z-get-tty-config ${D}${sysconfdir}
 	(cd ${D}${INST_DEST_PREFIX} && ln -s ${sysconfdir}/z-get-tty-config)
@@ -52,10 +55,6 @@ do_install() {
 	cd ${D}${INST_DEST_PREFIX}/ZDDX/
 	rm *.xml
 	python2 MakeIndex.py
-
-	# Clean-up config-files 
-	rm -rf ${D}${CONF_DEST_PREFIX}/config/zddx
-	# remind that this results in inoperable z-way without homepilot
 }
 
 INSANE_SKIP_${PN} += "already-stripped"
