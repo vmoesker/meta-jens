@@ -1,5 +1,8 @@
 #!/bin/sh 
 
+test -f /tmp/sysimg_update.once || sleep 10m
+touch /tmp/sysimg_update.once
+
 if [ `stat -c "%s" /var/log/sysimg_update.log` -gt 1048576 ]
 then
     mv /var/log/sysimg_update.log /var/log/sysimg_update.log.old
