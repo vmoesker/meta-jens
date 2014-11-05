@@ -11,7 +11,7 @@ HOMEPAGE=	"https://github.com/rehsack/Archive-Peek-Libarchive"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Artistic-1.0;md5=cda03bbdc3c1951996392b872397b798 \
 file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
 
-SRC_URI = "git://github.com/rehsack/System-Image-Update.git;rev=f61c3ac1b971652e5cc5661667239514d53e98a7 \
+SRC_URI = "git://github.com/rehsack/System-Image-Update.git;rev=7768ba6251bb979b3a9423cbac16318133452532 \
            file://run \
 	   file://sysimg_update.json \
 "
@@ -32,6 +32,7 @@ RDEPENDS_${PN} += "digest-md6-perl"
 RDEPENDS_${PN} += "digest-sha-perl"
 RDEPENDS_${PN} += "digest-sha3-perl"
 RDEPENDS_${PN} += "daemontools"
+RDEPENDS_${PN} += "system-image"
 
 S = "${WORKDIR}/git"
 
