@@ -1,7 +1,7 @@
 DESCRIPTION = "Meta recipe for recording system image version"
 
 LICENSE = "MIT"
-PV = "0.0.1"
+PV = "0.1.0"
 
 MAINTAINER=     "HP2 Dev Team <verteiler.hp2dev.team@rademacher.com>"
 HOMEPAGE=       "https://github.com/rdm-dev"
