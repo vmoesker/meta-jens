@@ -11,7 +11,7 @@ RDEPENDS_${PN} += "gnupg"
 RDEPENDS_${PN} += "service-df"
 RDEPENDS_${PN} += "zway-blob"
 
-inherit useradd
+inherit useradd record-installed-app
 
 PV = "4.0.0.0"
 SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=HomePilot_Blob;rev=3799 \
