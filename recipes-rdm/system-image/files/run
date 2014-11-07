@@ -1,5 +1,6 @@
 #!/bin/sh 
 
+test -f /tmp/sysimg_update.once || rm -rf /data/.update/*
 test -f /tmp/sysimg_update.once || sleep 10m
 touch /tmp/sysimg_update.once
 
