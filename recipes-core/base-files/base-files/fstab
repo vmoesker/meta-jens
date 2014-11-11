@@ -13,4 +13,3 @@ tmpfs                /var/volatile        tmpfs      defaults              0  0
 /dev/disk/by-label/data-curie	/data		ext4	defaults		1 2
 none	/etc	unionfs	noauto,dirs=/data/.shadow/.etc=rw:/etc=ro	0 0
 none	/home	unionfs	noauto,dirs=/data/.shadow/.home=rw:/home=ro	0 0
-none	/var/lib	unionfs	noauto,dirs=/data/.shadow/.var_lib=rw:/var/lib=ro	0 0

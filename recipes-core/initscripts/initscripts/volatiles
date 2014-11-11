@@ -22,11 +22,13 @@
 # a link will be created at /var/test pointing to /tmp/testfile and due to this
 # link the file defined as /var/test will actually be created as /tmp/testfile.
 d root root 1777 /run/lock none
+d root root 0755 /data/.var/lib none
 d root root 0755 /data/.var/log none
-d homepilot users 0755 /data/.var/log/hp2 none
+d root root 0755 /data/.var/spool none
 d root root 0755 /var/volatile/media none
 d root root 1777 /var/volatile/tmp none
 b root root 1777 /var/lock /run/lock
+b root root 0755 /var/lib /data/.var/lib
 b root root 0755 /var/log /data/.var/log
 b root root 0755 /var/spool /data/.var/spool
 b root root 0755 /var/run /run
