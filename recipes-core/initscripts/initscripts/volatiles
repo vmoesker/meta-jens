@@ -26,9 +26,6 @@ d root root 0755 /data/.var/log none
 d homepilot users 0755 /data/.var/log/hp2 none
 d root root 0755 /var/volatile/media none
 d root root 1777 /var/volatile/tmp none
-d root root 1770 /data/.var/spool/at/jobs none
-f root root 0600 /data/.var/spool/at/jobs/.SEQ none
-d root root 1770 /data/.var/spool/at/spool none
 b root root 1777 /var/lock /run/lock
 b root root 0755 /var/log /data/.var/log
 b root root 0755 /var/spool /data/.var/spool
