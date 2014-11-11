@@ -20,6 +20,8 @@ PATH=/sbin:/bin:/usr/sbin:/usr/bin
 #
 test "$VERBOSE" != no && echo "Mounting overlay filesystems..."
 
+test -x /etc/init.d/cleanunion.sh && /etc/init.d/cleanunion.sh
+
 test -f /etc/fstab && (
 
 #

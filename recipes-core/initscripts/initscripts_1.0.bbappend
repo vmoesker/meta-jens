@@ -1,6 +1,8 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 SRC_URI += "file://mountunion.sh \
+	file://cleanunion.sh \
+	file://default-cleanunion.conf \
 	file://umountunion.sh \
 	file://wifi-fallback.sh \
 	file://fb-cursor-off.sh \
