@@ -16,7 +16,7 @@ then
     SDCARD_DEVICE="/dev/mmcblk1"
 fi
 
-UNION_SHADOWS=".shadow/.etc .shadow/.home .shadow/.var_lib"
+UNION_SHADOWS=".shadow/.etc .shadow/.home"
 
 # use last image container
 for c in /data/.flashimg/*-complete.cpi /data/flashimg/*-complete
@@ -129,20 +129,27 @@ then
 
 	(cd /boot && tar xjf "${IMAGE_CONTAINER}" ${KERNEL} && chown -R root:root . && ${KERNEL_PREPARE})
 
+	if [ -d  /data/.shadow/.var_lib ]
+	then
+	    test -d /data/.var/lib || mkdir -p /data/.var/lib
+	    (cd /var/lib && tar cf - nginx dropbear) | (cd /data/.var/lib && tar xf -)
+	fi
+
+        rm -f /etc/volatile.cache
 	reboot
     elif [ $(echo ${ROOTDEV} | egrep 'p3$') ]
     then
 	RECOVERY=Y
 	mount /boot
-	mount /data
 
 	tar xjf "${IMAGE_CONTAINER}" -O ${ROOTIMG} | dd of=${SDCARD_DEVICE}p2 bs=1M
 	(cd /boot && ${KERNEL_SANITIZE})
 	(cd /data && mkdir -p ${UNION_SHADOWS})
 
-        rm -f /etc/volatile.cache
+	test -d  /data/.shadow/.var_lib && rm -rf /data/.shadow/.var_lib
 
 	rm -f "${IMAGE_CONTAINER}"
+        rm -f /etc/volatile.cache
 
 	reboot
     else
