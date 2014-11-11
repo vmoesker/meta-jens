@@ -4,14 +4,15 @@ LICENSE = "commercial"
 LIC_FILES_CHKSUM = "file://${THISDIR}/files/license.txt;md5=3ebe3464e841ddbf115af1f7019017c5"
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
-DEPENDS = "tar zway-blob "
+DEPENDS = "tar zway-blob hp2-base"
+RDEPENDS_${PN} += "hp2-base"
 RDEPENDS_${PN} += "daemontools"
 RDEPENDS_${PN} += "at"
 RDEPENDS_${PN} += "gnupg"
 RDEPENDS_${PN} += "service-df"
 RDEPENDS_${PN} += "zway-blob"
 
-inherit useradd record-installed-app
+inherit record-installed-app
 
 PV = "4.0.0.0"
 SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=HomePilot_Blob;rev=3799 \
@@ -100,10 +101,6 @@ do_install() {
 	touch ${D}${SVC_SERVICES}/jetty/down
 	touch ${D}${SVC_SERVICES}/z-way/down
 }
-
-USERADD_PACKAGES = "${PN}"
-
-USERADD_PARAM_${PN} = "-u 800 -d ${HOMEPILOT_USER_HOME} -g users -G dialout -r -m -s /bin/sh ${HOMEPILOT_USER}"
 
 FILES_${PN} += "${INST_DEST_PREFIX} \
                 ${ZWAY_DEST_PREFIX} \
