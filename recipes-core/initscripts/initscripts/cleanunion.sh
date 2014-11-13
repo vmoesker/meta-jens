@@ -9,6 +9,8 @@
 # Description:
 ### END INIT INFO
 
+set -x
+
 test -e /etc/default/rcS && . /etc/default/rcS
 
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
@@ -23,7 +25,7 @@ for cleanup_spec in ${CLEANUP_SPEC}
 do
     test -f "${cleanup_spec}" || continue
     IFS=$'\n'
-    path_specs=`${cleanup_spec}`
+    path_specs=`<${cleanup_spec}`
     for path_spec in ${path_specs}
     do
 	rm -rf "${path_spec}"
