@@ -1,0 +1,17 @@
+Revision history for HomePilot
+ 
+0.1.2   2014-11-13
+    - Implement blinking LED's on system update (instead of traffic-wise LED control)
+    - Add some extensive logging to update for reboot-debugging
+    - update xbmc-rdm-hp-addon
+    - add support for setting system date/time
+    - add initial reset
+    - fix update status issues with applying/downloading
+    - Cleanup volatiles, user settings (homepilot) and provide rough
+      template for hard-reset of overlayfs base layers.
+
+0.1.1	2014-11-10
+    - Updated release using Yocto 1.6.2
+
+0.1.0	2014-11-07
+    - Initial release to an unsuspecting world
