@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-3.0;md5=c79ff39f19dfec6d293
 
 PR = "r0"
 PV = "0.9.13.1"
-SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=XBMC_WR_Plugin_Ctrl;rev=3647"
+SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=XBMC_WR_Plugin_Ctrl;rev=3804"
 
 DEPENDS += "xbmc-startup"
 RDEPENDS_${PN} += "xbmc-startup"
