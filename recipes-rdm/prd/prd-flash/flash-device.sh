@@ -123,45 +123,59 @@ then
     if [ $(echo ${ROOTDEV} | egrep 'p2$') ]
     then
 	REGULAR=Y
+	logger "Updating phase 1"
 
 	echo 0 >/sys/class/leds/user2/brightness
 	echo heartbeat >/sys/class/leds/user2/trigger
 
+	logger "Going to extract u-boot"
 	tar xjf "${IMAGE_CONTAINER}" -O ${UBOOT_BIN} | dd of=${SDCARD_DEVICE} seek=2 skip=${UBOOT_PADDING} bs=512
+	logger "Going to extract recovery image"
 	tar xjf "${IMAGE_CONTAINER}" -O ${RECOVERIMG} | dd of=${SDCARD_DEVICE}p3 bs=1M
 
 	mount /boot
 
+	logger "Going to extract kernel"
 	(cd /boot && tar xjf "${IMAGE_CONTAINER}" ${KERNEL} && chown -R root:root . && ${KERNEL_PREPARE})
 
+	logger "Going to cleanup relics"
 	if [ -d  /data/.shadow/.var_lib ]
 	then
 	    test -d /data/.var/lib || mkdir -p /data/.var/lib
 	    (cd /var/lib && tar cf - nginx dropbear) | (cd /data/.var/lib && tar xf -)
 	fi
 
+	logger "Force rebuild of volatiles.cache next boot"
         rm -f /etc/volatile.cache
+	logger "Requesting reboot"
 	reboot
     elif [ $(echo ${ROOTDEV} | egrep 'p3$') ]
     then
 	RECOVERY=Y
-	mount /boot
+	logger "Updating phase 2"
 
 	echo 0 >/sys/class/leds/user1/brightness
 	echo heartbeat >/sys/class/leds/user1/trigger
 
+	logger "Going to extract rootfs image"
 	tar xjf "${IMAGE_CONTAINER}" -O ${ROOTIMG} | dd of=${SDCARD_DEVICE}p2 bs=1M
+	logger "Sanitize kernel"
+	mount /boot
 	(cd /boot && ${KERNEL_SANITIZE})
 	(cd /data && mkdir -p ${UNION_SHADOWS})
 
+	logger "Going to cleanup relics"
 	test -d  /data/.shadow/.var_lib && rm -rf /data/.shadow/.var_lib
 
+	logger "Removing update container"
 	rm -f "${IMAGE_CONTAINER}"
+	logger "Force rebuild of volatiles.cache next boot"
         rm -f /etc/volatile.cache
 
+	logger "Requesting reboot"
 	reboot
     else
-	echo "Cannot detect normal mode nor recovery mode. Fix and retry."
+	logger -s "Cannot detect normal mode nor recovery mode. Fix and retry."
 	exit 1
     fi
 fi
