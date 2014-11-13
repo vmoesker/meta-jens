@@ -25,11 +25,6 @@ do
     then
 	IMAGE_CONTAINER="$c"
 
-	echo 0 >/sys/class/leds/user1/brightness
-	echo mmc0 >/sys/class/leds/user1/trigger
-	echo 0 >/sys/class/leds/user2/brightness
-	echo mmc1 >/sys/class/leds/user2/trigger
-
 	break
     fi
 done
@@ -44,6 +39,11 @@ cd ${TEMP_DIR}/
 if [ -d "${IMAGE_CONTAINER}" ]
 then
     . "${IMAGE_CONTAINER}"/.settings
+
+    echo 0 >/sys/class/leds/user1/brightness
+    echo mmc0 >/sys/class/leds/user1/trigger
+    echo 0 >/sys/class/leds/user2/brightness
+    echo mmc1 >/sys/class/leds/user2/trigger
 
     BOOT_SPACE="8192"
     IMAGE_ROOTFS_ALIGNMENT="4096"
@@ -122,6 +122,10 @@ then
     if [ $(echo ${ROOTDEV} | egrep 'p2$') ]
     then
 	REGULAR=Y
+
+	echo 0 >/sys/class/leds/user2/brightness
+	echo heartbeat >/sys/class/leds/user2/trigger
+
 	tar xjf "${IMAGE_CONTAINER}" -O ${UBOOT_BIN} | dd of=${SDCARD_DEVICE} seek=2 skip=${UBOOT_PADDING} bs=512
 	tar xjf "${IMAGE_CONTAINER}" -O ${RECOVERIMG} | dd of=${SDCARD_DEVICE}p3 bs=1M
 
@@ -141,6 +145,9 @@ then
     then
 	RECOVERY=Y
 	mount /boot
+
+	echo 0 >/sys/class/leds/user1/brightness
+	echo heartbeat >/sys/class/leds/user1/trigger
 
 	tar xjf "${IMAGE_CONTAINER}" -O ${ROOTIMG} | dd of=${SDCARD_DEVICE}p2 bs=1M
 	(cd /boot && ${KERNEL_SANITIZE})
