@@ -32,4 +32,6 @@ do
     done
     rm -f "${cleanup_spec}"
     IFS="$DEF_IFS"
+    sync; sleep 1
 done
+sync
