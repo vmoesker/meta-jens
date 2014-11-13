@@ -13,6 +13,10 @@ do_install_append () {
     install -m 0755 ${WORKDIR}/umountunion.sh ${D}${sysconfdir}/init.d
     install -m 0755 ${WORKDIR}/wifi-fallback.sh ${D}${sysconfdir}/init.d
     install -m 0755 ${WORKDIR}/fb-cursor-off.sh ${D}${sysconfdir}/init.d
+	install -m 0755 ${WORKDIR}/cleanunion.sh ${D}${sysconfdir}/init.d
+
+	install -d ${D}${sysconfdir}/default
+	install -m 0644 ${WORKDIR}/default-cleanunion.conf ${D}${sysconfdir}/default/cleanunion.conf
 
     update-rc.d -r ${D} umountunion.sh start 30 0 1 6 .
     update-rc.d -r ${D} mountunion.sh start 16 2 3 4 5 S .
