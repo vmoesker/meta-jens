@@ -117,6 +117,7 @@ elif [ -f "${IMAGE_CONTAINER}" ]
 then
     tar xjf "${IMAGE_CONTAINER}" .settings
     . ./.settings
+    rm -f .settings
 
     ROOTDEV=`mount | grep "on / type" | sed -e 's/ on.*//'`
     if [ $(echo ${ROOTDEV} | egrep 'p2$') ]
