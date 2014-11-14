@@ -138,13 +138,6 @@ then
 	logger "Going to extract kernel"
 	(cd /boot && tar xjf "${IMAGE_CONTAINER}" ${KERNEL} && chown -R root:root . && ${KERNEL_PREPARE})
 
-	logger "Going to cleanup relics"
-	if [ -d  /data/.shadow/.var_lib ]
-	then
-	    test -d /data/.var/lib || mkdir -p /data/.var/lib
-	    (cd /var/lib && tar cf - nginx dropbear) | (cd /data/.var/lib && tar xf -)
-	fi
-
 	logger "Force rebuild of volatiles.cache next boot"
         rm -f /etc/volatile.cache
 	logger "Requesting reboot"
@@ -165,7 +158,12 @@ then
 	(cd /data && mkdir -p ${UNION_SHADOWS})
 
 	logger "Going to cleanup relics"
-	test -d  /data/.shadow/.var_lib && rm -rf /data/.shadow/.var_lib
+	if [ -d  /data/.shadow/.var_lib ]
+	then
+	    test -d /data/.var/lib || mkdir -p /data/.var/lib
+	    (cd /var/lib && tar cf - nginx dropbear) | (cd /data/.var/lib && tar xf -)
+	    test -d  /data/.shadow/.var_lib && rm -rf /data/.shadow/.var_lib
+	fi
 
 	logger "Removing update container"
 	rm -f "${IMAGE_CONTAINER}"
