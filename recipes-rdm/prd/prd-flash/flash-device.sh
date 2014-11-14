@@ -161,7 +161,8 @@ then
 	if [ -d  /data/.shadow/.var_lib ]
 	then
 	    test -d /data/.var/lib || mkdir -p /data/.var/lib
-	    (cd /var/lib && tar cf - nginx dropbear) | (cd /data/.var/lib && tar xf -)
+		# XXX remove unionfs files
+	    (cd /data/.shadow/.var_lib && tar cf - nginx dropbear) | (cd /data/.var/lib && tar xf -)
 	    test -d  /data/.shadow/.var_lib && rm -rf /data/.shadow/.var_lib
 	fi
 
