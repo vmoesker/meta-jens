@@ -1,5 +1,8 @@
 Revision history for HomePilot
 
+0.1.4	2014-11-17
+	- Enable Exitbutton in XBMC
+
 0.1.3	2014-11-14
     - copy old files from shadow to use old key
     - update hp-blob
