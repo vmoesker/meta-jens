@@ -1,0 +1,56 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+use Config::Any ();
+use Data::Dumper qw(Dumper);
+use File::Path qw(make_path remove_tree);
+use File::Spec qw();
+use Unix::Statgrab ();
+use Time::HiRes qw(usleep);
+
+use FindBin;
+my $f_cfg = Config::Any->load_files(
+    {
+        files   => [qw(/etc/sysdetails.json)],
+        use_ext => 1
+    }
+);
+my %cfg = map { %$_ } ( map { values %$_ } @$f_cfg );
+
+foreach my $path ( @{ $cfg{paths} } )
+{
+    make_path($path);
+}
+
+my $l = 1;
+for ( my $n = 10; $n < $cfg{logdata}; $n *= 10 ) { ++$l }
+
+my @funcs =
+  qw(get_host_info get_cpu_stats get_disk_io_stats get_fs_stats get_load_stats get_mem_stats get_swap_stats get_network_io_stats get_network_iface_stats get_page_stats get_process_stats get_user_stats);
+
+my $i = 0;
+for ( ;; usleep( $cfg{usleep} ) )
+{
+    my %data;
+    foreach my $func (@funcs)
+    {
+        my $sub = Unix::Statgrab->can($func);
+        defined $sub or die "No $func in Unix::Statgrab";
+        my $stats = $sub->();
+        $data{$func} = [ $stats->as_list ];
+    }
+
+    foreach my $path ( @{ $cfg{paths} } )
+    {
+        my $fn = File::Spec->catfile( $path, sprintf( "sysdetails.%0${l}d", $i ) );
+
+        my $fh;
+        open( $fh, ">", $fn ) or die "Can't open '$fn': $!";
+        print $fh Dumper( \%data );
+        close($fh);
+    }
+
+    ++$i;
+}
