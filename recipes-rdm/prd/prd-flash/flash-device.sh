@@ -11,11 +11,6 @@
 set -x
 
 SDCARD_DEVICE="/dev/mmcblk0"
-if test -e /dev/mmcblk1
-then
-    SDCARD_DEVICE="/dev/mmcblk1"
-fi
-
 UNION_SHADOWS=".shadow/.etc .shadow/.home"
 
 # use last image container
@@ -39,6 +34,11 @@ cd ${TEMP_DIR}/
 if [ -d "${IMAGE_CONTAINER}" ]
 then
     . "${IMAGE_CONTAINER}"/.settings
+
+    if test -e /dev/mmcblk1
+    then
+	SDCARD_DEVICE="/dev/mmcblk1"
+    fi
 
     echo 0 >/sys/class/leds/user1/brightness
     echo mmc0 >/sys/class/leds/user1/trigger
