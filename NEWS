@@ -1,5 +1,8 @@
 Revision history for HomePilot
 
+3.11.6
+    - XBMC: Use service requests for CEC adapter
+
 0.1.5	2014-11-20
     - Disable nginx accesslog
     - Fix HP backups to accept files greater than 1M (now 5M max)
