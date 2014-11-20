@@ -120,6 +120,12 @@ then
     rm -f .settings
 
     ROOTDEV=`mount | grep "on / type" | sed -e 's/ on.*//'`
+    if [ ! $(echo ${ROOTDEV} | egrep "^${SDCARD_DEVICE}") ]
+    then
+	logger -s "Cannot write to ${ROOTDEV}, flashing limited to ${SDCARD_DEVICE}."
+	exit 1
+    fi
+
     if [ $(echo ${ROOTDEV} | egrep 'p2$') ]
     then
 	REGULAR=Y
