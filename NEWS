@@ -1,12 +1,16 @@
 Revision history for HomePilot
 
-0.1.5
+0.1.5	2014-11-20
+    - Disable nginx accesslog
+    - Fix HP backups to accept files greater than 1M (now 5M max)
+    - Update hp-blob: web-ui fixes
+    - Remove unused service pages
 
 0.1.4	2014-11-18
-	- Enable Exitbutton in XBMC
-        - Add changelog link in UI
-        - Fix several update issues
-        - Improve WR Connect: add port check, fix data and state after reboot
+    - Enable Exitbutton in XBMC
+    - Add changelog link in UI
+    - Fix several update issues
+    - Improve WR Connect: add port check, fix data and state after reboot
 
 0.1.3	2014-11-14
     - copy old files from shadow to use old key
