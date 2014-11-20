@@ -1,4 +1,5 @@
 DESCRIPTION = "This software will proide the HomePilot2 Service Monitor e.g :81 Interface"
+MAINTAINER= "HP2 Dev Team <verteiler.hp2dev.team@rademacher.com>"
 HOMEPAGE = "http://www.rademacher.de"
 
 LICENSE = "commercial"
