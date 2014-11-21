@@ -1,4 +1,5 @@
-XBMC_INSTALL = "libsdl \
+XBMC_INSTALL = "bkeymaps \
+	libsdl \
 	libcec \
 	xbmc \
 	xbmc-rdm-hp-addon \
