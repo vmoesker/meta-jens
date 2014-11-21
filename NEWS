@@ -2,6 +2,9 @@ Revision history for HomePilot
 
 3.11.6
     - XBMC: Use service requests for CEC adapter
+    - add xbmc manual and update other manuals
+    - update homepilot: fix language
+    - initial de keymap support
 
 0.1.5	2014-11-20
     - Disable nginx accesslog
