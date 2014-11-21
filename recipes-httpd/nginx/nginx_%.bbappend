@@ -1,7 +1,7 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 SRC_URI += "http://internal.rdm.local/blobs/nginx-legal-0.1.tar.gz \
-	http://internal.rdm.local/blobs/nginx-manual-0.1.tar.gz \
+	http://internal.rdm.local/blobs/nginx-manual-0.2.tar.gz \
 	http://internal.rdm.local/blobs/nginx-html-0.2.tar.gz \
 	file://nginx-varlib.volatiles \
 "
