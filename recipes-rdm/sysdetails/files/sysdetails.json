@@ -1,5 +1,6 @@
 {
     "paths": [ "/data/sysdetails" ],
     "usleep": 100000,
-    "logdata": 300
+    "logdata": 300,
+    "keep": 4
 }

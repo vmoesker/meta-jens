@@ -22,6 +22,15 @@ my %cfg = map { %$_ } ( map { values %$_ } @$f_cfg );
 foreach my $path ( @{ $cfg{paths} } )
 {
     make_path($path);
+
+    opendir(my $dh, $path);
+    map { `tar czf $_.tar.gz $_`; remove_tree($_); } grep { -d } map { "$path/$_" } grep { /^\d+$/ } readdir($dh);
+    rewinddir($dh);
+    my @files = sort {(stat $b)[10] <=> (stat $a)[10]} grep { -f } map { "$path/$_" } grep { /^\d+\.tar\.gz$/ } readdir($dh);
+    unlink(@files[ $cfg{keep}>=0 ? $cfg{keep} : 0 .. (scalar @files)-1 ]);
+    closedir $dh;
+
+    make_path(sprintf("%s/%d", $path, $$));
 }
 
 my $l = 1;
@@ -44,7 +53,7 @@ for ( ;; usleep( $cfg{usleep} ) )
 
     foreach my $path ( @{ $cfg{paths} } )
     {
-        my $fn = File::Spec->catfile( $path, sprintf( "sysdetails.%0${l}d", $i ) );
+        my $fn = File::Spec->catfile( $path, sprintf( "%d/sysdetails.%0${l}d", $$, $i ) );
 
         my $fh;
         open( $fh, ">", $fn ) or die "Can't open '$fn': $!";
@@ -53,4 +62,5 @@ for ( ;; usleep( $cfg{usleep} ) )
     }
 
     ++$i;
+    $i %= $cfg{logdata};
 }
