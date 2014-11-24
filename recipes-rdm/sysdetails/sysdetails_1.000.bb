@@ -1,4 +1,4 @@
-ESCRIPTION = "sysdetails should help getting details of last minutes when \
+DESCRIPTION = "sysdetails should help getting details of last minutes when \
 a system dies"
 
 SECTION = "libs"
@@ -33,6 +33,9 @@ do_install() {
 
     install -d ${D}${SYSUPDT_SERVICE_DIR}
     install -m 0755 ${WORKDIR}/sysdetails.run ${D}${SYSUPDT_SERVICE_DIR}/run
+
+	# disable start
+    touch ${D}${SYSUPDT_SERVICE_DIR}/down
 }
 
 FILES_${PN} += "${sysconfdir} ${bindir}"
