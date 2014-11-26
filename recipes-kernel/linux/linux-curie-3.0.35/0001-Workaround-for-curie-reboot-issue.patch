@@ -1,0 +1,46 @@
+From e610f7bf5cd622fa6264f8299825b13298f9880d Mon Sep 17 00:00:00 2001
+From: Cui Gao <gao.cui@windsolve.com>
+Date: Tue, 25 Nov 2014 16:11:28 +0800
+Subject: [PATCH] Workaround for curie reboot issue
+
+Curie board may fail to boot up due to the failure of reading eMMC by the boot ROM. Changing the BOOTCFG setings for eMMC to 1-bit or 4-bits mode could solve this problem. This patch is a workaround to change the BOOTCFG settings by software before rebooting. BOOTCFG settings could be overridden by the two undocumented register SRC_GPR9 & SRC_GPR10
+---
+ arch/arm/plat-mxc/system.c | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+
+diff --git a/arch/arm/plat-mxc/system.c b/arch/arm/plat-mxc/system.c
+index e216f68..0d4af78 100644
+--- a/arch/arm/plat-mxc/system.c
++++ b/arch/arm/plat-mxc/system.c
+@@ -56,6 +56,28 @@ void arch_reset(char mode, const char *cmd)
+ 	arch_reset_special_mode(mode, cmd);
+ 
+ #ifdef CONFIG_ARCH_MX6
++	/* To change the bootcfg by software for curie board:
++	   1. load required bootcfg to SRC_GPR9 (0x020d8040)
++	   2. set bit 28 of SRC_GPR10 (0x020d8044)
++	   3. then reset the system
++
++	   to return to normal boot mode, clear SRC_GPR10[28]
++	 */
++	// eMMC 1-bit mode
++	{
++	u32 bmsr1 = __raw_readl(IO_ADDRESS(SRC_BASE_ADDR + 0x4));
++	u32 gpr9 = __raw_readl(IO_ADDRESS(SRC_BASE_ADDR + SRC_GPR9));
++	u32 gpr10 = __raw_readl(IO_ADDRESS(SRC_BASE_ADDR + SRC_GPR10));
++
++	if(bmsr1 == 0x4000d860) {
++		// original mode is eMMC 8-bit DDR boot
++		__raw_writel(0x40001860, IO_ADDRESS(SRC_BASE_ADDR + SRC_GPR9));
++		__raw_writel(gpr10 | 0x10000000, IO_ADDRESS(SRC_BASE_ADDR + SRC_GPR10));
++	} else {
++		// original mode is SD boot, unchanged
++	}
++	};
++
+ 	/* wait for reset to assert... */
+ 	if (enable_ldo_mode == LDO_MODE_BYPASSED) {
+ 		/*On Sabresd board use WDOG2 to reset external PMIC, so here do
+-- 
+1.9.1
+

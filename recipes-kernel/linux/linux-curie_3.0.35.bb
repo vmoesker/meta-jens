@@ -14,6 +14,7 @@ SRC_URI += "file://drm-vivante-Add-00-sufix-in-returned-bus-Id.patch \
 	    file://0004-ENGR00271136-Fix-build-break-when-CONFIG_CLK_DEBUG-i.patch \
            "
 SRC_URI += "file://0001-Fix-linking-errors-when-only-mx6q_sabresd-is-selecte.patch \
+            file://0001-Workaround-for-curie-reboot-issue.patch \
             file://0002-Create-a-new-board-MX6Q_CURIE-for-Curie.-Keep-using-.patch \
             file://0003-addition-of-USB-Host-OTG-support-for-Curie.patch \
             file://0004-add-fec-init-for-Curie-PHY-driver-is-not-correct-so-.patch \
