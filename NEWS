@@ -2,6 +2,10 @@ Revision history for HomePilot
 
 3.11.9
     - sysdetails improvment: fix startup, create and keep recent archives and minor changes
+    - Change manual order in /manual
+    - Fix camera motion detection: set enable flag
+    - Use utf8 file encoding for homepilot
+    - Workaround for reboot issue
 
 3.11.6
     - XBMC: Use service requests for CEC adapter
