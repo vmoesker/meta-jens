@@ -1,5 +1,10 @@
 Revision history for HomePilot
 
+3.11.10	2014-11-27
+    - improved ntp setup
+    - fixed hanging downloads
+    - included hp-blob svn revision in package version
+
 3.11.9   2014-11-26
     - sysdetails improvment: fix startup, create and keep recent archives and minor changes
     - Change manual order in /manual
