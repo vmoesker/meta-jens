@@ -1,15 +1,15 @@
-From 448ff7bcc06f13a95668d26a7dd6e3ba67b5ec14 Mon Sep 17 00:00:00 2001
+From a0652e9e68ed017177644900bda449865dbc016f Mon Sep 17 00:00:00 2001
 From: Jens Rehsack <sno@netbsd.org>
 Date: Fri, 12 Sep 2014 11:00:41 +0200
 Subject: [PATCH 4/4] don't printout debug message when DBG is off
 
 even _drv_always debug messages are omitted - respect silence configuration
 ---
- drivers/net/wireless/rtl8189es/include/rtw_debug.h | 13 ++++++++++++-
- 1 file changed, 12 insertions(+), 1 deletion(-)
+ drivers/net/wireless/rtl8189es/include/rtw_debug.h | 17 ++++++++++++++++-
+ 1 file changed, 16 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/net/wireless/rtl8189es/include/rtw_debug.h b/drivers/net/wireless/rtl8189es/include/rtw_debug.h
-index 09490bc..940d00f 100644
+index 67edf7f..5e5ee19 100644
 --- a/drivers/net/wireless/rtl8189es/include/rtw_debug.h
 +++ b/drivers/net/wireless/rtl8189es/include/rtw_debug.h
 @@ -161,21 +161,30 @@ extern void rtl871x_cedbg(const char *fmt, ...);
@@ -51,7 +51,7 @@ index 09490bc..940d00f 100644
  
  #define DRIVER_PREFIX "RTL871X: "
  
-@@ -219,9 +229,9 @@ extern void rtl871x_cedbg(const char *fmt, ...);
+@@ -221,9 +231,9 @@ extern void rtl871x_cedbg(const char *fmt, ...);
  	}while(0)
  
  #if defined(_seqdump)
@@ -62,7 +62,7 @@ index 09490bc..940d00f 100644
  #define DBG_871X_SEL(sel, fmt, arg...) \
  	do {\
  		if (sel == RTW_DBGDUMP)\
-@@ -232,6 +242,7 @@ extern void rtl871x_cedbg(const char *fmt, ...);
+@@ -234,6 +244,7 @@ extern void rtl871x_cedbg(const char *fmt, ...);
  	}while(0)
  
  /* dump message to selected 'stream' with driver-defined prefix */
@@ -70,6 +70,17 @@ index 09490bc..940d00f 100644
  #define DBG_871X_SEL_NL(sel, fmt, arg...) \
  	do {\
  		if (sel == RTW_DBGDUMP)\
+@@ -245,6 +256,10 @@ extern void rtl871x_cedbg(const char *fmt, ...);
+ 
+ #endif /* defined(_seqdump) */
+ 
++#else /* defined(_dbgdump) */
++
++#define DBG_871X_EXP(level, EXP) do { (void)(level); (void)(EXP); } while (0)
++
+ #endif /* defined(_dbgdump) */
+ 
+ #ifdef CONFIG_DEBUG
 -- 
 1.9.1
 

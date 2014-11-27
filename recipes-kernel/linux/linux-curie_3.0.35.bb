@@ -63,8 +63,8 @@ SRC_URI += "file://0001-ENGR00266882-fix-SabreAuto-random-system-hang-issue.patc
             file://0014-ENGR00278179-query-gpu-memory-with-seperate-types.patch \
            "
 
-SRC_URI += "file://0001-Add-directory-inclusion-for-coming-rtl8189es-drv.patch \
-            file://0002-import-rtl8189es-driver.patch \
+SRC_URI += "file://0001-Importing-rtl8189es_4.3.0-driver.patch \
+            file://0002-include-rtl8189es-driver-in-kernel-build.patch \
             file://0003-Add-platform-specific-modifications-for-Curie.patch \
             file://0004-don-t-printout-debug-message-when-DBG-is-off.patch \
            "
