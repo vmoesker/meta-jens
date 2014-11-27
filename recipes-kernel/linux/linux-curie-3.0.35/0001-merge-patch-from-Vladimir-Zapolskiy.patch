@@ -1,0 +1,45 @@
+From 75688898b990994545510af82530e79da1d5ab2a Mon Sep 17 00:00:00 2001
+From: Cui Gao <gao.cui@windsolve.com>
+Date: Thu, 27 Nov 2014 15:29:21 +0800
+Subject: [PATCH] merge patch from Vladimir Zapolskiy
+
+See more information at https://community.freescale.com/message/361740#361740
+
+The original patch removes some code about the local timer, but the code moves to another function.
+---
+ arch/arm/mach-mx6/system.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/arch/arm/mach-mx6/system.c b/arch/arm/mach-mx6/system.c
+index ff1feda..8424bd2 100644
+--- a/arch/arm/mach-mx6/system.c
++++ b/arch/arm/mach-mx6/system.c
+@@ -431,12 +431,14 @@ void arch_idle(void)
+ 
+ 	if (enable_wait_mode) {
+ #ifdef CONFIG_LOCAL_TIMERS
++#if 0
+ 		if (!tick_broadcast_oneshot_active()
+ 			|| !tick_oneshot_mode_active())
+ 			return;
+ 
+ 		clockevents_notify(CLOCK_EVT_NOTIFY_BROADCAST_ENTER, &cpu);
+ #endif
++#endif
+ 		if (enet_is_active)
+ 			/* Don't allow the chip to enter WAIT mode if enet is active
+ 			  * and the GPIO workaround for ENET interrupts is not used,
+@@ -467,8 +469,10 @@ void arch_idle(void)
+ 		else
+ 			arch_idle_multi_core(cpu);
+ #ifdef CONFIG_LOCAL_TIMERS
++#if 0
+ 		clockevents_notify(CLOCK_EVT_NOTIFY_BROADCAST_EXIT, &cpu);
+ #endif
++#endif
+ 	}  else {
+ 		mxc_cpu_lp_set(WAIT_CLOCKED);
+ 		ca9_do_idle();
+-- 
+1.9.1
+
