@@ -14,8 +14,9 @@ RDEPENDS_${PN} += "zway-blob"
 
 inherit record-installed-app
 
-PV = "4.0.0.0"
-SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=HomePilot_Blob;rev=3912 \
+HPREV="3912"
+PV = "4.0.${HPREV}"
+SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=HomePilot_Blob;rev=${HPREV} \
                 file://dfservice.run \
                 file://homepilot.run \
                 file://homepilot.sh \
@@ -40,7 +41,8 @@ HOMEPILOT_USER_HOME = "/home/homepilot"
 ZWAY_DEST_PREFIX="/opt/z-way"
 INST_DEST_PREFIX="/opt/homepilot"
 jetty_home="/opt/homepilot/opt/jetty"
-TARBALL_NAME="hp-dist_${PV}.tar.gz"
+# XXX Pat should finally fix that
+TARBALL_NAME="hp-dist_4.0.0.0.tar.gz"
 
 SVC_SERVICES="${sysconfdir}/daemontools/service"
 
