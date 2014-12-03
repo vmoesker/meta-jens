@@ -1,5 +1,7 @@
 Revision history for HomePilot
 
+3.11.12
+
 3.11.11  2014-12-03
     - add hostname to network configuration (fix http://homepilot/ in some networks)
     - enable error led for testing purpose
