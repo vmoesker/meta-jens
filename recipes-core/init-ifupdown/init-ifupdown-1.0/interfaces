@@ -14,6 +14,7 @@ iface eth0 inet dhcp
 
 # Wireless interfaces
 iface wlan0 inet dhcp
+	hostname homepilot
 	wireless_mode managed
 	wirless_essid any
 	wpa-dirver wext
