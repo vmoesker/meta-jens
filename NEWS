@@ -1,6 +1,14 @@
 Revision history for HomePilot
 
-3.11.10	2014-11-27
+3.11.11  2014-12-03
+    - add hostname to network configuration (fix http://homepilot/ in some networks)
+    - enable error led for testing purpose
+    - HP: Added Holiday Service project support.
+    - HP: Updated language files.
+    - HP: Adjusted timings on web UI after pressing 'download'-button.
+    - XBMC: update xbmc-rdm-hp-addon
+
+3.11.10	 2014-11-27
     - improved ntp setup
     - fixed hanging downloads
     - included hp-blob svn revision in package version
