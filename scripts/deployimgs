@@ -3,53 +3,52 @@
 set -e
 set -x
 
-test -n "$MATURITY" || exit 1
 test -n "$APPLY_TS" || exit 1
 test -n "$TARGETS" || exit 1
 
 MACHINE=`grep MACHINE conf/local.conf | sed -E -e "s/[^']+'([^']+)'.*/\\1/"`
 DEPLOY_DIR_IMAGE="tmp/deploy/images/${MACHINE}"
-KERNEL_IMAGETYPE="uImage"
-
-KERNEL_FILE="${DEPLOY_DIR_IMAGE}/`readlink ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${MACHINE}.bin`"
-KERNEL_TS="`file "${KERNEL_FILE}" | sed -e 's/.*bytes, //g' -e 's/,.*//g'`"
-KERNEL_ISO="`date -d "${KERNEL_TS}" --iso-8601=seconds | sed -e 's/+.*//g'`"
-KERNEL_DATE="`date -d "${KERNEL_TS}" --iso-8601`"
-
-(cd ${DEPLOY_DIR_IMAGE} && ln -sf rdm-hp2-image-complete.cpi "${KERNEL_DATE}-rdm-hp2-image-complete.cpi")
-(cd ${DEPLOY_DIR_IMAGE} && ln -sf rdm-hp2-xbmc-image-complete.cpi "${KERNEL_DATE}-rdm-hp2-xbmc-image-complete.cpi")
 
 # possible values are md5 rmd160 sha1 sha256 sha384 sha512 tiger whirlpool
 ALGORITHMS="md5 rmd160 sha1"
 
-SPC=""
-for alg in ${ALGORITHMS}
+SYSIMG_VERSION=$(. ${DEPLOY_DIR_IMAGE}/.settings; echo ${SYSIMG_VER})
+MANI=""
+MANISPC=""
+
+for IMAGE in ${DEPLOY_DIR_IMAGE}/*-complete-${SYSIMG_VERSION}.cpi
 do
-    HASH="${HASH}${SPC}${alg}=`/opt/pkg/bin/digest ${alg} ${DEPLOY_DIR_IMAGE}/rdm-hp2-image-complete.cpi | awk '{print $4}'`"
-    XHASH="${XHASH}${SPC}${alg}=`/opt/pkg/bin/digest ${alg} ${DEPLOY_DIR_IMAGE}/rdm-hp2-xbmc-image-complete.cpi | awk '{print $4}'`"
-    SPC=";"
+    SPC=""
+    HASH=""
+    for alg in ${ALGORITHMS}
+    do
+	HASH="${HASH}${SPC}${alg}=`/opt/pkg/bin/digest ${alg} "${IMAGE}" | awk '{print $4}'`"
+	SPC=";"
+    done
+    HASH="${HASH}${SPC}size=`stat -c %s "${IMAGE}"`"
+    IMAGE=`echo ${IMAGE} | sed -e "s,${DEPLOY_DIR_IMAGE}/,,"`
+    NAME=`echo ${IMAGE} | sed -e "s,rdm-,," -e "s,-image-complete-${SYSIMG_VERSION}.cpi,," -e 's,-,+,g'`
+    MANI="${MANI}${MANISPC}\"${NAME}\": \"${IMAGE};${HASH}\""
+    MANISPC=",
+        "
 done
-HASH="${HASH}${SPC}size=`stat -c %s ${DEPLOY_DIR_IMAGE}/rdm-hp2-image-complete.cpi`"
-XHASH="${XHASH}${SPC}size=`stat -c %s ${DEPLOY_DIR_IMAGE}/rdm-hp2-xbmc-image-complete.cpi`"
 
 APPLY_ISO="$APPLY_TS"
 test "x$APPLY_TS" = "xnull" || APPLY_ISO="\"`date -d "${APPLY_TS}" --iso-8601=seconds | sed -e 's/+.*//g'`\""
 
 MANIFEST="{
-    \"${KERNEL_ISO}\": {
-        \"hp2\": \"${KERNEL_DATE}-rdm-hp2-image-complete.cpi;${HASH}\",
-        \"hp2+xbmc\": \"${KERNEL_DATE}-rdm-hp2-xbmc-image-complete.cpi;${XHASH}\",
-        \"apply\": ${APPLY_ISO},
-        \"release_status\": \"${MATURITY}\"
+    \"${SYSIMG_VERSION}\": {
+        ${MANI},
+        \"apply\": ${APPLY_ISO}
     }
 }"
 
 # XXX do a rsync instead ...
 for target in ${TARGETS}
 do
-    ssh "${USER}@${target}" "mkdir -p /var/tmp/${KERNEL_DATE}-${MATURITY}"
-    echo "$MANIFEST" | ssh "${USER}@${target}" "cat >/var/tmp/${KERNEL_DATE}-${MATURITY}/manifest.json"
-    (cd ${DEPLOY_DIR_IMAGE} && scp "${KERNEL_DATE}-rdm-hp2-image-complete.cpi" "${KERNEL_DATE}-rdm-hp2-xbmc-image-complete.cpi" post-flash.tar.bz2 "${USER}@${target}:/var/tmp/${KERNEL_DATE}-${MATURITY}/")
+    ssh "${USER}@${target}" "mkdir -p /var/tmp/${SYSIMG_VERSION}-nightly"
+    echo "$MANIFEST" | ssh "${USER}@${target}" "cat >/var/tmp/${SYSIMG_VERSION}-nightly/manifest.json"
+    (cd ${DEPLOY_DIR_IMAGE} && scp *-complete-${SYSIMG_VERSION}.cpi post-flash-${SYSIMG_VERSION}.tar.bz2 "${USER}@${target}:/var/tmp/${SYSIMG_VERSION}-nightly/")
 
-    ssh "${USER}@${target}" "sudo /opt/pkg/bin/image-import --directory /var/tmp/${KERNEL_DATE}-${MATURITY}/"
+    ssh "${USER}@${target}" "sudo /opt/pkg/bin/image-import --directory /var/tmp/${SYSIMG_VERSION}-nightly/"
 done

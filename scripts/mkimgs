@@ -1,27 +1,28 @@
 #!/bin/sh
 
-#if [ "$1" = "-dev" ]
-#then
-#    IMAGES="rdm-core-dev-image rdm-hp2-dev-image rdm-hp2-xbmc-dev-image rdm-xbmc-dev-image rdm-zway-dev-image"
-#else
-#    IMAGES="rdm-core-image rdm-hp2-image rdm-hp2-xbmc-image rdm-xbmc-image"
-#fi
-
-IMAGE="$1"
-RECOVERY_IMAGE="rdm-core-image"
-DEV=0
-UBOOT_SUFFIX="bin"
-
-echo $IMAGE | fgrep -e "-dev-image"
-test $? -eq 0 && DEV=1
-if test $DEV -eq 1
-then
-    RECOVERY_IMAGE="rdm-core-dev-image"
-fi
-
-IMAGES="${IMAGE} ${RECOVERY_IMAGE}"
-
 set -x
+
+IMGSPC=""
+BUILD_IMAGES=""
+IMAGES=""
+
+for IMAGE in "$@"
+do
+    RECOVERY_IMAGE="rdm-core-image"
+
+    echo $IMAGE | fgrep -e "-dev-image"
+    test $? -eq 0 && RECOVERY_IMAGE="rdm-core-dev-image"
+
+    IMAGES="${IMAGES}${IMGSPC}${IMAGE}"
+    BUILD_IMAGES="${BUILD_IMAGES}${IMGSPC}${IMAGE}"
+    IMGSPC=" "
+    echo ${IMAGES} | fgrep -e "${RECOVERY_IMAGE}"
+    if [ "$?" != "0" ]
+    then
+	IMAGES="${IMAGES} ${RECOVERY_IMAGE}"
+    fi
+done
+
 set -e
 
 for img in ${IMAGES}
@@ -29,10 +30,13 @@ do
     bitbake $img
 done
 
+UBOOT_SUFFIX="bin"
 MACHINE=`grep MACHINE conf/local.conf | sed -E -e "s/[^']+'([^']+)'.*/\\1/"`
 DEPLOY_DIR_IMAGE="tmp/deploy/images/${MACHINE}"
 KERNEL_IMAGETYPE="uImage"
 KERNEL_DEVICE_TREE=`bitbake -e ${IMAGE} | grep KERNEL_DEVICETREE= | sed -E -e 's/[^"]+"([^"]+)".*/\\1/'`
+
+SYSIMG_VERSION=`bitbake -e system-image | grep PV= | sed -E -e 's/[^"]+"([^"]+)".*/\\1/'`
 
 kernel_bin="`readlink ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${MACHINE}.bin`"
 kernel_dtb="`readlink ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${MACHINE}.dtb || true`"
@@ -41,7 +45,6 @@ KERNEL="${kernel_bin}"
 KERNEL_PREPARE="mv ${kernel_bin} ${KERNEL_IMAGETYPE}-${MACHINE}"
 KERNEL_RECOVERY="ln -f ${KERNEL_IMAGETYPE} ${KERNEL_IMAGETYPE}-${MACHINE}"
 KERNEL_SANITIZE="mv ${KERNEL_IMAGETYPE}-${MACHINE} ${KERNEL_IMAGETYPE}"
-FILES=".settings ${KERNEL_IMAGETYPE}-${MACHINE}.bin ${kernel_bin}"
 if [ -n "${KERNEL_DEVICE_TREE}" ]
 then
     for DTS_FILE in ${KERNEL_DEVICE_TREE}
@@ -62,16 +65,27 @@ then
     done
 fi
 
-uboot_bin="`readlink ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.${UBOOT_SUFFIX}`"
-FILES="${FILES} u-boot-${MACHINE}.${UBOOT_SUFFIX} ${uboot_bin}"
+for IMAGE in ${BUILD_IMAGES}
+do
+    FILES=".${IMAGE}-${SYSIMG_VERSION}-settings .settings ${KERNEL_IMAGETYPE}-${MACHINE}.bin ${kernel_bin}"
+    RECOVERY_IMAGE="rdm-core-image"
 
-rootimg="`readlink ${DEPLOY_DIR_IMAGE}/${IMAGE}-${MACHINE}.squashfs-xz`"
-FILES="${FILES} ${rootimg}"
+    set +e
+    echo $IMAGE | fgrep -e "-dev-image"
+    test $? -eq 0 && RECOVERY_IMAGE="rdm-core-dev-image"
+    set -e
 
-recimg="`readlink ${DEPLOY_DIR_IMAGE}/${RECOVERY_IMAGE}-${MACHINE}.squashfs-xz`"
-FILES="${FILES} ${recimg}"
+    uboot_bin="`readlink ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.${UBOOT_SUFFIX}`"
+    FILES="${FILES} u-boot-${MACHINE}.${UBOOT_SUFFIX} ${uboot_bin}"
 
-cat >${DEPLOY_DIR_IMAGE}/.settings <<EOS
+    rootimg="`readlink ${DEPLOY_DIR_IMAGE}/${IMAGE}-${MACHINE}.squashfs-xz`"
+    FILES="${FILES} ${rootimg}"
+
+    recimg="`readlink ${DEPLOY_DIR_IMAGE}/${RECOVERY_IMAGE}-${MACHINE}.squashfs-xz`"
+    FILES="${FILES} ${recimg}"
+
+cat >${DEPLOY_DIR_IMAGE}/.${IMAGE}-${SYSIMG_VERSION}-settings <<EOS
+SYSIMG_VER=${SYSIMG_VERSION}
 DEV=${DEV}
 MACHINE=${MACHINE}
 UBOOT_BIN=${uboot_bin}
@@ -84,5 +98,9 @@ KERNEL_RECOVERY="${KERNEL_RECOVERY}"
 KERNEL_SANITIZE="${KERNEL_SANITIZE}"
 EOS
 
-(cd ${DEPLOY_DIR_IMAGE} && rm -f ${IMAGE}-complete.cpi)
-(cd ${DEPLOY_DIR_IMAGE} && tar cjf ${IMAGE}-complete.cpi ${FILES})
+    # XXX change next line into ln -sf after next applied update ...
+    (cd ${DEPLOY_DIR_IMAGE} && cp -f .${IMAGE}-${SYSIMG_VERSION}-settings .settings)
+    (cd ${DEPLOY_DIR_IMAGE} && rm -f ${IMAGE}-complete-${SYSIMG_VERSION}.cpi)
+    (cd ${DEPLOY_DIR_IMAGE} && tar cjf ${IMAGE}-complete-${SYSIMG_VERSION}.cpi ${FILES})
+    (cd ${DEPLOY_DIR_IMAGE} && ln -sf ${IMAGE}-complete-${SYSIMG_VERSION}.cpi ${IMAGE}-complete.cpi)
+done
