@@ -7,10 +7,10 @@ MKIMGS="`echo $0 | sed -e 's/mkdeployimgs/mkimgs/'`"
 MACHINE=`grep MACHINE conf/local.conf | sed -E -e "s/[^']+'([^']+)'.*/\\1/"`
 DEPLOY_DIR_IMAGE="tmp/deploy/images/${MACHINE}"
 
-SYSIMG_VERSION=$(. ${DEPLOY_DIR_IMAGE}/.settings; echo ${SYSIMG_VER})
 IMAGES="rdm-hp2-image rdm-hp2-xbmc-image"
 test "$1" = "--all" && IMAGES="${IMAGES} rdm-xbmc-image rdm-hp2-dev-image rdm-hp2-xbmc-dev-image rdm-xbmc-dev-image"
 
 "${MKIMGS}" ${IMAGES}
+SYSIMG_VERSION=$(. ${DEPLOY_DIR_IMAGE}/.settings; echo ${SYSIMG_VER})
 (cd `dirname $0`/post-flash/etc && tar cjf - .) >${DEPLOY_DIR_IMAGE}/post-flash-${SYSIMG_VERSION}.tar.bz2
 (cd ${DEPLOY_DIR_IMAGE} && ln -sf post-flash-${SYSIMG_VERSION}.tar.bz2 post-flash.tar.bz2)
