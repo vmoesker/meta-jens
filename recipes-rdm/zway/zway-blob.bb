@@ -4,9 +4,9 @@ LICENSE = "commercial"
 LIC_FILES_CHKSUM = "file://${THISDIR}/files/license.txt;md5=3ebe3464e841ddbf115af1f7019017c5"
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
-PV = "1.7.2"
+PV = "1.7.3"
 PR = "72"
-SRC_URI = "http://internal.rdm.local/blobs/v${PV}-${PR}-gfc0f0bf.tgz \
+SRC_URI = "http://internal.rdm.local/blobs/rdm-z-way-server-v${PV}-R1.tgz \
            file://z-way-server \
 	   file://config.xml"
 
