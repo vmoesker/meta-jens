@@ -100,7 +100,7 @@ EOS
 
     # XXX change next line into ln -sf after next applied update ...
     (cd ${DEPLOY_DIR_IMAGE} && cp -f .${IMAGE}-${SYSIMG_VERSION}-settings .settings)
-    (cd ${DEPLOY_DIR_IMAGE} && rm -f ${IMAGE}-complete-${SYSIMG_VERSION}.cpi)
-    (cd ${DEPLOY_DIR_IMAGE} && tar cjf ${IMAGE}-complete-${SYSIMG_VERSION}.cpi ${FILES})
-    (cd ${DEPLOY_DIR_IMAGE} && ln -sf ${IMAGE}-complete-${SYSIMG_VERSION}.cpi ${IMAGE}-complete.cpi)
+    (cd ${DEPLOY_DIR_IMAGE} && rm -f ${IMAGE}-${SYSIMG_VERSION}-complete.cpi)
+    (cd ${DEPLOY_DIR_IMAGE} && tar cjf ${IMAGE}-${SYSIMG_VERSION}-complete.cpi ${FILES})
+    (cd ${DEPLOY_DIR_IMAGE} && ln -sf ${IMAGE}-${SYSIMG_VERSION}-complete.cpi ${IMAGE}-complete.cpi)
 done
