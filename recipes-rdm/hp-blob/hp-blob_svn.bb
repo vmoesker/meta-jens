@@ -14,7 +14,7 @@ RDEPENDS_${PN} += "zway-blob"
 
 inherit record-installed-app
 
-HPREV="3960"
+HPREV="3963"
 PV = "4.0.${HPREV}"
 SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=HomePilot_Blob;rev=${HPREV} \
                 file://dfservice.run \
