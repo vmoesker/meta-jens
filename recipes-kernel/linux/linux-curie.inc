@@ -18,6 +18,10 @@ SRC_URI += "file://physeries.scc \
            "
 
 do_install_append () {
-  rm -f ${D}/boot/uImage
-  cp ${D}/boot/uImage-*  ${D}/boot/uImage
+    rm -f ${D}/boot/uImage
+    cp ${D}/boot/uImage-*  ${D}/boot/uImage
+
+    echo "options 8189es rtw_power_mgnt=0 rtw_ips_mode=0" >${WORKDIR}/8189es.conf
+    install -d ${D}${sysconfdir}/modprobe.d/
+    install -m 644 ${WORKDIR}/8189es.conf ${D}${sysconfdir}/modprobe.d/
 }
