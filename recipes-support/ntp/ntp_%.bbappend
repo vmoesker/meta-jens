@@ -1,6 +1,7 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 SRC_URI += "file://ntp-volatile.conf \
+file://ntpd \
 "
 
 do_install_append () {

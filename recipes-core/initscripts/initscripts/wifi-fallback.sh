@@ -14,20 +14,22 @@ PATH="/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin"
 
 [ -x /sbin/ifup ] || exit 0
 
-for i in `seq 5`; do
-    if grep unknown /sys/class/net/eth0/operstate
-    then
-	sleep 1
-    fi
-done
+waitfornetwork(){
+	for i in $(seq 1 10); do
+		nslookup 0.de.pool.ntp.org && break
+		sleep 1
+	done
+}
 
 case "$1" in
 start)
+	waitfornetwork
 	if test `cat /sys/class/net/eth0/carrier` -eq 0
 	then
     		echo "eth0 got no-carrier, starting wifi instead .."
 		ifup wlan0
 		echo "done."
+		waitfornetwork
 	else
    		echo "eth0 got a carrier,  wifi start is not required."
 	fi	

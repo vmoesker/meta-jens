@@ -20,7 +20,7 @@ do_install () {
 	install -m 0755 ${WORKDIR}/ledgodown.sh ${D}${sysconfdir}/init.d
 	install -m 0755 ${WORKDIR}/ledbootdown.sh ${D}${sysconfdir}/init.d
 
-	update-rc.d -r ${D} ledplay.sh start 05 S .
+	update-rc.d -r ${D} ledplay.sh start 06 S 2 3 4 5 .
 	update-rc.d -r ${D} ledreadydelay.sh start 95 5 .
 	update-rc.d -r ${D} ledbootup.sh start 99 5 .
 	update-rc.d -r ${D} ledgodown.sh stop 99 6 .
