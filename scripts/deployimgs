@@ -16,7 +16,7 @@ SYSIMG_VERSION=$(. ${DEPLOY_DIR_IMAGE}/.settings; echo ${SYSIMG_VER})
 MANI=""
 MANISPC=""
 
-for IMAGE in ${DEPLOY_DIR_IMAGE}/*-complete-${SYSIMG_VERSION}.cpi
+for IMAGE in ${DEPLOY_DIR_IMAGE}/*-${SYSIMG_VERSION}-complete.cpi
 do
     SPC=""
     HASH=""
@@ -27,7 +27,7 @@ do
     done
     HASH="${HASH}${SPC}size=`stat -c %s "${IMAGE}"`"
     IMAGE=`echo ${IMAGE} | sed -e "s,${DEPLOY_DIR_IMAGE}/,,"`
-    NAME=`echo ${IMAGE} | sed -e "s,rdm-,," -e "s,-image-complete-${SYSIMG_VERSION}.cpi,," -e 's,-,+,g'`
+    NAME=`echo ${IMAGE} | sed -e "s,rdm-,," -e "s,-image-${SYSIMG_VERSION}-complete.cpi,," -e 's,-,+,g'`
     MANI="${MANI}${MANISPC}\"${NAME}\": \"${IMAGE};${HASH}\""
     MANISPC=",
         "
@@ -46,9 +46,9 @@ MANIFEST="{
 # XXX do a rsync instead ...
 for target in ${TARGETS}
 do
-    ssh "${USER}@${target}" "mkdir -p /var/tmp/${SYSIMG_VERSION}-nightly"
-    echo "$MANIFEST" | ssh "${USER}@${target}" "cat >/var/tmp/${SYSIMG_VERSION}-nightly/manifest.json"
-    (cd ${DEPLOY_DIR_IMAGE} && scp *-complete-${SYSIMG_VERSION}.cpi post-flash-${SYSIMG_VERSION}.tar.bz2 "${USER}@${target}:/var/tmp/${SYSIMG_VERSION}-nightly/")
+    echo "$MANIFEST" | ssh "${USER}@${target}" "mkdir -p /var/tmp/${SYSIMG_VERSION}-nightly && cat >/var/tmp/${SYSIMG_VERSION}-nightly/manifest.json"
+    # echo "$MANIFEST" | ssh "${USER}@${target}" "cat >/var/tmp/${SYSIMG_VERSION}-nightly/manifest.json"
+    (cd ${DEPLOY_DIR_IMAGE} && scp *-${SYSIMG_VERSION}-complete.cpi post-flash-${SYSIMG_VERSION}.tar.bz2 "${USER}@${target}:/var/tmp/${SYSIMG_VERSION}-nightly/")
 
     ssh "${USER}@${target}" "sudo /opt/pkg/bin/image-import --directory /var/tmp/${SYSIMG_VERSION}-nightly/"
 done
