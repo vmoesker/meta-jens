@@ -126,6 +126,9 @@ then
 	exit 1
     fi
 
+    # try 26000000, too?
+    echo "39000000" >/sys/kernel/debug/mmc0/clock
+
     if [ $(echo ${ROOTDEV} | egrep 'p2$') ]
     then
 	REGULAR=Y
