@@ -19,6 +19,7 @@ RDM_BASE_INSTALL = "hp2sm \
 	util-linux-mount \
 	nfs-utils-client \
 	ntp \
+	ntpdate \
 	ntp-utils \
 	util-linux \
 	ethtool \
