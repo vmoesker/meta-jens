@@ -1,6 +1,11 @@
 Revision history for HomePilot
 
-3.11.13
+3.11.14 2014-12-12
+    - add iwconfig to diagnosis page
+    - fix date api: restart homepilot on manual change
+    - Web-UI changes at time-settings: introduced save button, introduced patients-dialog on save
+
+3.11.13 2014-12-12
     - apply some stability fixes for approval as recommended by FreeScale and Windsolve
     - Fix Web-UI of HomePilot (Fixed datetime in config, Refactored system-time label)
     - improve effort getting correct system time at boot
