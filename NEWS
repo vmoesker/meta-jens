@@ -1,5 +1,10 @@
 Revision history for HomePilot
 
+3.11.13
+    - apply some stability fixes for approval as recommended by FreeScale and Windsolve
+    - Fix Web-UI of HomePilot (Fixed datetime in config, Refactored system-time label)
+    - improve effort getting correct system time at boot
+
 3.11.12	2014-12-04
     - add function to save current log files
     - updated zway-blob
