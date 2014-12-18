@@ -6,7 +6,9 @@ use warnings;
 use Config::Any ();
 use Data::Dumper qw(Dumper);
 use File::Path qw(make_path remove_tree);
+use File::Slurp::Tiny qw(write_file);
 use File::Spec qw();
+use Params::Util qw(_HASH);
 use Unix::Statgrab ();
 use Time::HiRes qw(usleep);
 
@@ -27,7 +29,8 @@ foreach my $path ( @{ $cfg{paths} } )
     map { `tar czf $_.tar.gz $_`; remove_tree($_); } grep { -d } map { "$path/$_" } grep { /^\d+$/ } readdir($dh);
     rewinddir($dh);
     my @files = sort {(stat $b)[10] <=> (stat $a)[10]} grep { -f } map { "$path/$_" } grep { /^\d+\.tar\.gz$/ } readdir($dh);
-    unlink(@files[ $cfg{keep}>=0 ? $cfg{keep} : 0 .. (scalar @files)-1 ]);
+    my $keep_ofs = $cfg{keep}>=0 ? $cfg{keep} : 0;
+    unlink(@files[ $keep_ofs .. (scalar @files)-1 ]);
     closedir $dh;
 
     make_path(sprintf("%s/%d", $path, $$));
@@ -36,19 +39,54 @@ foreach my $path ( @{ $cfg{paths} } )
 my $l = 1;
 for ( my $n = 10; $n < $cfg{logdata}; $n *= 10 ) { ++$l }
 
-my @funcs =
-  qw(get_host_info get_cpu_stats get_disk_io_stats get_fs_stats get_load_stats get_mem_stats get_swap_stats get_network_io_stats get_network_iface_stats get_page_stats get_process_stats get_user_stats);
+my @funcs = ({get_cpu_stats => 'get_cpu_percents'}, 
+  qw(get_host_info get_disk_io_stats get_fs_stats get_load_stats),
+  qw(get_mem_stats get_swap_stats get_network_io_stats),
+  qw(get_network_iface_stats get_page_stats get_process_stats),
+  qw(get_user_stats));
 
+sub is_sane
+{
+    my %data;
+    foreach my $func ({get_cpu_stats => 'get_cpu_percents'}, qw(get_mem_stats get_process_stats))
+    {
+        my $stat = ref $func ? (keys %$func)[0] : $func;
+	my $sub = Unix::Statgrab->can($stat);
+        defined $sub or die "No $func in Unix::Statgrab";
+        my $stats = $sub->();
+	ref $func and $stats = $stats->can($stat = $func->{$stat})->($stats);
+        defined $data{$stat} or $data{$stat} = [ $stats->as_list ];
+    }
+
+    return unless $data{get_mem_stats}->[0]->{free} < (0.2 * $data{get_mem_stats}->[0]->{total}) or $data{get_cpu_percents}->[0]->{idle} < 5;
+
+    my @procs = grep {$_->{proc_resident} > 50*1024*1024 or $_->{cpu_percent} > 10} @{$data{get_process_stats}};
+    my @procs_by_mem = (sort { $b->{proc_resident} <=> $a->{proc_resident} } @procs)[0..19];
+    my @procs_by_cpu = (sort { $b->{cpu_percent} <=> $a->{cpu_percent} } @procs)[0..19];
+    my %procs = map { $_->{pid} => $_ } (grep { _HASH($_) } @procs_by_mem, @procs_by_cpu);
+    $data{get_process_stats} = [ values %procs ];
+
+    %data;
+}
+
+my $error = 0;
 my $i = 0;
 for ( ;; usleep( $cfg{usleep} ) )
 {
-    my %data;
+    $error or write_file("/sys/class/leds/error/brightness", "0");
+    my %data = is_sane;
+    scalar %data or next;
+    $error = 1;
+    write_file("/sys/class/leds/error/trigger", "heartbeat");
+
     foreach my $func (@funcs)
     {
-        my $sub = Unix::Statgrab->can($func);
+        my $stat = ref $func ? (keys %$func)[0] : $func;
+	my $sub = Unix::Statgrab->can($stat);
         defined $sub or die "No $func in Unix::Statgrab";
         my $stats = $sub->();
-        $data{$func} = [ $stats->as_list ];
+	ref $func and $stats = $stats->can($stat = $func->{$stat})->($stats);
+        defined $data{$stat} or $data{$stat} = [ $stats->as_list ];
     }
 
     foreach my $path ( @{ $cfg{paths} } )

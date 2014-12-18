@@ -17,7 +17,9 @@ SRC_URI = "file://sysdetails \
 "
 
 RDEPENDS_${PN} += "config-any-perl"
+RDEPENDS_${PN} += "file-slurp-tiny-perl"
 RDEPENDS_${PN} += "daemontools"
+RDEPENDS_${PN} += "params-util-perl"
 RDEPENDS_${PN} += "perl-modules"
 RDEPENDS_${PN} += "unix-statgrab-perl"
 
@@ -34,8 +36,8 @@ do_install() {
     install -d ${D}${SYSUPDT_SERVICE_DIR}
     install -m 0755 ${WORKDIR}/sysdetails.run ${D}${SYSUPDT_SERVICE_DIR}/run
 
-	# disable start
-    touch ${D}${SYSUPDT_SERVICE_DIR}/down
+    # disable start
+    #touch ${D}${SYSUPDT_SERVICE_DIR}/down
 }
 
 FILES_${PN} += "${sysconfdir} ${bindir}"
