@@ -1,6 +1,6 @@
 #!/bin/sh
 ### BEGIN INIT INFO
-# Provides:             ledplay
+# Provides:             ledplay_m
 # Required-Start:       $local_fs
 # Required-Stop:      $local_fs
 # Default-Start:
@@ -8,7 +8,7 @@
 # Short-Description:  Enables/Disables each LED once at boot
 ### END INIT INFO
 
-for led in `cd /sys/class/leds/ && echo *`
+for led in error wifi boot
 do
     echo 255 >/sys/class/leds/${led}/brightness
     sleep 1
