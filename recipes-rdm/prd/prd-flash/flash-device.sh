@@ -150,14 +150,6 @@ then
 	logger "Force rebuild of volatiles.cache next boot"
         rm -f /etc/volatile.cache
 
-	logger "Stopping services"
-	svc -d /etc/daemontools/service/*
-	sleep 2
-	svstat /etc/daemontools/service/* | logger
-	svc -dk /etc/daemontools/service/*
-	sleep 2
-	svstat /etc/daemontools/service/* | logger
-
 	logger "Requesting reboot"
 	reboot
     elif [ $(echo ${ROOTDEV} | egrep 'p3$') ]
@@ -188,14 +180,6 @@ then
 	rm -f "${IMAGE_CONTAINER}"
 	logger "Force rebuild of volatiles.cache next boot"
         rm -f /etc/volatile.cache
-
-	logger "Stopping services"
-	svc -d /etc/daemontools/service/*
-	sleep 2
-	svstat /etc/daemontools/service/* | logger
-	svc -dk /etc/daemontools/service/*
-	sleep 2
-	svstat /etc/daemontools/service/* | logger
 
 	logger "Requesting reboot"
 	reboot
