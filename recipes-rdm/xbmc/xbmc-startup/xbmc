@@ -2,8 +2,7 @@
 
 export HOME=/home/xbmc
 echo 3 > /proc/sys/vm/drop_caches
-test -d /tmp/xbmc || mkdir /tmp/xbmc
-chown xbmc /tmp/xbmc
+test -d /tmp/xbmc || setuidgid xbmc mkdir /tmp/xbmc
 rm -f ${HOME}/.xbmc/temp
 setuidgid xbmc ln -s /tmp/xbmc ${HOME}/.xbmc/temp
 exec 2>&1 start-stop-daemon --pidfile /run/xbmc.pid --make-pidfile --start --exec sudo -- -i -u xbmc /imx6/xbmc/lib/xbmc/xbmc.bin
