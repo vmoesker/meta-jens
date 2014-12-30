@@ -1,5 +1,22 @@
 Revision history for HomePilot
 
+3.11.17 2014-12-30
+    - HP1 Z-Way-config file location fix.
+    - add sysdetails to log files
+
+3.11.16	2014-12-19
+    - revert weird relic from first boot fixes
+    - fix first boot (after production or update)
+
+3.11.15	2014-12-18
+    - fix broken led startup
+    - revert always enabled error led
+    - fine tune stability issues from 3.11.13
+    - improve minor monitoring builtin
+    - always stop rdm services on shutdown
+    - add new debug code around first boot
+    - disable some debug code
+
 3.11.14 2014-12-12
     - add iwconfig to diagnosis page
     - fix date api: restart homepilot on manual change
