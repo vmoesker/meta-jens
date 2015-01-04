@@ -45,16 +45,29 @@ my @funcs = ({get_cpu_stats => 'get_cpu_percents'},
   qw(get_network_iface_stats get_page_stats get_process_stats),
   qw(get_user_stats));
 
+my %funcs;
+
+sub get_stat_func
+{
+    my $func = shift;
+    $funcs{$func} and return $funcs{$func};
+    my $pkg;
+    @_ and $pkg = shift;
+    $pkg and ref $pkg and $pkg = ref $pkg;
+    $pkg or $pkg = "Unix::Statgrab";
+    $funcs{$func} = $pkg->can($func);
+    defined $funcs{$func} or die "No $func in $pkg";
+    $funcs{$func}
+}
+
 sub is_sane
 {
     my %data;
     foreach my $func ({get_cpu_stats => 'get_cpu_percents'}, qw(get_mem_stats get_process_stats))
     {
         my $stat = ref $func ? (keys %$func)[0] : $func;
-	my $sub = Unix::Statgrab->can($stat);
-        defined $sub or die "No $func in Unix::Statgrab";
-        my $stats = $sub->();
-	ref $func and $stats = $stats->can($stat = $func->{$stat})->($stats);
+	my $stats = get_stat_func($stat)->();
+	ref $func and $stats = get_stat_func($stat = $func->{$stat}, ref $stats)->($stats);
         defined $data{$stat} or $data{$stat} = [ $stats->as_list ];
     }
 
@@ -83,10 +96,8 @@ for ( ;; usleep( $cfg{usleep} ) )
     foreach my $func (@funcs)
     {
         my $stat = ref $func ? (keys %$func)[0] : $func;
-	my $sub = Unix::Statgrab->can($stat);
-        defined $sub or die "No $func in Unix::Statgrab";
-        my $stats = $sub->();
-	ref $func and $stats = $stats->can($stat = $func->{$stat})->($stats);
+	my $stats = get_stat_func($stat)->();
+	ref $func and $stats = get_stat_func($stat = $func->{$stat}, ref $stats)->($stats);
         defined $data{$stat} or $data{$stat} = [ $stats->as_list ];
     }
 
