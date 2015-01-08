@@ -1,12 +1,9 @@
 #!/bin/sh
-### BEGIN INIT INFO
-# Provides:             ledplay
-# Required-Start:       $local_fs
-# Required-Stop:      $local_fs
-# Default-Start:
-# Default-Stop:
-# Short-Description:  Enables/Disables each LED once at boot
-### END INIT INFO
+
+# Frank measured 45 seconds between LED turned into ready state and every application is runnning
+# sleep 60 seconds just to be sure
+
+sleep 60s
 
 echo none >/sys/class/leds/boot/trigger
 echo 0 >/sys/class/leds/boot/brightness
