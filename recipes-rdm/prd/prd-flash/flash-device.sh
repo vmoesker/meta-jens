@@ -101,7 +101,7 @@ then
     dd if=${IMAGE_CONTAINER}/${ROOTIMG} of=${SDCARD_DEVICE}p2 bs=1M
     dd if=${IMAGE_CONTAINER}/${RECOVERIMG} of=${SDCARD_DEVICE}p3 bs=1M
 
-    (cd "${IMAGE_CONTAINER}" && tar cf - ${KERNEL}) | (cd ${TEMP_DIR}/flashimg/root/boot && tar xf - && chown -R root:root . && ${KERNEL_PREPARE} && ${KERNEL_SANITIZE})
+    (cd "${IMAGE_CONTAINER}" && tar cf - ${KERNEL}) | (cd ${TEMP_DIR}/flashimg/root/boot && tar xf - && chown -R root:root . && eval ${KERNEL_PREPARE} && eval ${KERNEL_SANITIZE})
 
     mkdir -p ${TEMP_DIR}/flashimg/root/data/tmp
     chmod 01777 ${TEMP_DIR}/flashimg/root/data/tmp
@@ -137,6 +137,9 @@ then
 	echo 0 >/sys/class/leds/user2/brightness
 	echo heartbeat >/sys/class/leds/user2/trigger
 
+	tune2fs -L "boot-${MACHINE}" ${SDCARD_DEVICE}p1
+	tune2fs -L "data-${MACHINE}" ${SDCARD_DEVICE}p4
+
 	logger "Going to extract u-boot"
 	tar xjf "${IMAGE_CONTAINER}" -O ${UBOOT_BIN} | dd of=${SDCARD_DEVICE} seek=2 skip=${UBOOT_PADDING} bs=512
 	logger "Going to extract recovery image"
@@ -145,7 +148,7 @@ then
 	mount /boot
 
 	logger "Going to extract kernel"
-	(cd /boot && tar xjf "${IMAGE_CONTAINER}" ${KERNEL} && chown -R root:root . && ${KERNEL_PREPARE})
+	(cd /boot && tar xjf "${IMAGE_CONTAINER}" ${KERNEL} && chown -R root:root . && eval ${KERNEL_PREPARE})
 
 	logger "Force rebuild of volatiles.cache next boot"
         rm -f /etc/volatile.cache
@@ -164,7 +167,7 @@ then
 	tar xjf "${IMAGE_CONTAINER}" -O ${ROOTIMG} | dd of=${SDCARD_DEVICE}p2 bs=1M
 	logger "Sanitize kernel"
 	mount /boot
-	(cd /boot && ${KERNEL_SANITIZE})
+	(cd /boot && eval ${KERNEL_SANITIZE})
 	(cd /data && mkdir -p ${UNION_SHADOWS})
 
 	logger "Going to cleanup relics"

@@ -30,36 +30,40 @@ do
     bitbake $img
 done
 
-UBOOT_SUFFIX="bin"
+BITBAKE_SETTINGS=`bitbake -e system-image | egrep "(KERNEL_DEVICETREE|UBOOT_SUFFIX|UBOOT_PADDING|PV)=" | sed -e "s/PV/SYSIMG_VERSION/" -e "s/KERNEL_DEVICETREE/KERNEL_DEVICE_TREE/"`
+eval $BITBAKE_SETTINGS
+test -z "${UBOOT_PADDING}" && UBOOT_PADDING=0
+
 MACHINE=`grep MACHINE conf/local.conf | sed -E -e "s/[^']+'([^']+)'.*/\\1/"`
 DEPLOY_DIR_IMAGE="tmp/deploy/images/${MACHINE}"
 KERNEL_IMAGETYPE="uImage"
-KERNEL_DEVICE_TREE=`bitbake -e ${IMAGE} | grep KERNEL_DEVICETREE= | sed -E -e 's/[^"]+"([^"]+)".*/\\1/'`
 
-SYSIMG_VERSION=`bitbake -e system-image | grep PV= | sed -E -e 's/[^"]+"([^"]+)".*/\\1/'`
+SYSIMG_FILES=".${IMAGE}-${SYSIMG_VERSION}-settings .settings"
 
 kernel_bin="`readlink ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${MACHINE}.bin`"
-kernel_dtb="`readlink ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${MACHINE}.dtb || true`"
+kernel_dtb="`readlink ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${KERNEL_DEVICE_TREE} || true`"
 
 KERNEL="${kernel_bin}"
 KERNEL_PREPARE="mv ${kernel_bin} ${KERNEL_IMAGETYPE}-${MACHINE}"
 KERNEL_RECOVERY="ln -f ${KERNEL_IMAGETYPE} ${KERNEL_IMAGETYPE}-${MACHINE}"
 KERNEL_SANITIZE="mv ${KERNEL_IMAGETYPE}-${MACHINE} ${KERNEL_IMAGETYPE}"
+KERNEL_FILES="${KERNEL_IMAGETYPE}-${MACHINE}.bin ${kernel_bin}"
 if [ -n "${KERNEL_DEVICE_TREE}" ]
 then
     for DTS_FILE in ${KERNEL_DEVICE_TREE}
     do
 	DTS_BASE_NAME=`basename ${DTS_FILE} | awk -F "." '{print $1}'`
-	if [ -e "${KERNEL_IMAGETYPE}-${DTS_BASE_NAME}.dtb" ]
+	if [ -e "${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${DTS_BASE_NAME}.dtb" ]
 	then
-	    kernel_bin_for_dtb="`readlink ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${DTS_BASE_NAME}.dtb | sed "s,$DTS_BASE_NAME,${MACHINE},g;s,\.dtb$,.bin,g"`"
+	    bin_for_dtb="`readlink ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${DTS_BASE_NAME}.dtb`"
+	    kernel_bin_for_dtb="`echo ${bin_for_dtb} | sed "s,$DTS_BASE_NAME,${MACHINE},g;s,\.dtb$,.bin,g"`"
 	    if [ $kernel_bin = $kernel_bin_for_dtb ]
 	    then
-		FILES="${FILES} ${KERNEL_IMAGETYPE}-${DTS_BASE_NAME}.dtb ${kernel_bin_for_dtb}"
-		KERNEL="${KERNEL} ${kernel_bin_for_dtb}"
-		KERNEL_PREPARE="${KERNEL_PREPARE} && mv ${kernel_bin_for_dtb} ${KERNEL_IMAGETYPE}-${MACHINE}-${DTS_BASE_NAME}.dtb"
-		KERNEL_RECOVERY="${KERNEL_RECOVERY} && ln -f ${KERNEL_IMAGETYPE}-${MACHINE}-${DTS_BASE_NAME}.dtb ${KERNEL_IMAGETYPE}-${DTS_BASE_NAME}.dtb"
-		KERNEL_SANITIZE="${KERNEL_SANITIZE} && mv ${KERNEL_IMAGETYPE}-${MACHINE}-${DTS_BASE_NAME}.dtb ${KERNEL_IMAGETYPE}-${DTS_BASE_NAME}.dtb"
+		KERNEL_FILES="${KERNEL_FILES} ${KERNEL_IMAGETYPE}-${DTS_BASE_NAME}.dtb ${bin_for_dtb}"
+		KERNEL="${KERNEL} ${bin_for_dtb}"
+		KERNEL_PREPARE="${KERNEL_PREPARE} && mv ${bin_for_dtb} ${DTS_BASE_NAME}.dtb"
+		# KERNEL_RECOVERY="${KERNEL_RECOVERY} && ln -f ${KERNEL_IMAGETYPE}-${MACHINE}-${DTS_BASE_NAME}.dtb ${KERNEL_IMAGETYPE}-${DTS_BASE_NAME}.dtb"
+		# KERNEL_SANITIZE="${KERNEL_SANITIZE} && mv ${KERNEL_IMAGETYPE}-${DTS_BASE_NAME}.dtb ${KERNEL_IMAGETYPE}-${DTS_BASE_NAME}.dtb"
 	    fi
 	fi
     done
@@ -67,7 +71,7 @@ fi
 
 for IMAGE in ${BUILD_IMAGES}
 do
-    FILES=".${IMAGE}-${SYSIMG_VERSION}-settings .settings ${KERNEL_IMAGETYPE}-${MACHINE}.bin ${kernel_bin}"
+    FILES="${SYSIMG_FILES} ${KERNEL_FILES}"
     RECOVERY_IMAGE="rdm-core-image"
 
     set +e
@@ -89,7 +93,7 @@ SYSIMG_VER=${SYSIMG_VERSION}
 DEV=${DEV}
 MACHINE=${MACHINE}
 UBOOT_BIN=${uboot_bin}
-UBOOT_PADDING="2"
+UBOOT_PADDING="${UBOOT_PADDING}"
 KERNEL="${KERNEL}"
 ROOTIMG=${rootimg}
 RECOVERIMG=${recimg}

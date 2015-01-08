@@ -2,6 +2,7 @@ RDM_BASE_INSTALL = "hp2sm \
 	alsa-utils \
 	init-iecset \
 	e2fsprogs \
+	e2fsprogs-tune2fs \
 	btrfs-tools \
 	dosfstools \
 	system-image-update \
