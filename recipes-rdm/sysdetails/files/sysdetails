@@ -86,12 +86,12 @@ my $error = 0;
 my $i = 0;
 for ( ;; usleep( $cfg{usleep} ) )
 {
-    $error or write_file("/sys/class/leds/error/brightness", "0");
+#    $error or write_file("/sys/class/leds/error/brightness", "0");
     $error = 0;
     my %data = is_sane;
     scalar %data or next;
     $error = 1;
-    write_file("/sys/class/leds/error/trigger", "heartbeat");
+#    write_file("/sys/class/leds/error/trigger", "heartbeat");
 
     foreach my $func (@funcs)
     {
