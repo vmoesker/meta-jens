@@ -1,7 +1,7 @@
 #!/bin/sh 
 
 test -f /tmp/sysimg_update.once || rm -rf /data/.update/*
-test -f /tmp/sysimg_update.once || sleep 10m
+test -f /tmp/sysimg_update.once || sleep 5m
 touch /tmp/sysimg_update.once
 
 if [ `stat -c "%s" /var/log/sysimg_update.log` -gt 1048576 ]
