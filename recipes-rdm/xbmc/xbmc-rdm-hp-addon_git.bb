@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-3.0;md5=c79ff39f19dfec6d293
 
 PR = "r0"
 PV = "0.9.13.1"
-SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=XBMC_WR_Plugin_Ctrl;rev=3937"
+SRC_URI = "git://github.com/rdm-dev/xbmc-rdm-hp-addon;rev=d7e12852dacf674e5ddcbb5aa9dbb662a07507ee"
 
 DEPENDS += "xbmc-startup"
 RDEPENDS_${PN} += "xbmc-startup"
@@ -17,7 +17,7 @@ XBMC_USER_HOME = "/home/xbmc"
 XBMC_APPDIR = "${XBMC_USER_HOME}/.xbmc"
 XBMC_ADDONS = "${XBMC_APPDIR}/addons"
 
-S = "${WORKDIR}/XBMC_WR_Plugin_Ctrl/src/script.homepilot/"
+S = "${WORKDIR}/git/script.homepilot/"
 do_install() {
         install -o xbmc -g users -d ${D}${XBMC_USER_HOME}
         install -o xbmc -g users -d ${D}${XBMC_APPDIR}

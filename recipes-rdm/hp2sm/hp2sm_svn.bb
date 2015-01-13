@@ -14,7 +14,7 @@ RDEPENDS_${PN} += "daemontools"
 
 PV = "0.1"
 
-SRC_URI = "svn://192.168.1.186/svn/EW_Prj/trunk/;protocol=http;module=hp2sm;rev=3992"
+SRC_URI = "svn://192.168.1.186/svn/EW_Prj/001/HP_ServiceMonitor/trunk;protocol=http;module=hp2sm;rev=4072"
 SRC_URI += "file://hp2sm.run"
 S = "${WORKDIR}/hp2sm/src"
 
