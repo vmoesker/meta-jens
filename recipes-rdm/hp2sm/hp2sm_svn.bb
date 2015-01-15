@@ -12,6 +12,10 @@ RDEPENDS_${PN} += "scalar-list-utils-perl"
 RDEPENDS_${PN} += "perl-modules"
 RDEPENDS_${PN} += "daemontools"
 
+RDEPENDS_${PN} += "encode-perl"
+RDEPENDS_${PN} += "devel-cycle-perl devel-leak-object-perl devel-stacktrace-perl"
+RDEPENDS_${PN} += "test-memory-cycle-perl test-leaktrace-perl"
+
 PV = "0.1"
 
 SRC_URI = "svn://192.168.1.186/svn/EW_Prj/001/HP_ServiceMonitor/trunk;protocol=http;module=hp2sm;rev=4079"
