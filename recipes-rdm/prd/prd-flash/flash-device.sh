@@ -179,6 +179,9 @@ then
 	    test -d  /data/.shadow/.var_lib && rm -rf /data/.shadow/.var_lib
 	fi
 
+	logger "Cleanup services"
+	echo "/data/.shadow/.etc/daemontools/service" > /etc/unionfs.mrproper
+
 	logger "Removing update container"
 	rm -f "${IMAGE_CONTAINER}"
 	logger "Force rebuild of volatiles.cache next boot"
