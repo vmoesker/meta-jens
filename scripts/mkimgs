@@ -38,8 +38,6 @@ MACHINE=`grep MACHINE conf/local.conf | sed -E -e "s/[^']+'([^']+)'.*/\\1/"`
 DEPLOY_DIR_IMAGE="tmp/deploy/images/${MACHINE}"
 KERNEL_IMAGETYPE="uImage"
 
-SYSIMG_FILES=".${IMAGE}-${SYSIMG_VERSION}-settings .settings"
-
 kernel_bin="`readlink ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${MACHINE}.bin`"
 kernel_dtb="`readlink ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${KERNEL_DEVICE_TREE} || true`"
 
@@ -71,6 +69,7 @@ fi
 
 for IMAGE in ${BUILD_IMAGES}
 do
+    SYSIMG_FILES=".${IMAGE}-${SYSIMG_VERSION}-settings .settings"
     FILES="${SYSIMG_FILES} ${KERNEL_FILES}"
     RECOVERY_IMAGE="rdm-core-image"
 
