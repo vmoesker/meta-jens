@@ -3,4 +3,4 @@
 # XXX must be able to be deleted
 mkdir -p /etc/modules-load.d
 
-exec sudo -u @HOMEPILOT_USER@ -- /bin/sh -c @HOMEPILOT_BASE@/bin/homepilot
+exec start-stop-daemon -S --pidfile /run/homepilot.pid --make-pidfile --chuid @HOMEPILOT_USER@ --exec @HOMEPILOT_BASE@/bin/homepilot
