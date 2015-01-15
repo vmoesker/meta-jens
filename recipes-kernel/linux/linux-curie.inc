@@ -6,6 +6,10 @@ require recipes-kernel/linux/linux-imx.inc
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-${PV}:${THISDIR}/linux-imx-3.0.35:"
 
+SRC_URI = "git://github.com/rdm-dev/linux-curie;branch=curie-3.0.101 \
+           file://defconfig \
+"
+
 SRC_URI += "file://defconfig"
 
 # patch for the hardware of "Marie Curie" board
