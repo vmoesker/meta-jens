@@ -17,10 +17,9 @@ iface wlan0 inet dhcp
 	hostname homepilot
 	wireless_mode managed
 	wirless_essid any
-	wpa-driver nl80211
+	wpa-driver wext
 	wpa-conf /etc/wpa_supplicant.conf
 	pre-up /etc/network/wifi/pre_up.sh
 	post-up /etc/network/wifi/post_up.sh
 	pre-down /etc/network/wifi/pre_down.sh
 	post-down /etc/network/wifi/post_down.sh
-
