@@ -137,8 +137,8 @@ then
 	echo 0 >/sys/class/leds/user2/brightness
 	echo heartbeat >/sys/class/leds/user2/trigger
 
-	tune2fs -L "boot-${MACHINE}" ${SDCARD_DEVICE}p1
-	tune2fs -L "data-${MACHINE}" ${SDCARD_DEVICE}p4
+	tune2fs -L "boot-${MACHINE}" -o discard,block_validity ${SDCARD_DEVICE}p1
+	tune2fs -L "data-${MACHINE}" -o journal_data,discard,block_validity ${SDCARD_DEVICE}p4
 
 	logger "Going to extract u-boot"
 	tar xjf "${IMAGE_CONTAINER}" -O ${UBOOT_BIN} | dd of=${SDCARD_DEVICE} seek=2 skip=${UBOOT_PADDING} bs=512
