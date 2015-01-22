@@ -4,7 +4,7 @@ LICENSE = "commercial"
 LIC_FILES_CHKSUM = "file://${THISDIR}/files/license.txt;md5=3ebe3464e841ddbf115af1f7019017c5"
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
-DEPENDS = "tar zway-blob hp2-base"
+DEPENDS = "zway-blob hp2-base"
 RDEPENDS_${PN} += "hp2-base"
 RDEPENDS_${PN} += "daemontools"
 RDEPENDS_${PN} += "at"
