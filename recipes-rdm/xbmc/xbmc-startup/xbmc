@@ -1,6 +1,6 @@
 #!/bin/sh
 
-test -f /tmp/xbmc.once || for i in $(seq 60); do pgrep psplash && break; sleep 1; done
+test -f /tmp/xbmc.once || for i in $(seq 60); do pgrep psplash || break; sleep 1; done
 touch /tmp/xbmc.once
 
 export HOME=/home/xbmc
