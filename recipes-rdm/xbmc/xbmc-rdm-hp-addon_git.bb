@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-3.0;md5=c79ff39f19dfec6d293
 
 PR = "r0"
 PV = "0.9.13.1"
-SRC_URI = "git://github.com/rdm-dev/xbmc-rdm-hp-addon;rev=d7e12852dacf674e5ddcbb5aa9dbb662a07507ee"
+SRC_URI = "git://github.com/rdm-dev/xbmc-rdm-hp-addon;rev=d216b776791cf88f4f6a8c6d136677388b1b07e1"
 
 DEPENDS += "xbmc-startup"
 RDEPENDS_${PN} += "xbmc-startup"
