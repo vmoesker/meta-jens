@@ -79,7 +79,7 @@
         <addonautoupdate default="true">true</addonautoupdate>
         <addonforeignfilter default="false">false</addonforeignfilter>
         <addonnotifications default="true">true</addonnotifications>
-        <settinglevel>3</settinglevel>
+        <settinglevel>0</settinglevel>
         <systemtotaluptime>64</systemtotaluptime>
     </general>
     <input>
