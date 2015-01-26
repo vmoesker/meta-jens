@@ -20,6 +20,30 @@ Revision history for HomePilot
     - fix xbmc startup to avoid fb-issues when two processes block it
     - set default xbmc settingslevel to easy
 
+3.11.20 2015-01-17
+    - fix correct $IMAGE used to determine settings file
+    - Add some extra dependencies: dedicated most-recent Encode, some leak-debug utilities
+
+3.11.19 2015-01-16
+    - cleanup /etc/daemontools/service on update to fix services startup
+    - update linux-curie to 3.0.101
+    - include openjdk-jdk-blob-arm7 in rdm-hp2
+    - add start-stop-daemon to startup scripts
+    - disable tty1 to remove login screen
+    - update hp2sm
+	* set log filename
+	* avoid capturing stdout unless required
+	* use common objects unless fresh init needed
+    - delay first start of xbmc and wait until psplash is closed
+    - migrate to new svn structure and move xbmc-rdm-hp-addon to github
+    - enable reboot on kernel panic, kernel oops and oom
+    - fix typo in /etc/network/interfaces and set wpa-driver to nl80211
+    - decrease start delay of sysimg_update to 5 min
+    - disable led for sysdetails
+    - fix flash and boot issues while switching bsp
+    - don't block boot process for ready signalling
+    - concentrate stat function lookup to avoid stale
+
 3.11.17 2014-12-30
     - HP1 Z-Way-config file location fix.
     - add sysdetails to log files
