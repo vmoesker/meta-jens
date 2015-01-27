@@ -14,7 +14,7 @@ DEPENDS += "xbmc-startup"
 RDEPENDS_${PN} += "xbmc-startup"
 
 XBMC_USER_HOME = "/home/xbmc"
-XBMC_APPDIR = "${XBMC_USER_HOME}/.xbmc"
+XBMC_APPDIR = "${XBMC_USER_HOME}/.kodi"
 XBMC_ADDONS = "${XBMC_APPDIR}/addons"
 
 S = "${WORKDIR}/git/script.homepilot/"

@@ -1,12 +1,12 @@
 DESCRIPTION = "libCEC allows you in combination with the right hardware to control your device with your TV remote control. Utilising your existing HDMI cabling"
 LICENSE = "GPLv2+"
-LIC_FILES_CHKSUM = "file://COPYING;md5=5e8e16396992369f73f3d28875f846da"
+LIC_FILES_CHKSUM = "file://COPYING;md5=e296fd6027598da75a7516ce1ae4f56a"
 
 PR = "r2"
 inherit autotools pkgconfig
 
-SRC_URI = "git://github.com/xbmc-imx6/libcec.git "
-SRCREV = "42c3c07a79b8155635851c2eed9558b221b89047"
+SRC_URI = "git://github.com/xbmc-imx6/libcec.git"
+SRCREV = "5e00ba12d63b6f9240c2b6ee914b35a7735262aa"
 
 EXTRA_OECONF="--enable-imx6"
 

@@ -1,23 +1,20 @@
 DESCRIPTION = "software media player and entertainment hub"
 
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://copying.txt;md5=4cea88e622381d1ad6e43f07c47513b5"
-DEPENDS = "mysql5 libsamplerate0 alsa-lib udev libvorbis boost libass mpeg2dec libmad libmodplug tiff yajl libtinyxml taglib libcdio jasper libmicrohttpd libssh samba rtmpdump libnfs samba swig-native libxslt libplist shairplay flac"
+LIC_FILES_CHKSUM = "file://copying.txt;md5=8c8473d035f42f5883d82c5f6828eba7"
+DEPENDS = "ffmpeg mysql5 libsamplerate0 alsa-lib udev libvorbis boost libass mpeg2dec libmad libmodplug tiff yajl libtinyxml taglib libcdio jasper libmicrohttpd libssh samba rtmpdump libnfs samba swig-native libxslt libplist shairplay flac"
 DEPENDS_append_mx6 = " virtual/kernel virtual/libgles2 virtual/egl libfslvpuwrap libcec"
 
 INC_PR = "r1"
 
-SRC_URI = "git://github.com/rdm-dev/xbmc.git;rev=${SRCREV} \
-           file://vp8ts.patch \
-	   file://rss.patch \
-	"
+SRC_URI = "git://github.com/xbmc/xbmc.git;rev=${SRCREV}"
 
 S = "${WORKDIR}/git"
 
 inherit autotools lib_package pkgconfig gettext python-dir record-installed-app
 
 EXTRA_OECONF="ac_cv_path_JAVA_EXE=/usr/bin/java \
---prefix=/imx6/xbmc --enable-external-ffmpeg --disable-x11 --disable-sdl --disable-xrandr --disable-gl --disable-vdpau --disable-vaapi --disable-openmax --enable-neon --enable-gles --enable-udev --enable-codec=imxvpu --disable-debug --disable-texturepacker --enable-airplay --enable-airtunes"
+--prefix=/imx6/kodi --disable-udev --disable-x11 --disable-sdl --disable-xrandr --disable-gl --disable-vdpau --disable-vaapi --disable-openmax --enable-gles --enable-udev --enable-codec=imxvpu --disable-debug --disable-texturepacker --enable-airplay --enable-airtunes"
 
 CPPFLAGS += " -I${STAGING_KERNEL_DIR}/include/uapi -I${STAGING_KERNEL_DIR}/include "
 CXXFLAGS += " -I${STAGING_KERNEL_DIR}/include/uapi -I${STAGING_KERNEL_DIR}/include "
@@ -36,7 +33,7 @@ do_configure() {
 
   rm -rf ${S}/addons/service.xbmc.versioncheck
 
-  sh bootstrap
+  CXX=g++ sh bootstrap
   # oe_runconf
   # Call manually configure instead of oe_runconf because of specific prefix /imx6/xbmc...
   ${S}/configure  --build=${BUILD_SYS} \
@@ -100,15 +97,15 @@ RDEPENDS_${PN} = " python-stringold \
 
 FILES_${PN} += "/imx6 /usr/share/icons/hicolor"
 FILES_${PN}-dbg += " \
-                    /imx6/xbmc/lib/xbmc/system/players/paplayer/.debug/ \
-                    /imx6/xbmc/lib/xbmc/system/players/dvdplayer/.debug/ \
-                    /imx6/xbmc/lib/xbmc/system/.debug/ \
-                    /imx6/xbmc/lib/xbmc/addons/library.xbmc.gui/.debug/ \
-                    /imx6/xbmc/lib/xbmc/addons/library.xbmc.addon/.debug/ \
-                    /imx6/xbmc/lib/xbmc/addons/visualization.glspectrum/.debug/ \
-                    /imx6/xbmc/lib/xbmc/addons/library.xbmc.pvr/.debug/ \
-                    /imx6/xbmc/lib/xbmc/addons/visualization.waveform/.debug/ \
-                    /imx6/xbmc/lib/xbmc/.debug/ \
-                    /imx6/xbmc/lib/xbmc/addons/library.xbmc.codec/.debug \
+                    /imx6/kodi/lib/kodi/system/players/paplayer/.debug/ \
+                    /imx6/kodi/lib/kodi/system/players/dvdplayer/.debug/ \
+                    /imx6/kodi/lib/kodi/system/.debug/ \
+                    /imx6/kodi/lib/kodi/addons/library.xbmc.gui/.debug/ \
+                    /imx6/kodi/lib/kodi/addons/library.xbmc.addon/.debug/ \
+                    /imx6/kodi/lib/kodi/addons/visualization.glspectrum/.debug/ \
+                    /imx6/kodi/lib/kodi/addons/library.xbmc.pvr/.debug/ \
+                    /imx6/kodi/lib/kodi/addons/visualization.waveform/.debug/ \
+                    /imx6/kodi/lib/kodi/.debug/ \
+                    /imx6/kodi/lib/kodi/addons/library.xbmc.codec/.debug \
                    "
 

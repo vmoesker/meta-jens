@@ -6,7 +6,7 @@ touch /tmp/xbmc.once
 export HOME=/home/xbmc
 echo 3 > /proc/sys/vm/drop_caches
 test -d /tmp/xbmc || setuidgid xbmc mkdir /tmp/xbmc
-rm -f ${HOME}/.xbmc/temp
-setuidgid xbmc ln -s /tmp/xbmc ${HOME}/.xbmc/temp
+rm -f ${HOME}/.kodi/temp
+setuidgid xbmc ln -s /tmp/xbmc ${HOME}/.kodi/temp
 
-exec 2>&1 start-stop-daemon -S --pidfile /run/xbmc.pid --make-pidfile --chuid xbmc --exec /imx6/xbmc/lib/xbmc/xbmc.bin
+exec 2>&1 start-stop-daemon -S --pidfile /run/xbmc.pid --make-pidfile --chuid xbmc --exec /imx6/kodi/lib/kodi/kodi.bin
