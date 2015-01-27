@@ -10,7 +10,7 @@ tty_zwave="/dev/ttyZWave"
 if [ "$ACTION" = "add" ] && [ -n "$DEVNAME" ]
 then
     ttyid=`basename ${DEVPATH}`
-    tty=`basename /sys${DEVPATH}/${ttyid}*/ttyUSB*`
+    tty=`basename /sys${DEVPATH}/${ttyid}*/tty[AU]*`
     tty=$(cd $zway_home && env LD_LIBRARY_PATH="./libzway:./libzwayhttp:./libzwayjs:/opt/v8/lib" ./z-get-tty /dev/$tty)
 
     echo "test -n \"$tty\" -a ! -c $tty_zwave && ln -fs $tty $tty_zwave" >>/tmp/update_tty
