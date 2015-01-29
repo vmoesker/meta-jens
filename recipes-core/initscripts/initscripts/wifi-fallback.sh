@@ -16,7 +16,7 @@ PATH="/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin"
 
 waitfornetwork(){
 	for i in $(seq 1 10); do
-		nslookup 0.de.pool.ntp.org && break
+		nslookup 0.de.pool.ntp.org 1>/dev/null 2>/dev/null && break
 		sleep 1
 	done
 }
