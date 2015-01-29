@@ -2,7 +2,7 @@
 
 test -r /etc/network/wifi/defaults && source /etc/network/wifi/defaults
 
-test -x /etc/network/if-pre-up.d/wpa-supplicant && /etc/network/if-pre-up.d/wpa-supplicant stop
+test -x /etc/network/if-pre-up.d/wpa-supplicant && MODE=stop /etc/network/if-pre-up.d/wpa-supplicant
 
 if [ -f /data/.shadow/.etc/wpa_supplicant.conf ] && grep -q ${wifi_module} ${wifi_modprobe_loaded_path}; then
     if [ $(lsmod | grep $wifi_module | wc -l) -eq 0 ]; then
@@ -11,5 +11,3 @@ if [ -f /data/.shadow/.etc/wpa_supplicant.conf ] && grep -q ${wifi_module} ${wif
 else
     exit 1
 fi
-
-test -x /etc/network/if-pre-up.d/wpa-supplicant && /etc/network/if-pre-up.d/wpa-supplicant start
