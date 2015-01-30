@@ -1,5 +1,19 @@
 Revision history for HomePilot
 
+3.11.23 2015-01-30
+    - update hp-blob
+	* Removed SAC scheduling.
+	* 1-channel-actor acts like 2-channel-actor on automation-fixing.
+	* bug fix firmware ui: deinstall button reappears after click
+	* Removed Decor.ScheduleSac from propr. sensors.
+	* 1 channel actor acts like universal actor on automation fixing.
+    - fix wpa_supplicant startup
+    - update nginx-legal to 0.2
+        * remove oracle binary code license
+    - sleep 90 seconds before setting ledbootup into ready state
+    - hide nslookup output on boot
+    - update udev rules to support new z-wave stick
+
 3.11.22	2015-01-26
     - force /etc/daemontools into tmpfs
     - switch back to wext driver to stabilize wifi
