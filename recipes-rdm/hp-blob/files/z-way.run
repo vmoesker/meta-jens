@@ -1,4 +1,8 @@
 #!/bin/sh
 
+sleep 2
+echo -ne "\x01\x03\x00\x08\xf4" > /dev/ttyZWave
+sleep 5
+
 export LD_LIBRARY_PATH='./libzway:./libzwayhttp:./libzwayjs:/opt/v8/lib'
 cd @ZWAY_BASE@ && exec start-stop-daemon -S --pidfile /run/z-way.pid --make-pidfile --chuid @HOMEPILOT_USER@ --exec ./z-way-server
