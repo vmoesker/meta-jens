@@ -1,6 +1,15 @@
 Revision history for HomePilot
 
-3.11.25	2015-02-nn
+3.11.25 2015-02-03
+    - improve xbmc configuration
+        * increase buffer for playing streams
+	    * tested with local media, smb and ftp streams
+	    * set limit to 32 MB because more cache was never used by xbmc
+        * correct deprecated parameter
+    - update hp-blob
+        * reduced backup size
+
+3.11.24	2015-02-03
     - Bail out flash procedure when already running
     - Update update service to avoid end-user issues
     - Revert "reboot immediately on kernel panic"
