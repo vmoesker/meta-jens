@@ -1,5 +1,20 @@
 Revision history for HomePilot
 
+3.11.25	2015-02-nn
+    - Bail out flash procedure when already running
+    - Update update service to avoid end-user issues
+    - Revert "reboot immediately on kernel panic"
+    - fix urandom start/stop
+    - improve z-way startup (reboot chip)
+    - update hp2sm
+        * disable ssh key management
+        * remove deployment wizard
+    - improve hp2sm startup: use production environment
+    - update hp-blob
+        * new language files and firmware ui bugfix
+        * firmware ui idle bugfix
+
+
 3.11.23 2015-01-30
     - update hp-blob
 	* Removed SAC scheduling.
