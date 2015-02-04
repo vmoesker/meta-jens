@@ -1,5 +1,9 @@
 Revision history for HomePilot
 
+4.0.0 2015-02-04
+    - update hp2sm
+        * fix date api: update rtc
+
 3.11.25 2015-02-03
     - improve xbmc configuration
         * increase buffer for playing streams
