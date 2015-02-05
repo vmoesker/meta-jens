@@ -1,5 +1,28 @@
 Revision history for HomePilot
 
+4.0.1 2015-02-05
+    - update sysimg_update for middleware interaction
+        * provide errorlog_filename to allow middleware to know which file to
+          check for recent errors
+        * adopt distributed config according to errorlog_filename introduction
+        * improve startup and scheduling behavior
+        * add few additional traces to ease post-mortem debugging
+    - update system-image-update for volatile config
+        * volatile means currently: persistent until next reboot
+    - update hp2sm
+        * fix date api: update rtc
+        * fix: save spdif settings
+        * fix: select and download image in one step
+    - update service-df
+        * Replaced syslog by vsyslog.
+    - update hp-blob
+        * change firmware ui select image behaviour
+        * new language files
+        * new default language file
+        * fix dialog
+    - update system-image-update
+        * try fix for polluting message ... "Your datetime does not match your pattern."
+
 4.0.0 2015-02-04
     - update hp2sm
         * fix date api: update rtc
