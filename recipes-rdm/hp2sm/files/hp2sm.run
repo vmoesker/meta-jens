@@ -9,4 +9,5 @@ OPTIONS="--env production --port ${PLACK_PORT} ${PLACK_APP} "
 
 PIDFILE="/var/run/$NAME.pid"
 
+export SYSTEM_IMAGE_UPDATE_DIR=/data/.update
 exec start-stop-daemon -m --start --quiet --pidfile "$PIDFILE" --exec plackup -- $OPTIONS
