@@ -175,18 +175,20 @@ then
 	(cd /boot && eval ${KERNEL_SANITIZE})
 	(cd /data && mkdir -p ${UNION_SHADOWS})
 
+	touch /etc/unionfs.mrproper
+
 	logger "Going to cleanup relics"
 	if [ -d  /data/.shadow/.var_lib ]
 	then
 	    test -d /data/.var/lib || mkdir -p /data/.var/lib
 		# XXX remove unionfs files
 	    (cd /data/.shadow/.var_lib && tar cf - nginx dropbear) | (cd /data/.var/lib && tar xf -)
-	    test -d  /data/.shadow/.var_lib && rm -rf /data/.shadow/.var_lib
+	    test -d  /data/.shadow/.var_lib && echo "/data/.shadow/.var_lib" >> /etc/unionfs.mrproper
 	fi
 
 	logger "Cleanup services"
-	echo "/data/.shadow/.etc/daemontools/service" > /etc/unionfs.mrproper
-	echo "/data/.shadow/.etc/sysimg_update.json" > /etc/unionfs.mrproper
+	test -d /data/.shadow/.var_lib && echo "/data/.shadow/.etc/daemontools/service" >> /etc/unionfs.mrproper
+	test -f /data/.shadow/.etc/sysimg_update.json echo "/data/.shadow/.etc/sysimg_update.json" >> /etc/unionfs.mrproper
 
 	logger "Removing update container"
 	rm -f "${IMAGE_CONTAINER}"
