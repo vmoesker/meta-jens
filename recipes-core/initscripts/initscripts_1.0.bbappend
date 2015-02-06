@@ -19,6 +19,7 @@ do_install_append () {
     install -m 0644 ${WORKDIR}/default-cleanunion.conf ${D}${sysconfdir}/default/cleanunion.conf
 
     update-rc.d -r ${D} umountunion.sh start 30 0 1 6 .
+    # cleanunion is called at beginnof mountunion
     update-rc.d -r ${D} mountunion.sh start 16 2 3 4 5 S .
 
     update-rc.d -r ${D} fb-cursor-off.sh start 05 2 3 4 5 .
