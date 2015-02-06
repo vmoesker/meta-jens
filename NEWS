@@ -10,7 +10,6 @@ Revision history for HomePilot
     - update system-image-update for volatile config
         * volatile means currently: persistent until next reboot
     - update hp2sm
-        * fix date api: update rtc
         * fix: save spdif settings
         * fix: select and download image in one step
     - update service-df
