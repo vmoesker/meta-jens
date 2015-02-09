@@ -188,7 +188,7 @@ then
 
 	logger "Cleanup services"
 	test -d /data/.shadow/.var_lib && echo "/data/.shadow/.etc/daemontools/service" >> /etc/unionfs.mrproper
-	test -f /data/.shadow/.etc/sysimg_update.json echo "/data/.shadow/.etc/sysimg_update.json" >> /etc/unionfs.mrproper
+	test -f /data/.shadow/.etc/sysimg_update.json && echo "/data/.shadow/.etc/sysimg_update.json" >> /etc/unionfs.mrproper
 
 	logger "Removing update container"
 	rm -f "${IMAGE_CONTAINER}"
