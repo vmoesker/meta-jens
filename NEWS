@@ -1,5 +1,8 @@
 Revision history for HomePilot
 
+4.0.2 2015-02-09
+    - Fix usage of cleanunionfs at update
+
 4.0.1 2015-02-05
     - update sysimg_update for middleware interaction
         * provide errorlog_filename to allow middleware to know which file to
