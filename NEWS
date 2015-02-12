@@ -1,5 +1,9 @@
 Revision history for HomePilot
 
+4.0.3 2015-02-12
+    - add flags to panic on eMMC issues to kernel cmdline
+    - fix prevent multiple instances of flash-device.sh
+
 4.0.2 2015-02-09
     - Fix usage of cleanunionfs at update
 
