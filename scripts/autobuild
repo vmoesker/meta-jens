@@ -1,0 +1,54 @@
+#!/bin/sh
+
+die() {
+    echo "$@" >&2
+    exit 1
+}
+
+bitbake_var() {
+    cd "${BUILDPATH}"
+    bitbake -e system-image 2>&1 | egrep "^($@)="
+}
+
+BUILDPATH="$1"; shift
+BRANCH="$1"; shift
+
+set -e
+set -x
+
+cd "${BUILDPATH}"
+git fetch --all
+git checkout $BRANCH
+
+BBFILE_PATTERN=`bitbake_var "BBFILE_PATTERN[^=]*" | awk -F = '{print $2}' | sed -e 's,"^,,' -e 's,/"$,,'`
+for d in ${BBFILE_PATTERN}
+do
+    cd $d
+    git fetch --all
+    git checkout $BRANCH || git checkout master
+    git pull
+done
+
+# XXX good example why we shall rewrite it as soon as pkgsrc is up-to-date (Packager::Utils ^^)
+BITBAKE_SETTINGS=`bitbake_var "PV|BSPDIR|FILE_DIRNAME|FILE" | sed -e "s/PV/SYSIMG_VERSION/" -e "s/FILE_DIRNAME/RECIPE_DIR/" -e "s/FILE/SYSIMG_VERSION_RECIPE/"`
+eval $BITBAKE_SETTINGS
+
+cd "${RECIPE_DIR}"
+git log -n 1 | grep "bump.*${SYSIMG_VERSION}" && die "Image is up to date"
+
+cd "${BUILDPATH}"
+mkdeployimgs "$@"
+time env APPLY_TS=null TARGETS="update.homepilot.de" deployimgs
+
+# bump
+PS=`printf 'my @v = split(/\./, "%s"); $v[$#v]++; print join( ".", @v)\n' 4.0.3`
+SYSIMG_BUMPED=`perl -le "$PS"`
+
+for d in "${BUILDPATH}" ${BBFILE_PATTERN}
+do
+    cd "$d"
+    git tag "$SYSIMG_VERSION" && git push --tags || :
+done
+
+sed -i -e "s/${SYSIMG_VERSION}/${SYSIMG_BUMPED}/" "${SYSIMG_VERSION_RECIPE}"
+(cd "${RECIPE_DIR}" && git commit -m "bump version after release to to ${SYSIMG_BUMPED}" `basename "${SYSIMG_VERSION_RECIPE}"` && git push)
