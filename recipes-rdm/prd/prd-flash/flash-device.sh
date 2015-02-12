@@ -10,6 +10,10 @@
 
 set -x
 
+logger -s "Prove being the one and only ..."
+test "${FLOCKER}" != "@ARGV0@" && exec env FLOCKER="@ARGV0@" flock -en "@ARGV0@" "@ARGV0@" || :
+logger -s "Starting flash ..."
+
 SDCARD_DEVICE="/dev/mmcblk0"
 UNION_SHADOWS=".shadow/.etc .shadow/.home"
 
@@ -115,13 +119,9 @@ then
     test -e /dev/mmcblk1 || reboot
 elif [ -f "${IMAGE_CONTAINER}" ]
 then
-    if [ -e ./.settings ]
-    then
-	logger -s "Flash already in progress."
-	exit 1
-    fi
     tar xjf "${IMAGE_CONTAINER}" .settings
     . ./.settings
+    rm -f .settings
 
     ROOTDEV=`mount | grep "on / type" | sed -e 's/ on.*//'`
     if [ ! $(echo ${ROOTDEV} | egrep "^${SDCARD_DEVICE}") ]
@@ -157,7 +157,6 @@ then
 	logger "Force rebuild of volatiles.cache next boot"
         rm -f /etc/volatile.cache
 
-	rm -f .settings
 	logger "Requesting reboot"
 	reboot
     elif [ $(echo ${ROOTDEV} | egrep 'p3$') ]
@@ -195,7 +194,6 @@ then
 	logger "Force rebuild of volatiles.cache next boot"
         rm -f /etc/volatile.cache
 
-	rm -f .settings
 	logger "Requesting reboot"
 	reboot
     else
