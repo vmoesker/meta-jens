@@ -300,7 +300,7 @@ index 6f07961..d3409e6 100644
 +		"ethprime=FEC0\0"                                        \
 +		"uboot=u-boot.bin\0"                                     \
 +		"kernel=uImage\0"                                        \
-+		"bootargs_base=console=ttymxc0,115200\0"                 \
++		"bootargs_base=console=ttymxc0,115200 oops=panic panic=5\0" \
 +		"bootargs_nfs=setenv bootargs ${bootargs_base} ip=dhcp " \
 +		        "root=/dev/nfs ro rootwait consoleblank=0'\0"    \
 +		"bootcmd_nfs=run bootargs_nfs; dhcp ${loadaddr}; bootm\0"\
