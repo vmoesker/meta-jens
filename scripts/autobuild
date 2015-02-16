@@ -41,7 +41,7 @@ mkdeployimgs "$@"
 time env APPLY_TS=null TARGETS="update.homepilot.de" deployimgs
 
 # bump
-PS=`printf 'my @v = split(/\./, "%s"); $v[$#v]++; print join( ".", @v)\n' 4.0.3`
+PS=`printf 'my @v = split(/\./, "%s"); $v[$#v]++; print join( ".", @v)\n' "${SYSIMG_VERSION}"`
 SYSIMG_BUMPED=`perl -le "$PS"`
 
 for d in "${BUILDPATH}" ${BBFILE_PATTERN}
