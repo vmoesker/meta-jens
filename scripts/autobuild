@@ -51,4 +51,4 @@ do
 done
 
 sed -i -e "s/${SYSIMG_VERSION}/${SYSIMG_BUMPED}/" "${SYSIMG_VERSION_RECIPE}"
-(cd "${RECIPE_DIR}" && git commit -m "bump version after release to to ${SYSIMG_BUMPED}" `basename "${SYSIMG_VERSION_RECIPE}"` && git push)
+(cd "${RECIPE_DIR}" && git commit -m "bump version after release to ${SYSIMG_BUMPED}" `basename "${SYSIMG_VERSION_RECIPE}"` && git push)
