@@ -10,6 +10,16 @@ SRC_URI = "http://internal.rdm.local/blobs/rdm-z-way-server-v${PV}-R1.tgz;name=s
            file://z-way-server \
 	   file://config.xml"
 
+DEPENDS = "hp2-base"
+RDEPENDS_${PN} += "hp2-base"
+RDEPENDS_${PN} += "libarchive"
+RDEPENDS_${PN} += "libxml2"
+RDEPENDS_${PN} += "openssl"
+RDEPENDS_${PN} += "yajl"
+RDEPENDS_${PN} += "curl"
+RDEPENDS_${PN} += "v8"
+RDEPENDS_${PN} += "zlib"
+
 SRC_URI[server.md5sum] = "73f7bcacb0353c108b5253ac18711966"
 SRC_URI[server.sha256sum] = "da855fd1408237bbc15a7fad0d71ec361570f30eb3a98f9bb756e9c3d0d67d32"
 
@@ -68,14 +78,6 @@ FILES_${PN} += "${INST_DEST_PREFIX} \
 FILES_${PN}-dbg += "${INST_DEST_PREFIX}/.debug ${INST_DEST_PREFIX}/*/.debug"
 FILES_${PN}-dev += "${INST_DEST_PREFIX}/*/*.h"
 FILES_${PN}-staticdev += "${INST_DEST_PREFIX}/*/*.a"
-
-RDEPENDS_${PN} = "libarchive \
-        libxml2 \
-        openssl \
-        yajl \
-        curl \
-        v8 \
-        zlib"
 
 INITSCRIPT_NAME = "z-way-server"
 INITSCRIPT_PARAMS = "start 99 S . stop 20 0 1 6 ."
