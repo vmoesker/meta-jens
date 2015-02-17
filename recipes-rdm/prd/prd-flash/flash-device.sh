@@ -44,6 +44,12 @@ then
 	SDCARD_DEVICE="/dev/mmcblk1"
     fi
 
+    if [ "$SDCARD_DEVICE" == "/dev/mmcblk${SDCARD_IMAGE}" ]
+    then
+	logger -s "Cannot flash incompatible image"
+	exit 1
+    fi
+
     echo 0 >/sys/class/leds/user1/brightness
     echo mmc0 >/sys/class/leds/user1/trigger
     echo 0 >/sys/class/leds/user2/brightness
@@ -96,9 +102,9 @@ then
 
     mkdir -p ${TEMP_DIR}/flashimg/root/boot ${TEMP_DIR}/flashimg/root/data
 
-    mkfs.ext2 -I128 -L "boot-${MACHINE}" ${SDCARD_DEVICE}p1
+    mkfs.ext2 -I128 -L "boot-${LABEL}" ${SDCARD_DEVICE}p1
     mount ${SDCARD_DEVICE}p1 ${TEMP_DIR}/flashimg/root/boot
-    mkfs.ext4 -L "data-${MACHINE}" ${SDCARD_DEVICE}p4
+    mkfs.ext4 -L "data-${LABEL}" ${SDCARD_DEVICE}p4
     mount ${SDCARD_DEVICE}p4 ${TEMP_DIR}/flashimg/root/data
 
     dd if=${IMAGE_CONTAINER}/${UBOOT_BIN} of=${SDCARD_DEVICE} seek=2 skip=${UBOOT_PADDING} bs=512
@@ -127,6 +133,12 @@ then
     if [ ! $(echo ${ROOTDEV} | egrep "^${SDCARD_DEVICE}") ]
     then
 	logger -s "Cannot write to ${ROOTDEV}, flashing limited to ${SDCARD_DEVICE}."
+	exit 1
+    fi
+
+    if [ "$SDCARD_IMAGE" -eq 1 ]
+    then
+	logger -s "Cannot update ${ROOTDEV}"
 	exit 1
     fi
 

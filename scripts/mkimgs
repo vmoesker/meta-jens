@@ -30,13 +30,17 @@ do
     bitbake $img
 done
 
-BITBAKE_SETTINGS=`bitbake -e system-image | egrep "(KERNEL_DEVICETREE|UBOOT_SUFFIX|UBOOT_PADDING|PV)=" | sed -e "s/PV/SYSIMG_VERSION/" -e "s/KERNEL_DEVICETREE/KERNEL_DEVICE_TREE/"`
+BITBAKE_SETTINGS=`bitbake -e system-image | egrep "(KERNEL_DEVICETREE|UBOOT_SUFFIX|UBOOT_PADDING|PV|MACHINE_ARCH|SDCARD_IMAGE)=" | sed -e "s/MACHINE_ARCH/MACHINE/" -e "s/PV/SYSIMG_VERSION/" -e "s/KERNEL_DEVICETREE/KERNEL_DEVICE_TREE/"`
 eval $BITBAKE_SETTINGS
 test -z "${UBOOT_PADDING}" && UBOOT_PADDING=0
+test -z "${SDCARD_IMAGE}" && SDCARD_IMAGE=0
 
-MACHINE=`grep MACHINE conf/local.conf | sed -E -e "s/[^']+'([^']+)'.*/\\1/"`
 DEPLOY_DIR_IMAGE="tmp/deploy/images/${MACHINE}"
 KERNEL_IMAGETYPE="uImage"
+
+PREFIX=""
+test $SDCARD_IMAGE -eq 1 && PREFIX="sd"
+LABEL="${PREFIX}${MACHINE}"
 
 kernel_bin="`readlink ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${MACHINE}.bin`"
 kernel_dtb="`readlink ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${KERNEL_DEVICE_TREE} || true`"
@@ -99,6 +103,8 @@ RECOVERIMG=${recimg}
 KERNEL_PREPARE="${KERNEL_PREPARE}"
 KERNEL_RECOVERY="${KERNEL_RECOVERY}"
 KERNEL_SANITIZE="${KERNEL_SANITIZE}"
+SDCARD_IMAGE="${SDCARD_IMAGE}"
+LABEL="${LABEL}"
 EOS
 
     # XXX change next line into ln -sf after next applied update ...
