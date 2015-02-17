@@ -44,7 +44,7 @@ then
 	SDCARD_DEVICE="/dev/mmcblk1"
     fi
 
-    if [ "$SDCARD_DEVICE" == "/dev/mmcblk${SDCARD_IMAGE}" ]
+    if [ "$SDCARD_DEVICE" != "/dev/mmcblk${SDCARD_IMAGE}" ]
     then
 	logger -s "Cannot flash incompatible image"
 	exit 1
