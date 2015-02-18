@@ -1,1 +1,1 @@
-COMPATIBLE_MACHINE = "(mx6|mx6curie)"
+COMPATIBLE_MACHINE = "(mx6|mx6qcurie)"

@@ -42,14 +42,15 @@ PREFIX=""
 test $SDCARD_IMAGE -eq 1 && PREFIX="sd"
 LABEL="${PREFIX}${MACHINE}"
 
+script_bin="`readlink ${DEPLOY_DIR_IMAGE}/bootscript`"
 kernel_bin="`readlink ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${MACHINE}.bin`"
 kernel_dtb="`readlink ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${KERNEL_DEVICE_TREE} || true`"
 
-KERNEL="${kernel_bin}"
-KERNEL_PREPARE="mv ${kernel_bin} ${KERNEL_IMAGETYPE}-${MACHINE}"
+KERNEL="${kernel_bin} ${script_bin}"
+KERNEL_PREPARE="mv ${kernel_bin} ${KERNEL_IMAGETYPE}-${MACHINE} && mv ${script_bin} bootscript"
 KERNEL_RECOVERY="ln -f ${KERNEL_IMAGETYPE} ${KERNEL_IMAGETYPE}-${MACHINE}"
 KERNEL_SANITIZE="mv ${KERNEL_IMAGETYPE}-${MACHINE} ${KERNEL_IMAGETYPE}"
-KERNEL_FILES="${KERNEL_IMAGETYPE}-${MACHINE}.bin ${kernel_bin}"
+KERNEL_FILES="${KERNEL_IMAGETYPE}-${MACHINE}.bin ${kernel_bin} bootscript ${script_bin}"
 if [ -n "${KERNEL_DEVICE_TREE}" ]
 then
     for DTS_FILE in ${KERNEL_DEVICE_TREE}

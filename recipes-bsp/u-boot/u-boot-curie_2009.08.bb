@@ -51,4 +51,4 @@ do_compile_prepend() {
 	fi
 }
 
-COMPATIBLE_MACHINE = "(mx6curie)"
+COMPATIBLE_MACHINE = "(curie)"

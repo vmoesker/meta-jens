@@ -20,15 +20,6 @@ SERIAL_CONSOLE = "115200 ttymxc0"
 PREFERRED_PROVIDER_u-boot = "u-boot-curie"
 PREFERRED_PROVIDER_virtual/kernel = "linux-curie"
 
-PREFERRED_VERSION_firmware-imx = "3.10.17-1.0.0"
-PREFERRED_VERSION_imx-lib = "3.10.17-1.0.0"
-PREFERRED_VERSION_imx-vpu = "3.10.17-1.0.0"
-PREFERRED_VERSION_gpu-viv-bin-mx6q = "3.10.17-1.0.1-hfp"
-PREFERRED_VERSION_gpu-viv-bin-mx6dl = "3.10.17-1.0.1-hfp"
-
-UBOOT_ENTRYPOINT = "0x17800000"
-UBOOT_LOADADDRESS = "0x12000000"
-
 MACHINE_FEATURES_remove = " phone irda usbgadget 3g nfc "
 DISTRO_FEATURES_remove = " phone irda usbgadget 3g nfc "
 MACHINE_FEATURES_append = " alsa pci wifi"

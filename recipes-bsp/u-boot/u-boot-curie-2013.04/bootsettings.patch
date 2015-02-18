@@ -33,7 +33,7 @@ index 1c7da3f..f143caf 100644
  #ifdef CONFIG_SYS_USE_SPINOR
  #define CONFIG_SF_DEFAULT_CS   (0|(IMX_GPIO_NR(4, 9)<<8))
 diff --git a/include/configs/mx6qcurie_common.h b/include/configs/mx6qcurie_common.h
-index 6c703a1..fcf37b4 100644
+index 6c703a1..bbfd24d 100644
 --- a/include/configs/mx6qcurie_common.h
 +++ b/include/configs/mx6qcurie_common.h
 @@ -114,18 +114,11 @@
@@ -60,7 +60,16 @@ index 6c703a1..fcf37b4 100644
  
  #define CONFIG_MFG_ENV_SETTINGS \
  	"mfgtool_args=setenv bootargs console=" CONFIG_CONSOLE_DEV ",115200 " \
-@@ -185,25 +178,46 @@
+@@ -178,43 +171,28 @@
+ #else
+ #define CONFIG_EXTRA_ENV_SETTINGS \
+ 	CONFIG_MFG_ENV_SETTINGS \
+-	"script=boot.scr\0" \
++	"script=bootscript\0" \
+ 	"uimage=uImage\0" \
+ 	"fdt_file=" CONFIG_DEFAULT_FDT_FILE "\0" \
+ 	"fdt_addr=0x18000000\0" \
++	"scriptaddr=0x00100000\0" \
  	"boot_fdt=try\0" \
  	"ip_dyn=yes\0" \
  	"console=" CONFIG_CONSOLE_DEV "\0" \
@@ -71,53 +80,44 @@ index 6c703a1..fcf37b4 100644
 -	"\0" \
 -	"mmcpart=" __stringify(CONFIG_SYS_MMC_IMG_LOAD_PART) "\0" \
 -	"mmcroot=" CONFIG_MMCROOT " rootwait rw\0" \
++	"bootargs_base=console=${console},${baudrate} oops=panic panic=5 ${smp} rootwait consoleblank=0\0" \
 +	CONFIG_EMMC_DEV_SET \
  	"smp=" CONFIG_SYS_NOSMP "\0"\
-+	"sdargs=setenv bootargs console=${console},${baudrate} ${smp} " \
-+		"root=${sdroot}\0" \
-+	"sdargs=setenv bootargs console=${console},${baudrate} ${smp} " \
-+		"root=${sdroot}\0" \
-+	"sdloadbootscript=" \
-+		"ext2load mmc ${sdcarddev}:${mmcpart} ${loadaddr} ${script};\0" \
-+	"sdloaduimage=ext2load mmc ${sdcarddev}:${mmcpart} ${loadaddr} ${uimage}\0" \
-+	"sdloadfdt=ext2load mmc ${sdcarddev}:${mmcpart} ${fdt_addr} ${fdt_file}\0" \
-+	"mmcloadbootscript=" \
-+		"ext2load mmc ${emmcdev}:${mmcpart} ${loadaddr} ${script};\0" \
- 	"mmcargs=setenv bootargs console=${console},${baudrate} ${smp} " \
- 		"root=${mmcroot}\0" \
+-	"mmcargs=setenv bootargs console=${console},${baudrate} ${smp} " \
+-		"root=${mmcroot}\0" \
 -	"loadbootscript=" \
 -		"fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${script};\0" \
 -	"bootscript=echo Running bootscript from mmc ...; " \
-+	"mmcloaduimage=ext2load mmc ${emmcdev}:${mmcpart} ${loadaddr} ${uimage}\0" \
-+	"mmcloadfdt=ext2load mmc ${emmcdev}:${mmcpart} ${fdt_addr} ${fdt_file}\0" \
-+	"bootscript=echo Running bootscript ...; " \
- 		"source\0" \
+-		"source\0" \
 -	"loaduimage=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${uimage}\0" \
 -	"loadfdt=fatload mmc ${mmcdev}:${mmcpart} ${fdt_addr} ${fdt_file}\0" \
- 	"mmcboot=echo Booting from mmc ...; " \
- 		"run mmcargs; " \
- 		"if test ${boot_fdt} = yes || test ${boot_fdt} = try; then " \
+-	"mmcboot=echo Booting from mmc ...; " \
+-		"run mmcargs; " \
+-		"if test ${boot_fdt} = yes || test ${boot_fdt} = try; then " \
 -			"if run loadfdt; then " \
-+			"if run mmcloadfdt; then " \
-+				"bootm ${loadaddr} - ${fdt_addr}; " \
-+			"else " \
-+				"if test ${boot_fdt} = try; then " \
-+					"bootm; " \
-+				"else " \
-+					"echo WARN: Cannot load the DT; " \
-+				"fi; " \
-+			"fi; " \
-+		"else " \
-+			"bootm; " \
-+		"fi;\0" \
-+	"sdcardboot=echo Booting from sdcard ...; " \
-+		"run sdargs; " \
-+		"if test ${boot_fdt} = yes || test ${boot_fdt} = try; then " \
-+			"if run sdloadfdt; then " \
- 				"bootm ${loadaddr} - ${fdt_addr}; " \
- 			"else " \
- 				"if test ${boot_fdt} = try; then " \
-@@ -227,7 +241,7 @@
+-				"bootm ${loadaddr} - ${fdt_addr}; " \
+-			"else " \
+-				"if test ${boot_fdt} = try; then " \
+-					"bootm; " \
+-				"else " \
+-					"echo WARN: Cannot load the DT; " \
+-				"fi; " \
+-			"fi; " \
+-		"else " \
+-			"bootm; " \
+-		"fi;\0" \
++	"sdloadbootscript=" \
++		"ext2load mmc ${sdcarddev}:${mmcpart} ${scriptaddr} ${script};\0" \
++	"sdloadfdt=ext2load mmc ${sdcarddev}:${mmcpart} ${fdt_addr} ${fdt_file}\0" \
++	"mmcloadbootscript=" \
++		"ext2load mmc ${emmcdev}:${mmcpart} ${scriptaddr} ${script};\0" \
++	"mmcloadfdt=ext2load mmc ${emmcdev}:${mmcpart} ${fdt_addr} ${fdt_file}\0" \
++	"bootscript=echo Running bootscript ...; " \
++		"source ${scriptaddr}\0" \
+ 	"netargs=setenv bootargs console=${console},${baudrate} ${smp} " \
+ 		"root=/dev/nfs " \
+ 		"ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp\0" \
+@@ -227,7 +205,7 @@
  		"fi; " \
  		"${get_cmd} ${uimage}; " \
  		"if test ${boot_fdt} = yes || test ${boot_fdt} = try; then " \
@@ -126,7 +126,7 @@ index 6c703a1..fcf37b4 100644
  				"bootm ${loadaddr} - ${fdt_addr}; " \
  			"else " \
  				"if test ${boot_fdt} = try; then " \
-@@ -241,16 +255,22 @@
+@@ -241,16 +219,16 @@
  		"fi;\0"
  
  #define CONFIG_BOOTCOMMAND \
@@ -144,14 +144,8 @@ index 6c703a1..fcf37b4 100644
 -		"fi; " \
 +	    "else if run mmcloadbootscript; then " \
 +		"run bootscript; " \
-+	    "else if run sdloaduimage; then " \
-+		"run sdcardboot; " \
-+	    "else if run mmcloaduimage; then " \
-+		"run mmcboot; " \
 +	    "else " \
 +	        "run netboot; "\
-+	    "fi;" \
-+	    "fi;" \
 +	    "fi;" \
 +	    "fi;" \
  	"else run netboot; fi"

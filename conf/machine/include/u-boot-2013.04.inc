@@ -1,0 +1,5 @@
+PREFERRED_VERSION_u-boot-curie = "2013.04"
+
+UBOOT_MACHINE = "mx6qcurie"
+
+UBOOT_MMC_BASE_DEV = "1"
