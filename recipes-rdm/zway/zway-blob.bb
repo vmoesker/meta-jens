@@ -6,9 +6,12 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 PV = "1.7.3"
 PR = "72"
-SRC_URI = "http://internal.rdm.local/blobs/rdm-z-way-server-v${PV}-R1.tgz \
+SRC_URI = "http://internal.rdm.local/blobs/rdm-z-way-server-v${PV}-R1.tgz;name=server \
            file://z-way-server \
 	   file://config.xml"
+
+SRC_URI[server.md5sum] = "73f7bcacb0353c108b5253ac18711966"
+SRC_URI[server.sha256sum] = "da855fd1408237bbc15a7fad0d71ec361570f30eb3a98f9bb756e9c3d0d67d32"
 
 S = "${WORKDIR}/z-way-http-test"
 S2 = "${WORKDIR}/z-get-tty"
