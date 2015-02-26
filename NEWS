@@ -1,7 +1,10 @@
 Revision history for HomePilot
 
-4.0.4 2015-02-17
+4.0.4 2015-02-26
     - support sdcard images for maintenance at build stage
+    - update u-boot to 2013.04
+    - update linux to 3.10.17-1.0.0
+    - web-ui bugfix to support internet explorer 11
 
 4.0.3 2015-02-12
     - add flags to panic on eMMC issues to kernel cmdline
