@@ -27,10 +27,6 @@ SRC_URI = "git://github.com/rdm-dev/linux-curie.git;branch=${SRCBRANCH};rev=ca3c
 # patches for curie
 COMPATIBLE_MACHINE = "(curie)"
 
-SDCARD_IMAGE ?= "0"
-UBOOT_MMC_DEV = "${@${UBOOT_MMC_BASE_DEV}-${SDCARD_IMAGE}}"
-KERNEL_MMC_DEV = "${@${KERNEL_MMC_BASE_DEV}-${SDCARD_IMAGE}}"
-
 do_install_append () {
     sed -i -e "s/@UBOOT_LOADADDRESS[@]/${UBOOT_LOADADDRESS}/g" -e "s/@UBOOT_FDTADDRESS[@]/${UBOOT_FDTADDRESS}/g" \
          -e "s/@UBOOT_MMC_DEV[@]/${UBOOT_MMC_DEV}/g" -e "s/@SDCARD_IMAGE[@]/${SDCARD_IMAGE}/g" \

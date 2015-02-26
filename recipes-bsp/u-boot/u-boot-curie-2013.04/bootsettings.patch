@@ -33,7 +33,7 @@ index 1c7da3f..f143caf 100644
  #ifdef CONFIG_SYS_USE_SPINOR
  #define CONFIG_SF_DEFAULT_CS   (0|(IMX_GPIO_NR(4, 9)<<8))
 diff --git a/include/configs/mx6qcurie_common.h b/include/configs/mx6qcurie_common.h
-index 6c703a1..065be05 100644
+index 6c703a1..912c167 100644
 --- a/include/configs/mx6qcurie_common.h
 +++ b/include/configs/mx6qcurie_common.h
 @@ -114,18 +114,11 @@
@@ -60,7 +60,7 @@ index 6c703a1..065be05 100644
  
  #define CONFIG_MFG_ENV_SETTINGS \
  	"mfgtool_args=setenv bootargs console=" CONFIG_CONSOLE_DEV ",115200 " \
-@@ -178,43 +171,28 @@
+@@ -178,79 +171,46 @@
  #else
  #define CONFIG_EXTRA_ENV_SETTINGS \
  	CONFIG_MFG_ENV_SETTINGS \
@@ -106,6 +106,9 @@ index 6c703a1..065be05 100644
 -		"else " \
 -			"bootm; " \
 -		"fi;\0" \
+-	"netargs=setenv bootargs console=${console},${baudrate} ${smp} " \
+-		"root=/dev/nfs " \
+-		"ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp\0" \
 +	"sdloadbootscript=" \
 +		"ext2load mmc ${sdcarddev}:${mmcpart} ${scriptaddr} ${script};\0" \
 +	"sdloadfdt=ext2load mmc ${sdcarddev}:${mmcpart} ${fdt_addr} ${fdt_file}\0" \
@@ -114,12 +117,13 @@ index 6c703a1..065be05 100644
 +	"mmcloadfdt=ext2load mmc ${emmcdev}:${mmcpart} ${fdt_addr} ${fdt_file}\0" \
 +	"bootscript=echo Running bootscript ...; " \
 +		"source ${scriptaddr}\0" \
- 	"netargs=setenv bootargs console=${console},${baudrate} ${smp} " \
- 		"root=/dev/nfs " \
- 		"ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp\0" \
-@@ -225,32 +203,20 @@
- 		"else " \
- 			"setenv get_cmd tftp; " \
+ 	"netboot=echo Booting from net ...; " \
+-		"run netargs; " \
+ 		"if test ${ip_dyn} = yes; then " \
+-			"setenv get_cmd dhcp; " \
+-		"else " \
+-			"setenv get_cmd tftp; " \
++			"dhcp; " \
  		"fi; " \
 -		"${get_cmd} ${uimage}; " \
 -		"if test ${boot_fdt} = yes || test ${boot_fdt} = try; then " \
@@ -135,7 +139,7 @@ index 6c703a1..065be05 100644
 -		"else " \
 -			"bootm; " \
 -		"fi;\0"
-+		"${get_cmd} ${scriptaddr} bootscript.nfs; " \
++		"tftp ${scriptaddr} bootscript.nfs; " \
 +		"run bootscript;\0"
  
  #define CONFIG_BOOTCOMMAND \

@@ -27,10 +27,6 @@ SRC_URI += "file://physeries.scc \
             file://bootscript.nfs \
            "
 
-SDCARD_IMAGE ?= "0"
-UBOOT_MMC_DEV = "${@${UBOOT_MMC_BASE_DEV}-${SDCARD_IMAGE}}"
-KERNEL_MMC_DEV = "${@${KERNEL_MMC_BASE_DEV}+${SDCARD_IMAGE}}"
-
 do_install_append () {
     rm -f ${D}/boot/uImage
     cp ${D}/boot/uImage-*  ${D}/boot/uImage
