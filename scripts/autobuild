@@ -36,6 +36,12 @@ eval $BITBAKE_SETTINGS
 cd "${RECIPE_DIR}"
 git log -n 1 | grep "bump.*${SYSIMG_VERSION}" && die "Image is up to date"
 
+for build_result in cache sstate-cache tmp
+do
+    mv ${BUILDPATH}/${build_result} ${BUILDPATH}/${build_result}.old
+    rm -rf ${BUILDPATH}/${build_result}.old &
+done
+
 cd "${BUILDPATH}"
 mkdeployimgs "$@"
 time env APPLY_TS=null TARGETS="update.homepilot.de" deployimgs
