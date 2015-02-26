@@ -28,10 +28,12 @@ COMPATIBLE_MACHINE = "(curie)"
 
 SDCARD_IMAGE ?= "0"
 UBOOT_MMC_DEV = "${@${UBOOT_MMC_BASE_DEV}-${SDCARD_IMAGE}}"
+KERNEL_MMC_DEV = "${@${KERNEL_MMC_BASE_DEV}-${SDCARD_IMAGE}}"
 
 do_install_append () {
     sed -i -e "s/@UBOOT_LOADADDRESS[@]/${UBOOT_LOADADDRESS}/g" -e "s/@UBOOT_FDTADDRESS[@]/${UBOOT_FDTADDRESS}/g" \
          -e "s/@UBOOT_MMC_DEV[@]/${UBOOT_MMC_DEV}/g" -e "s/@SDCARD_IMAGE[@]/${SDCARD_IMAGE}/g" \
+         -e "s/@KERNEL_MMC_DEV[@]/${KERNEL_MMC_DEV}/g" \
 	 ${WORKDIR}/bootscript
     uboot-mkimage -T script -C none -n 'Curie Script' -d ${WORKDIR}/bootscript ${D}/boot/bootscript
 

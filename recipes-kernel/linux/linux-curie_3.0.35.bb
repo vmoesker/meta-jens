@@ -28,13 +28,15 @@ SRC_URI += "file://physeries.scc \
 
 SDCARD_IMAGE ?= "0"
 UBOOT_MMC_DEV = "${@${UBOOT_MMC_BASE_DEV}-${SDCARD_IMAGE}}"
+KERNEL_MMC_DEV = "${@${KERNEL_MMC_BASE_DEV}+${SDCARD_IMAGE}}"
 
 do_install_append () {
     rm -f ${D}/boot/uImage
     cp ${D}/boot/uImage-*  ${D}/boot/uImage
 
     sed -i -e "s/@UBOOT_LOADADDRESS[@]/${UBOOT_LOADADDRESS}/g" -e "s/@UBOOT_MMC_DEV[@]/${UBOOT_MMC_DEV}/g" \
-	 -e "s/@SDCARD_IMAGE[@]/${SDCARD_IMAGE}/g" ${WORKDIR}/bootscript
+	 -e "s/@SDCARD_IMAGE[@]/${SDCARD_IMAGE}/g" -e "s/@KERNEL_MMC_DEV[@]/${KERNEL_MMC_DEV}/g" \
+	 ${WORKDIR}/bootscript
     uboot-mkimage -T script -C none -n 'Curie Script' -d ${WORKDIR}/bootscript ${D}/boot/bootscript
 
     echo "options 8189es rtw_power_mgnt=0" >${WORKDIR}/8189es.conf

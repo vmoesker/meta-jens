@@ -1,7 +1,7 @@
 setenv loadaddr @UBOOT_LOADADDRESS@
-setenv bootargs_mmc setenv bootargs ${bootargs_base} ip=none root=/dev/mmcblk@SDCARD_IMAGE@p2
+setenv bootargs_mmc setenv bootargs ${bootargs_base} ip=none root=/dev/mmcblk@KERNEL_MMC_DEV@p2
 setenv bootcmd_mmc 'run bootargs_mmc; mmc dev @UBOOT_MMC_DEV@; ext2load mmc @UBOOT_MMC_DEV@:1 ${loadaddr} /uImage; bootm'
-setenv bootargs_rec setenv bootargs ${bootargs_base} ip=none root=/dev/mmcblk@SDCARD_IMAGE@p3
+setenv bootargs_rec setenv bootargs ${bootargs_base} ip=none root=/dev/mmcblk@KERNEL_MMC_DEV@p3
 setenv bootcmd_rec 'run bootargs_rec; mmc dev @UBOOT_MMC_DEV@; ext2load mmc @UBOOT_MMC_DEV@:1 ${loadaddr} /uImage-curie; bootm'
 run bootcmd_rec
 run bootcmd_mmc
