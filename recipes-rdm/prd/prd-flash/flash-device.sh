@@ -14,7 +14,7 @@ logger -s "Prove being the one and only ..."
 test "${FLOCKER}" != "@ARGV0@" && exec env FLOCKER="@ARGV0@" flock -en "@ARGV0@" "@ARGV0@" || :
 logger -s "Starting flash ..."
 
-SDCARD_DEVICE="/dev/mmcblk0"
+SDCARD_DEVICE="/dev/mmcblk@KERNEL_EMMC_DEV@"
 UNION_SHADOWS=".shadow/.etc .shadow/.home"
 
 # use last image container
@@ -39,15 +39,15 @@ if [ -d "${IMAGE_CONTAINER}" ]
 then
     . "${IMAGE_CONTAINER}"/.settings
 
-    if test -e /dev/mmcblk1
+    if test -e /dev/mmcblk@KERNEL_SD_DEV@
     then
-	SDCARD_DEVICE="/dev/mmcblk1"
-    fi
+	if [ "$SDCARD_IMAGE" != "1" ]
+	then
+	    logger -s "Cannot flash incompatible image"
+	    exit 1
+	fi
 
-    if [ "$SDCARD_DEVICE" != "/dev/mmcblk${SDCARD_IMAGE}" ]
-    then
-	logger -s "Cannot flash incompatible image"
-	exit 1
+	SDCARD_DEVICE="/dev/mmcblk@KERNEL_SD_DEV@"
     fi
 
     echo 0 >/sys/class/leds/user1/brightness

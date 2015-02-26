@@ -10,7 +10,9 @@ SRC_URI = "file://flash-device.sh \
 do_install () {
 	install -d ${D}${sysconfdir}/init.d
 
-	sed -i -e "s,@ARGV0@,${sysconfdir}/init.d/flash-device.sh,g" ${WORKDIR}/flash-device.sh
+	sed -i -e "s,@ARGV0@,${sysconfdir}/init.d/flash-device.sh,g" -e "s/@SDCARD_IMAGE[@]/${SDCARD_IMAGE}/g" \
+	    -e "s/@KERNEL_EMMC_DEV[@]/${KERNEL_EMMC_DEV}/g" -e "s/@KERNEL_SD_DEV[@]/${KERNEL_SD_DEV}/g" \
+	    ${WORKDIR}/flash-device.sh
 	install -m 0755 ${WORKDIR}/flash-device.sh ${D}${sysconfdir}/init.d
 
 	update-rc.d -r ${D} flash-device.sh start 25 3 5 .
