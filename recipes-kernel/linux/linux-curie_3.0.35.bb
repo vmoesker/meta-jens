@@ -24,6 +24,7 @@ SRC_URI += "file://physeries.scc \
             file://Merge-patches-for-CEC-issues-from-wolfgar.patch \
             file://use-dma-pool.patch \
             file://bootscript \
+            file://bootscript.nfs \
            "
 
 SDCARD_IMAGE ?= "0"
@@ -36,8 +37,9 @@ do_install_append () {
 
     sed -i -e "s/@UBOOT_LOADADDRESS[@]/${UBOOT_LOADADDRESS}/g" -e "s/@UBOOT_MMC_DEV[@]/${UBOOT_MMC_DEV}/g" \
 	 -e "s/@SDCARD_IMAGE[@]/${SDCARD_IMAGE}/g" -e "s/@KERNEL_MMC_DEV[@]/${KERNEL_MMC_DEV}/g" \
-	 ${WORKDIR}/bootscript
+	 ${WORKDIR}/bootscript ${WORKDIR}/bootscript.nfs
     uboot-mkimage -T script -C none -n 'Curie Script' -d ${WORKDIR}/bootscript ${D}/boot/bootscript
+    uboot-mkimage -T script -C none -n 'Curie Script' -d ${WORKDIR}/bootscript.nfs ${D}/boot/bootscript.nfs
 
     echo "options 8189es rtw_power_mgnt=0" >${WORKDIR}/8189es.conf
     install -d ${D}${sysconfdir}/modprobe.d/
@@ -46,7 +48,9 @@ do_install_append () {
 
 do_deploy_append () {
     cp ${D}/boot/bootscript ${DEPLOYDIR}/bootscript-${DATETIME}
+    cp ${D}/boot/bootscript.nfs ${DEPLOYDIR}/bootscript.nfs-${DATETIME}
     ln -sf bootscript-${DATETIME} ${DEPLOYDIR}/bootscript
+    ln -sf bootscript.nfs-${DATETIME} ${DEPLOYDIR}/bootscript.nfs
 }
 
-FILES_kernel-image += "/boot/bootscript"
+FILES_kernel-image += "/boot/bootscript /boot/bootscript.nfs"

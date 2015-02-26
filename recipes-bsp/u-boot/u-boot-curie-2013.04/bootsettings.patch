@@ -33,7 +33,7 @@ index 1c7da3f..f143caf 100644
  #ifdef CONFIG_SYS_USE_SPINOR
  #define CONFIG_SF_DEFAULT_CS   (0|(IMX_GPIO_NR(4, 9)<<8))
 diff --git a/include/configs/mx6qcurie_common.h b/include/configs/mx6qcurie_common.h
-index 6c703a1..bbfd24d 100644
+index 6c703a1..065be05 100644
 --- a/include/configs/mx6qcurie_common.h
 +++ b/include/configs/mx6qcurie_common.h
 @@ -114,18 +114,11 @@
@@ -117,17 +117,26 @@ index 6c703a1..bbfd24d 100644
  	"netargs=setenv bootargs console=${console},${baudrate} ${smp} " \
  		"root=/dev/nfs " \
  		"ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp\0" \
-@@ -227,7 +205,7 @@
+@@ -225,32 +203,20 @@
+ 		"else " \
+ 			"setenv get_cmd tftp; " \
  		"fi; " \
- 		"${get_cmd} ${uimage}; " \
- 		"if test ${boot_fdt} = yes || test ${boot_fdt} = try; then " \
+-		"${get_cmd} ${uimage}; " \
+-		"if test ${boot_fdt} = yes || test ${boot_fdt} = try; then " \
 -			"if ${get_cmd} ${fdt_addr} ${fdt_file}; then " \
-+			"if tftp ${fdt_addr} ${fdt_file}; then " \
- 				"bootm ${loadaddr} - ${fdt_addr}; " \
- 			"else " \
- 				"if test ${boot_fdt} = try; then " \
-@@ -241,16 +219,16 @@
- 		"fi;\0"
+-				"bootm ${loadaddr} - ${fdt_addr}; " \
+-			"else " \
+-				"if test ${boot_fdt} = try; then " \
+-					"bootm; " \
+-				"else " \
+-					"echo WARN: Cannot load the DT; " \
+-				"fi; " \
+-			"fi; " \
+-		"else " \
+-			"bootm; " \
+-		"fi;\0"
++		"${get_cmd} ${scriptaddr} bootscript.nfs; " \
++		"run bootscript;\0"
  
  #define CONFIG_BOOTCOMMAND \
 -	"mmc dev ${mmcdev};" \
