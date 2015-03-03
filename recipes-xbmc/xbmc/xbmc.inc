@@ -89,7 +89,6 @@ RDEPENDS_${PN} = " python-stringold \
                    alsa-lib \
                    alsa-conf \
                    tzdata \
-                   xbmc-pvr-addons \
                    shairplay \
                    libvorbis \
                    flac \
@@ -108,4 +107,3 @@ FILES_${PN}-dbg += " \
                     /imx6/kodi/lib/kodi/.debug/ \
                     /imx6/kodi/lib/kodi/addons/library.xbmc.codec/.debug \
                    "
-
