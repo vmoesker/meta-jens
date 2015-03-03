@@ -22,7 +22,7 @@ XBMC_SERVICE_DIR = "${SERVICE_ROOT}/xbmc"
 XBMC_LOG_DIR = "/var/log/daemontools/xbmc"
 CLEAR_PAGE_CACHE_SERVICE_DIR = "${SERVICE_ROOT}/clear-page-cache"
 
-XBMC_USER_HOME = "/home/xbmc/"
+XBMC_USER_HOME = "/home/xbmc"
 
 USERADD_PACKAGES = "${PN}"
 
