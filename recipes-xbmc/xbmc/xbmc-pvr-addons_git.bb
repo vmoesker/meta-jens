@@ -5,13 +5,13 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 inherit autotools 
 
 SRC_URI = "git://github.com/opdenkamp/xbmc-pvr-addons.git"
-SRCREV = "2955e1dd62f4047b2782cb927f7671ae209f20d8"
+SRCREV = "5eea14767c50a80ee307a6dbae3e2cbc94a256c8"
 CACHED_CONFIGUREVARS = "ac_cv_lib_GL_main=no"
 S = "${WORKDIR}/git"
 
 PR = "r2"
 
-EXTRA_OECONF="--prefix=/imx6/xbmc"
+EXTRA_OECONF="--prefix=/imx6/kodi"
 
 do_configure() {
 
@@ -25,5 +25,5 @@ do_configure() {
                   ${EXTRA_OECONF}
 }
 
-FILES_${PN} += "/imx6/xbmc"
-FILES_${PN}-dbg += "/imx6/xbmc/lib/xbmc/addons/*/.debug/"
+FILES_${PN} += "/imx6/kodi"
+FILES_${PN}-dbg += "/imx6/kodi/lib/kodi/addons/*/.debug/"
