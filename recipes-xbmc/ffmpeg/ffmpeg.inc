@@ -34,7 +34,7 @@ EXTRA_OECONF = " \
         --enable-libvorbis \
         --enable-muxer=ogg \
         --enable-encoder=libvorbis \
-        --enable-nonfree \
+        --disable-nonfree \
         --enable-pthreads \
         --enable-zlib \
         --enable-shared \
