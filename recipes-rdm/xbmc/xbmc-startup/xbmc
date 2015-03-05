@@ -5,6 +5,9 @@ touch /tmp/xbmc.once
 
 export HOME=/home/xbmc
 echo 3 > /proc/sys/vm/drop_caches
+
+test -d ${HOME} && chown xbmc:users ${HOME}
+test -d ${HOME}/.kodi || setuidgid xbmc mkdir ${HOME}/.kodi
 test -d /tmp/xbmc || setuidgid xbmc mkdir /tmp/xbmc
 rm -f ${HOME}/.kodi/temp
 setuidgid xbmc ln -s /tmp/xbmc ${HOME}/.kodi/temp
