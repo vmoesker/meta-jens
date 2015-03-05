@@ -25,10 +25,8 @@ done
 
 set -e
 
-for img in ${IMAGES}
-do
-    bitbake $img
-done
+BITBAKE_OPTIONS="-k"
+bitbake ${BITBAKE_OPTIONS} ${IMAGES} || bitbake ${IMAGES}
 
 BITBAKE_SETTINGS=`bitbake -e system-image | egrep "(KERNEL_DEVICETREE|UBOOT_SUFFIX|UBOOT_PADDING|PV|MACHINE_ARCH|SDCARD_IMAGE)=" | sed -e "s/MACHINE_ARCH/MACHINE/" -e "s/PV/SYSIMG_VERSION/" -e "s/KERNEL_DEVICETREE/KERNEL_DEVICE_TREE/"`
 eval $BITBAKE_SETTINGS
