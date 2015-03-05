@@ -5,7 +5,7 @@ SECTION = "libs"
 LICENSE = "Artistic-1.0 | GPL-2.0"
 PR = "r0"
 
-MAINTAINER=	"HP2 Dev Team <verteiler.hp2dev.team@rademacher.com>"
+MAINTAINER=	"HP2 Dev Team <verteiler.hp2dev.team@rademacher.de>"
 HOMEPAGE=	"https://github.com/rehsack/System-Image-Update"
 
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Artistic-1.0;md5=cda03bbdc3c1951996392b872397b798 \
