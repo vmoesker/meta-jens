@@ -20,6 +20,7 @@ set -x
 cd "${BUILDPATH}"
 git fetch --all
 git checkout $BRANCH
+git pull --rebase
 
 BBFILE_PATTERN=`bitbake_var "BBFILE_PATTERN[^=]*" | awk -F = '{print $2}' | sed -e 's,"^,,' -e 's,/"$,,'`
 for d in ${BBFILE_PATTERN}
@@ -27,7 +28,7 @@ do
     cd $d
     git fetch --all
     git checkout $BRANCH || git checkout master
-    git pull
+    git pull --rebase
 done
 
 # XXX good example why we shall rewrite it as soon as pkgsrc is up-to-date (Packager::Utils ^^)
