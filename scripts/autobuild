@@ -6,6 +6,7 @@ die() {
 }
 
 bitbake_var() {
+    set -e
     cd "${BUILDPATH}"
     bitbake -e system-image 2>&1 | egrep "^($@)="
 }
@@ -38,6 +39,7 @@ git log -n 1 | grep "bump.*${SYSIMG_VERSION}" && die "Image is up to date"
 
 for build_result in cache sstate-cache tmp
 do
+    test -d ${BUILDPATH}/${build_result} || continue
     mv ${BUILDPATH}/${build_result} ${BUILDPATH}/${build_result}.old
     rm -rf ${BUILDPATH}/${build_result}.old &
 done
