@@ -5,6 +5,19 @@ Revision history for HomePilot
     - update u-boot to 2013.04
     - update linux to 3.10.17-1.0.0
     - web-ui bugfix to support internet explorer 11
+    - disable start of nfs-server
+    - allow ntpd to resolve addresses of time-servers dynamically
+    - update service manager
+      * collect kodi log files
+      * re-enable ssh key management for labour management
+    - update xbmc to Kodi 14.1 (Helix)
+      * add ffmpeg 2.4.6
+      * disallow use of most of nonfree code for ffmpeg
+      * disable xbmc-custom-settings
+      * enable unicode properties for libpcre
+      * fix kodi startup
+      * update xbmc to kodi 14.1
+      * update xbmc-pvr-addons to Helix_rc3
 
 4.0.3 2015-02-12
     - add flags to panic on eMMC issues to kernel cmdline
