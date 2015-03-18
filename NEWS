@@ -1,5 +1,15 @@
 Revision history for HomePilot
 
+4.0.5 2015-03-18
+    - archive homepilot log files on startup
+    - fix path for wifi led
+    - limit r/w permissions for gpio keys
+    - update hp2sm
+        * add kodi page with spdif settings
+        * add reset for homepilot, multimedia, system or all configurations
+        * add zwave page
+        * improve ssh key management: check device-root.no_warranty and user button
+
 4.0.4 2015-02-26
     - support sdcard images for maintenance at build stage
     - update u-boot to 2013.04
