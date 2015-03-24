@@ -5,4 +5,4 @@ mkdir -p /etc/modules-load.d
 
 test -f /var/log/hp2/server.log && mv /var/log/hp2/server.log /var/log/hp2/server.log.old
 
-exec start-stop-daemon -S --pidfile /run/homepilot.pid --make-pidfile --chuid @HOMEPILOT_USER@ --exec @HOMEPILOT_BASE@/bin/homepilot
+exec start-stop-daemon -S --pidfile /run/homepilot.pid --make-pidfile --chuid @HOMEPILOT_USER@ --exec @HOMEPILOT_BASE@/bin/homepilot 2>&1 >/dev/null
