@@ -1,5 +1,14 @@
 Revision history for HomePilot
 
+4.0.6 2015-03-24
+    - fix user button for kernel 3.0.101
+    - limit r/w permissions for gpio keys
+    - update hp2sm to r4357
+        * fix user button
+        * support both kernels
+        * rename kodi to multimedia
+    - redirect homepilot process stdout/stderr into logfile
+
 4.0.5 2015-03-18
     - archive homepilot log files on startup
     - fix path for wifi led
