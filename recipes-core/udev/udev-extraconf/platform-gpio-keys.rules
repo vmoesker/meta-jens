@@ -1,2 +1,3 @@
 # Only root has r/w permission to gpio keys
 SUBSYSTEM=="input", ATTRS{name}=="gpio-keys.21", GROUP="root"
+SUBSYSTEM=="input", ATTRS{name}=="gpio-keys", GROUP="root"
