@@ -1,0 +1,78 @@
+From 7580955478a1323dc735f1002d6ada9ab1202019 Mon Sep 17 00:00:00 2001
+From: Cui Gao <gao.cui@windsolve.com>
+Date: Wed, 25 Mar 2015 13:09:35 +0800
+Subject: [PATCH] Workaround for curie reboot issue
+
+  Curie board may fail to boot up due to the failure of reading eMMC
+  by the boot ROM. Changing the eMMC BOOTCFG settings to 1-bit or
+  4-bits mode could solve this problem. This patch is a workaround
+  to change the BOOTCFG settings by software before rebooting.
+
+  The BOOTCFG settings could be overridden even after WDOG reset
+  by two undocumented registers SRC_GPR9 & SRC_GPR10.
+---
+ arch/arm/mach-imx/system.c | 32 ++++++++++++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
+
+diff --git a/arch/arm/mach-imx/system.c b/arch/arm/mach-imx/system.c
+index df3d1ff..0c14517 100644
+--- a/arch/arm/mach-imx/system.c
++++ b/arch/arm/mach-imx/system.c
+@@ -32,6 +32,7 @@
+ #include "common.h"
+ #include "hardware.h"
+ 
++static void __iomem *src_base;
+ static void __iomem *wdog_base;
+ static struct clk *wdog_clk;
+ static u32 wdog_source = 1; /* use WDOG1 default */
+@@ -43,6 +44,29 @@ void mxc_restart(char mode, const char *cmd)
+ {
+ 	unsigned int wcr_enable;
+ 
++	/* To change the bootcfg by software for curie board:
++	   1. load required bootcfg to SRC_GPR9 (0x020d8040)
++	   2. set bit 28 of SRC_GPR10 (0x020d8044)
++	   3. then reset the system
++
++	   to return to normal boot mode, clear SRC_GPR10[28]
++	 */
++	// eMMC 1-bit mode
++	if(src_base) {
++		u32 bmsr1 = __raw_readl(src_base + 0x4 /* BMSR1 */);
++		u32 gpr9 = __raw_readl(src_base + 0x40 /* GPR10 */);
++		u32 gpr10 = __raw_readl(src_base + 0x44 /* GPR9 */);
++
++		if(bmsr1 == 0x4000d860) {
++			// original mode is eMMC 8-bit DDR boot
++			__raw_writel(0x40001860, src_base + 0x40 /* GPR9 */);
++			__raw_writel(gpr10 | 0x10000000, src_base + 0x44/* GPR10 */);
++		} else {
++			// original mode is SD boot, unchanged
++		}
++	};
++	
++
+ 	if (wdog_clk)
+ 		clk_enable(wdog_clk);
+ 
+@@ -93,8 +117,16 @@ void __init mxc_arch_reset_init(void __iomem *base)
+ 
+ void __init mxc_arch_reset_init_dt(void)
+ {
++	struct device_node *np_src = NULL;
+ 	struct device_node *np = NULL;
+ 
++	if (cpu_is_imx6q() || cpu_is_imx6dl()) {
++		np_src = of_find_compatible_node(NULL, NULL, "fsl,imx6q-src");
++		if(np_src)
++			src_base = of_iomap(np_src, 0);
++		printk("!!!!!!! SRC BASE is %08x\n", (unsigned int) src_base);
++	}
++
+ 	if (cpu_is_imx6q() || cpu_is_imx6dl())
+ 		np = of_find_compatible_node(NULL, NULL, "fsl,imx6q-gpc");
+ 	else if (cpu_is_imx6sl())
+-- 
+1.9.1
+

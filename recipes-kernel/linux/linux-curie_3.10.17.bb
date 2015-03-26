@@ -16,6 +16,7 @@ SRC_URI = "git://github.com/rdm-dev/linux-curie.git;branch=${SRCBRANCH};rev=ca3c
            file://0002-include-rtl8189es-driver-in-kernel-build.patch \
            file://0003-Add-platform-specific-modifications-for-Curie.patch \
            file://0004-don-t-printout-debug-message-when-DBG-is-off.patch \
+	   file://0098-Workaround-for-curie-reboot-issue.patch \
 	   file://0099-respect_config_pm_mxs.patch \
 	   file://unionfs-2.6_for_3.10.53.patch \
 	   file://overlayfs-v18.patch \
