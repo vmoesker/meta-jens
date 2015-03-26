@@ -1,9 +1,13 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/collectd:"
 
 SRC_URI += "file://collectd-perl.patch \
-            file://collectd-libstatgrab.patch"
+            file://collectd-libstatgrab.patch \
+            file://collectd.conf \
+"
 
-PACKAGECONFIG[libstatgrab] = "--with-libstatgrab,--without-libstatgrab,libstatgrab"
+PACKAGECONFIG[sensors] = "--enable-sensors --with-libsensors=yes, \
+        --disable-sensors --with-libsensors=no,lmsensors,lmsensors-sensors"
+PACKAGECONFIG[libstatgrab] = "--with-libstatgrab,--without-libstatgrab,libstatgrab,libstatgrab"
 
 DEPENDS += "perl-native"
 RDEPENDS_${PN} += "perl"
@@ -31,16 +35,22 @@ export PERL_CFLAGS = "${@get_perl_cfgvar(d, 'ccflags')} -I${STAGING_LIBDIR}${PER
 export PERL_LDFLAGS = "${@get_perl_cfgvar(d, 'ccdlflags')} -L${STAGING_LIBDIR}${PERL_OWN_DIR}/perl/${@get_perl_version(d)}/CORE -lperl ${@get_perl_cfgvar(d, 'perllibs')}"
 #  -v -Wl,-debug -Wl,-t -Wl,--verbose
 
-# --enable-cpufreq --enable-dns --enable-interface --enable-nginx
-# --enable-openvpn --enable-processes --enable-protocols --enable-serial
+# --enable-debug --enable-dns
+# 
+# --enable-openvpn --enable-processes --enable-protocols
 # --enable-perl --with-libperl
 EXTRA_OECONF = " \
                 ${FPLAYOUT} \
                 --disable-perl --with-libperl=no --with-perl-bindings=no \
-                --enable-cpu --enable-exec --enable-df --enable-disk \
-                --enable-ethstat --enable-load --enable-logfile \
-                --enable-memory --enable-ntpd --enable-thermal \
-		--enable-wireless \
+                --enable-cpu --enable-cpufreq --enable-exec --enable-df \
+                --enable-disk --enable-ethstat --enable-interface \
+                --enable-load --enable-logfile --enable-memory \
+                --enable-nginx --enable-ntpd --enable-serial \
+                --enable-thermal --enable-wireless \
                 --with-libgcrypt=${STAGING_BINDIR_CROSS}/libgcrypt-config \
                 --disable-notify_desktop \
 "
+
+do_install_append () {
+	install -m 644 ${WORKDIR}/collectd.conf ${D}/${sysconfdir}/
+}
