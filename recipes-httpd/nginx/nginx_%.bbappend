@@ -13,6 +13,38 @@ SRC_URI[legal.sha256sum] = "f8643b50b34b5cf5ce483bf01012f97dc35b2d0a5b79adbe2d73
 SRC_URI[manual.sha256sum] = "17e16a35206b2a0379d758a5b0f355e095db5064ee51e91d26cea3c527edc50c"
 SRC_URI[html.sha256sum] = "c370d6fce8a81fb2bf5ba0454d230263ea4ec57aa50626ca8fccb3a5269be17c"
 
+do_configure () {
+	if [ "${SITEINFO_BITS}" = "64" ]; then
+		PTRSIZE=8
+	else
+		PTRSIZE=4
+	fi
+
+	echo $CFLAGS
+	echo $LDFLAGS
+
+	./configure \
+	--crossbuild=Linux:${TUNE_ARCH} \
+	--with-endian=${@base_conditional('SITEINFO_ENDIANNESS', 'le', 'little', 'big', d)} \
+	--with-int=4 \
+	--with-long=${PTRSIZE} \
+	--with-long-long=8 \
+	--with-ptr-size=${PTRSIZE} \
+	--with-sig-atomic-t=${PTRSIZE} \
+	--with-size-t=${PTRSIZE} \
+	--with-off-t=${PTRSIZE} \
+	--with-time-t=${PTRSIZE} \
+	--with-sys-nerr=132 \
+	--conf-path=${sysconfdir}/nginx/nginx.conf \
+	--http-log-path=${localstatedir}/log/nginx/access.log \
+	--error-log-path=${localstatedir}/log/nginx/error.log \
+	--pid-path=/run/nginx/nginx.pid \
+	--prefix=${prefix} \
+	--with-http_ssl_module \
+	--with-http_gzip_static_module \
+	--with-http_stub_status_module
+}
+
 do_install_append () {
 	install -d ${D}${localstatedir}/lib/nginx/
 	install -d ${D}${sysconfdir}/default/volatiles
