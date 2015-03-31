@@ -22,6 +22,7 @@ RDM_BASE_INSTALL = "hp2sm \
 	ntp \
 	ntpdate \
 	ntp-utils \
+	openvpn \
 	util-linux \
 	ethtool \
 	xz \
