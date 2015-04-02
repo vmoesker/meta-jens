@@ -11,7 +11,7 @@ DJB_BUILD_ARGS ?= ""
 DJB_CONFIG_PREFIX ?= "${prefix}"
 DJB_CONFIG_HOME ?= "conf-home"
 
-S = "${WORKDIR}/admin/${PN}-${PV}"
+S ?= "${WORKDIR}/admin/${PN}-${PV}"
 
 djbware_do_configure () {
         cd "${DJB_CONFIG_DIR}"
