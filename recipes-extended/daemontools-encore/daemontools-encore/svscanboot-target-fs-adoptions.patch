@@ -1,5 +1,7 @@
---- a/src/svscanboot.sh.orig	2014-09-09 09:51:10.419680502 +0200
-+++ b/src/svscanboot.sh	2014-09-09 09:56:45.307681762 +0200
+diff --git a/svscanboot.sh b/svscanboot.sh
+index 74079ea..8574353 100644
+--- a/svscanboot.sh
++++ b/svscanboot.sh
 @@ -1,11 +1,11 @@
  
 -PATH=/command:/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin
