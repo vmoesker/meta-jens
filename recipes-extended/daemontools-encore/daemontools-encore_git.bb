@@ -57,3 +57,6 @@ do_install () {
     install -d ${D}${sysconfdir}/sudoers.d
     install -m 600 ${WORKDIR}/sv-enc-as-users.sudoers ${D}${sysconfdir}/sudoers.d/sv-enc-as-users
 }
+
+PROVIDES = "daemontools"
+RPROVIDES_${PN} = "daemontools"
