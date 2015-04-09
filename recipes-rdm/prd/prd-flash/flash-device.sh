@@ -136,12 +136,6 @@ then
 	exit 1
     fi
 
-    if [ "$SDCARD_IMAGE" -eq 1 ]
-    then
-	logger -s "Cannot update ${ROOTDEV}"
-	exit 1
-    fi
-
     # try 26000000, too?
     echo "39000000" >/sys/kernel/debug/mmc0/clock
 
