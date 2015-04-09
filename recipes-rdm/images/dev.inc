@@ -6,6 +6,9 @@ EXTRA_IMAGE_FEATURES_dev = "tools-debug \
 "
 
 DEV_INSTALL = "vivante-gpu-sdk \
+	ltrace \
+	systemtap \
+	systemtap-uprobes \
 	valgrind \
 	git \
 	subversion \
