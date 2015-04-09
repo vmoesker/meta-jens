@@ -6,5 +6,9 @@
 	    [ "File",   "min_level", "error", "filename", "/var/log/sysimg_update.error", "newline", 1, "mode", ">>" ],
 	    [ "Screen", "min_level", "notice", "newline", 1, "stderr", 1 ]
 	]
-    ]
+    ],
+    "restrict_record_installed": [ "system-image" ],
+    "record_installed_aliases": {
+	"hp-blob": "hp2"
+    }
 }

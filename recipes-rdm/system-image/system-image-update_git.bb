@@ -11,7 +11,7 @@ HOMEPAGE=	"https://github.com/rehsack/System-Image-Update"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Artistic-1.0;md5=cda03bbdc3c1951996392b872397b798 \
 file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
 
-SRC_URI = "git://github.com/rehsack/System-Image-Update.git;rev=646fa92881818c8987cc987a1f59e55f56913622 \
+SRC_URI = "git://github.com/rehsack/System-Image-Update.git;rev=5d15d24e50ec91ad86a170887b07b70d88b4495e \
            file://run \
 	   file://sysimg_update.json \
 "
@@ -20,6 +20,7 @@ RDEPENDS_${PN} += "archive-peek-libarchive-perl"
 RDEPENDS_${PN} += "crypt-ripemd160-perl"
 RDEPENDS_${PN} += "datetime-format-strptime-perl"
 RDEPENDS_${PN} += "log-any-adapter-dispatch-perl"
+RDEPENDS_${PN} += "experimental-perl"
 RDEPENDS_${PN} += "file-configdir-system-image-update-perl"
 RDEPENDS_${PN} += "moo-perl"
 RDEPENDS_${PN} += "moox-configfromfile-perl"
