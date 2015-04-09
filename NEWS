@@ -10,6 +10,14 @@ Revision history for HomePilot
     - redirect homepilot process stdout/stderr into logfile
     - enable collectd to collect statistics about the system
     - workaround for reboot issue on 3.10.17 kernel
+    - update hp2sm
+        * add beta/custom/standard update channel
+        * improve language
+    - enable ipv6 for kernel 3.0.101
+    - add tun/tap device driver support for kernel 3.0.101 and 3.10.17
+    - add openvpn 2.3.6
+    - allow picking xbmc/kodi version
+    - daemontools-encore introduction
 
 4.0.5 2015-03-18
     - archive homepilot log files on startup
