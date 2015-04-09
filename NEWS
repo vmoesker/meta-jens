@@ -1,23 +1,28 @@
 Revision history for HomePilot
 
-4.0.6
+4.0.6 2015-04-09
     - fix user button for kernel 3.0.101
     - limit r/w permissions for gpio keys
     - update hp2sm to r4357
         * fix user button
         * support both kernels
         * rename kodi to multimedia
+        * add beta/custom/standard update channel
+        * improve language
+        * improve ssh key management
+            # overwrite ~/.ssh/authorized_keys
+            # use another user for ssh access
     - redirect homepilot process stdout/stderr into logfile
     - enable collectd to collect statistics about the system
     - workaround for reboot issue on 3.10.17 kernel
-    - update hp2sm
-        * add beta/custom/standard update channel
-        * improve language
     - enable ipv6 for kernel 3.0.101
     - add tun/tap device driver support for kernel 3.0.101 and 3.10.17
     - add openvpn 2.3.6
     - allow picking xbmc/kodi version
     - daemontools-encore introduction
+    - remove prevention of sdcard updates
+    - add support choosing image type from record-installed
+    - add some extra settings to allow kernel debugging
 
 4.0.5 2015-03-18
     - archive homepilot log files on startup
