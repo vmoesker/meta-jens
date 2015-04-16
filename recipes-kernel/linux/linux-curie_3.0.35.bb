@@ -23,6 +23,7 @@ SRC_URI += "file://physeries.scc \
             file://physeries-user-patches.scc \
             file://Merge-patches-for-CEC-issues-from-wolfgar.patch \
             file://use-dma-pool.patch \
+	    file://0001-Patch-to-tune-mx6-HDMI-parameters.patch \
             file://bootscript \
             file://bootscript.nfs \
            "
