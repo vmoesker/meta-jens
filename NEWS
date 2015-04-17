@@ -1,5 +1,10 @@
 Revision history for HomePilot
 
+4.0.7 2015-04-17
+    - add patch for linux-curie-3.0.101 to tune mx6 HDMI parameters
+    - pick linux-curie-3.0.101
+    - temporarily disable collectd
+
 4.0.6 2015-04-09
     - fix user button for kernel 3.0.101
     - limit r/w permissions for gpio keys
