@@ -33,7 +33,7 @@ index 1c7da3f..f143caf 100644
  #ifdef CONFIG_SYS_USE_SPINOR
  #define CONFIG_SF_DEFAULT_CS   (0|(IMX_GPIO_NR(4, 9)<<8))
 diff --git a/include/configs/mx6qcurie_common.h b/include/configs/mx6qcurie_common.h
-index 6c703a1..912c167 100644
+index 6c703a1..a458435 100644
 --- a/include/configs/mx6qcurie_common.h
 +++ b/include/configs/mx6qcurie_common.h
 @@ -114,18 +114,11 @@
@@ -60,7 +60,7 @@ index 6c703a1..912c167 100644
  
  #define CONFIG_MFG_ENV_SETTINGS \
  	"mfgtool_args=setenv bootargs console=" CONFIG_CONSOLE_DEV ",115200 " \
-@@ -178,79 +171,46 @@
+@@ -178,79 +171,49 @@
  #else
  #define CONFIG_EXTRA_ENV_SETTINGS \
  	CONFIG_MFG_ENV_SETTINGS \
@@ -80,7 +80,6 @@ index 6c703a1..912c167 100644
 -	"\0" \
 -	"mmcpart=" __stringify(CONFIG_SYS_MMC_IMG_LOAD_PART) "\0" \
 -	"mmcroot=" CONFIG_MMCROOT " rootwait rw\0" \
-+	"bootargs_base=console=${console},${baudrate} oops=panic panic=5 ${smp} rootwait consoleblank=0\0" \
 +	CONFIG_EMMC_DEV_SET \
  	"smp=" CONFIG_SYS_NOSMP "\0"\
 -	"mmcargs=setenv bootargs console=${console},${baudrate} ${smp} " \
@@ -109,6 +108,10 @@ index 6c703a1..912c167 100644
 -	"netargs=setenv bootargs console=${console},${baudrate} ${smp} " \
 -		"root=/dev/nfs " \
 -		"ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp\0" \
++	"hdmi_txterm=0x0005\0" \
++	"hdmi_vlev=0x01ad\0" \
++	"bootargs_base=console=${console},${baudrate} txterm=${hdmi_txterm} vlev=${hdmi_vlev} oops=panic panic=5 ${smp} rootwait consoleblank=0\0" \
++	"set_bootargs_base=setenv bootargs_base=console=${console},${baudrate} txterm=${hdmi_txterm} vlev=${hdmi_vlev} oops=panic panic=5 ${smp} rootwait consoleblank=0\0" \
 +	"sdloadbootscript=" \
 +		"ext2load mmc ${sdcarddev}:${mmcpart} ${scriptaddr} ${script};\0" \
 +	"sdloadfdt=ext2load mmc ${sdcarddev}:${mmcpart} ${fdt_addr} ${fdt_file}\0" \
