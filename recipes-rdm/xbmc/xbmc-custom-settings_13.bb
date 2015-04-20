@@ -13,7 +13,7 @@ SRC_URI = "file://advancedsettings.xml \
 "
 
 XBMC_USER = "xbmc"
-XBMC_HOME = "/home/xbmc/.kodi"
+XBMC_HOME = "/home/xbmc/${XBMC_APPLICATION_DIRECTORY_BASE}"
 XBMC_USERDATA = "${XBMC_HOME}/userdata"
 
 do_install () {
