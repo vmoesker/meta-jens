@@ -25,6 +25,7 @@ SRC_URI = "svn://192.168.1.186/svn/EW_Prj/001/HP_Blob/trunk/;protocol=http;modul
                 file://jetty.run \
                 file://jetty.sh \
                 file://z-way.run \
+                file://z-way-log.run \
                 file://init_appdir.sh \
                 file://gpg/pubring.gpg \
                 file://gpg/random_seed \
@@ -77,6 +78,7 @@ do_install() {
 	install -d ${D}${SVC_SERVICES}/homepilot/log
 	install -d ${D}${SVC_SERVICES}/jetty
 	install -d ${D}${SVC_SERVICES}/z-way
+	install -d ${D}${SVC_SERVICES}/z-way/log
 
 	# 2 Move all the run-files
 	install -m 0755 ${WORKDIR}/homepilot-network-manager.run ${D}${SVC_SERVICES}/homepilot-network-manager/run
@@ -87,6 +89,7 @@ do_install() {
 	install -m 0755 ${WORKDIR}/jetty.run ${D}${SVC_SERVICES}/jetty/run
 	install -m 0755 ${WORKDIR}/jetty.sh ${D}${INST_DEST_PREFIX}/bin/jetty
 	install -m 0755 ${WORKDIR}/z-way.run ${D}${SVC_SERVICES}/z-way/run
+	install -m 0755 ${WORKDIR}/z-way-log.run ${D}${SVC_SERVICES}/z-way/log/run
 
 	# 
 	sed -i -e "s,@HOMEPILOT_BASE@,${INST_DEST_PREFIX},g" -e "s,@ZWAY_BASE@,${ZWAY_DEST_PREFIX},g"  \

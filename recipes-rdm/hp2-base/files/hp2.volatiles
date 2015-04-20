@@ -1,2 +1,3 @@
 d homepilot users 0755 /data/.var/log/hp2 none
 d homepilot users 0755 /data/.var/log/daemontools/homepilot none
+d homepilot users 0755 /data/.var/log/daemontools/z-way none
