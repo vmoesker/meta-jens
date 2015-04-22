@@ -1,5 +1,9 @@
 Revision history for HomePilot
 
+4.0.8
+    - allow modifying hdmi tuning knobs and rebuild bootargs_base for smooth booting
+    - port patch from windsolve to tune hdmi parameters from 3.0 to 3.10
+
 4.0.7 2015-04-17
     - add patch for linux-curie-3.0.101 to tune mx6 HDMI parameters
     - pick linux-curie-3.0.101
