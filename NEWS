@@ -1,8 +1,24 @@
 Revision history for HomePilot
 
-4.0.8
+4.0.8 2015-04-23
     - allow modifying hdmi tuning knobs and rebuild bootargs_base for smooth booting
+    - add zway-blob 2.0.1-rc25
+        - fix permissions to start z-way-server as homepilot-user
+        - link /opt/z-way/automation/storage to /home/homepilot/z-way/storage
+    - add z-way log and set default log-level to error
+    - enable xbmc-custom-settings
+        - fix path for xbmc/kodi application directory
     - port patch from windsolve to tune hdmi parameters from 3.0 to 3.10
+    - update hp2sm
+        - add log-level configuration for z-way
+        - fix reset for homepilot, xbmc/kodi and system configurations
+    - update hp-blob
+        - add df motiondetector device
+        - fixes for zway 2.0
+    - update nginx-manual
+        - add ip camera
+    - update service-df
+        - add df motiondetector device
 
 4.0.7 2015-04-17
     - add patch for linux-curie-3.0.101 to tune mx6 HDMI parameters
