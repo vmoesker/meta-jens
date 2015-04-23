@@ -20,7 +20,7 @@ test -f /etc/fstab && (
 #
 cat /etc/fstab | sed -E 's/#.*//g' | while read device mountpt fstype options
 do
-	if test "$fstype" = unionfs
+	if test "$fstype" = unionfs -o "$fstype" = "overlayfs" -o "$fstype" = "overlay"
 	then
 		umount -f $mountpt
 	fi

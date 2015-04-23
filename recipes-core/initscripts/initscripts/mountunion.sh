@@ -29,7 +29,7 @@ test -f /etc/fstab && (
 #
 cat /etc/fstab | sed -E 's/#.*//g' | while read device mountpt fstype options
 do
-	if test "$fstype" = unionfs
+	if test "$fstype" = unionfs -o "$fstype" = "overlayfs" -o "$fstype" = "overlay"
 	then
 		if [ "`mount | grep "$fstype" | grep "$mountpt" | wc -l`" -eq 0 ]
 		then
@@ -39,6 +39,4 @@ do
 done
 )
 
-
 : exit 0
-
