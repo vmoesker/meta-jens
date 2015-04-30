@@ -10,6 +10,9 @@ PREFERRED_VERSION_imx-vpu = "3.10.17-1.0.0"
 PREFERRED_VERSION_gpu-viv-bin-mx6q = "3.10.17-1.0.1-hfp"
 PREFERRED_VERSION_gpu-viv-bin-mx6dl = "3.10.17-1.0.1-hfp"
 
+OVERLAYFS = "overlayfs"
+UNIONFS = "#unionfs"
+
 # 2.6.37 and later kernels use OMAP_SERIAL, ttyO2
 # earlier kernels use ttyS2
 SERIAL_CONSOLE = "115200 ttymxc0"
