@@ -1,5 +1,18 @@
 Revision history for HomePilot
 
+4.0.9
+    - back to linux-curie-3.10
+    - enable http_stub_status_module for nginx
+    - enable nginx plugin for collectd
+    - introduce overlayfs instead of unionfs
+    - re-introduce collectd since it doesn't freeze anymore on overlayfs
+    - cherry-pick commits from windsolve and put recent fixes directly into kernel tree
+    - go to cpufreq gov "on_demand" by default
+    - allow system builder pick easy between appropriate overlay filesystem
+    - refresh u-boot with fixes from freescale
+    - switch to maintained branch of fsl's 3.10.17 and apply patches made against 3.10.17_1.0.1_ga
+    - set gpu3DMinClock to 3 before starting xbmc/kodi
+
 4.0.8 2015-04-23
     - allow modifying hdmi tuning knobs and rebuild bootargs_base for smooth booting
     - add zway-blob 2.0.1-rc25
