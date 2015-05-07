@@ -1,11 +1,11 @@
 #!/bin/sh
 ### BEGIN INIT INFO
-# Provides:          mountunion
+# Provides:          mountoverlay
 # Required-Start:    $local_fs
 # Required-Stop: 
 # Default-Start:     S
 # Default-Stop:
-# Short-Description: Mount all filesystems.
+# Short-Description: Mount all overlay filesystems.
 # Description:
 ### END INIT INFO
 
@@ -20,12 +20,13 @@ PATH=/sbin:/bin:/usr/sbin:/usr/bin
 #
 test "$VERBOSE" != no && echo "Mounting overlay filesystems..."
 
-test -x /etc/init.d/cleanunion.sh && /etc/init.d/cleanunion.sh
+test -x /etc/init.d/cleanoverlay.sh && /etc/init.d/cleanoverlay.sh
+test -x /etc/init.d/migrate2overlay.sh && /etc/init.d/migrate2overlay.sh
 
 test -f /etc/fstab && (
 
 #
-#	Read through fstab line by line and nount union file systems
+#	Read through fstab line by line and mount overlay file systems
 #
 cat /etc/fstab | sed -E 's/#.*//g' | while read device mountpt fstype options
 do

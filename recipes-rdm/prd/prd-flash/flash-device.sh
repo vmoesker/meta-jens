@@ -63,7 +63,7 @@ then
     SDCARD_SIZE=`fdisk -l $SDCARD_DEVICE | grep "Disk $SDCARD_DEVICE" | awk '{print $5}'`
     SDCARD_SIZE=$(expr $SDCARD_SIZE \/ 1024)
 
-    if test "$DEV" -eq 0
+    if test -n "$DEV" -a "$DEV" -eq 0
     then
 	ROOTFS_SIZE=$(expr 1024 \* 512)
 	RECOVERY_SIZE=$(expr 1024 \* 128)
@@ -129,6 +129,14 @@ then
     . ./.settings
     rm -f .settings
 
+    if test -e /dev/mmcblk@KERNEL_SD_DEV@
+    then
+	if [ "$SDCARD_IMAGE" != "1" ]
+	then
+            SDCARD_DEVICE="/dev/mmcblk@KERNEL_SD_DEV@"
+	fi
+    fi
+
     ROOTDEV=`mount | grep "on / type" | sed -e 's/ on.*//'`
     if [ ! $(echo ${ROOTDEV} | egrep "^${SDCARD_DEVICE}") ]
     then
@@ -180,7 +188,7 @@ then
 	(cd /boot && eval ${KERNEL_SANITIZE})
 	(cd /data && mkdir -p ${UNION_SHADOWS})
 
-	touch /etc/unionfs.mrproper
+	touch /etc/overlay.mrproper
 
 	logger "Going to cleanup relics"
 	if [ -d  /data/.shadow/.var_lib ]
@@ -188,12 +196,12 @@ then
 	    test -d /data/.var/lib || mkdir -p /data/.var/lib
 		# XXX remove unionfs files
 	    (cd /data/.shadow/.var_lib && tar cf - nginx dropbear) | (cd /data/.var/lib && tar xf -)
-	    test -d  /data/.shadow/.var_lib && echo "/data/.shadow/.var_lib" >> /etc/unionfs.mrproper
+	    test -d  /data/.shadow/.var_lib && echo "/data/.shadow/.var_lib" >> /etc/overlay.mrproper
 	fi
 
 	logger "Cleanup services"
-	test -d /data/.shadow/.var_lib && echo "/data/.shadow/.etc/daemontools/service" >> /etc/unionfs.mrproper
-	test -f /data/.shadow/.etc/sysimg_update.json && echo "/data/.shadow/.etc/sysimg_update.json" >> /etc/unionfs.mrproper
+	test -d /data/.shadow/.etc/daemontools/service && echo "/data/.shadow/.etc/daemontools/service" >> /etc/overlay.mrproper
+	test -f /data/.shadow/.etc/sysimg_update.json && echo "/data/.shadow/.etc/sysimg_update.json" >> /etc/overlay.mrproper
 
 	logger "Removing update container"
 	rm -f "${IMAGE_CONTAINER}"

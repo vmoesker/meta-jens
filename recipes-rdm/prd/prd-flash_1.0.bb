@@ -1,3 +1,5 @@
+DESCRIPTION = "Initscript for flashing images at boot"
+
 FILESEXTRAPATHS_prepend := "${THISDIR}/prd-flash:"
 
 LICENSE = "GPLv2"

@@ -1,11 +1,11 @@
 #!/bin/sh
 ### BEGIN INIT INFO
-# Provides:          cleanunion
+# Provides:          cleanoverlay
 # Required-Start:    $local_fs
 # Required-Stop: 
 # Default-Start:     S
 # Default-Stop:
-# Short-Description: Clean union filesystems upon request
+# Short-Description: Clean overlay filesystems upon request
 # Description:
 ### END INIT INFO
 
@@ -15,10 +15,10 @@ test -e /etc/default/rcS && . /etc/default/rcS
 
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
 
-test -e /etc/default/cleanunion.conf -o -e /etc/cleanunion.conf || exit 0
+test -e /etc/default/cleanoverlay.conf -o -e /etc/cleanoverlay.conf || exit 0
 
-test -e /etc/default/cleanunion.conf && . /etc/default/cleanunion.conf
-test -e /etc/cleanunion.conf && . /etc/cleanunion.conf
+test -e /etc/default/cleanoverlay.conf && . /etc/default/cleanoverlay.conf
+test -e /etc/cleanoverlay.conf && . /etc/cleanoverlay.conf
 
 DEF_IFS="$IFS"
 for cleanup_spec in ${CLEANUP_SPEC}

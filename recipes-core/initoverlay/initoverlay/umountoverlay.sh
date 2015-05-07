@@ -1,12 +1,12 @@
 #!/bin/sh
 ### BEGIN INIT INFO
-# Provides:          umountunion
+# Provides:          umountoverlay
 # Required-Start:
 # Required-Stop:     umountnfs
 # Should-Stop:
 # Default-Start:
 # Default-Stop:      0 6
-# Short-Description: Unmount all union filesystems
+# Short-Description: Unmount all overlay filesystems
 ### END INIT INFO
 
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
@@ -16,7 +16,7 @@ echo "Unmounting overlay filesystems..."
 test -f /etc/fstab && (
 
 #
-#	Read through fstab line by line and unount network file systems
+#	Read through fstab line by line and umount overlay file systems
 #
 cat /etc/fstab | sed -E 's/#.*//g' | while read device mountpt fstype options
 do

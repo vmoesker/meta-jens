@@ -1,6 +1,4 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
-# mount by-* requires udev being started
-INITSCRIPT_PARAMS_udev := "start 03 S ."
 
 SRC_URI += "file://restart-udev.sh \
 "

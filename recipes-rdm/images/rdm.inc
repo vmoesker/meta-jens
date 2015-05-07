@@ -5,10 +5,12 @@ RDM_BASE_INSTALL = "hp2sm \
 	e2fsprogs-tune2fs \
 	btrfs-tools \
 	dosfstools \
+	initoverlay \
 	system-image-update \
 	prd-flash \
 	nano \
 	ledctrl \
+	fb-cursor-off \
 	sudo \
 	qbrqry \
 	nginx \
@@ -25,6 +27,7 @@ RDM_BASE_INSTALL = "hp2sm \
 	openvpn \
 	util-linux \
 	ethtool \
+	wifi-fallback \
 	xz \
 	lsof \
 	logrotate \
