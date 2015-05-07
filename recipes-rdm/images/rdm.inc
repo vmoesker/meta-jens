@@ -32,6 +32,7 @@ RDM_BASE_INSTALL = "hp2sm \
 	lsof \
 	logrotate \
 	collectd \
+	sysdetails \
 "
 RDM_INSTALL = "${RDM_BASE_INSTALL} \
 	udev-extraconf \
