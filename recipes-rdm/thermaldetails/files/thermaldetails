@@ -1,0 +1,58 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+use Config::Any;
+use File::Path qw(make_path remove_tree);
+use File::Slurp::Tiny qw(read_lines write_file);
+use Time::HiRes qw(usleep);
+use Unix::Statgrab qw(get_host_info get_cpu_stats);
+use Text::CSV_XS;
+
+my $f_cfg = Config::Any->load_files(
+    {
+        files   => [qw(/etc/thermaldetails.json)],
+        use_ext => 1
+    }
+);
+my %cfg = map { %$_ } ( map { values %$_ } @$f_cfg );
+
+make_path( sprintf( "%s", $cfg{path} ) );
+
+opendir( my $dh, $cfg{path} );
+map { system("tar czf $_.tar.gz $_"); remove_tree($_); } grep { -d } map { "$cfg{path}/$_" } grep { /^\d+$/ } readdir($dh);
+closedir $dh;
+
+make_path( sprintf( "%s/%d", $cfg{path}, $$ ) );
+
+for ( my $i = 0;; $i++ )
+{
+    my $fh;
+    open( $fh, ">", sprintf( "%s/%d/thermaldetails.%08d", $cfg{path}, $$, get_host_info()->uptime ) );
+    my $csv = Text::CSV_XS->new(
+        {
+            sep_char => ";",
+            eol      => "\r\n"
+        }
+    );
+
+    for ( my $j = 0; $j < 60; $j++ )
+    {
+        my @data;
+        my $host_info    = get_host_info();
+        my $cpu_percents = get_cpu_stats()->get_cpu_percents();
+        push @data, $host_info->systime;
+        push @data, $host_info->uptime;
+        push @data, ( read_lines( "/sys/class/thermal/thermal_zone0/temp", "chomp" => 1 ) )[0];
+        push @data, $cpu_percents->user;
+        push @data, $cpu_percents->kernel;
+        push @data, $cpu_percents->idle;
+
+        $csv->print( $fh, \@data );
+
+        usleep( $cfg{usleep} );
+    }
+
+    close $fh;
+}
