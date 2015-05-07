@@ -31,8 +31,6 @@ RDM_BASE_INSTALL = "hp2sm \
 	xz \
 	lsof \
 	logrotate \
-	collectd \
-	sysdetails \
 "
 RDM_INSTALL = "${RDM_BASE_INSTALL} \
 	udev-extraconf \
@@ -42,4 +40,7 @@ RDM_INSTALL = "${RDM_BASE_INSTALL} \
 	ksm-init \
 "
 RECOVER_INSTALL="parted \
+"
+SKIPPED_DEPS = "collectd \
+	sysdetails \
 "
