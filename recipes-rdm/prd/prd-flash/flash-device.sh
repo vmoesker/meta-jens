@@ -131,7 +131,7 @@ then
 
     if test -e /dev/mmcblk@KERNEL_SD_DEV@
     then
-	if [ "$SDCARD_IMAGE" != "1" ]
+	if [ "$SDCARD_IMAGE" = "1" ]
 	then
             SDCARD_DEVICE="/dev/mmcblk@KERNEL_SD_DEV@"
 	fi
