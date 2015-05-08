@@ -16,6 +16,7 @@ Revision history for HomePilot
     - remove bluetooth feature
     - split initscripts into separate packages on union to improve unionfs/overlayfs handling
     - add u-boot to dependencies for linux-curie
+    - cleanup deprecated scripts for alpha/beta tester
 
 4.0.8 2015-04-23
     - allow modifying hdmi tuning knobs and rebuild bootargs_base for smooth booting
