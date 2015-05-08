@@ -7,6 +7,7 @@ require recipes-kernel/linux/linux-imx.inc
 require recipes-kernel/linux/linux-dtb.inc
 
 DEPENDS += "lzop-native bc-native"
+DEPENDS_${PN} += "u-boot-curie"
 
 SRCBRANCH = "curie_3.10.17_1.0.0_ga"
 LOCALVERSION = "+curie"
