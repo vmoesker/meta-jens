@@ -1,8 +1,7 @@
 DESCRIPTION = "Linux kernel for Curie"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
-DEPENDS += "lzop-native"
-DEPENDS_${PN} += "u-boot-curie"
+DEPENDS += "lzop-native u-boot-curie"
 require recipes-kernel/linux/linux-imx.inc
 
 SRCREV = "681175b964d4f84755776260fa670f7aa20d13c7"
