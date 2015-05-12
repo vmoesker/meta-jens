@@ -7,7 +7,7 @@ DEPENDS_append_mx6 = " virtual/kernel virtual/libgles2 virtual/egl libfslvpuwrap
 
 SRC_URI = "git://github.com/xbmc/xbmc.git;rev=${SRCREV};branch=${SRCBRANCH}"
 SRCBRANCH = "Helix"
-SRCREV = "38e404661b56ea5c12460ca1a4079eef9c98d233"
+SRCREV = "7cc53a9a3da77869d1d5d3d3d9971b4bd1641b50"
 
 INC_PR = "r1"
 PR = "${INC_PR}.1"
