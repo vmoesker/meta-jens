@@ -4,6 +4,7 @@ SRC_URI += "http://internal.rdm.local/blobs/nginx-legal-0.2.tar.gz;name=legal \
 	http://internal.rdm.local/blobs/nginx-manual-0.4.tar.gz;name=manual \
 	http://internal.rdm.local/blobs/nginx-html-0.2.tar.gz;name=html \
 	file://nginx-varlib.volatiles \
+	file://nginx-logrotate.conf \
 "
 
 SRC_URI[legal.md5sum] = "ccb221827f2bcd827cca8db6a3d14d70"
@@ -57,4 +58,7 @@ do_install_append () {
 	install -o www -g www-data -m 0755 -t ${D}${localstatedir}/www/localhost/manual/ ${WORKDIR}/manual/*
 
 	install -m 644 ${WORKDIR}/nginx-varlib.volatiles ${D}${sysconfdir}/default/volatiles/98_nginx_varlib
+
+	install -m 755 -d ${D}${sysconfdir}/logrotate.d
+	install -m 644 ${WORKDIR}/nginx-logrotate.conf ${D}${sysconfdir}/logrotate.d/nginx
 }
