@@ -3,6 +3,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/collectd:"
 SRC_URI += "file://collectd-perl.patch \
             file://collectd-libstatgrab.patch \
             file://collectd.conf \
+            file://collectd-logrotate.conf \
 "
 
 PACKAGECONFIG[sensors] = "--enable-sensors --with-libsensors=yes, \
@@ -53,4 +54,8 @@ EXTRA_OECONF = " \
 
 do_install_append () {
 	install -m 644 ${WORKDIR}/collectd.conf ${D}/${sysconfdir}/
+
+	install -m 755 -d ${D}${sysconfdir}/logrotate.d
+	install -m 644 ${WORKDIR}/collectd-logrotate.conf ${D}${sysconfdir}/logrotate.d/collectd
+
 }
