@@ -37,4 +37,4 @@ do_install() {
 FILES_${PN} += "/opt/rdm/fb"
 
 INITSCRIPT_NAME = "init_fb"
-INITSCRIPT_PARAMS = "start 99 5 S. stop 20 0 1 6 ."
+INITSCRIPT_PARAMS = "start 99 5 . stop 20 0 1 6 ."
