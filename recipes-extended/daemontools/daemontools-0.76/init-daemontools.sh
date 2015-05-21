@@ -10,9 +10,6 @@
 
 case "$1" in
 	start)
-		mkdir /var/volatile/daemontools
-		(cd /etc && tar cf - daemontools) | (cd /var/volatile && tar xf -)
-		mount --bind /var/volatile/daemontools /etc/daemontools
 		/etc/init.d/svscanboot &
 		;;
 	stop)
