@@ -66,13 +66,20 @@ do
                     dn=`dirname "$path_entry"`
                     case "$bn" in
                     .wh.__dir_opaque)
-                        rm -rf "${dn}"
-                        ln -sf "(overlay-whiteout)" "${dn}"
+                        rm -rf "${dn}/.wh.__dir_opaque"
+                        setfattr -n "trusted.overlay.opaque" -v "y" "${dn}"
                         ;;
                     .wh.*)
+                        opaque="n"
+                        if [ -d "${path_entry}" -a -e "${path_entry}/.wh.__dir_opaque" ]
+                        then
+                            opaque="y"
+                        fi
                         rm -rf "$path_entry"
                         pure_bn=`echo $bn | sed -e 's/.wh.//'`
                         ln -sf "(overlay-whiteout)" "${dn}/${pure_bn}"
+                        setfattr -n "trusted.overlay.whiteout" -v "y" "${dn}/${pure_bn}"
+                        test "${opaque}" = "y" && setfattr -n "trusted.overlay.opaque" -v "y" "${dn}/${pure_bn}"
                         ;;
                     esac
                 done

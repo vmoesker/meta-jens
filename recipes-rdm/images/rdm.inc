@@ -4,6 +4,8 @@ RDM_BASE_INSTALL = "hp2sm \
 	init-iecset \
 	e2fsprogs \
 	e2fsprogs-tune2fs \
+	attr \
+	acl \
 	btrfs-tools \
 	dosfstools \
 	initoverlay \
