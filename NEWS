@@ -1,5 +1,41 @@
 Revision history for HomePilot
 
+4.0.14
+    - add libpam to openvpn dependencies
+    - update kodi to 14.2
+    - disable syslog for collectd
+    - sleep 120 seconds before setting ledbootup into ready state
+    - add cronie
+    - add logrotate configuration for collectd
+    - add logrotate configuration for nginx
+    - add logrotate configuration for system-image-update and remove custom log rotation on startup
+    - add logrotate configuration for collectd and run logrotate on startup
+    - add hp2sm log
+    - add dfservice log
+    - improve logrotate configuration
+        disable dateext to use a number instead of a date extension
+        set size to 1M
+        disable log rotation for btmp and wtmp
+        add daily cron job to remove logrotate state file
+    - update hp2sm
+        improve ssh key management
+            create non-existing ~/.ssh directory
+        rename XBMC to XBMC/Kodi
+        remove template relic
+        add log files for collectd
+        Style harmonization using Perl::Tidy
+    - update fb-init
+        Create pictures only if IP-Address changed!
+        Fixed minor bugs (waiting text, copy framebuffer-picture)
+        Fixed Fontsize
+    - fix fb-init startup
+    - update service-df
+        bugfix for uid and add forgotten lock command
+    - revert "remove patch to handle additional cooling information"
+    - fix unionfs -> overlayfs migration
+    - remove tmpfs workaround for daemontools
+    - apply security patches from poky/daisy
+
 4.0.13 2015-05-12
     - prepare test image
         - pick unionfs for linux-curie-3.10.17
