@@ -18,6 +18,7 @@ HPREV="4517"
 PV = "4.0.${HPREV}"
 SRC_URI = "svn://192.168.1.186/svn/EW_Prj/001/HP_Blob/trunk/;protocol=http;module=HomePilot_Blob;rev=${HPREV} \
                 file://dfservice.run \
+                file://dfservice-log.run \
                 file://homepilot.run \
                 file://homepilot-log.run \
                 file://homepilot.sh \
@@ -74,6 +75,7 @@ do_install() {
 	# 1 Create all the folders
 	install -d ${D}${SVC_SERVICES}/homepilot-network-manager
 	install -d ${D}${SVC_SERVICES}/dfservice
+	install -d ${D}${SVC_SERVICES}/dfservice/log
 	install -d ${D}${SVC_SERVICES}/homepilot
 	install -d ${D}${SVC_SERVICES}/homepilot/log
 	install -d ${D}${SVC_SERVICES}/jetty
@@ -83,6 +85,7 @@ do_install() {
 	# 2 Move all the run-files
 	install -m 0755 ${WORKDIR}/homepilot-network-manager.run ${D}${SVC_SERVICES}/homepilot-network-manager/run
 	install -m 0755 ${WORKDIR}/dfservice.run ${D}${SVC_SERVICES}/dfservice/run
+	install -m 0755 ${WORKDIR}/dfservice-log.run ${D}${SVC_SERVICES}/dfservice/log/run
 	install -m 0755 ${WORKDIR}/homepilot.run ${D}${SVC_SERVICES}/homepilot/run
 	install -m 0755 ${WORKDIR}/homepilot.sh ${D}${INST_DEST_PREFIX}/bin/homepilot
 	install -m 0755 ${WORKDIR}/homepilot-log.run ${D}${SVC_SERVICES}/homepilot/log/run
