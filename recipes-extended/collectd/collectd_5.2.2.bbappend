@@ -4,6 +4,8 @@ SRC_URI += "file://collectd-perl.patch \
             file://collectd-libstatgrab.patch \
             file://collectd.conf \
             file://collectd-logrotate.conf \
+	    file://logrotate-collectd.conf \
+	    file://collectd.init \
 "
 
 PACKAGECONFIG[sensors] = "--enable-sensors --with-libsensors=yes, \
@@ -11,7 +13,7 @@ PACKAGECONFIG[sensors] = "--enable-sensors --with-libsensors=yes, \
 PACKAGECONFIG[libstatgrab] = "--with-libstatgrab,--without-libstatgrab,libstatgrab,libstatgrab"
 
 DEPENDS += "perl-native"
-RDEPENDS_${PN} += "perl"
+RDEPENDS_${PN} += "logrotate perl"
 
 inherit cpan-base perlnative
 
@@ -57,5 +59,6 @@ do_install_append () {
 
 	install -m 755 -d ${D}${sysconfdir}/logrotate.d
 	install -m 644 ${WORKDIR}/collectd-logrotate.conf ${D}${sysconfdir}/logrotate.d/collectd
+	install -m 644 ${WORKDIR}/logrotate-collectd.conf ${D}${sysconfdir}/logrotate-collectd.conf
 
 }
