@@ -4,11 +4,6 @@ test -f /tmp/sysimg_update.once || rm -rf /data/.update/*
 test -f /tmp/sysimg_update.once || sleep 5m
 touch /tmp/sysimg_update.once
 
-if [ -f /var/log/sysimg_update.log -a `stat -c "%s" /var/log/sysimg_update.log` -gt 1048576 ]
-then
-    mv /var/log/sysimg_update.log /var/log/sysimg_update.log.old
-    xz /var/log/sysimg_update.log.old
-fi
 export SYSTEM_IMAGE_UPDATE_DIR=/data/.update
 export SYSTEM_IMAGE_UPDATE_FLASH_DIR=/data/.flashimg
 exec /usr/bin/sysimg_update
