@@ -103,8 +103,11 @@ then
     mkdir -p ${TEMP_DIR}/flashimg/root/boot ${TEMP_DIR}/flashimg/root/data
 
     mkfs.ext2 -I128 -L "boot-${LABEL}" ${SDCARD_DEVICE}p1
-    mount ${SDCARD_DEVICE}p1 ${TEMP_DIR}/flashimg/root/boot
     mkfs.ext4 -L "data-${LABEL}" ${SDCARD_DEVICE}p4
+    tune2fs -L "boot-${LABEL}" -o discard,block_validity ${SDCARD_DEVICE}p1
+    tune2fs -L "data-${LABEL}" -o journal_data,discard,block_validity ${SDCARD_DEVICE}p4
+
+    mount ${SDCARD_DEVICE}p1 ${TEMP_DIR}/flashimg/root/boot
     mount ${SDCARD_DEVICE}p4 ${TEMP_DIR}/flashimg/root/data
 
     dd if=${IMAGE_CONTAINER}/${UBOOT_BIN} of=${SDCARD_DEVICE} seek=2 skip=${UBOOT_PADDING} bs=512
