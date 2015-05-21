@@ -20,6 +20,7 @@ PV = "0.1"
 
 SRC_URI = "svn://192.168.1.186/svn/EW_Prj/001/HP_ServiceMonitor/trunk;protocol=http;module=hp2sm;rev=4603"
 SRC_URI += "file://hp2sm.run"
+SRC_URI += "file://hp2sm-log.run"
 S = "${WORKDIR}/hp2sm/src"
 
 SERVICE_ROOT = "${sysconfdir}/daemontools/service"
@@ -28,9 +29,11 @@ HP2SM_SERVICE_DIR = "${SERVICE_ROOT}/hp2sm"
 do_install() {
 	#create init.d directory
 	install -d ${D}${HP2SM_SERVICE_DIR}
+	install -d ${D}${HP2SM_SERVICE_DIR}/log
 	
 	#install svc run script and make it executable
 	install -m 0755 ${WORKDIR}/hp2sm.run ${D}${HP2SM_SERVICE_DIR}/run
+	install -m 0755 ${WORKDIR}/hp2sm-log.run ${D}${HP2SM_SERVICE_DIR}/log/run
 	
 	#create directory for source
 	install -d ${D}/opt/rdm/hp2sm
