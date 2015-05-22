@@ -1,6 +1,7 @@
 RDM_BASE_INSTALL = "hp2sm \
 	alsa-utils \
 	cronie \
+	collectd \
 	init-iecset \
 	e2fsprogs \
 	e2fsprogs-tune2fs \
@@ -45,6 +46,4 @@ RDM_INSTALL = "${RDM_BASE_INSTALL} \
 "
 RECOVER_INSTALL="parted \
 "
-SKIPPED_DEPS = "collectd \
-	sysdetails \
-"
+SKIPPED_DEPS = "sysdetails"
