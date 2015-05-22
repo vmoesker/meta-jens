@@ -1,6 +1,6 @@
 Revision history for HomePilot
 
-4.0.14
+4.0.14 2015-05-22
     - add libpam to openvpn dependencies
     - update kodi to 14.2
     - disable syslog for collectd
@@ -24,6 +24,7 @@ Revision history for HomePilot
         remove template relic
         add log files for collectd
         Style harmonization using Perl::Tidy
+        fix log files for collectd
     - update fb-init
         Create pictures only if IP-Address changed!
         Fixed minor bugs (waiting text, copy framebuffer-picture)
@@ -35,6 +36,7 @@ Revision history for HomePilot
     - fix unionfs -> overlayfs migration
     - remove tmpfs workaround for daemontools
     - apply security patches from poky/daisy
+    - re-enable collectd after tests
 
 4.0.13 2015-05-12
     - prepare test image
