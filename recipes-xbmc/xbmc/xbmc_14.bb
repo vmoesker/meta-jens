@@ -103,6 +103,7 @@ RDEPENDS_${PN} = " python-stringold \
                    shairplay \
                    libvorbis \
                    flac \
+		   lsb \
                  "
 
 FILES_${PN} += "/imx6 /usr/share/icons/hicolor"
