@@ -35,7 +35,6 @@ RDM_BASE_INSTALL = "hp2sm \
 	xz \
 	lsof \
 	logrotate \
-	thermaldetails \
 "
 RDM_INSTALL = "${RDM_BASE_INSTALL} \
 	udev-extraconf \
@@ -46,4 +45,6 @@ RDM_INSTALL = "${RDM_BASE_INSTALL} \
 "
 RECOVER_INSTALL="parted \
 "
-SKIPPED_DEPS = "sysdetails"
+SKIPPED_DEPS = "sysdetails \
+	thermaldetails \
+	"
