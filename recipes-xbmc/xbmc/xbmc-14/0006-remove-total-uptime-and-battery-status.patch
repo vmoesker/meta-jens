@@ -1,0 +1,29 @@
+From a44c6de0ae0c7a3ccce880e8c4428f88b22d53dd Mon Sep 17 00:00:00 2001
+From: tobw <tobw@users.noreply.github.com>
+Date: Wed, 27 May 2015 12:04:24 +0200
+Subject: [PATCH 6/6] remove total uptime and battery status
+
+---
+ xbmc/windows/GUIWindowSystemInfo.cpp | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/xbmc/windows/GUIWindowSystemInfo.cpp b/xbmc/windows/GUIWindowSystemInfo.cpp
+index 196a1c6..06f6df0 100644
+--- a/xbmc/windows/GUIWindowSystemInfo.cpp
++++ b/xbmc/windows/GUIWindowSystemInfo.cpp
+@@ -100,8 +100,12 @@ void CGUIWindowSystemInfo::FrameMove()
+     SetControlLabel(i++, "%s %s", 13283, SYSTEM_OS_VERSION_INFO);
+ #endif
+     SetControlLabel(i++, "%s: %s", 12390, SYSTEM_UPTIME);
++#ifdef HAS_TOTALUPTIME
+     SetControlLabel(i++, "%s: %s", 12394, SYSTEM_TOTALUPTIME);
++#endif
++#ifdef HAS_BATTERY_LEVEL
+     SetControlLabel(i++, "%s: %s", 12395, SYSTEM_BATTERY_LEVEL);
++#endif
+   }
+   else if (m_section == CONTROL_BT_STORAGE)
+   {
+-- 
+1.9.1
+

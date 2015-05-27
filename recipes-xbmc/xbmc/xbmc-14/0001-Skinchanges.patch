@@ -1,0 +1,144 @@
+From fe704caaeb96dcc31b85cfb266332ff5547fe757 Mon Sep 17 00:00:00 2001
+From: tobw <tobw@users.noreply.github.com>
+Date: Wed, 27 May 2015 12:00:25 +0200
+Subject: [PATCH 1/6] Skinchanges
+
+- add HomePilot addon to mainmenu
+- remove Profiles from mainmenu
+- remove Filemanager from mainmenu
+- remove PVR menues
+---
+ addons/skin.confluence/720p/Home.xml                  | 7 +++++++
+ addons/skin.confluence/720p/IncludesHomeMenuItems.xml | 2 ++
+ addons/skin.confluence/720p/Settings.xml              | 1 +
+ addons/skin.confluence/720p/SettingsSystemInfo.xml    | 1 +
+ addons/skin.confluence/language/Dutch/strings.po      | 4 ++++
+ addons/skin.confluence/language/English/strings.po    | 4 ++++
+ addons/skin.confluence/language/French/strings.po     | 4 ++++
+ addons/skin.confluence/language/German/strings.po     | 4 ++++
+ addons/skin.confluence/language/Spanish/strings.po    | 4 ++++
+ 9 files changed, 31 insertions(+)
+
+diff --git a/addons/skin.confluence/720p/Home.xml b/addons/skin.confluence/720p/Home.xml
+index 3646412..f29c085 100644
+--- a/addons/skin.confluence/720p/Home.xml
++++ b/addons/skin.confluence/720p/Home.xml
+@@ -904,6 +904,13 @@
+ 						<thumb>-</thumb>
+ 						<visible>!Skin.HasSetting(HomeMenuNoWeatherButton) + !IsEmpty(Weather.Plugin)</visible>
+ 					</item>
++					<item id="15">
++						<label>62345</label>
++						<onclick>RunAddon(script.homepilot)</onclick>
++						<icon>-</icon>
++						<thumb>-</thumb>
++						<visible></visible>
++					</item>
+ 					<item id="4">
+ 						<label>31951</label>
+ 						<onclick>ActivateWindow(Pictures)</onclick>
+diff --git a/addons/skin.confluence/720p/IncludesHomeMenuItems.xml b/addons/skin.confluence/720p/IncludesHomeMenuItems.xml
+index 1019cc7..da1a0ab 100644
+--- a/addons/skin.confluence/720p/IncludesHomeMenuItems.xml
++++ b/addons/skin.confluence/720p/IncludesHomeMenuItems.xml
+@@ -194,11 +194,13 @@
+ 			<include>ButtonHomeSubCommonValues</include>
+ 			<label>7</label>
+ 			<onclick>ActivateWindow(FileManager)</onclick>
++			<visible>false</visible>
+ 		</control>
+ 		<control type="button" id="90124">
+ 			<include>ButtonHomeSubCommonValues</include>
+ 			<label>13200</label>
+ 			<onclick>ActivateWindow(Profiles)</onclick>
++			<visible>false</visible>
+ 		</control>
+ 		<control type="button" id="90125">
+ 			<include>ButtonHomeSubCommonValues</include>
+diff --git a/addons/skin.confluence/720p/Settings.xml b/addons/skin.confluence/720p/Settings.xml
+index 72a5ad0..6352331 100644
+--- a/addons/skin.confluence/720p/Settings.xml
++++ b/addons/skin.confluence/720p/Settings.xml
+@@ -133,6 +133,7 @@
+ 						<label2>31409</label2>
+ 						<onclick>ActivateWindow(PVRSettings)</onclick>
+ 						<icon>special://skin/backgrounds/tv.jpg</icon>
++						<visible>false</visible>
+ 					</item>
+ 					<item id="4">
+ 						<label>2</label>
+diff --git a/addons/skin.confluence/720p/SettingsSystemInfo.xml b/addons/skin.confluence/720p/SettingsSystemInfo.xml
+index 27fdb9d..a6acd5b 100644
+--- a/addons/skin.confluence/720p/SettingsSystemInfo.xml
++++ b/addons/skin.confluence/720p/SettingsSystemInfo.xml
+@@ -161,6 +161,7 @@
+ 					<texturenofocus border="5">MenuItemNF.png</texturenofocus>
+ 					<pulseonselect>false</pulseonselect>
+ 					<label>19191</label>
++					<visible>false</visible>
+ 				</control>
+ 			</control>
+ 			<control type="image">
+diff --git a/addons/skin.confluence/language/Dutch/strings.po b/addons/skin.confluence/language/Dutch/strings.po
+index 62e0406..0bc00ed 100644
+--- a/addons/skin.confluence/language/Dutch/strings.po
++++ b/addons/skin.confluence/language/Dutch/strings.po
+@@ -611,3 +611,7 @@ msgstr "SYSTEEM"
+ msgctxt "#31960"
+ msgid "RADIO"
+ msgstr "RADIO"
++
++msgctxt "#62345"
++msgid "HOMEPILOT"
++msgstr "HOMEPILOT"
+diff --git a/addons/skin.confluence/language/English/strings.po b/addons/skin.confluence/language/English/strings.po
+index 8bfbd35..28167d5 100644
+--- a/addons/skin.confluence/language/English/strings.po
++++ b/addons/skin.confluence/language/English/strings.po
+@@ -697,3 +697,7 @@ msgstr ""
+ msgctxt "#31960"
+ msgid "RADIO"
+ msgstr ""
++
++msgctxt "#62345"
++msgid "HOMEPILOT"
++msgstr "HOMEPILOT"
+diff --git a/addons/skin.confluence/language/French/strings.po b/addons/skin.confluence/language/French/strings.po
+index 1e5490f..666ca2e 100644
+--- a/addons/skin.confluence/language/French/strings.po
++++ b/addons/skin.confluence/language/French/strings.po
+@@ -611,3 +611,7 @@ msgstr "SYSTÈME"
+ msgctxt "#31960"
+ msgid "RADIO"
+ msgstr "RADIO"
++
++msgctxt "#62345"
++msgid "HOMEPILOT"
++msgstr "HOMEPILOT"
+diff --git a/addons/skin.confluence/language/German/strings.po b/addons/skin.confluence/language/German/strings.po
+index 8eccf60..4518b03 100644
+--- a/addons/skin.confluence/language/German/strings.po
++++ b/addons/skin.confluence/language/German/strings.po
+@@ -611,3 +611,7 @@ msgstr "OPTIONEN"
+ msgctxt "#31960"
+ msgid "RADIO"
+ msgstr "RADIO"
++
++msgctxt "#62345"
++msgid "HOMEPILOT"
++msgstr "HOMEPILOT"
+diff --git a/addons/skin.confluence/language/Spanish/strings.po b/addons/skin.confluence/language/Spanish/strings.po
+index ba14f38..81bf6ec 100644
+--- a/addons/skin.confluence/language/Spanish/strings.po
++++ b/addons/skin.confluence/language/Spanish/strings.po
+@@ -611,3 +611,7 @@ msgstr "SISTEMA"
+ msgctxt "#31960"
+ msgid "RADIO"
+ msgstr "RADIO"
++
++msgctxt "#62345"
++msgid "HOMEPILOT"
++msgstr "HOMEPILOT"
+-- 
+1.9.1
+
