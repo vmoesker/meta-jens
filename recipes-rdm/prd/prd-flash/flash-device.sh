@@ -210,6 +210,9 @@ then
 	test -d /data/.shadow/.etc/daemontools/service && echo "/data/.shadow/.etc/daemontools/service" >> /etc/overlay.mrproper
 	test -f /data/.shadow/.etc/sysimg_update.json && echo "/data/.shadow/.etc/sysimg_update.json" >> /etc/overlay.mrproper
 
+	logger "Cleanup deprecated xbmc folder"
+	test -d /data/.shadow/.home/xbmc/.xbmc && echo "/data/.shadow/.home/xbmc/.xbmc" >> /etc/overlay.mrproper
+
 	logger "Removing update container"
 	rm -f "${IMAGE_CONTAINER}"
 	logger "Force rebuild of volatiles.cache next boot"
