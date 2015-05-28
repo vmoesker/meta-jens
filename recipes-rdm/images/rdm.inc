@@ -12,6 +12,7 @@ RDM_BASE_INSTALL = "hp2sm \
 	initoverlay \
 	system-image-update \
 	prd-flash \
+	boot-fsck \
 	nano \
 	ledctrl \
 	mmc-slowdown \
