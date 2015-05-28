@@ -14,6 +14,7 @@ RDM_BASE_INSTALL = "hp2sm \
 	prd-flash \
 	nano \
 	ledctrl \
+	mmc-slowdown \
 	fb-cursor-off \
 	sudo \
 	qbrqry \
