@@ -17,6 +17,7 @@ Revision history for HomePilot
     - add wrc log
     - fsck at boot
     - clean up xbmc since kodi is deployed
+    - cleanup thermaldetails data for alpha/beta tester
 
 4.0.14 2015-05-22
     - add libpam to openvpn dependencies
