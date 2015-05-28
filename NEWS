@@ -1,5 +1,20 @@
 Revision history for HomePilot
 
+4.0.15
+    - move xbmc-13 files into dedicated directory
+    - add custom kodi configurations as suggested by pmm@
+        * add user defaults
+        * adjust cec settings
+        * disable fullscreen toggle
+        * enable custom RSS feeds
+        * remove total uptime and battery status
+        * set global default settings
+    - add lsb support for kodi
+    - disable thermaldetails
+    - improve logrotate configuration
+        * disable weekly rotation
+    - port linux-curie-3.0 eMMC failure workaround to more recent bsp's
+
 4.0.14 2015-05-22
     - add libpam to openvpn dependencies
     - update kodi to 14.2
