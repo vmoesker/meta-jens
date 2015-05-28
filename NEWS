@@ -14,6 +14,7 @@ Revision history for HomePilot
     - improve logrotate configuration
         * disable weekly rotation
     - port linux-curie-3.0 eMMC failure workaround to more recent bsp's
+    - add wrc log
 
 4.0.14 2015-05-22
     - add libpam to openvpn dependencies
