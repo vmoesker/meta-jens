@@ -206,6 +206,9 @@ then
 	test -d /data/.shadow/.etc/init.d/ && echo "/data/.shadow/.etc/init.d/" >> /etc/overlay.mrproper
 	test -d /data/.shadow/.etc/rc5.d/ && echo "/data/.shadow/.etc/rc5.d/" >> /etc/overlay.mrproper
 
+	logger "Cleanup thermaldetails data"
+	test -d /data/thermaldetails/ && echo "/data/thermaldetails/" >> /etc/overlay.mrproper
+
 	logger "Cleanup services"
 	test -d /data/.shadow/.etc/daemontools/service && echo "/data/.shadow/.etc/daemontools/service" >> /etc/overlay.mrproper
 	test -f /data/.shadow/.etc/sysimg_update.json && echo "/data/.shadow/.etc/sysimg_update.json" >> /etc/overlay.mrproper
