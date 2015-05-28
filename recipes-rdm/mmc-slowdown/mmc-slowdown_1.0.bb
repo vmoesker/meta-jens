@@ -28,4 +28,4 @@ do_install () {
 }
 
 INITSCRIPT_NAME = "mmc-slowdown"
-INITSCRIPT_PARAMS = "start 04 S ."
+INITSCRIPT_PARAMS = "start 01 S ."
