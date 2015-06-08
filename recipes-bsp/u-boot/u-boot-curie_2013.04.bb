@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-${PV}:"
 
 SRCBRANCH = "curie_v2013.04_3.10.17"
-SRC_URI = "git://github.com/rdm-dev/uboot-curie.git;branch=${SRCBRANCH};rev=f3b5656dc2b31d3d2044f18495b34b9e521f86d9 \
+SRC_URI = "git://github.com/rdm-dev/uboot-curie.git;branch=${SRCBRANCH};rev=f8769741a13cbb34efb9ca6a1617e08d2a0f511f \
            file://bootsettings.patch \
 	   "
 

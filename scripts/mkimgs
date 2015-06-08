@@ -28,16 +28,19 @@ set -e
 BITBAKE_OPTIONS="-k"
 bitbake ${BITBAKE_OPTIONS} ${IMAGES} || bitbake ${IMAGES}
 
-BITBAKE_SETTINGS=`bitbake -e system-image | egrep "(KERNEL_DEVICETREE|UBOOT_SUFFIX|UBOOT_PADDING|PV|MACHINE_ARCH|SDCARD_IMAGE)=" | sed -e "s/MACHINE_ARCH/MACHINE/" -e "s/PV/SYSIMG_VERSION/" -e "s/KERNEL_DEVICETREE/KERNEL_DEVICE_TREE/"`
+BITBAKE_SETTINGS=`bitbake -e system-image | egrep "(KERNEL_DEVICETREE|UBOOT_SUFFIX|UBOOT_PADDING|PV|MACHINE_ARCH|SDCARD_IMAGE|USBSTICK_IMAGE)=" | sed -e "s/MACHINE_ARCH/MACHINE/" -e "s/PV/SYSIMG_VERSION/" -e "s/KERNEL_DEVICETREE/KERNEL_DEVICE_TREE/"`
 eval $BITBAKE_SETTINGS
 test -z "${UBOOT_PADDING}" && UBOOT_PADDING=0
 test -z "${SDCARD_IMAGE}" && SDCARD_IMAGE=0
+test -z "${USBSTICK_IMAGE}" && USBSTICK_IMAGE=0
+test "${USBSTICK_IMAGE}" -eq 1 && SDCARD_IMAGE=0
 
 DEPLOY_DIR_IMAGE="tmp/deploy/images/${MACHINE}"
 KERNEL_IMAGETYPE="uImage"
 
 PREFIX=""
 test $SDCARD_IMAGE -eq 1 && PREFIX="sd"
+test $USBSTICK_IMAGE -eq 1 && PREFIX="usb"
 LABEL="${PREFIX}${MACHINE}"
 
 script_bin="`readlink ${DEPLOY_DIR_IMAGE}/bootscript`"
@@ -74,11 +77,13 @@ for IMAGE in ${BUILD_IMAGES}
 do
     SYSIMG_FILES=".${IMAGE}-${SYSIMG_VERSION}-settings .settings"
     FILES="${SYSIMG_FILES} ${KERNEL_FILES}"
+    DEV=0
     RECOVERY_IMAGE="rdm-core-image"
 
     set +e
     echo $IMAGE | fgrep -e "-dev-image"
-    test $? -eq 0 && RECOVERY_IMAGE="rdm-core-dev-image"
+    test $? -eq 0 && DEV=1
+    test "$DEV" -eq 1 && RECOVERY_IMAGE="rdm-core-dev-image"
     set -e
 
     uboot_bin="`readlink ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.${UBOOT_SUFFIX}`"
@@ -103,6 +108,7 @@ KERNEL_PREPARE="${KERNEL_PREPARE}"
 KERNEL_RECOVERY="${KERNEL_RECOVERY}"
 KERNEL_SANITIZE="${KERNEL_SANITIZE}"
 SDCARD_IMAGE="${SDCARD_IMAGE}"
+USBSTICK_IMAGE="${USBSTICK_IMAGE}"
 LABEL="${LABEL}"
 EOS
 

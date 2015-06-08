@@ -4,10 +4,9 @@ hostname := "homepilot"
 volatiles := ""
 
 do_install_append () {
-    PREFIX=""
-    test ${SDCARD_IMAGE} -eq 1 && PREFIX="sd"
-    LABEL="${PREFIX}${MACHINE}"
-    sed -i -e "s,@LABEL@,${LABEL},g" -e "s,@KERNEL_MMC_DEV@,${KERNEL_MMC_DEV},g" \
+    BOOT_DEV="mmcblk${KERNEL_MMC_DEV}p"
+    test ${USBSTICK_IMAGE} -eq 1 && BOOT_DEV="sda"
+    sed -i -e "s,@BOOT_DEV@,${BOOT_DEV},g" \
          -e "s,@overlayfs@,${OVERLAYFS},g" -e "s,@unionfs@,${UNIONFS},g" \
         ${D}/${sysconfdir}/fstab
 

@@ -15,6 +15,7 @@ test "${FLOCKER}" != "@ARGV0@" && exec env FLOCKER="@ARGV0@" flock -en "@ARGV0@"
 logger -s "Starting flash ..."
 
 SDCARD_DEVICE="/dev/mmcblk@KERNEL_EMMC_DEV@"
+SDCARD_PREFIX="${SDCARD_DEVICE}p"
 UNION_SHADOWS=".shadow/.etc .shadow/.home"
 
 # use last image container
@@ -39,15 +40,26 @@ if [ -d "${IMAGE_CONTAINER}" ]
 then
     . "${IMAGE_CONTAINER}"/.settings
 
-    if test -e /dev/mmcblk@KERNEL_SD_DEV@
+    if test -e /dev/sda
+    then
+	if [ "$USBSTICK_IMAGE" != 1 ]
+	then
+	    logger -s "Cannot flash incompatible image (USB stick but no USB image)"
+	    exit 1
+	fi
+
+	SDCARD_DEVICE="/dev/sda"
+	SDCARD_PREFIX="${SDCARD_DEVICE}"
+    elif test -e /dev/mmcblk@KERNEL_SD_DEV@
     then
 	if [ "$SDCARD_IMAGE" != "1" ]
 	then
-	    logger -s "Cannot flash incompatible image"
+	    logger -s "Cannot flash incompatible image (SD card but no SD card image)"
 	    exit 1
 	fi
 
 	SDCARD_DEVICE="/dev/mmcblk@KERNEL_SD_DEV@"
+	SDCARD_PREFIX="${SDCARD_DEVICE}p"
     fi
 
     echo 0 >/sys/class/leds/user1/brightness
@@ -63,11 +75,10 @@ then
     SDCARD_SIZE=`fdisk -l $SDCARD_DEVICE | grep "Disk $SDCARD_DEVICE" | awk '{print $5}'`
     SDCARD_SIZE=$(expr $SDCARD_SIZE \/ 1024)
 
-    if test -n "$DEV" -a "$DEV" -eq 0
+    ROOTFS_SIZE=$(expr 1024 \* 512)
+    RECOVERY_SIZE=$(expr 1024 \* 128)
+    if test "$DEV" -eq 1
     then
-	ROOTFS_SIZE=$(expr 1024 \* 512)
-	RECOVERY_SIZE=$(expr 1024 \* 128)
-    else
 	ROOTFS_SIZE=$(expr 1024 \* 1024)
 	RECOVERY_SIZE=$(expr 1024 \* 512)
     fi
@@ -91,7 +102,7 @@ then
     RECOVERFS_SPACE_END=$(expr ${RECOVERFS_SPACE_START} \+ ${RECOVERY_SIZE_ALIGNED})
 
     # wipe them out ... all of them
-    dd if=/dev/zero of=${SDCARD_DEVICE} bs=1M count=512
+    dd if=/dev/zero of=${SDCARD_DEVICE} bs=1M count=64
 
     parted -s ${SDCARD_DEVICE} mklabel msdos
     parted -s ${SDCARD_DEVICE} unit KiB mkpart primary ${BOOT_SPACE_START} ${BOOT_SPACE_END}
@@ -102,17 +113,17 @@ then
 
     mkdir -p ${TEMP_DIR}/flashimg/root/boot ${TEMP_DIR}/flashimg/root/data
 
-    mkfs.ext2 -I128 -L "boot-${LABEL}" ${SDCARD_DEVICE}p1
-    mkfs.ext4 -L "data-${LABEL}" ${SDCARD_DEVICE}p4
-    tune2fs -L "boot-${LABEL}" -o discard,block_validity ${SDCARD_DEVICE}p1
-    tune2fs -L "data-${LABEL}" -o journal_data,discard,block_validity ${SDCARD_DEVICE}p4
+    mkfs.ext2 -I128 -L "boot-${LABEL}" ${SDCARD_PREFIX}1
+    mkfs.ext4 -L "data-${LABEL}" ${SDCARD_PREFIX}4
+    tune2fs -L "boot-${LABEL}" -o discard,block_validity ${SDCARD_PREFIX}1
+    tune2fs -L "data-${LABEL}" -o journal_data,discard,block_validity ${SDCARD_PREFIX}4
 
-    mount ${SDCARD_DEVICE}p1 ${TEMP_DIR}/flashimg/root/boot
-    mount ${SDCARD_DEVICE}p4 ${TEMP_DIR}/flashimg/root/data
+    mount ${SDCARD_PREFIX}1 ${TEMP_DIR}/flashimg/root/boot
+    mount ${SDCARD_PREFIX}4 ${TEMP_DIR}/flashimg/root/data
 
     dd if=${IMAGE_CONTAINER}/${UBOOT_BIN} of=${SDCARD_DEVICE} seek=2 skip=${UBOOT_PADDING} bs=512
-    dd if=${IMAGE_CONTAINER}/${ROOTIMG} of=${SDCARD_DEVICE}p2 bs=1M
-    dd if=${IMAGE_CONTAINER}/${RECOVERIMG} of=${SDCARD_DEVICE}p3 bs=1M
+    dd if=${IMAGE_CONTAINER}/${ROOTIMG} of=${SDCARD_PREFIX}2 bs=1M
+    dd if=${IMAGE_CONTAINER}/${RECOVERIMG} of=${SDCARD_PREFIX}3 bs=1M
 
     (cd "${IMAGE_CONTAINER}" && tar cf - ${KERNEL}) | (cd ${TEMP_DIR}/flashimg/root/boot && tar xf - && chown -R root:root . && eval ${KERNEL_PREPARE} && eval ${KERNEL_SANITIZE})
 
@@ -125,18 +136,27 @@ then
 
     sync
 
-    test -e /dev/mmcblk1 || reboot
+    test "${SDCARD_DEVICE}" = "/dev/mmcblk@KERNEL_EMMC_DEV@" && reboot
 elif [ -f "${IMAGE_CONTAINER}" ]
 then
     tar xjf "${IMAGE_CONTAINER}" .settings
     . ./.settings
     rm -f .settings
 
+    if test -e /dev/sda
+    then
+	if [ "$USBSTICK_IMAGE" = "1" ]
+	then
+            SDCARD_DEVICE="/dev/sda"
+	    SDCARD_PREFIX="${SDCARD_DEVICE}"
+	fi
+    fi
     if test -e /dev/mmcblk@KERNEL_SD_DEV@
     then
 	if [ "$SDCARD_IMAGE" = "1" ]
 	then
             SDCARD_DEVICE="/dev/mmcblk@KERNEL_SD_DEV@"
+	    SDCARD_PREFIX="${SDCARD_DEVICE}p"
 	fi
     fi
 
@@ -158,13 +178,13 @@ then
 	echo 0 >/sys/class/leds/user2/brightness
 	echo heartbeat >/sys/class/leds/user2/trigger
 
-	tune2fs -L "boot-${LABEL}" -o discard,block_validity ${SDCARD_DEVICE}p1
-	tune2fs -L "data-${LABEL}" -o journal_data,discard,block_validity ${SDCARD_DEVICE}p4
+	tune2fs -L "boot-${LABEL}" -o discard,block_validity ${SDCARD_PREFIX}1
+	tune2fs -L "data-${LABEL}" -o journal_data,discard,block_validity ${SDCARD_PREFIX}4
 
 	logger "Going to extract u-boot"
 	tar xjf "${IMAGE_CONTAINER}" -O ${UBOOT_BIN} | dd of=${SDCARD_DEVICE} seek=2 skip=${UBOOT_PADDING} bs=512
 	logger "Going to extract recovery image"
-	tar xjf "${IMAGE_CONTAINER}" -O ${RECOVERIMG} | dd of=${SDCARD_DEVICE}p3 bs=1M
+	tar xjf "${IMAGE_CONTAINER}" -O ${RECOVERIMG} | dd of=${SDCARD_PREFIX}3 bs=1M
 
 	mount /boot
 
@@ -185,7 +205,7 @@ then
 	echo heartbeat >/sys/class/leds/user1/trigger
 
 	logger "Going to extract rootfs image"
-	tar xjf "${IMAGE_CONTAINER}" -O ${ROOTIMG} | dd of=${SDCARD_DEVICE}p2 bs=1M
+	tar xjf "${IMAGE_CONTAINER}" -O ${ROOTIMG} | dd of=${SDCARD_PREFIX}2 bs=1M
 	logger "Sanitize kernel"
 	mount /boot
 	(cd /boot && eval ${KERNEL_SANITIZE})

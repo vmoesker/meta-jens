@@ -20,8 +20,9 @@ SRC_URI = "git://github.com/rdm-dev/linux-curie.git;branch=${SRCBRANCH};rev=b280
 	   file://unionfs-2.6_for_3.10.53.patch \
 	   file://overlayfs-v18.patch \
 	   file://defconfig \
-	   file://bootscript \
+	   file://bootscript.mmc \
 	   file://bootscript.nfs \
+	   file://bootscript.usb \
           "
 
 # patches for curie
@@ -31,9 +32,10 @@ do_install_append () {
     sed -i -e "s/@UBOOT_LOADADDRESS[@]/${UBOOT_LOADADDRESS}/g" -e "s/@UBOOT_FDTADDRESS[@]/${UBOOT_FDTADDRESS}/g" \
          -e "s/@UBOOT_MMC_DEV[@]/${UBOOT_MMC_DEV}/g" -e "s/@SDCARD_IMAGE[@]/${SDCARD_IMAGE}/g" \
          -e "s/@KERNEL_MMC_DEV[@]/${KERNEL_MMC_DEV}/g" \
-	 ${WORKDIR}/bootscript ${WORKDIR}/bootscript.nfs
-    uboot-mkimage -T script -C none -n 'Curie Script' -d ${WORKDIR}/bootscript ${D}/boot/bootscript
+	 ${WORKDIR}/bootscript.mmc ${WORKDIR}/bootscript.nfs ${WORKDIR}/bootscript.usb
+    uboot-mkimage -T script -C none -n 'Curie Script' -d ${WORKDIR}/bootscript.mmc ${D}/boot/bootscript.mmc
     uboot-mkimage -T script -C none -n 'Curie Script' -d ${WORKDIR}/bootscript.nfs ${D}/boot/bootscript.nfs
+    uboot-mkimage -T script -C none -n 'Curie Script' -d ${WORKDIR}/bootscript.usb ${D}/boot/bootscript.usb
 
     echo "options 8189es rtw_power_mgnt=0" >${WORKDIR}/8189es.conf
     install -d ${D}${sysconfdir}/modprobe.d/
@@ -41,10 +43,17 @@ do_install_append () {
 }
 
 do_deploy_append () {
-    cp ${D}/boot/bootscript ${DEPLOYDIR}/bootscript-${DATETIME}
+    set -x
+    cp ${D}/boot/bootscript.mmc ${DEPLOYDIR}/bootscript.mmc-${DATETIME}
     cp ${D}/boot/bootscript.nfs ${DEPLOYDIR}/bootscript.nfs-${DATETIME}
-    ln -sf bootscript-${DATETIME} ${DEPLOYDIR}/bootscript
+    cp ${D}/boot/bootscript.usb ${DEPLOYDIR}/bootscript.usb-${DATETIME}
+    ln -sf bootscript.mmc-${DATETIME} ${DEPLOYDIR}/bootscript.mmc
     ln -sf bootscript.nfs-${DATETIME} ${DEPLOYDIR}/bootscript.nfs
+    ln -sf bootscript.usb-${DATETIME} ${DEPLOYDIR}/bootscript.usb
+
+    ln -sf bootscript.mmc-${DATETIME} ${DEPLOYDIR}/bootscript
+    test ${USBSTICK_IMAGE} -eq 1 && ln -sf bootscript.usb-${DATETIME} ${DEPLOYDIR}/bootscript
+    : # exit 0
 }
 
-FILES_kernel-image += "/boot/bootscript /boot/bootscript.nfs"
+FILES_kernel-image += "/boot/bootscript.mmc /boot/bootscript.nfs /boot/bootscript.usb"

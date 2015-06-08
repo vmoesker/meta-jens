@@ -1,5 +1,5 @@
 diff --git a/include/configs/mx6qcurie.h b/include/configs/mx6qcurie.h
-index 1c7da3f..f143caf 100644
+index cc74af1..ce84b3f 100644
 --- a/include/configs/mx6qcurie.h
 +++ b/include/configs/mx6qcurie.h
 @@ -20,7 +20,12 @@
@@ -24,7 +24,7 @@ index 1c7da3f..f143caf 100644
  #define CONFIG_EHCI_HCD_INIT_AFTER_RESET
  #define CONFIG_USB_HOST_ETHER
 @@ -39,8 +45,6 @@
- #define CONFIG_USB_MAX_CONTROLLER_COUNT 1 /* Enabled USB controller number */
+ #define CONFIG_USB_MAX_CONTROLLER_COUNT 2 /* Enabled USB controller number */
  
  #define CONFIG_SYS_FSL_USDHC_NUM	2
 -#define CONFIG_SYS_MMC_ENV_DEV		1	/* SDHC4 */
@@ -33,7 +33,7 @@ index 1c7da3f..f143caf 100644
  #ifdef CONFIG_SYS_USE_SPINOR
  #define CONFIG_SF_DEFAULT_CS   (0|(IMX_GPIO_NR(4, 9)<<8))
 diff --git a/include/configs/mx6qcurie_common.h b/include/configs/mx6qcurie_common.h
-index 6c703a1..a458435 100644
+index 6c703a1..596963e 100644
 --- a/include/configs/mx6qcurie_common.h
 +++ b/include/configs/mx6qcurie_common.h
 @@ -114,18 +114,11 @@
@@ -60,7 +60,7 @@ index 6c703a1..a458435 100644
  
  #define CONFIG_MFG_ENV_SETTINGS \
  	"mfgtool_args=setenv bootargs console=" CONFIG_CONSOLE_DEV ",115200 " \
-@@ -178,79 +171,49 @@
+@@ -178,80 +171,53 @@
  #else
  #define CONFIG_EXTRA_ENV_SETTINGS \
  	CONFIG_MFG_ENV_SETTINGS \
@@ -80,6 +80,7 @@ index 6c703a1..a458435 100644
 -	"\0" \
 -	"mmcpart=" __stringify(CONFIG_SYS_MMC_IMG_LOAD_PART) "\0" \
 -	"mmcroot=" CONFIG_MMCROOT " rootwait rw\0" \
++	"bootargs_base=console=${console},${baudrate} oops=panic panic=5 ${smp} rootwait consoleblank=0\0" \
 +	CONFIG_EMMC_DEV_SET \
  	"smp=" CONFIG_SYS_NOSMP "\0"\
 -	"mmcargs=setenv bootargs console=${console},${baudrate} ${smp} " \
@@ -108,16 +109,15 @@ index 6c703a1..a458435 100644
 -	"netargs=setenv bootargs console=${console},${baudrate} ${smp} " \
 -		"root=/dev/nfs " \
 -		"ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp\0" \
-+	"hdmi_txterm=0x0005\0" \
-+	"hdmi_vlev=0x01ad\0" \
-+	"bootargs_base=console=${console},${baudrate} txterm=${hdmi_txterm} vlev=${hdmi_vlev} oops=panic panic=5 ${smp} rootwait consoleblank=0\0" \
-+	"set_bootargs_base=setenv bootargs_base=console=${console},${baudrate} txterm=${hdmi_txterm} vlev=${hdmi_vlev} oops=panic panic=5 ${smp} rootwait consoleblank=0\0" \
 +	"sdloadbootscript=" \
 +		"ext2load mmc ${sdcarddev}:${mmcpart} ${scriptaddr} ${script};\0" \
 +	"sdloadfdt=ext2load mmc ${sdcarddev}:${mmcpart} ${fdt_addr} ${fdt_file}\0" \
 +	"mmcloadbootscript=" \
 +		"ext2load mmc ${emmcdev}:${mmcpart} ${scriptaddr} ${script};\0" \
 +	"mmcloadfdt=ext2load mmc ${emmcdev}:${mmcpart} ${fdt_addr} ${fdt_file}\0" \
++	"usbloadbootscript=" \
++		"ext2load usb 0:${mmcpart} ${scriptaddr} ${script};\0" \
++	"usbloadfdt=ext2load usb 0:${mmcpart} ${fdt_addr} ${fdt_file}\0" \
 +	"bootscript=echo Running bootscript ...; " \
 +		"source ${scriptaddr}\0" \
  	"netboot=echo Booting from net ...; " \
@@ -142,28 +142,35 @@ index 6c703a1..a458435 100644
 -		"else " \
 -			"bootm; " \
 -		"fi;\0"
-+		"tftp ${scriptaddr} bootscript.nfs; " \
++		"tftp ${scriptaddr} ${script}.nfs; " \
 +		"run bootscript;\0"
  
  #define CONFIG_BOOTCOMMAND \
 -	"mmc dev ${mmcdev};" \
-+	"mmc dev ${emmcdev};" \
- 	"if mmc rescan; then " \
+-	"if mmc rescan; then " \
 -		"if run loadbootscript; then " \
-+	    "if run sdloadbootscript; then " \
- 		"run bootscript; " \
+-		"run bootscript; " \
 -		"else " \
 -			"if run loaduimage; then " \
 -				"run mmcboot; " \
 -			"else run netboot; " \
 -			"fi; " \
 -		"fi; " \
-+	    "else if run mmcloadbootscript; then " \
-+		"run bootscript; " \
-+	    "else " \
-+	        "run netboot; "\
-+	    "fi;" \
-+	    "fi;" \
- 	"else run netboot; fi"
+-	"else run netboot; fi"
++	"mmc dev ${emmcdev};" \
++	"usb start;" \
++	"mmc rescan; " \
++	"if run usbloadbootscript; then " \
++	    "run bootscript; " \
++	"else if run sdloadbootscript; then " \
++	    "run bootscript; " \
++	"else if run mmcloadbootscript; then " \
++	    "run bootscript; " \
++	"else " \
++	    "run netboot; "\
++	"fi;" \
++	"fi;" \
++	"fi"
  #endif
  #define CONFIG_ARP_TIMEOUT     200UL
+ 
