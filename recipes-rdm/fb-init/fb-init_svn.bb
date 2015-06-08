@@ -9,7 +9,7 @@ RDEPENDS_${PN} = "fbset imagemagick liberation-fonts"
 
 PV = "0.1"
 
-SRC_URI = "svn://192.168.1.186/svn/EW_Prj/001/HP_FrameBuffer/trunk/;protocol=http;module=IEBF;rev=4590"
+SRC_URI = "svn://192.168.1.186/svn/EW_Prj/001/HP_FrameBuffer/trunk/;protocol=http;module=IEBF;rev=4645"
 S = "${WORKDIR}/IEBF/src"
 
 inherit update-rc.d
