@@ -9,11 +9,6 @@ DEPENDS = "linux-curie"
 
 SRC_URI = "file://mmc-slowdown.sh"
 
-inherit update-rc.d
-
-ALTERNATIVE_PRIORITY = "100"
-ALTERNATIVE_LINK_NAME[mmc_slowdown] = "${D}${sysconfdir}/init.d/mmc-slowdown"
-
 do_compile () {
 	sed -i -e "s/@KERNEL_MMC_DEV[@]/${KERNEL_MMC_DEV}/g" \
 	    ${WORKDIR}/mmc-slowdown.sh
@@ -26,6 +21,3 @@ do_install () {
 	#install init.d script and make it executable
 	install -m 0755 ${WORKDIR}/mmc-slowdown.sh ${D}${sysconfdir}/init.d/mmc-slowdown
 }
-
-INITSCRIPT_NAME = "mmc-slowdown"
-INITSCRIPT_PARAMS = "start 01 S ."

@@ -10,6 +10,7 @@
 
 case "$1" in
         start)
+		test -x /etc/init.d/mmc-slowdown && /etc/init.d/mmc-slowdown
                 fsck -a -p -t ext2
                 fsck -a -p -t ext4
                 ;;
