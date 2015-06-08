@@ -11,11 +11,19 @@ bitbake_var() {
     bitbake -e system-image 2>&1 | egrep "^($@)="
 }
 
+set -x
+
+RECIPE_DIR="`dirname $0`"
+while [ ! -d "${RECIPE_DIR}/conf" ];
+do
+    RECIPE_DIR="`realpath ${RECIPE_DIR}/..`"
+done
+DISTRO_VERSION_FILE="conf/distro/rdm.conf"
+DISTRO_VERSION_PATH="${RECIPE_DIR}/${DISTRO_VERSION_FILE}"
 BUILDPATH="$1"; shift
 BRANCH="$1"; shift
 
 set -e
-set -x
 
 cd "${BUILDPATH}"
 git fetch --all
@@ -32,7 +40,7 @@ do
 done
 
 # XXX good example why we shall rewrite it as soon as pkgsrc is up-to-date (Packager::Utils ^^)
-BITBAKE_SETTINGS=`bitbake_var "PV|BSPDIR|FILE_DIRNAME|FILE" | sed -e "s/PV/SYSIMG_VERSION/" -e "s/FILE_DIRNAME/RECIPE_DIR/" -e "s/FILE/SYSIMG_VERSION_RECIPE/"`
+BITBAKE_SETTINGS=`bitbake_var "PV|BSPDIR" | sed -e "s/PV/SYSIMG_VERSION/"`
 eval $BITBAKE_SETTINGS
 
 cd "${RECIPE_DIR}"
@@ -59,5 +67,5 @@ do
     git tag "$SYSIMG_VERSION" && git push --tags || :
 done
 
-sed -i -e "s/${SYSIMG_VERSION}/${SYSIMG_BUMPED}/" "${SYSIMG_VERSION_RECIPE}"
-(cd "${RECIPE_DIR}" && git commit -m "bump version after release to ${SYSIMG_BUMPED}" `basename "${SYSIMG_VERSION_RECIPE}"` && git push)
+sed -i -e "s/${SYSIMG_VERSION}/${SYSIMG_BUMPED}/" "${DISTRO_VERSION_FILE}"
+(cd "${RECIPE_DIR}" && git commit -m "bump version after release to ${SYSIMG_BUMPED}" "${DISTRO_VERSION_FILE}" && git push)
