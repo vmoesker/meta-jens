@@ -2,6 +2,7 @@ RDM_BASE_INSTALL = "hp2sm \
 	alsa-utils \
 	cronie \
 	collectd \
+        date-set \
 	init-iecset \
 	e2fsprogs \
 	e2fsprogs-tune2fs \
