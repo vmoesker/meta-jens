@@ -1,6 +1,7 @@
 Revision history for HomePilot
 
 4.0.16 2015-06-11
+    - update kernel to latest 3.10 patchelvel (3.10.80)
     - add capability to boot from usb stick
     - eMMC slowdown and correct order of early boot scripts
     - rename the distribution to "Homepilot"
