@@ -8,6 +8,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 RDEPENDS_${PN} += "dancer2-perl yaml-libyaml-perl file-slurp-tiny-perl"
 RDEPENDS_${PN} += "unix-statgrab-perl"
+RDEPENDS_${PN} += "libwww-perl-perl"
 RDEPENDS_${PN} += "scalar-list-utils-perl"
 RDEPENDS_${PN} += "perl-modules"
 RDEPENDS_${PN} += "daemontools"
@@ -18,7 +19,7 @@ RDEPENDS_${PN} += "test-memory-cycle-perl test-leaktrace-perl"
 
 PV = "0.1"
 
-SRC_URI = "svn://192.168.1.186/svn/EW_Prj/001/HP_ServiceMonitor/trunk;protocol=http;module=hp2sm;rev=4641"
+SRC_URI = "svn://192.168.1.186/svn/EW_Prj/001/HP_ServiceMonitor/trunk;protocol=http;module=hp2sm;rev=4653"
 SRC_URI += "file://hp2sm.run"
 SRC_URI += "file://hp2sm-log.run"
 S = "${WORKDIR}/hp2sm/src"
