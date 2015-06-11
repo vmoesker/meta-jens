@@ -8,15 +8,15 @@ require recipes-kernel/linux/linux-dtb.inc
 
 DEPENDS += "lzop-native bc-native u-boot-curie"
 
-SRCBRANCH = "curie_3.10.17_1.0.0_ga"
+REV="3a898ae9c79b7b9e7780dfb5a327e56f36deebb3"
+SRCBRANCH = "curie_3.10.80_1.0.0_ga"
 LOCALVERSION = "+curie"
 
-SRC_URI = "git://github.com/rdm-dev/linux-curie.git;branch=${SRCBRANCH};rev=318f8d4de37c0206f6fc0d8284c5c4b603dc5e9b \
+SRC_URI = "git://github.com/rdm-dev/linux-curie.git;branch=${SRCBRANCH};rev=${REV} \
            file://0001-Importing-rtl8189es_4.3.0-driver.patch \
            file://0002-include-rtl8189es-driver-in-kernel-build.patch \
            file://0003-Add-platform-specific-modifications-for-Curie.patch \
            file://0004-don-t-printout-debug-message-when-DBG-is-off.patch \
-	   file://0099-handle-additional-cooling-info.patch \
 	   file://unionfs-2.6_for_3.10.53.patch \
 	   file://overlayfs-v18.patch \
 	   file://defconfig \
