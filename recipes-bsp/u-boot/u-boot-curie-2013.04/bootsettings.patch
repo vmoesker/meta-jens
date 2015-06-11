@@ -33,10 +33,10 @@ index cc74af1..ce84b3f 100644
  #ifdef CONFIG_SYS_USE_SPINOR
  #define CONFIG_SF_DEFAULT_CS   (0|(IMX_GPIO_NR(4, 9)<<8))
 diff --git a/include/configs/mx6qcurie_common.h b/include/configs/mx6qcurie_common.h
-index 6c703a1..596963e 100644
+index 479c839..b2aba1f 100644
 --- a/include/configs/mx6qcurie_common.h
 +++ b/include/configs/mx6qcurie_common.h
-@@ -114,18 +114,11 @@
+@@ -115,18 +115,11 @@
  #define CONFIG_MFG_NAND_PARTITION ""
  #endif
  
@@ -60,7 +60,7 @@ index 6c703a1..596963e 100644
  
  #define CONFIG_MFG_ENV_SETTINGS \
  	"mfgtool_args=setenv bootargs console=" CONFIG_CONSOLE_DEV ",115200 " \
-@@ -178,80 +171,53 @@
+@@ -179,80 +172,53 @@
  #else
  #define CONFIG_EXTRA_ENV_SETTINGS \
  	CONFIG_MFG_ENV_SETTINGS \

@@ -11,7 +11,7 @@ DEPENDS += "lzop-native bc-native u-boot-curie"
 SRCBRANCH = "curie_3.10.17_1.0.0_ga"
 LOCALVERSION = "+curie"
 
-SRC_URI = "git://github.com/rdm-dev/linux-curie.git;branch=${SRCBRANCH};rev=b2807877623804f5620db5e59371ce92ca9c443a \
+SRC_URI = "git://github.com/rdm-dev/linux-curie.git;branch=${SRCBRANCH};rev=318f8d4de37c0206f6fc0d8284c5c4b603dc5e9b \
            file://0001-Importing-rtl8189es_4.3.0-driver.patch \
            file://0002-include-rtl8189es-driver-in-kernel-build.patch \
            file://0003-Add-platform-specific-modifications-for-Curie.patch \
