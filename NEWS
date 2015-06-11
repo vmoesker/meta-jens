@@ -13,6 +13,7 @@ Revision history for HomePilot
         * show current update channel
         * improve language
         * use LWP::UserAgent instead of LWP::Simple
+        * check status before saving sysimg_update configuration
     - add date-set to update the system clock earlier on startup
     - update hp-blob
         * insert configuration from motion detector.
@@ -22,7 +23,7 @@ Revision history for HomePilot
         * insert a fast fix for Rollotron issue with second status message
     - add samba
     - update Perl modules from CPAN
-    - apply security patches from poky
+    - apply security patches from poky and open-embedded
 
 4.0.15 2015-05-28
     - move xbmc-13 files into dedicated directory
