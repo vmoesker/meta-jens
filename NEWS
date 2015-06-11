@@ -1,5 +1,29 @@
 Revision history for HomePilot
 
+4.0.16 2015-06-11
+    - add capability to boot from usb stick
+    - eMMC slowdown and correct order of early boot scripts
+    - rename the distribution to "Homepilot"
+    - fix serial and revision number displayed correctly
+    - improve collectd configuration to ignore bind and overlayfs mounts
+    - added nginx configuration for /mediaplayer
+    - update fb-init
+        * rename /xbmc to /mediaplayer
+    - update hp2sm
+        * show current update channel
+        * improve language
+        * use LWP::UserAgent instead of LWP::Simple
+    - add date-set to update the system clock earlier on startup
+    - update hp-blob
+        * insert configuration from motion detector.
+        * solve some bug fixes for motion detector.
+        * cconfigure motion detector for costumer revision
+    - update service-df
+        * insert a fast fix for Rollotron issue with second status message
+    - add samba
+    - update Perl modules from CPAN
+    - apply security patches from poky
+
 4.0.15 2015-05-28
     - move xbmc-13 files into dedicated directory
     - add custom kodi configurations as suggested by pmm@
