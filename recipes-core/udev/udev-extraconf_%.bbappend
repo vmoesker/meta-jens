@@ -11,6 +11,8 @@ do_install_prepend_mx6 () {
 	install -m 0644 ${WORKDIR}/10-imx-hdmi.rules ${D}${sysconfdir}/udev/rules.d
 	install -m 0644 ${WORKDIR}/10-galcore.rules ${D}${sysconfdir}/udev/rules.d
 	install -m 0644 ${WORKDIR}/platform-gpio-keys.rules ${D}${sysconfdir}/udev/rules.d
+
+        echo "/dev/mmcblk${KERNEL_MMC_DEV}p*" >> ${WORKDIR}/mount.blacklist
 }
 
 PACKAGE_ARCH_mx6 = "${MACHINE_ARCH}"
