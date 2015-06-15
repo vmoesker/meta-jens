@@ -8,6 +8,7 @@ Revision history for HomePilot
     - Update meta-openembedded (rrdtool + build fixes)
     - Fix patching the right file to bump version
     - Improve wiping - in speed and completeness
+    - avoid mounting recovery partition during normal operation
 
 4.0.16 2015-06-11
     - update kernel to latest 3.10 patchelvel (3.10.80)
