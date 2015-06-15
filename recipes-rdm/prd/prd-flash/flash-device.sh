@@ -102,7 +102,7 @@ then
     RECOVERFS_SPACE_END=$(expr ${RECOVERFS_SPACE_START} \+ ${RECOVERY_SIZE_ALIGNED})
 
     # wipe them out ... all of them
-    dd if=/dev/zero of=${SDCARD_DEVICE} bs=1M count=64
+    blkdiscard ${SDCARD_DEVICE}
 
     parted -s ${SDCARD_DEVICE} mklabel msdos
     parted -s ${SDCARD_DEVICE} unit KiB mkpart primary ${BOOT_SPACE_START} ${BOOT_SPACE_END}
