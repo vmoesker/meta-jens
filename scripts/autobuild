@@ -67,5 +67,5 @@ do
     git tag "$SYSIMG_VERSION" && git push --tags || :
 done
 
-sed -i -e "s/${SYSIMG_VERSION}/${SYSIMG_BUMPED}/" "${DISTRO_VERSION_FILE}"
+(cd "${RECIPE_DIR}" && sed -i -e "s/${SYSIMG_VERSION}/${SYSIMG_BUMPED}/" "${DISTRO_VERSION_FILE}")
 (cd "${RECIPE_DIR}" && git commit -m "bump version after release to ${SYSIMG_BUMPED}" "${DISTRO_VERSION_FILE}" && git push)
