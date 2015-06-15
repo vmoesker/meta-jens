@@ -3,12 +3,16 @@ Revision history for HomePilot
 4.0.17 2015-06-15
     - update hp2sm
       * fix developer page
+      * remove collectd log files
     - Update meta-cpan (Log::Dispatch, DBD::SQLite, DateTime::TimeZone ...)
     - Update poky (sqlite3 to 3.8.10.2)
     - Update meta-openembedded (rrdtool + build fixes)
     - Fix patching the right file to bump version
     - Improve wiping - in speed and completeness
     - avoid mounting recovery partition during normal operation
+    - add prerequisites for graph generation
+    - avoid rotating rrd's of collectd
+    - add volatiles configuration for alsa-utils
 
 4.0.16 2015-06-11
     - update kernel to latest 3.10 patchelvel (3.10.80)
