@@ -7,15 +7,17 @@ LIC_FILES_CHKSUM = "file://${THISDIR}/files/license.txt;md5=3ebe3464e841ddbf115a
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 RDEPENDS_${PN} += "dancer2-perl yaml-libyaml-perl file-slurp-tiny-perl"
-RDEPENDS_${PN} += "unix-statgrab-perl"
+RDEPENDS_${PN} += "dancer2-plugin-auth-yarbac-perl"
 RDEPENDS_${PN} += "libwww-perl-perl"
+RDEPENDS_${PN} += "http-tiny-perl"
 RDEPENDS_${PN} += "scalar-list-utils-perl"
 RDEPENDS_${PN} += "perl-modules"
+RDEPENDS_${PN} += "system-image-update unix-statgrab-perl"
 RDEPENDS_${PN} += "daemontools"
 
 RDEPENDS_${PN} += "encode-perl"
-RDEPENDS_${PN} += "devel-cycle-perl devel-leak-object-perl devel-stacktrace-perl"
-RDEPENDS_${PN} += "test-memory-cycle-perl test-leaktrace-perl"
+RDEPENDS_${PN}-dev += "devel-cycle-perl devel-leak-object-perl devel-stacktrace-perl"
+RDEPENDS_${PN}-dev += "test-memory-cycle-perl test-leaktrace-perl"
 
 PV = "0.1"
 
