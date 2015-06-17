@@ -1,4 +1,5 @@
 # Copyright (C) 2014 Shanghai Zhixing Information Technology Co.Ltd
+# Copyright (C) 2014-2015 Rademacher Elektronik GmbH
 
 SUMMARY = "Linux Kernel for Curie Board"
 DESCRIPTION = "Linux Kernel for Curie Board"
@@ -9,10 +10,11 @@ require recipes-kernel/linux/linux-dtb.inc
 DEPENDS += "lzop-native bc-native u-boot-curie"
 
 REV="3a898ae9c79b7b9e7780dfb5a327e56f36deebb3"
+SRCREPO="rdm-dev"
 SRCBRANCH = "curie_3.10.80_1.0.0_ga"
 LOCALVERSION = "+curie"
 
-SRC_URI = "git://github.com/rdm-dev/linux-curie.git;branch=${SRCBRANCH};rev=${REV} \
+SRC_URI = "git://github.com/${SRCREPO}/linux-curie.git;branch=${SRCBRANCH};rev=${REV} \
            file://0001-Importing-rtl8189es_4.3.0-driver.patch \
            file://0002-include-rtl8189es-driver-in-kernel-build.patch \
            file://0003-Add-platform-specific-modifications-for-Curie.patch \
