@@ -1,0 +1,9 @@
+setenv loadaddr @UBOOT_LOADADDRESS@
+setenv fdtaddr @UBOOT_FDTADDRESS@
+setenv bootargs_usb setenv bootargs ${bootargs_base} ip=none root=/dev/sda2
+setenv bootcmd_usb 'if ext2load usb 0:1 ${loadaddr} /uImage; then run bootargs_usb; ext2load usb 0:1 ${fdtaddr} /${fdt_file}; bootm ${loadaddr} - ${fdtaddr}; fi'
+setenv bootargs_rec setenv bootargs ${bootargs_base} ip=none root=/dev/sda3
+setenv bootcmd_rec 'if ext2load usb 0:1 ${loadaddr} /uImage-curie; then run bootargs_rec; ext2load usb 0:1 ${fdtaddr} /${fdt_file}; bootm ${loadaddr} - ${fdtaddr}; fi'
+usb dev 0
+run bootcmd_rec
+run bootcmd_usb
