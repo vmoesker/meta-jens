@@ -1,5 +1,11 @@
 Revision history for HomePilot
 
+4.0.18
+    - update hp-blob
+        * change news.jpg request
+    - Tweak kernel config using menuconfig build-target
+    - Add/tune prereqs for service monitor
+
 4.0.17 2015-06-15
     - update hp2sm
       * fix developer page
