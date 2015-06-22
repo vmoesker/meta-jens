@@ -1,5 +1,9 @@
 Revision history for HomePilot
 
+4.0.19 2015-06-22
+    - Turn on error led when wifi device disappears and fec has no carrier
+    - select linux-curie-3.10.80 with some additional patches and updated driver for rtl8189es
+
 4.0.18 2015-06-18
     - update hp-blob
         * change news.jpg request
