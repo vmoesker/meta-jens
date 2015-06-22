@@ -85,7 +85,6 @@ RDEPENDS_${PN} = " python-stringold \
                    libcurl \
                    libnfs \
                    rtmpdump \
-                   upower \
                    libmad \
                    libass \
                    mpeg2dec \
