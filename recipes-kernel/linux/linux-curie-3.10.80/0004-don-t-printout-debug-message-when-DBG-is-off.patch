@@ -1,4 +1,4 @@
-From a0652e9e68ed017177644900bda449865dbc016f Mon Sep 17 00:00:00 2001
+From 07b0ab15d17da27ed8c885f11d72f4810bc07167 Mon Sep 17 00:00:00 2001
 From: Jens Rehsack <sno@netbsd.org>
 Date: Fri, 12 Sep 2014 11:00:41 +0200
 Subject: [PATCH 4/4] don't printout debug message when DBG is off

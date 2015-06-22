@@ -1,25 +1,27 @@
-From 1ad9a73e3c5fd69ab56add206163e4101fd3d010 Mon Sep 17 00:00:00 2001
+From a859733fb9647582cb38b5777f4229635ccb9869 Mon Sep 17 00:00:00 2001
 From: Jens Rehsack <sno@netbsd.org>
 Date: Thu, 27 Nov 2014 16:06:14 +0100
 Subject: [PATCH 2/4] include rtl8189es driver in kernel build
 
+Conflicts:
+	drivers/net/wireless/Kconfig
 ---
  drivers/net/wireless/Kconfig  | 1 +
  drivers/net/wireless/Makefile | 1 +
  2 files changed, 2 insertions(+)
 
 diff --git a/drivers/net/wireless/Kconfig b/drivers/net/wireless/Kconfig
-index f8f0156..e90b8b5 100644
+index f8f0156..20992d5 100644
 --- a/drivers/net/wireless/Kconfig
 +++ b/drivers/net/wireless/Kconfig
-@@ -277,6 +277,7 @@ source "drivers/net/wireless/orinoco/Kconfig"
+@@ -276,6 +276,7 @@ source "drivers/net/wireless/libertas/Kconfig"
+ source "drivers/net/wireless/orinoco/Kconfig"
  source "drivers/net/wireless/p54/Kconfig"
  source "drivers/net/wireless/rt2x00/Kconfig"
- source "drivers/net/wireless/rtlwifi/Kconfig"
 +source "drivers/net/wireless/rtl8189es/Kconfig"
+ source "drivers/net/wireless/rtlwifi/Kconfig"
  source "drivers/net/wireless/ti/Kconfig"
  source "drivers/net/wireless/zd1211rw/Kconfig"
- source "drivers/net/wireless/mwifiex/Kconfig"
 diff --git a/drivers/net/wireless/Makefile b/drivers/net/wireless/Makefile
 index 67156ef..f84f15d 100644
 --- a/drivers/net/wireless/Makefile
@@ -34,3 +36,4 @@ index 67156ef..f84f15d 100644
  # 16-bit wireless PCMCIA client drivers
 -- 
 1.9.1
+
