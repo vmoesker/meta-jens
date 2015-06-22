@@ -1,4 +1,4 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-${PV}:"
+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 SRC_URI += "file://eth/pre_up.sh \
 	file://eth/post_up.sh \
@@ -28,4 +28,3 @@ do_install_append () {
 }
 
 FILES_${PN} += "/etc/network"
-
