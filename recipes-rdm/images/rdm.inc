@@ -37,6 +37,7 @@ RDM_BASE_INSTALL = "hp2sm \
 	util-linux \
 	ethtool \
 	wifi-fallback \
+	crda \
 	xz \
 	lsof \
 	logrotate \
