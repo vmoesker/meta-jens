@@ -181,8 +181,6 @@ then
 	tune2fs -L "boot-${LABEL}" -o discard,block_validity ${SDCARD_PREFIX}1
 	tune2fs -L "data-${LABEL}" -o journal_data,discard,block_validity ${SDCARD_PREFIX}4
 
-	logger "Going to extract u-boot"
-	tar xjf "${IMAGE_CONTAINER}" -O ${UBOOT_BIN} | dd of=${SDCARD_DEVICE} seek=2 skip=${UBOOT_PADDING} bs=512
 	logger "Going to extract recovery image"
 	tar xjf "${IMAGE_CONTAINER}" -O ${RECOVERIMG} | dd of=${SDCARD_PREFIX}3 bs=1M
 
@@ -190,6 +188,9 @@ then
 
 	logger "Going to extract kernel"
 	(cd /boot && tar xjf "${IMAGE_CONTAINER}" ${KERNEL} && chown -R root:root . && eval ${KERNEL_PREPARE})
+
+	logger "Going to extract u-boot"
+	tar xjf "${IMAGE_CONTAINER}" -O ${UBOOT_BIN} | dd of=${SDCARD_DEVICE} seek=2 skip=${UBOOT_PADDING} bs=512
 
 	logger "Force rebuild of volatiles.cache next boot"
         rm -f /etc/volatile.cache
