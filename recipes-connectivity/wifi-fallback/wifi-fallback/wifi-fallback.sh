@@ -24,6 +24,7 @@ waitfornetwork(){
 case "$1" in
 start)
 	waitfornetwork
+	test -f /sys/class/net/eth0/address && echo -n "eth0 has address " && cat /sys/class/net/eth0/address
 	if test `cat /sys/class/net/eth0/carrier` -eq 0
 	then
     		echo "eth0 got no-carrier, starting wifi instead .."
