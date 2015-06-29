@@ -9,9 +9,9 @@ require recipes-kernel/linux/linux-dtb.inc
 
 DEPENDS += "lzop-native bc-native u-boot-curie"
 
-REV="ed1f5d0d2939b986f35756936fd9111d46d987b8"
+REV="aa863e040e9c9a14addb9fbed1c460c20f21c6f9"
 SRCREPO="rdm-dev"
-SRCBRANCH = "curie_3.10.80_1.0.0_ga"
+SRCBRANCH = "curie_3.10.81_1.0.0_ga"
 LOCALVERSION = "+curie"
 
 SRC_URI = "git://github.com/${SRCREPO}/linux-curie.git;branch=${SRCBRANCH};rev=${REV} \
@@ -27,6 +27,10 @@ SRC_URI = "git://github.com/${SRCREPO}/linux-curie.git;branch=${SRCBRANCH};rev=$
 	   file://bootscript.usb \
           "
 
+BAD_URI = "file://0006-mmc-An-optional-entry-in-imx-usdhc-for-max_freq.patch \
+	   file://0007-dt-Set-the-max-frequency-for-the-mmc-controllers.patch \
+          "
+
 # patches for curie
 COMPATIBLE_MACHINE = "(curie)"
 
@@ -40,8 +44,16 @@ do_install_append () {
     uboot-mkimage -T script -C none -n 'Curie Script' -d ${WORKDIR}/bootscript.usb ${D}/boot/bootscript.usb
 
     echo "options 8189es rtw_power_mgnt=0" >${WORKDIR}/8189es.conf
+    echo "blacklist 8189es" >${WORKDIR}/blacklist-8189es.conf
+    echo "options cfg80211 ieee80211_regdom=EU" >${WORKDIR}/cfg80211.conf
+    echo "blacklist cfg80211" >${WORKDIR}/blacklist-cfg80211.conf
+    echo "blacklist ahci_imx" >${WORKDIR}/blacklist-ahci_imx.conf
     install -d ${D}${sysconfdir}/modprobe.d/
     install -m 644 ${WORKDIR}/8189es.conf ${D}${sysconfdir}/modprobe.d/
+    install -m 644 ${WORKDIR}/blacklist-8189es.conf ${D}${sysconfdir}/modprobe.d/
+    install -m 644 ${WORKDIR}/cfg80211.conf ${D}${sysconfdir}/modprobe.d/
+    install -m 644 ${WORKDIR}/blacklist-cfg80211.conf ${D}${sysconfdir}/modprobe.d/
+    install -m 644 ${WORKDIR}/blacklist-ahci_imx.conf ${D}${sysconfdir}/modprobe.d/
 }
 
 do_deploy_append () {
@@ -58,4 +70,7 @@ do_deploy_append () {
     : # exit 0
 }
 
+FILES_kernel-module-8189es += "${sysconfdir}/modprobe.d/blacklist-8189es.conf"
+FILES_kernel-module-ahci-imx += "${sysconfdir}/modprobe.d/blacklist-ahci_imx.conf"
+FILES_kernel-module-cfg80211 += "${sysconfdir}/modprobe.d/blacklist-cfg80211.conf"
 FILES_kernel-image += "/boot/bootscript.mmc /boot/bootscript.nfs /boot/bootscript.usb"
