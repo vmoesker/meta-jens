@@ -45,13 +45,11 @@ do_install_append () {
 
     echo "options 8189es rtw_power_mgnt=0" >${WORKDIR}/8189es.conf
     echo "blacklist 8189es" >${WORKDIR}/blacklist-8189es.conf
-    echo "options cfg80211 ieee80211_regdom=EU" >${WORKDIR}/cfg80211.conf
     echo "blacklist cfg80211" >${WORKDIR}/blacklist-cfg80211.conf
     echo "blacklist ahci_imx" >${WORKDIR}/blacklist-ahci_imx.conf
     install -d ${D}${sysconfdir}/modprobe.d/
     install -m 644 ${WORKDIR}/8189es.conf ${D}${sysconfdir}/modprobe.d/
     install -m 644 ${WORKDIR}/blacklist-8189es.conf ${D}${sysconfdir}/modprobe.d/
-    install -m 644 ${WORKDIR}/cfg80211.conf ${D}${sysconfdir}/modprobe.d/
     install -m 644 ${WORKDIR}/blacklist-cfg80211.conf ${D}${sysconfdir}/modprobe.d/
     install -m 644 ${WORKDIR}/blacklist-ahci_imx.conf ${D}${sysconfdir}/modprobe.d/
 }
