@@ -1,6 +1,6 @@
 Revision history for HomePilot
 
-4.0.20
+4.0.20 2015-06-30
     - add jetty log
     - print eth0 address on startup
     - remove upower dependency from xbmc/kodi
@@ -16,6 +16,9 @@ Revision history for HomePilot
     - Change default CPU_FREQ governor from ON_DEMAND to PERFORMANCE and disable IDLE GOVERNOR at all
     - Update rebased 3.10 stable to 3.10.81
         * avoid automatically load modules for usually unused hardware
+    - remove module parameters for cfg80211 and disable ieee80211_regdom=EU
+    - update hp-blob
+        * Generate blob with new wifi settings.
 
 4.0.19 2015-06-22
     - Turn on error led when wifi device disappears and fec has no carrier
