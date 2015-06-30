@@ -1,5 +1,22 @@
 Revision history for HomePilot
 
+4.0.20
+    - add jetty log
+    - print eth0 address on startup
+    - remove upower dependency from xbmc/kodi
+    - remove unused uboot patches
+    - flash new uboot as very latest step to recover easier on power outage
+    - Add collectd-graphs which depends on collectd
+    - add dependency on crda
+    - disable cfg80211 default powersave
+    - Add nl80211 wifi driver in addition to general one
+    - let ramdisks being a module, reduce default number of ramdisks and loop-devices down to 2
+    - add tool to stresstest the device
+    - Clean up distro and machine configuration
+    - Change default CPU_FREQ governor from ON_DEMAND to PERFORMANCE and disable IDLE GOVERNOR at all
+    - Update rebased 3.10 stable to 3.10.81
+        * avoid automatically load modules for usually unused hardware
+
 4.0.19 2015-06-22
     - Turn on error led when wifi device disappears and fec has no carrier
     - select linux-curie-3.10.80 with some additional patches and updated driver for rtl8189es
