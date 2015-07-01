@@ -1,7 +1,7 @@
 DESCRIPTION = "Apache Maven is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project's build, reporting and documentation from a central piece of information."
 HOMEPAGE = "http://maven.apache.org/"
 
-LICENSE = "Apache 2.0"
+LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
 
 # http://ftp.fau.de/apache/maven/maven-3/3.2.2/source/apache-maven-3.2.2-src.tar.gz
