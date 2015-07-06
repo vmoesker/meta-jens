@@ -13,7 +13,6 @@ SRC_URI[sha256sum] = "474754ac4ab32d738cbf2a4a3e87ee0a2c71b9048a38bdcd7df1e4f9fd
 
 EXTRA_OECONF_append = "--disable-lynx"
 
-
 INITSCRIPT_PACKAGES = "${PN}"
 INITSCRIPT_NAME_${PN} = "${PN}"
 INITSCRIPT_PARAMS_${PN} = "defaults 05"
@@ -22,4 +21,4 @@ do_install_append() {
 	install -m 644 ${WORKDIR}/ifplugd.conf ${D}${sysconfdir}/ifplugd/
 }
 
-inherit autotools update-rc.d
+inherit autotools update-rc.d pkgconfig
