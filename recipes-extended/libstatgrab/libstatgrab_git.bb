@@ -15,6 +15,8 @@ SRC_URI = "git://github.com/i-scream/libstatgrab.git \
            file://linux-proctbl-names-with-spaces.patch \
           "
 
+EXTRA_OECONF = "--without-perl5 --with-mnttab=/proc/mounts"
+
 S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
