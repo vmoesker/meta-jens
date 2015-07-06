@@ -81,7 +81,9 @@ RDEPENDS_${PN} = " python-stringold \
                    python-xmlrpc \
                    python-misc \
                    python-modules \
-                   eglibc-gconv-cp1252 \
+                   glibc-gconv-cp1252 \
+                   glibc-gconv-ibm850 \
+                   glibc-gconv-utf-32 \
                    libcurl \
                    libnfs \
                    rtmpdump \
@@ -90,10 +92,7 @@ RDEPENDS_${PN} = " python-stringold \
                    mpeg2dec \
                    libcec \
                    kernel \
-                   eglibc-gconv-ibm850 \
-                   eglibc-gconv-utf-32 \
                    jasper \
-                   libcec \
                    udev \
                    alsa-lib \
                    alsa-conf \
