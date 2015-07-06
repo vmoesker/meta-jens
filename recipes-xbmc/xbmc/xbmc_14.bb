@@ -43,7 +43,7 @@ do_configure() {
 
   rm -rf ${S}/addons/service.xbmc.versioncheck
 
-  CXX=g++ sh bootstrap
+  cd ${S} && CXX=g++ sh bootstrap
   # oe_runconf
   # Call manually configure instead of oe_runconf because of specific prefix /imx6/xbmc...
   ${S}/configure  --build=${BUILD_SYS} \
