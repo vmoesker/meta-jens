@@ -38,7 +38,6 @@ do_install() {
 	rm -f ${D}${INST_DEST_PREFIX}/automation/.gitignore \
 	      ${D}${INST_DEST_PREFIX}/htdocs/z-way-ha-tv/.gitignore \
 	      ${D}${INST_DEST_PREFIX}/htdocs/expert/.gitignore
-	rmdir ${D}${INST_DEST_PREFIX}/patches
 
 	# Move config directory into CONF_DEST_PREFIX dir of target
 	install -o homepilot -g users -d ${D}${CONF_DEST_PREFIX}
