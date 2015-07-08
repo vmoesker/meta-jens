@@ -1,0 +1,36 @@
+diff --git a/configure.ac b/configure.ac
+index d64c88a..b2f316b 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -31,14 +31,25 @@ AX_CHECK_LIB_FLAGS([xml2], [], [xmlFree(NULL);], [AC_INCLUDES_DEFAULT
+ 	AC_MSG_ERROR(["libxml2 not found."])
+ ])
+ 
+-AX_CHECK_WITH_LIB([ftdi], [yes])
++AX_CHECK_WITH_LIB([ftdi1], [yes])
++AX_CHECK_LIB_FLAGS([ftdi1], [], [ftdi_init(NULL)], [AC_INCLUDES_DEFAULT
++#include <ftdi.h>
++], [libftdi1], [
++	AX_APPEND_TO_VAR([LINKFLAGS], ${LIBS_FTDI1})
++	AX_APPEND_TO_VAR([CLIBFLAGS], ${INC_FTDI1})
++])
+ 
+-AX_CHECK_LIB_FLAGS([ftdi], [], [ftdi_init(NULL)], [AC_INCLUDES_DEFAULT
++AS_IF([test -z "${HAVE_LIBFTDI1}"], [
++    AX_CHECK_WITH_LIB([ftdi], [yes])
++    AX_CHECK_LIB_FLAGS([ftdi], [], [ftdi_init(NULL)], [AC_INCLUDES_DEFAULT
+ #include <ftdi.h>
+-], [libftdi], [
+-	AX_APPEND_TO_VAR([LINKFLAGS], ${LIBS_FTDI})
+-	AX_APPEND_TO_VAR([CLIBFLAGS], ${INC_FTDI})
+-], [
++    ], [libftdi], [
++	    AX_APPEND_TO_VAR([LINKFLAGS], ${LIBS_FTDI})
++	    AX_APPEND_TO_VAR([CLIBFLAGS], ${INC_FTDI})
++    ])
++])
++
++AS_IF([test -z "${HAVE_LIBFTDI}" -a -z "${HAVE_LIBFTDI1}"], [
+ 	AC_MSG_ERROR(["libftdi not found."])
+ ])
+ 

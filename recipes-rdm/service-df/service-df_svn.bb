@@ -9,22 +9,18 @@ DEPENDS = "libxml2 libftdi"
 
 PV = "1.2.0"
 
-SRC_URI = "svn://192.168.1.186/svn/EW_Prj/001/HP_DuoFern_Service/trunk/;protocol=http;module=DuoFern_Service;rev=4648"
+SRC_URI = "svn://192.168.1.186/svn/EW_Prj/001/HP_DuoFern_Service/trunk/;protocol=http;module=DuoFern_Service;rev=4648 \
+	  file://use-ftdi1-too.patch \
+	  file://clean-up.patch \
+	  "
 
 S = "${WORKDIR}/DuoFern_Service"
 
 inherit autotools pkgconfig
 
-EXTRA_OECONF="--prefix=/opt/homepilot"
-
-do_configure() {
-    autoreconf -i
-    ${S}/configure	--build=${BUILD_SYS} \
-			--host=${HOST_SYS} \
-			--target=${TARGET_SYS} \
-			${EXTRA_OECONF}
-
-}
+prefix="/opt/homepilot"
+exec_prefix="/opt/homepilot"
+PKG_CONFIG_DIR .= ":${STAGING_DIR_HOST}/usr/lib/pkgconfig"
 
 FILES_${PN} += "/opt/homepilot"
 FILES_${PN}-dbg += "/opt/homepilot/bin/.debug"
