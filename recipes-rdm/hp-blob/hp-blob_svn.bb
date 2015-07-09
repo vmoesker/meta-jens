@@ -23,6 +23,7 @@ SRC_URI = "svn://192.168.1.186/svn/EW_Prj/001/HP_Blob/trunk/;protocol=http;modul
                 file://homepilot-log.run \
                 file://homepilot.sh \
                 file://homepilot-network-manager.run \
+                file://homepilot-network-manager-log.run \
                 file://jetty.run \
                 file://jetty-log.run \
                 file://jetty.sh \
@@ -75,6 +76,7 @@ do_install() {
 	# Install all the init-scripts
 	# 1 Create all the folders
 	install -d ${D}${SVC_SERVICES}/homepilot-network-manager
+	install -d ${D}${SVC_SERVICES}/homepilot-network-manager/log
 	install -d ${D}${SVC_SERVICES}/dfservice
 	install -d ${D}${SVC_SERVICES}/dfservice/log
 	install -d ${D}${SVC_SERVICES}/homepilot
@@ -86,6 +88,7 @@ do_install() {
 
 	# 2 Move all the run-files
 	install -m 0755 ${WORKDIR}/homepilot-network-manager.run ${D}${SVC_SERVICES}/homepilot-network-manager/run
+	install -m 0755 ${WORKDIR}/homepilot-network-manager-log.run ${D}${SVC_SERVICES}/homepilot-network-manager/log/run
 	install -m 0755 ${WORKDIR}/dfservice.run ${D}${SVC_SERVICES}/dfservice/run
 	install -m 0755 ${WORKDIR}/dfservice-log.run ${D}${SVC_SERVICES}/dfservice/log/run
 	install -m 0755 ${WORKDIR}/homepilot.run ${D}${SVC_SERVICES}/homepilot/run
