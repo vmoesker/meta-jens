@@ -1,6 +1,6 @@
 PREFERRED_VERSION_u-boot-curie = "2014.04"
 
-UBOOT_MACHINE = "mx6qcurie"
+UBOOT_MACHINE = "mx6qcurie_config"
 
 UBOOT_MMC_BASE_DEV = "1"
 UBOOT_MMC_DEV = "${@${UBOOT_MMC_BASE_DEV}-${SDCARD_IMAGE}}"
