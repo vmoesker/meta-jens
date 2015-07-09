@@ -12,6 +12,7 @@ SRC_URI = "git://github.com/xbmc/xbmc.git;rev=${SRCREV};branch=${SRCBRANCH} \
 	file://0004-adjust-cec-settings.patch \
 	file://0005-set-global-default-settings.patch \
 	file://0006-remove-total-uptime-and-battery-status.patch \
+        file://0007-prevent-hibernate-reboot-shutdown-and-suspend.patch \
 "
 SRCBRANCH = "Helix"
 SRCREV = "7cc53a9a3da77869d1d5d3d3d9971b4bd1641b50"

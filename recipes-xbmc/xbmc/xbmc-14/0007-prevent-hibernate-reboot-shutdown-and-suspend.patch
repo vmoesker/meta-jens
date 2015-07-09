@@ -1,0 +1,49 @@
+From 56e827038a9eab807671f5f2ba8863fb6f736c16 Mon Sep 17 00:00:00 2001
+From: tobw <tobw@users.noreply.github.com>
+Date: Thu, 9 Jul 2015 08:31:17 +0200
+Subject: [PATCH] prevent hibernate, reboot, shutdown and suspend
+
+---
+ xbmc/powermanagement/PowerManager.h               | 8 ++++----
+ xbmc/powermanagement/linux/FallbackPowerSyscall.h | 4 ++--
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/xbmc/powermanagement/PowerManager.h b/xbmc/powermanagement/PowerManager.h
+index 0b1f10a..0e0018d 100644
+--- a/xbmc/powermanagement/PowerManager.h
++++ b/xbmc/powermanagement/PowerManager.h
+@@ -49,10 +49,10 @@ public:
+   virtual bool Hibernate()    { return false; }
+   virtual bool Reboot()       { return false; }
+ 
+-  virtual bool CanPowerdown() { return true; }
+-  virtual bool CanSuspend()   { return true; }
+-  virtual bool CanHibernate() { return true; }
+-  virtual bool CanReboot()    { return true; }
++  virtual bool CanPowerdown() { return false; }
++  virtual bool CanSuspend()   { return false; }
++  virtual bool CanHibernate() { return false; }
++  virtual bool CanReboot()    { return false; }
+ 
+   virtual int  BatteryLevel() { return 0; }
+ 
+diff --git a/xbmc/powermanagement/linux/FallbackPowerSyscall.h b/xbmc/powermanagement/linux/FallbackPowerSyscall.h
+index a6ed27b..6195bf5 100644
+--- a/xbmc/powermanagement/linux/FallbackPowerSyscall.h
++++ b/xbmc/powermanagement/linux/FallbackPowerSyscall.h
+@@ -30,10 +30,10 @@ public:
+   virtual bool Hibernate() {return false; }
+   virtual bool Reboot() {return true; }
+ 
+-  virtual bool CanPowerdown() {return true; }
++  virtual bool CanPowerdown() {return false; }
+   virtual bool CanSuspend() {return false; }
+   virtual bool CanHibernate() {return false; }
+-  virtual bool CanReboot() {return true; }
++  virtual bool CanReboot() {return false; }
+   virtual int  BatteryLevel() {return 0; }
+ };
+ #endif
+-- 
+1.9.1
+
