@@ -107,9 +107,9 @@
         <timezonecountry default="true">Germany</timezonecountry>
     </locale>
     <lookandfeel>
-        <enablerssfeeds default="true">true</enablerssfeeds>
+        <enablerssfeeds default="false">false</enablerssfeeds>
         <font default="true">Default</font>
-        <rssedit default="true"></rssedit>
+        <rssedit default="false"></rssedit>
         <skin default="true">skin.confluence</skin>
         <skincolors default="true">SKINDEFAULT</skincolors>
         <skintheme default="true">SKINDEFAULT</skintheme>
