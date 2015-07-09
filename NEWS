@@ -1,6 +1,6 @@
 Revision history for HomePilot
 
-4.0.21
+4.0.21 2015-07-09
     - add homepilot-network-manager log
     - update hp-blob
     - improve kodi configuration
@@ -20,6 +20,7 @@ Revision history for HomePilot
         - optimize very unlikely/likely branches
         - remove unionfs
         - use ext4 for ext2/ext3 file systems
+    - use modern cfg80211 api of linux kernel
 
 4.0.20 2015-06-30
     - add jetty log
