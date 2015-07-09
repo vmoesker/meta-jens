@@ -1,5 +1,26 @@
 Revision history for HomePilot
 
+4.0.21
+    - add homepilot-network-manager log
+    - update hp-blob
+    - improve kodi configuration
+        - prevent hibernate, reboot, shutdown, and suspend
+        - disable rss feed
+    - improve samba configuration
+    - improve linux-curie-3.10.80
+        - add Asynchronous Sample Rate Converter (ASRC) module support
+        - detect hard and soft lockups
+        - disable cpufreq statistics
+        - disable initrd support
+        - disable old ALSA API
+        - disable support for MISC binaries
+        - disable USB gadgets
+        - enable pwm support
+        - increase VPU frequncy to 352M
+        - optimize very unlikely/likely branches
+        - remove unionfs
+        - use ext4 for ext2/ext3 file systems
+
 4.0.20 2015-06-30
     - add jetty log
     - print eth0 address on startup
