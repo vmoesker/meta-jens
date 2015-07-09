@@ -1,0 +1,9 @@
+setenv loadaddr @UBOOT_LOADADDRESS@
+setenv fdtaddr @UBOOT_FDTADDRESS@
+setenv bootargs_mmc setenv bootargs ${bootargs_base} ip=none root=/dev/mmcblk@KERNEL_MMC_DEV@p2
+setenv bootcmd_mmc 'if ext2load mmc @UBOOT_MMC_DEV@:1 ${loadaddr} /uImage; then run bootargs_mmc; ext2load mmc @UBOOT_MMC_DEV@:1 ${fdtaddr} /${fdt_file}; bootm ${loadaddr} - ${fdtaddr}; fi'
+setenv bootargs_rec setenv bootargs ${bootargs_base} ip=none root=/dev/mmcblk@KERNEL_MMC_DEV@p3
+setenv bootcmd_rec 'if ext2load mmc @UBOOT_MMC_DEV@:1 ${loadaddr} /uImage-curie; then run bootargs_rec; ext2load mmc @UBOOT_MMC_DEV@:1 ${fdtaddr} /${fdt_file}; bootm ${loadaddr} - ${fdtaddr}; fi'
+mmc dev @UBOOT_MMC_DEV@
+run bootcmd_rec
+run bootcmd_mmc
