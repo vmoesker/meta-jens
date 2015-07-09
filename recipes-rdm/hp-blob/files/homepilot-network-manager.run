@@ -1,4 +1,5 @@
 #!/bin/sh
 
+echo "starting homepilot-network-manager"
 cd @HOMEPILOT_BASE@/lib/java
-exec @JAVA_ELF@ -jar @HOMEPILOT_BASE@/lib/java/networkingservice-1.0.0.jar
+exec @JAVA_ELF@ -jar @HOMEPILOT_BASE@/lib/java/networkingservice-1.0.0.jar 2>&1
