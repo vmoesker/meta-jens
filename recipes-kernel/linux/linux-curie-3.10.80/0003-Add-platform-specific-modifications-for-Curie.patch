@@ -1,12 +1,13 @@
-From 5129349b2081b58b452f22525a4d649fe3b90a63 Mon Sep 17 00:00:00 2001
+From b812ae555fc4365ec4ec957a97a67f17bc08dfa3 Mon Sep 17 00:00:00 2001
 From: Jens Rehsack <sno@netbsd.org>
 Date: Thu, 27 Nov 2014 16:24:59 +0100
 Subject: [PATCH 3/4] Add platform specific modifications for Curie
 
 ---
- drivers/net/wireless/rtl8189es/Makefile           |  9 ++++++++-
- drivers/net/wireless/rtl8189es/include/autoconf.h | 12 ++++++------
- 2 files changed, 14 insertions(+), 7 deletions(-)
+ drivers/net/wireless/rtl8189es/Makefile                |  9 ++++++++-
+ drivers/net/wireless/rtl8189es/include/autoconf.h      | 16 ++++++++--------
+ drivers/net/wireless/rtl8189es/os_dep/linux/os_intfs.c |  2 +-
+ 3 files changed, 17 insertions(+), 10 deletions(-)
 
 diff --git a/drivers/net/wireless/rtl8189es/Makefile b/drivers/net/wireless/rtl8189es/Makefile
 index 8de2d41..6f872c9 100755
@@ -43,10 +44,10 @@ index 8de2d41..6f872c9 100755
  EXTRA_CFLAGS += -DCONFIG_LITTLE_ENDIAN
  EXTRA_CFLAGS += -DCONFIG_PLATFORM_ARM_SUN7I
 diff --git a/drivers/net/wireless/rtl8189es/include/autoconf.h b/drivers/net/wireless/rtl8189es/include/autoconf.h
-index 5a4e9d3..b95e121 100644
+index 5a4e9d3..57a1c3f 100644
 --- a/drivers/net/wireless/rtl8189es/include/autoconf.h
 +++ b/drivers/net/wireless/rtl8189es/include/autoconf.h
-@@ -41,7 +41,7 @@
+@@ -41,11 +41,11 @@
  #define CONFIG_SDIO_HCI
  #define PLATFORM_LINUX
  
@@ -54,7 +55,13 @@ index 5a4e9d3..b95e121 100644
 +#define CONFIG_IOCTL_CFG80211
  
  #ifdef CONFIG_IOCTL_CFG80211
- 	//#define RTW_USE_CFG80211_STA_EVENT /* Indecate new sta asoc through cfg80211_new_sta */
+-	//#define RTW_USE_CFG80211_STA_EVENT /* Indecate new sta asoc through cfg80211_new_sta */
+-	#define CONFIG_CFG80211_FORCE_COMPATIBLE_2_6_37_UNDER
++	#define RTW_USE_CFG80211_STA_EVENT /* Indecate new sta asoc through cfg80211_new_sta */
++	//#define CONFIG_CFG80211_FORCE_COMPATIBLE_2_6_37_UNDER
+ 	//#define CONFIG_DEBUG_CFG80211
+ 	#define CONFIG_SET_SCAN_DENY_TIMER
+ #endif
 @@ -60,7 +60,7 @@
  #define CONFIG_80211N_HT
  #define CONFIG_RECV_REORDERING_CTRL
@@ -84,6 +91,19 @@ index 5a4e9d3..b95e121 100644
  
  //#define DBG_IO
  //#define DBG_DELAY_OS
+diff --git a/drivers/net/wireless/rtl8189es/os_dep/linux/os_intfs.c b/drivers/net/wireless/rtl8189es/os_dep/linux/os_intfs.c
+index bac9bcc..bc8c0da 100644
+--- a/drivers/net/wireless/rtl8189es/os_dep/linux/os_intfs.c
++++ b/drivers/net/wireless/rtl8189es/os_dep/linux/os_intfs.c
+@@ -192,7 +192,7 @@ int rtw_dmsp = 0;
+ #endif	// CONFIG_DUALMAC_CONCURRENT
+ 
+ #ifdef CONFIG_80211D
+-int rtw_80211d = 0;
++int rtw_80211d = 1;
+ #endif
+ 
+ #ifdef CONFIG_SPECIAL_SETTING_FOR_FUNAI_TV
 -- 
 1.9.1
 
