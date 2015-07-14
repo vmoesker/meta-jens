@@ -5,7 +5,6 @@ RDM_BASE_INSTALL = "hp2sm \
 	fontconfig \
 	liberation-fonts \
 	date-set \
-	init-iecset \
 	e2fsprogs \
 	e2fsprogs-tune2fs \
 	attr \
@@ -18,8 +17,6 @@ RDM_BASE_INSTALL = "hp2sm \
 	boot-fsck \
 	nano \
 	ledctrl \
-	mmc-slowdown \
-	fb-cursor-off \
 	sudo \
 	qbrqry \
 	nginx \
@@ -43,6 +40,11 @@ RDM_BASE_INSTALL = "hp2sm \
 	xz \
 	lsof \
 	logrotate \
+"
+RDM_BASE_INSTALL_append_mx6qcurie = "\
+	init-iecset \
+	mmc-slowdown \
+	fb-cursor-off \
 "
 RDM_INSTALL = "${RDM_BASE_INSTALL} \
 	udev-extraconf \

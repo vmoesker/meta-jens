@@ -13,14 +13,8 @@ include rdm-xbmc.inc
 
 inherit core-image distro_features_check
 
-CONFLICT_DISTRO_FEATURES = "directfb wayland"
-
-# SOC_EXTRA_IMAGE_FEATURES ?= "tools-testapps"
-SOC_EXTRA_IMAGE_FEATURES?=""
-
 # Add extra image features
 EXTRA_IMAGE_FEATURES += " \
-    ${SOC_EXTRA_IMAGE_FEATURES} \
     nfs-server \
     ssh-server-dropbear \
     ${EXTRA_IMAGE_FEATURES_dev} \
@@ -28,7 +22,6 @@ EXTRA_IMAGE_FEATURES += " \
 
 IMAGE_INSTALL += " \
 	${CORE_IMAGE_BASE_INSTALL} \
-	${MACHINE_FIRMWARE} \
 	${HP2_INSTALL} \
 	${XBMC_INSTALL} \
 	${RDM_INSTALL} \
