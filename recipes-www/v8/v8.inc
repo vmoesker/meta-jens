@@ -9,7 +9,34 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 S = "${WORKDIR}/v8"
 V8_TARGET = "${TUNE_ARCH}"
 # XXX fix them for general use
-V8_FLAGS = "arm_version=7 armfpu=neon armfloatabi=hard armthumb=off "
+V8_FLAGS = ""
+
+V8_FLAGS .= "${@bb.utils.contains("TUNE_FEATURES", "armv4", " arm_version=4 ", \
+               bb.utils.contains("TUNE_FEATURES", "armv5", " arm_version=5 ", \
+                 bb.utils.contains("TUNE_FEATURES", "armv6", " arm_version=6 ", \
+                   bb.utils.contains("TUNE_FEATURES", "armv7", " arm_version=7 ", \
+                     bb.utils.contains("TUNE_FEATURES", "armv7a", " arm_version=7 ", \
+                       bb.utils.contains("TUNE_FEATURES", "armv8", " arm_version=8 ", \
+                         "", d), \
+                       d), \
+                     d), \
+                   d), \
+                 d), \
+               d)}"
+
+V8_FLAGS .= "${@bb.utils.contains("TUNE_FEATURES", "vfpv4", " armfpu=vfpv4 armfloatabi=hard ", \
+               bb.utils.contains("TUNE_FEATURES", "neon", " armfpu=neon armfloatabi=hard ", \
+                 bb.utils.contains("TUNE_FEATURES", "vfp", " armfpu=vfp armfloatabi=hard ", \
+                   bb.utils.contains("TUNE_FEATURES", "arm", " armfpu=vfp armfloatabi=soft ", \
+                     "", d), \
+                   d), \
+                 d), \
+               d)}"
+
+V8_FLAGS .= "${@bb.utils.contains("TUNE_FEATURES", "thumb", " armthumb=on ", \
+               bb.utils.contains("TUNE_FEATURES", "arm", " armthumb=off ", \
+                 "", d), \
+               d)}"
 
 do_compile () {
     export LD="${CXX}"
