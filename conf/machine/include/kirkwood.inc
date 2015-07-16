@@ -3,13 +3,16 @@
 
 TARGET_ARCH = "arm"
 
-PREFERRED_PROVIDER_virtual/bootloader = ""
+PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
 PREFERRED_PROVIDER_virtual/kernel = "linux-kirkwood"
 
 SERIAL_CONSOLE = "115200 ttyS0"
 
 # Currently all the orion devices we support use uImage
 KERNEL_IMAGETYPE = "uImage"
+UBOOT_MACHINE = "guruplug_config"
+UBOOT_SUFFIX = "kwb"
+UBOOT_MAKE_TARGET = "u-boot.kwb"
 UBOOT_ENTRYPOINT = "0x00008000"
 UBOOT_LOADADDRESS = "0x00008000"
 
