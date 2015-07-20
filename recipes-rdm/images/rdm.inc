@@ -1,5 +1,4 @@
-RDM_BASE_INSTALL = "hp2sm \
-	alsa-utils \
+RDM_BASE_INSTALL = "u-boot-fw-utils \
 	cronie \
 	collectd-graphs \
 	fontconfig \
@@ -11,14 +10,8 @@ RDM_BASE_INSTALL = "hp2sm \
 	acl \
 	btrfs-tools \
 	dosfstools \
-	initoverlay \
-	system-image-update \
-	prd-flash \
-	boot-fsck \
 	nano \
-	ledctrl \
 	sudo \
-	qbrqry \
 	nginx \
 	tzdata \
 	tcpdump \
@@ -33,15 +26,22 @@ RDM_BASE_INSTALL = "hp2sm \
 	openvpn \
 	util-linux \
 	ethtool \
-	wifi-fallback \
 	crda \
 	xz \
 	lsof \
 	logrotate \
+	qbrqry \
+	boot-fsck \
+	initoverlay \
+	system-image-update \
+	hp2sm \
+	prd-flash \
+	wifi-fallback \
 "
 RDM_BASE_INSTALL_append_mx6qcurie = "\
+	ledctrl \
+	alsa-utils \
 	init-iecset \
-	mmc-slowdown \
 	fb-cursor-off \
 "
 RDM_INSTALL = "${RDM_BASE_INSTALL} \
@@ -55,4 +55,6 @@ RECOVER_INSTALL="parted \
 "
 SKIPPED_DEPS = "sysdetails \
 	thermaldetails \
+	mmc-slowdown \
+	stressapptest \
 	"
