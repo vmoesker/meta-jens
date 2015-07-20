@@ -6,14 +6,17 @@ TARGET_ARCH = "arm"
 PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
 PREFERRED_PROVIDER_virtual/kernel = "linux-kirkwood"
 
-SERIAL_CONSOLE = "115200 ttyS0"
+OVERLAYFS = "overlayfs"
+UNIONFS = "#unionfs"
 
-# Currently all the orion devices we support use uImage
-KERNEL_IMAGETYPE = "uImage"
+SERIAL_CONSOLE = "115200 ttyS0"
+KERNEL_IMAGETYPE = "zImage"
+KERNEL_DEVICETREE = "kirkwood-guruplug-server-plus.dtb"
+
 UBOOT_MACHINE = "guruplug_config"
 UBOOT_SUFFIX = "kwb"
 UBOOT_MAKE_TARGET = "u-boot.kwb"
-UBOOT_ENTRYPOINT = "0x00008000"
-UBOOT_LOADADDRESS = "0x00008000"
+UBOOT_ENTRYPOINT = "0x800000"
+UBOOT_LOADADDRESS = "0x800000"
 
 require conf/machine/include/tune-arm926ejs.inc
