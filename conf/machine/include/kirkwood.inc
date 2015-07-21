@@ -18,5 +18,6 @@ UBOOT_SUFFIX = "kwb"
 UBOOT_MAKE_TARGET = "u-boot.kwb"
 UBOOT_ENTRYPOINT = "0x800000"
 UBOOT_LOADADDRESS = "0x800000"
+UBOOT_FDTADDRESS = "0x700000"
 
 require conf/machine/include/tune-arm926ejs.inc
