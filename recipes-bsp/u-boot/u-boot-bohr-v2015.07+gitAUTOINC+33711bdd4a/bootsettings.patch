@@ -1,0 +1,57 @@
+diff --git a/include/configs/guruplug.h b/include/configs/guruplug.h
+index 5f09567..bd925a1 100644
+--- a/include/configs/guruplug.h
++++ b/include/configs/guruplug.h
+@@ -82,26 +82,37 @@
+  * Default environment variables
+  */
+ #define CONFIG_BOOTCOMMAND \
+-	"setenv bootargs ${console} ${mtdparts} ${bootargs_root}; "	\
+-	"ubi part root; "						\
+-	"ubifsmount ubi:rootfs; "					\
+-	"ubifsload 0x800000 ${kernel}; "				\
+-	"ubifsload 0x700000 ${fdt}; "					\
+-	"ubifsumount; "							\
+-	"fdt addr 0x700000; fdt resize; fdt chosen; "			\
+-	"bootz 0x800000 - 0x700000"
++	"usb start;" \
++	"run usbloadbootscript; " \
++	"run nandloadbootscript; " \
++	"run netboot"
+ 
+ #define CONFIG_MTDPARTS	\
+-	"mtdparts=orion_nand:"						\
+-	"896K(uboot),128K(uboot_env),"					\
++	"mtdparts=orion_nand:" \
++	"896K(uboot),128K(uboot_env)," \
+ 	"-@1M(root)\0"
+ 
+ #define CONFIG_EXTRA_ENV_SETTINGS \
+-	"console=console=ttyS0,115200\0"				\
+-	"mtdids=nand0=orion_nand\0"					\
+-	"mtdparts="CONFIG_MTDPARTS					\
+-	"kernel=/boot/zImage\0"						\
+-	"fdt=/boot/guruplug-server-plus.dtb\0"				\
++	"console=console=ttyS0,115200\0" \
++	"script=bootscript\0" \
++	"mtdids=nand0=orion_nand\0" \
++	"mtdparts="CONFIG_MTDPARTS \
++	"kernel=zImage\0" \
++	"loadaddr=0x800000\0" \
++	"fdt_file=zImage-kirkwood-guruplug-server-plus.dtb\0" \
++	"fdt_addr=0x700000\0" \
++	"scriptaddr=0x100000\0" \
++	"nandloadbootscript=" \
++		"ubi part root; ubifsmount ubi:rootfs; ubifsload ${scriptaddr} ${script}; ubifsumount; run bootscript;\0" \
++	"usbloadbootscript=" \
++		"ext2load usb 0:1 ${scriptaddr} ${script}; run bootscript;\0" \
++	"netboot=echo Booting from net ...; " \
++		"dhcp; " \
++		"tftp ${scriptaddr} ${script}.nfs; " \
++		"run bootscript;\0" \
++	"bootscript=echo Running bootscript ...; " \
++		"source ${scriptaddr}\0" \
++	"bootargs_base=${console} ${mtdparts} oops=panic panic=5 ${smp} rootwait consoleblank=0\0"	\
+ 	"bootargs_root=ubi.mtd=2 root=ubi0:rootfs rootfstype=ubifs rw\0"
+ 
+ #define MTDIDS_DEFAULT	"nand0=orion_nand"
