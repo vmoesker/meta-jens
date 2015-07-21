@@ -1,0 +1,5 @@
+setenv loadaddr @UBOOT_LOADADDRESS@
+setenv fdtaddr @UBOOT_FDTADDRESS@
+setenv bootargs_nand setenv bootargs ${bootargs_base} ip=none ubi.mtd=2 root=ubi0:rootfs rootfstype=ubifs rw
+setenv bootcmd_nand 'ubi part root; ubifsmount ubi:rootfs; ubifsload @UBOOT_LOADADDRESS@ /@KERNEL_IMAGETYPE@; ubifsload @UBOOT_FDTADDRESS@ /${fdt_file}; ubifsumount; fdt addr @UBOOT_FDTADDRESS@; fdt resize; fdt chosen; run bootargs_nand; bootz @UBOOT_LOADADDRESS@ - @UBOOT_FDTADDRESS@; fi'
+run bootcmd_nand

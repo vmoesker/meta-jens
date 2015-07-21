@@ -19,7 +19,7 @@ SRCBRANCH = "linux-4.1.y"
 
 SRC_URI = "git://github.com/${SRCREPO}/linux-curie.git;branch=${SRCBRANCH};rev=${REV} \
 	   file://defconfig \
-	   file://bootscript.mmc \
+	   file://bootscript.nand \
 	   file://bootscript.nfs \
 	   file://bootscript.usb \
           "
@@ -65,10 +65,9 @@ do_configure_prepend() {
 
 do_install_append () {
     sed -i -e "s/@UBOOT_LOADADDRESS[@]/${UBOOT_LOADADDRESS}/g" -e "s/@UBOOT_FDTADDRESS[@]/${UBOOT_FDTADDRESS}/g" \
-         -e "s/@UBOOT_MMC_DEV[@]/${UBOOT_MMC_DEV}/g" -e "s/@SDCARD_IMAGE[@]/${SDCARD_IMAGE}/g" \
-         -e "s/@KERNEL_MMC_DEV[@]/${KERNEL_MMC_DEV}/g" -e "s/@KERNEL_IMAGETYPE[@]/${KERNEL_IMAGETYPE}/g" \
-	 ${WORKDIR}/bootscript.mmc ${WORKDIR}/bootscript.nfs ${WORKDIR}/bootscript.usb
-    uboot-mkimage -T script -C none -n 'Bohr Script' -d ${WORKDIR}/bootscript.mmc ${D}/boot/bootscript.mmc
+         -e "s/@KERNEL_IMAGETYPE[@]/${KERNEL_IMAGETYPE}/g" \
+	 ${WORKDIR}/bootscript.nand ${WORKDIR}/bootscript.nfs ${WORKDIR}/bootscript.usb
+    uboot-mkimage -T script -C none -n 'Bohr Script' -d ${WORKDIR}/bootscript.nand ${D}/boot/bootscript.nand
     uboot-mkimage -T script -C none -n 'Bohr Script' -d ${WORKDIR}/bootscript.nfs ${D}/boot/bootscript.nfs
     uboot-mkimage -T script -C none -n 'Bohr Script' -d ${WORKDIR}/bootscript.usb ${D}/boot/bootscript.usb
 
@@ -79,17 +78,17 @@ do_install_append () {
 
 do_deploy_append () {
     set -x
-    cp ${D}/boot/bootscript.mmc ${DEPLOYDIR}/bootscript.mmc-${DATETIME}
+    cp ${D}/boot/bootscript.nand ${DEPLOYDIR}/bootscript.nand-${DATETIME}
     cp ${D}/boot/bootscript.nfs ${DEPLOYDIR}/bootscript.nfs-${DATETIME}
     cp ${D}/boot/bootscript.usb ${DEPLOYDIR}/bootscript.usb-${DATETIME}
-    ln -sf bootscript.mmc-${DATETIME} ${DEPLOYDIR}/bootscript.mmc
+    ln -sf bootscript.nand-${DATETIME} ${DEPLOYDIR}/bootscript.nand
     ln -sf bootscript.nfs-${DATETIME} ${DEPLOYDIR}/bootscript.nfs
     ln -sf bootscript.usb-${DATETIME} ${DEPLOYDIR}/bootscript.usb
 
-    ln -sf bootscript.mmc-${DATETIME} ${DEPLOYDIR}/bootscript
+    ln -sf bootscript.nand-${DATETIME} ${DEPLOYDIR}/bootscript
     test ${USBSTICK_IMAGE} -eq 1 && ln -sf bootscript.usb-${DATETIME} ${DEPLOYDIR}/bootscript
     : # exit 0
 }
 
 FILES_kernel-module-cfg80211 += "${sysconfdir}/modprobe.d/blacklist-cfg80211.conf"
-FILES_kernel-image += "/boot/bootscript.mmc /boot/bootscript.nfs /boot/bootscript.usb"
+FILES_kernel-image += "/boot/bootscript.nand /boot/bootscript.nfs /boot/bootscript.usb"
