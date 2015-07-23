@@ -13,6 +13,8 @@ RDM_BASE_INSTALL = "\
 	nano \
 	sudo \
 	nginx \
+	nginx-legal \
+	nginx-manual \
 	tzdata \
 	tcpdump \
 	ifplugd \
