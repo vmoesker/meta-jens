@@ -23,6 +23,8 @@ RDM_BASE_INSTALL = "hp2sm \
 	sudo \
 	qbrqry \
 	nginx \
+	nginx-legal \
+	nginx-manual \
 	tzdata \
 	tcpdump \
 	ifplugd \
