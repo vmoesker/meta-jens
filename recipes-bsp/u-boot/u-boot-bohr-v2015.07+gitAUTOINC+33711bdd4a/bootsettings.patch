@@ -1,8 +1,16 @@
 diff --git a/include/configs/guruplug.h b/include/configs/guruplug.h
-index 5f09567..bd925a1 100644
+index 5f09567..27cfafd 100644
 --- a/include/configs/guruplug.h
 +++ b/include/configs/guruplug.h
-@@ -82,26 +82,37 @@
+@@ -49,7 +49,6 @@
+ #define CONFIG_CMD_BOOTZ
+ #define CONFIG_CMD_DHCP
+ #define CONFIG_CMD_ENV
+-#define CONFIG_CMD_IDE
+ #define CONFIG_CMD_MII
+ #define CONFIG_CMD_NAND
+ #define CONFIG_CMD_PING
+@@ -82,26 +81,37 @@
   * Default environment variables
   */
  #define CONFIG_BOOTCOMMAND \
@@ -38,7 +46,7 @@ index 5f09567..bd925a1 100644
 +	"mtdparts="CONFIG_MTDPARTS \
 +	"kernel=zImage\0" \
 +	"loadaddr=0x800000\0" \
-+	"fdt_file=zImage-kirkwood-guruplug-server-plus.dtb\0" \
++	"fdt_file=kirkwood-guruplug-server-plus.dtb\0" \
 +	"fdt_addr=0x700000\0" \
 +	"scriptaddr=0x100000\0" \
 +	"nandloadbootscript=" \
