@@ -29,6 +29,8 @@ SRC_URI = "git://github.com/rdm-dev/linux-curie.git;branch=${SRCBRANCH};rev=318f
 COMPATIBLE_MACHINE = "(curie)"
 
 do_install_append () {
+    SDCARD_IMAGE=0
+    test "${WANTED_ROOT_DEV}" = "sd" && SDCARD_IMAGE=1
     sed -i -e "s/@UBOOT_LOADADDRESS[@]/${UBOOT_LOADADDRESS}/g" -e "s/@UBOOT_FDTADDRESS[@]/${UBOOT_FDTADDRESS}/g" \
          -e "s/@UBOOT_MMC_DEV[@]/${UBOOT_MMC_DEV}/g" -e "s/@SDCARD_IMAGE[@]/${SDCARD_IMAGE}/g" \
          -e "s/@KERNEL_MMC_DEV[@]/${KERNEL_MMC_DEV}/g" \
@@ -51,8 +53,9 @@ do_deploy_append () {
     ln -sf bootscript.nfs-${DATETIME} ${DEPLOYDIR}/bootscript.nfs
     ln -sf bootscript.usb-${DATETIME} ${DEPLOYDIR}/bootscript.usb
 
-    ln -sf bootscript.mmc-${DATETIME} ${DEPLOYDIR}/bootscript
-    test ${USBSTICK_IMAGE} -eq 1 && ln -sf bootscript.usb-${DATETIME} ${DEPLOYDIR}/bootscript
+    DEFAULT_BOOTSCRIPT="bootscript.mmc-${DATETIME}"
+    test -f ${DEPLOYDIR}/bootscript.${WANTED_ROOT_DEV}-${DATETIME} && DEFAULT_BOOTSCRIPT="bootscript.${WANTED_ROOT_DEV}-${DATETIME}"
+    ln -sf ${DEFAULT_BOOTSCRIPT} ${DEPLOYDIR}/bootscript
     : # exit 0
 }
 

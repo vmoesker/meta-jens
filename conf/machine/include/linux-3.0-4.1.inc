@@ -15,6 +15,7 @@ UNIONFS = "none"
 # 2.6.37 and later kernels use OMAP_SERIAL, ttyO2
 # earlier kernels use ttyS2
 SERIAL_CONSOLE = "115200 ttymxc0"
+
 KERNEL_MMC_BASE_DEV = "0"
 
 KERNEL_MMC_DEV = "${@${KERNEL_MMC_BASE_DEV}+${SDCARD_IMAGE}}"
