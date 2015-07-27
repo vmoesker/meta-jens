@@ -4,12 +4,9 @@ hostname := "homepilot"
 volatiles := ""
 
 do_install_append () {
-    BOOT_DEV="mmcblk${KERNEL_MMC_DEV}p"
+    DEV_PFX="${ROOT_DEV_NAME}${ROOT_DEV_SEP}"
 
-    test "${MACHINE}" = "bohr" && BOOT_DEV="ubi0_"
-    test ${USBSTICK_IMAGE} -eq 1 && BOOT_DEV="sda"
-
-    sed -i -e "s,@BOOT_DEV@,${BOOT_DEV},g" \
+    sed -i -e "s,@DEV_PFX@,${DEV_PFX},g" \
          -e "s,@overlay@,${OVERLAY},g" -e "s,@overlayfs@,${OVERLAYFS},g" -e "s,@unionfs@,${UNIONFS},g" \
         ${D}${sysconfdir}/fstab
     test "${MACHINE}" = "bohr" && sed -i -e "s,ext[24],ubifs,g" \

@@ -85,8 +85,7 @@ do_deploy_append () {
     ln -sf bootscript.nfs-${DATETIME} ${DEPLOYDIR}/bootscript.nfs
     ln -sf bootscript.usb-${DATETIME} ${DEPLOYDIR}/bootscript.usb
 
-    ln -sf bootscript.nand-${DATETIME} ${DEPLOYDIR}/bootscript
-    test ${USBSTICK_IMAGE} -eq 1 && ln -sf bootscript.usb-${DATETIME} ${DEPLOYDIR}/bootscript
+    ln -sf bootscript.${WANTED_ROOT_DEV}-${DATETIME} ${DEPLOYDIR}/bootscript
     : # exit 0
 }
 

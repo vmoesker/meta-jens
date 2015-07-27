@@ -1,0 +1,19 @@
+trigger_recover () {
+    echo 0 >/sys/class/leds/user2/brightness
+    echo heartbeat >/sys/class/leds/user2/trigger
+}
+
+trigger_root () {
+    echo 0 >/sys/class/leds/user1/brightness
+    echo heartbeat >/sys/class/leds/user1/trigger
+}
+
+silence_recover () {
+    echo none >/sys/class/leds/user2/trigger
+    echo 0 >/sys/class/leds/user2/brightness
+}
+
+silence_root () {
+    echo none >/sys/class/leds/user1/trigger
+    echo 0 >/sys/class/leds/user1/brightness
+}
