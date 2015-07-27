@@ -23,7 +23,6 @@ RDM_BASE_INSTALL = "u-boot-fw-utils \
 	ntp \
 	ntpdate \
 	ntp-utils \
-	openvpn \
 	util-linux \
 	ethtool \
 	crda \
@@ -38,10 +37,14 @@ RDM_BASE_INSTALL = "u-boot-fw-utils \
 	prd-flash \
 	wifi-fallback \
 "
+RDM_BASE_INSTALL_append_bohr = "\
+	mtd-utils \
+	mtd-utils-jffs2 \
+	mtd-utils-ubifs \
+	mtd-utils-misc \
+"
 RDM_BASE_INSTALL_append_mx6qcurie = "\
 	ledctrl \
-	alsa-utils \
-	init-iecset \
 	fb-cursor-off \
 "
 RDM_INSTALL = "${RDM_BASE_INSTALL} \
@@ -50,6 +53,7 @@ RDM_INSTALL = "${RDM_BASE_INSTALL} \
 	ntfsprogs \
 	ntfs-3g \
 	ksm-init \
+	openvpn \
 "
 RECOVER_INSTALL="parted \
 "

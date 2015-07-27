@@ -11,3 +11,4 @@ HP2_INSTALL = "service-df \
 	wrc-startup \
 	udev-hp \
 "
+RDEPENDS_append = " packagegroup-base-zeroconf"
