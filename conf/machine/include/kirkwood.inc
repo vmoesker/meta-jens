@@ -6,8 +6,10 @@ TARGET_ARCH = "arm"
 PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
 PREFERRED_PROVIDER_virtual/kernel = "linux-kirkwood"
 
-OVERLAYFS = "overlayfs"
+OVERLAY = "overlay"
+OVERLAYFS = "#overlayfs"
 UNIONFS = "#unionfs"
+UNION_SHADOWS=".shadow/.etc .shadow/.home .work/.etc .work/.home"
 
 SERIAL_CONSOLE = "115200 ttyS0"
 KERNEL_IMAGETYPE = "zImage"
