@@ -1,5 +1,5 @@
 diff --git a/include/configs/guruplug.h b/include/configs/guruplug.h
-index 5f09567..27cfafd 100644
+index 5f09567..dd6b4b5 100644
 --- a/include/configs/guruplug.h
 +++ b/include/configs/guruplug.h
 @@ -49,7 +49,6 @@
@@ -10,7 +10,7 @@ index 5f09567..27cfafd 100644
  #define CONFIG_CMD_MII
  #define CONFIG_CMD_NAND
  #define CONFIG_CMD_PING
-@@ -82,26 +81,37 @@
+@@ -82,27 +81,38 @@
   * Default environment variables
   */
  #define CONFIG_BOOTCOMMAND \
@@ -40,6 +40,7 @@ index 5f09567..27cfafd 100644
 -	"mtdparts="CONFIG_MTDPARTS					\
 -	"kernel=/boot/zImage\0"						\
 -	"fdt=/boot/guruplug-server-plus.dtb\0"				\
+-	"bootargs_root=ubi.mtd=2 root=ubi0:rootfs rootfstype=ubifs rw\0"
 +	"console=console=ttyS0,115200\0" \
 +	"script=bootscript\0" \
 +	"mtdids=nand0=orion_nand\0" \
@@ -50,7 +51,7 @@ index 5f09567..27cfafd 100644
 +	"fdt_addr=0x700000\0" \
 +	"scriptaddr=0x100000\0" \
 +	"nandloadbootscript=" \
-+		"ubi part root; ubifsmount ubi:rootfs; ubifsload ${scriptaddr} ${script}; ubifsumount; run bootscript;\0" \
++		"ubi part root; ubifsmount ubi:boot; ubifsload ${scriptaddr} ${script}; ubifsumount; run bootscript;\0" \
 +	"usbloadbootscript=" \
 +		"ext2load usb 0:1 ${scriptaddr} ${script}; run bootscript;\0" \
 +	"netboot=echo Booting from net ...; " \
@@ -59,7 +60,8 @@ index 5f09567..27cfafd 100644
 +		"run bootscript;\0" \
 +	"bootscript=echo Running bootscript ...; " \
 +		"source ${scriptaddr}\0" \
-+	"bootargs_base=${console} ${mtdparts} oops=panic panic=5 ${smp} rootwait consoleblank=0\0"	\
- 	"bootargs_root=ubi.mtd=2 root=ubi0:rootfs rootfstype=ubifs rw\0"
++	"bootargs_base=${console} ${mtdparts} oops=panic panic=5 ${smp} rootwait consoleblank=0\0" \
++	"bootargs_ubi=ubi.mtd=2 ubi.block=0,2 ubi.block=0,3\0"
  
  #define MTDIDS_DEFAULT	"nand0=orion_nand"
+ 
