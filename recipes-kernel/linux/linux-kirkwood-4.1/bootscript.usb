@@ -1,9 +1,9 @@
 setenv loadaddr @UBOOT_LOADADDRESS@
-setenv fdtaddr @UBOOT_FDTADDRESS@
-setenv bootargs_usb setenv bootargs ${bootargs_base} ip=none root=/dev/sda2
-setenv bootcmd_usb 'if ext2load usb 0:1 @UBOOT_LOADADDRESS@ /@KERNEL_IMAGETYPE@; then run bootargs_usb; ext2load usb 0:1 @UBOOT_FDTADDRESS@ /${fdt_file}; fdt addr @UBOOT_FDTADDRESS@; fdt resize; fdt chosen; bootz @UBOOT_LOADADDRESS@ - @UBOOT_FDTADDRESS@; fi'
+setenv fdt_addr @UBOOT_FDTADDRESS@
+setenv bootargs_usb setenv bootargs ${bootargs_base} ip=none ${bootargs_ubi} root=/dev/sda2
+setenv bootcmd_usb 'if ext2load usb 0:1 @UBOOT_LOADADDRESS@ /@KERNEL_IMAGETYPE@; then run bootargs_usb; ext2load usb 0:1 @UBOOT_FDTADDRESS@ /@KERNEL_DEVICETREE@; fdt addr @UBOOT_FDTADDRESS@; fdt resize; fdt chosen; bootz @UBOOT_LOADADDRESS@ - @UBOOT_FDTADDRESS@; fi'
 setenv bootargs_rec setenv bootargs ${bootargs_base} ip=none root=/dev/sda3
-setenv bootcmd_rec 'if ext2load usb 0:1 @UBOOT_LOADADDRESS@ /@KERNEL_IMAGETYPE@-bohr; then run bootargs_rec; ext2load usb 0:1 @UBOOT_FDTADDRESS@ /${fdt_file}; fdt addr @UBOOT_FDTADDRESS@; fdt resize; fdt chosen; bootz @UBOOT_LOADADDRESS@ - @UBOOT_FDTADDRESS@; fi'
+setenv bootcmd_rec 'if ext2load usb 0:1 @UBOOT_LOADADDRESS@ /@KERNEL_IMAGETYPE@-bohr; then run bootargs_rec; ext2load usb 0:1 @UBOOT_FDTADDRESS@ /@KERNEL_DEVICETREE@; fdt addr @UBOOT_FDTADDRESS@; fdt resize; fdt chosen; bootz @UBOOT_LOADADDRESS@ - @UBOOT_FDTADDRESS@; fi'
 usb dev 0
 run bootcmd_rec
 run bootcmd_usb

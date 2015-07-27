@@ -65,7 +65,7 @@ do_configure_prepend() {
 
 do_install_append () {
     sed -i -e "s/@UBOOT_LOADADDRESS[@]/${UBOOT_LOADADDRESS}/g" -e "s/@UBOOT_FDTADDRESS[@]/${UBOOT_FDTADDRESS}/g" \
-         -e "s/@KERNEL_IMAGETYPE[@]/${KERNEL_IMAGETYPE}/g" \
+           -e "s/@KERNEL_IMAGETYPE[@]/${KERNEL_IMAGETYPE}/g" -e "s/@KERNEL_DEVICETREE[@]/${KERNEL_DEVICETREE}/g" \
 	 ${WORKDIR}/bootscript.nand ${WORKDIR}/bootscript.nfs ${WORKDIR}/bootscript.usb
     uboot-mkimage -T script -C none -n 'Bohr Script' -d ${WORKDIR}/bootscript.nand ${D}/boot/bootscript.nand
     uboot-mkimage -T script -C none -n 'Bohr Script' -d ${WORKDIR}/bootscript.nfs ${D}/boot/bootscript.nfs

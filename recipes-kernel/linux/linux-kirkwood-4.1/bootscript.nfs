@@ -1,5 +1,5 @@
 setenv loadaddr @UBOOT_LOADADDRESS@
-setenv fdtaddr @UBOOT_FDTADDRESS@
+setenv fdt_addr @UBOOT_FDTADDRESS@
 setenv bootargs_nfs setenv bootargs ${bootargs_base} ip=dhcp root=/dev/nfs ro
-setenv bootcmd_nfs 'run bootargs_nfs; tftp @UBOOT_LOADADDRESS@ bohr-4.1/@KERNEL_IMAGETYPE@; tftp @UBOOT_FDTADDRESS@ bohr-4.1/${fdt_file}; fdt addr @UBOOT_FDTADDRESS@; fdt resize; fdt chosen; bootz @UBOOT_LOADADDRESS@ - @UBOOT_FDTADDRESS@'
+setenv bootcmd_nfs 'run bootargs_nfs; tftp @UBOOT_LOADADDRESS@ bohr-4.1/@KERNEL_IMAGETYPE@; tftp @UBOOT_FDTADDRESS@ bohr-4.1/@KERNEL_DEVICETREE@; fdt addr @UBOOT_FDTADDRESS@; fdt resize; fdt chosen; bootz @UBOOT_LOADADDRESS@ - @UBOOT_FDTADDRESS@'
 run bootcmd_nfs
