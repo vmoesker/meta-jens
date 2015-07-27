@@ -16,7 +16,7 @@ logger -s "Starting flash ..."
 
 SDCARD_DEVICE="/dev/mmcblk@KERNEL_EMMC_DEV@"
 SDCARD_PREFIX="${SDCARD_DEVICE}p"
-UNION_SHADOWS=".shadow/.etc .shadow/.home"
+UNION_SHADOWS=".shadow/.etc .shadow/.home .work/.etc .work/.home"
 
 # use last image container
 for c in /data/.flashimg/*-complete.cpi /data/flashimg/*-complete
@@ -42,7 +42,7 @@ then
 
     if test -e /dev/sda
     then
-	if [ "$USBSTICK_IMAGE" != 1 ]
+	if [ "$USBSTICK_IMAGE" != "1" ]
 	then
 	    logger -s "Cannot flash incompatible image (USB stick but no USB image)"
 	    exit 1
@@ -60,6 +60,16 @@ then
 
 	SDCARD_DEVICE="/dev/mmcblk@KERNEL_SD_DEV@"
 	SDCARD_PREFIX="${SDCARD_DEVICE}p"
+    else
+	if [ "$USBSTICK_IMAGE" = "1" ]
+	then
+	    logger -s "Cannot flash incompatible image (USB stick image but no USB stick)"
+	    exit 1
+	elif [ "$SDCARD_IMAGE" = "1" ]
+	then
+	    logger -s "Cannot flash incompatible image (SD card image but no SD card)"
+	    exit 1
+	fi
     fi
 
     echo 0 >/sys/class/leds/user1/brightness
@@ -142,6 +152,12 @@ then
     tar xjf "${IMAGE_CONTAINER}" .settings
     . ./.settings
     rm -f .settings
+
+    if test "@MACHINE@" != "${MACHINE}"
+    then
+	logger -s "Cannot perform an update for ${MACHINE}."
+	exit 1
+    fi
 
     if test -e /dev/sda
     then

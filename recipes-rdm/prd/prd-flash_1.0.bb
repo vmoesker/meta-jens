@@ -10,7 +10,7 @@ SRC_URI = "file://flash-device.sh \
 "
 
 do_compile () {
-	sed -i -e "s,@ARGV0@,${sysconfdir}/init.d/flash-device.sh,g" -e "s/@SDCARD_IMAGE[@]/${SDCARD_IMAGE}/g" \
+	sed -i -e "s,@ARGV0@,${sysconfdir}/init.d/flash-device.sh,g" -e "s/@MACHINE[@]/${MACHINE}/g" \
 	    -e "s/@KERNEL_EMMC_DEV[@]/${KERNEL_EMMC_DEV}/g" -e "s/@KERNEL_SD_DEV[@]/${KERNEL_SD_DEV}/g" \
 	    -e "s/@KERNEL_MMC_DEV[@]/${KERNEL_MMC_DEV}/g" ${WORKDIR}/flash-device.sh
 }
