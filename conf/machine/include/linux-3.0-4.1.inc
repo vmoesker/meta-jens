@@ -8,6 +8,7 @@ PREFERRED_VERSION_imx-lib = "3.10.9-1.0.0"
 PREFERRED_VERSION_imx-vpu = "3.10.9-1.0.0"
 PREFERRED_VERSION_gpu-viv-bin-mx6q = "3.10.9-1.0.0-hfp"
 
+OVERLAY = "#overlay"
 OVERLAYFS = "#overlayfs"
 UNIONFS = "none"
 
