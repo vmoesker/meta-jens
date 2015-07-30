@@ -1,4 +1,5 @@
 PREFERRED_VERSION_u-boot-curie = "2014.04"
+PREFERRED_VERSION_u-boot-fw-utils-curie = "2014.04"
 
 UBOOT_MACHINE = "mx6qcurie_config"
 

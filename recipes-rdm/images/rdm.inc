@@ -1,4 +1,4 @@
-RDM_BASE_INSTALL = "u-boot-fw-utils \
+RDM_BASE_INSTALL = "\
 	cronie \
 	collectd-graphs \
 	fontconfig \
@@ -38,12 +38,14 @@ RDM_BASE_INSTALL = "u-boot-fw-utils \
 	wifi-fallback \
 "
 RDM_BASE_INSTALL_append_bohr = "\
+	u-boot-fw-utils \
 	mtd-utils \
 	mtd-utils-jffs2 \
 	mtd-utils-ubifs \
 	mtd-utils-misc \
 "
 RDM_BASE_INSTALL_append_mx6qcurie = "\
+	u-boot-fw-utils-curie \
 	ledctrl \
 	fb-cursor-off \
 "
