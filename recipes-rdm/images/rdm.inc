@@ -16,7 +16,6 @@ RDM_BASE_INSTALL = "hp2sm \
 	prd-flash \
 	boot-fsck \
 	nano \
-	ledctrl \
 	sudo \
 	qbrqry \
 	nginx \
@@ -42,8 +41,9 @@ RDM_BASE_INSTALL = "hp2sm \
 	logrotate \
 "
 RDM_BASE_INSTALL_append_mx6qcurie = "\
-	init-iecset \
 	mmc-slowdown \
+	u-boot-fw-utils-curie \
+	ledctrl \
 	fb-cursor-off \
 "
 RDM_INSTALL = "${RDM_BASE_INSTALL} \
