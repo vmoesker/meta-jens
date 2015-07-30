@@ -37,8 +37,9 @@ do_install_append () {
     SDCARD_IMAGE=0
     test "${WANTED_ROOT_DEV}" = "sd" && SDCARD_IMAGE=1
     sed -i -e "s/@UBOOT_LOADADDRESS[@]/${UBOOT_LOADADDRESS}/g" -e "s/@UBOOT_FDTADDRESS[@]/${UBOOT_FDTADDRESS}/g" \
-         -e "s/@UBOOT_MMC_DEV[@]/${UBOOT_MMC_DEV}/g" -e "s/@SDCARD_IMAGE[@]/${SDCARD_IMAGE}/g" \
-         -e "s/@KERNEL_MMC_DEV[@]/${KERNEL_MMC_DEV}/g" \
+           -e "s/@UBOOT_MMC_DEV[@]/${UBOOT_MMC_DEV}/g" -e "s/@SDCARD_IMAGE[@]/${SDCARD_IMAGE}/g" \
+           -e "s/@KERNEL_MMC_DEV[@]/${KERNEL_MMC_DEV}/g" -e "s/@KERNEL_IMAGETYPE[@]/${KERNEL_IMAGETYPE}/g" \
+	   -e "s/@MACHINE[@]/${MACHINE}/g" -e "s/@BRANCH[@]/${METADATA_BRANCH}/g" \
 	 ${WORKDIR}/bootscript.mmc ${WORKDIR}/bootscript.nfs ${WORKDIR}/bootscript.usb
     uboot-mkimage -T script -C none -n 'Curie Script' -d ${WORKDIR}/bootscript.mmc ${D}/boot/bootscript.mmc
     uboot-mkimage -T script -C none -n 'Curie Script' -d ${WORKDIR}/bootscript.nfs ${D}/boot/bootscript.nfs

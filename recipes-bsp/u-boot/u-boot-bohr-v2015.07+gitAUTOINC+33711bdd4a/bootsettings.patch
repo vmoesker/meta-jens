@@ -10,7 +10,7 @@ index 5f09567..dd6b4b5 100644
  #define CONFIG_CMD_MII
  #define CONFIG_CMD_NAND
  #define CONFIG_CMD_PING
-@@ -82,27 +81,38 @@
+@@ -82,27 +81,37 @@
   * Default environment variables
   */
  #define CONFIG_BOOTCOMMAND \
@@ -55,8 +55,7 @@ index 5f09567..dd6b4b5 100644
 +	"usbloadbootscript=" \
 +		"ext2load usb 0:1 ${scriptaddr} ${script}; run bootscript;\0" \
 +	"netboot=echo Booting from net ...; " \
-+		"dhcp; " \
-+		"tftp ${scriptaddr} ${script}.nfs; " \
++		"dhcp ${scriptaddr}; " \
 +		"run bootscript;\0" \
 +	"bootscript=echo Running bootscript ...; " \
 +		"source ${scriptaddr}\0" \

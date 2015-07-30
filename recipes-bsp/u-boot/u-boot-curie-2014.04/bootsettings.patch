@@ -73,7 +73,7 @@ index 8b1c751..f0d188f 100644
  	"mmcautodetect=yes\0" \
  	"update_sd_firmware=" \
  		"if test ${ip_dyn} = yes; then " \
-@@ -185,66 +193,39 @@
+@@ -185,66 +193,38 @@
  			"fi; "	\
  		"fi\0" \
  	"smp=" CONFIG_SYS_NOSMP "\0"\
@@ -120,7 +120,7 @@ index 8b1c751..f0d188f 100644
 -			"setenv get_cmd dhcp; " \
 -		"else " \
 -			"setenv get_cmd tftp; " \
-+			"dhcp; " \
++			"dhcp $scriptaddr; " \
  		"fi; " \
 -		"${get_cmd} ${image}; " \
 -		"if test ${boot_fdt} = yes || test ${boot_fdt} = try; then " \
@@ -136,7 +136,6 @@ index 8b1c751..f0d188f 100644
 -		"else " \
 -			"bootz; " \
 -		"fi;\0"
-+		"tftp ${scriptaddr} ${script}.nfs; " \
 +		"run bootscript;\0"
  
  #define CONFIG_BOOTCOMMAND \

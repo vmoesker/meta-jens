@@ -13,7 +13,7 @@ require recipes-kernel/linux/linux-dtb.inc
 # u-boot-curie
 DEPENDS += "lzop-native bc-native u-boot u-boot-mkimage-native"
 
-REV="5cf9896dc5c72a6c68c36140568b755f697f7760"
+REV="c8bde72f9af412de57f0ceae218d648640118b0b"
 SRCREPO="rehsack"
 SRCBRANCH = "linux-4.1.y"
 
@@ -66,6 +66,7 @@ do_configure_prepend() {
 do_install_append () {
     sed -i -e "s/@UBOOT_LOADADDRESS[@]/${UBOOT_LOADADDRESS}/g" -e "s/@UBOOT_FDTADDRESS[@]/${UBOOT_FDTADDRESS}/g" \
            -e "s/@KERNEL_IMAGETYPE[@]/${KERNEL_IMAGETYPE}/g" -e "s/@KERNEL_DEVICETREE[@]/${KERNEL_DEVICETREE}/g" \
+	   -e "s/@MACHINE[@]/${MACHINE}/g" -e "s/@BRANCH[@]/${METADATA_BRANCH}/g" \
 	 ${WORKDIR}/bootscript.nand ${WORKDIR}/bootscript.nfs ${WORKDIR}/bootscript.usb
     uboot-mkimage -T script -C none -n 'Bohr Script' -d ${WORKDIR}/bootscript.nand ${D}/boot/bootscript.nand
     uboot-mkimage -T script -C none -n 'Bohr Script' -d ${WORKDIR}/bootscript.nfs ${D}/boot/bootscript.nfs
