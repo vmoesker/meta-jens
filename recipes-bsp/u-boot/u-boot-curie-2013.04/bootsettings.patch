@@ -60,7 +60,7 @@ index 479c839..b2aba1f 100644
  
  #define CONFIG_MFG_ENV_SETTINGS \
  	"mfgtool_args=setenv bootargs console=" CONFIG_CONSOLE_DEV ",115200 " \
-@@ -179,80 +172,53 @@
+@@ -179,80 +172,52 @@
  #else
  #define CONFIG_EXTRA_ENV_SETTINGS \
  	CONFIG_MFG_ENV_SETTINGS \
@@ -126,7 +126,7 @@ index 479c839..b2aba1f 100644
 -			"setenv get_cmd dhcp; " \
 -		"else " \
 -			"setenv get_cmd tftp; " \
-+			"dhcp; " \
++			"dhcp $scriptaddr; " \
  		"fi; " \
 -		"${get_cmd} ${uimage}; " \
 -		"if test ${boot_fdt} = yes || test ${boot_fdt} = try; then " \
@@ -142,7 +142,6 @@ index 479c839..b2aba1f 100644
 -		"else " \
 -			"bootm; " \
 -		"fi;\0"
-+		"tftp ${scriptaddr} ${script}.nfs; " \
 +		"run bootscript;\0"
  
  #define CONFIG_BOOTCOMMAND \
