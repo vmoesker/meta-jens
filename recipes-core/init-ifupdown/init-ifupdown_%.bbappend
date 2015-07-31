@@ -1,5 +1,7 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
+RRECOMMENDS_${PN} += "ethtool"
+
 SRC_URI += "file://eth/pre_up.sh \
 	file://eth/post_up.sh \
 	file://eth/pre_down.sh \
