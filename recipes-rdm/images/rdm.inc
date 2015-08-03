@@ -42,7 +42,6 @@ RDM_BASE_INSTALL = "hp2sm \
 "
 RDM_BASE_INSTALL_append_mx6qcurie = "\
 	mmc-slowdown \
-	u-boot-fw-utils-curie \
 	ledctrl \
 	fb-cursor-off \
 "
