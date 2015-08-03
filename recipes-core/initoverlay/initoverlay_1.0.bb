@@ -11,6 +11,11 @@ SRC_URI = "file://mountoverlay.sh \
 	file://umountoverlay.sh \
 "
 
+do_compile () {
+    sed -i -e "s/@ROOT_DEV_NAME[@]/${ROOT_DEV_NAME}/g" -e "s/@ROOT_DEV_SEP[@]/${ROOT_DEV_SEP}/g" -e "s/@ROOT_DEV_TYPE[@]/${ROOT_DEV_TYPE}/g" \
+	${WORKDIR}/mountoverlay.sh ${WORKDIR}/cleanoverlay.sh ${WORKDIR}/migrate2overlay.sh ${WORKDIR}/umountoverlay.sh
+}
+
 do_install () {
 	install -d ${D}${sysconfdir}/default
 	install -m 0644 ${WORKDIR}/default-cleanoverlay.conf ${D}${sysconfdir}/default/cleanoverlay.conf
