@@ -41,7 +41,6 @@ RDM_BASE_INSTALL = "hp2sm \
 	logrotate \
 "
 RDM_BASE_INSTALL_append_mx6qcurie = "\
-	mmc-slowdown \
 	ledctrl \
 	fb-cursor-off \
 "

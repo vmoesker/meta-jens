@@ -9,9 +9,9 @@ require recipes-kernel/linux/linux-dtb.inc
 
 DEPENDS += "lzop-native bc-native u-boot-curie"
 
-REV="aa863e040e9c9a14addb9fbed1c460c20f21c6f9"
+REV="294d5af92ed392ade42bdf551ae29f5768bd2540"
 SRCREPO="rdm-dev"
-SRCBRANCH = "curie_3.10.81_1.0.0_ga"
+SRCBRANCH = "curie_3.10.84_1.0.0_ga"
 LOCALVERSION = "+curie"
 
 SRC_URI = "git://github.com/${SRCREPO}/linux-curie.git;branch=${SRCBRANCH};rev=${REV} \
