@@ -48,8 +48,8 @@ prepare_device () {
     tune2fs -L "boot-${LABEL}" -o discard,block_validity ${DEVICE_PREFIX}1
     tune2fs -L "data-${LABEL}" -o journal_data,discard,block_validity ${DEVICE_PREFIX}4
 
-    mount ${DEVICE_PREFIX}1 ${TEMP_DIR}/flashimg/root/boot
-    mount ${DEVICE_PREFIX}4 ${TEMP_DIR}/flashimg/root/data
+    mount ${DEVICE_PREFIX}1 ${BOOT_MNT}
+    mount ${DEVICE_PREFIX}4 ${DATA_MNT}
 }
 
 flash_uboot () {
