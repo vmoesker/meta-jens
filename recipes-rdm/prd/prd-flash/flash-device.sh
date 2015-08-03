@@ -15,6 +15,7 @@ test "${FLOCKER}" != "@ARGV0@" && exec env FLOCKER="@ARGV0@" flock -en "@ARGV0@"
 logger -s "Starting flash ..."
 
 . @LIBEXEC@/hw
+. @LIBEXEC@/init.@MACHINE@
 
 # use last image container
 for c in /data/.flashimg/*-complete.cpi /data/flashimg/*-complete
@@ -38,39 +39,50 @@ if [ -d "${IMAGE_CONTAINER}" ]
 then
     . "${IMAGE_CONTAINER}"/.settings
 
-    for w in @AVAIL_ROOT_DEV@
+    DEV_FOUND=0
+
+    for w in @AVAIL_ROOT_DEVS@
     do
-	devnm="ROOT_DEV_NAME-${w}"
-	dev=$(echo /dev/$devnm)
+	devnm="ROOT_DEV_NAME_${w}"
+	dev=$(eval echo /dev/\$${devnm})
 	if test -e $dev
 	then
+	    test $DEV_FOUND -eq 1 && continue
 	    if [ "$WANTED_ROOT_DEV" != "$w" ]
 	    then
 		logger -s "Cannot flash incompatible image ($dev but no $w image)"
 		exit 1
 	    fi
+	    DEV_FOUND=1
 	fi
     done
 
     DEVICE_PATH="/dev/${ROOT_DEV_NAME}"
     DEVICE_PREFIX="/dev/${ROOT_DEV_NAME}${ROOT_DEV_SEP}"
 
+    ETH0_ADDR=`cat /sys/class/net/eth0/address | sed -e 's/://g'`
+    BOOT_MNT=${TEMP_DIR}/flashimg/root/boot/${ETH0_ADDR}
+    DATA_MNT=${TEMP_DIR}/flashimg/root/data/${ETH0_ADDR}
+    mkdir -p ${BOOT_MNT} ${DATA_MNT}
+
     trigger_root
     trigger_recover
 
-    mkdir -p ${TEMP_DIR}/flashimg/root/boot ${TEMP_DIR}/flashimg/root/data
-
     . @LIBEXEC@/init.${ROOT_DEV_TYPE}
-    . @LIBEXEC@/init.@MACHINE@
+    prepare_device
 
-    (cd "${IMAGE_CONTAINER}" && tar cf - ${KERNEL}) | (cd ${TEMP_DIR}/flashimg/root/boot && tar xf - && chown -R root:root . && eval ${KERNEL_PREPARE} && eval ${KERNEL_SANITIZE})
+    flash_uboot
+    flash_rootfs
+    flash_recoveryfs
 
-    mkdir -p ${TEMP_DIR}/flashimg/root/data/tmp
-    chmod 01777 ${TEMP_DIR}/flashimg/root/data/tmp
-    (cd ${TEMP_DIR}/flashimg/root/data && mkdir -p ${UNION_SHADOWS})
+    (cd "${IMAGE_CONTAINER}" && tar cf - ${KERNEL}) | (cd ${BOOT_MNT} && tar xf - && chown -R root:root . && eval ${KERNEL_PREPARE} && eval ${KERNEL_SANITIZE})
 
-    umount ${TEMP_DIR}/flashimg/root/boot
-    umount ${TEMP_DIR}/flashimg/root/data
+    mkdir -p ${DATA_MNT}/tmp
+    chmod 01777 ${DATA_MNT}/tmp
+    (cd ${DATA_MNT} && mkdir -p ${UNION_SHADOWS})
+
+    umount ${BOOT_MNT}
+    umount ${DATA_MNT}
 
     sync
 
@@ -84,7 +96,7 @@ then
     . ./.settings
     rm -f .settings
 
-    if test "@MACHINE@" != "${MACHINE}"
+    if [ "${MACHINE}" != "@MACHINE@" ]
     then
 	logger -s "Cannot perform an update for ${MACHINE}."
 	exit 1
@@ -94,14 +106,13 @@ then
     then
 	logger -s "Cannot write to ${WANTED_ROOT_DEV}, flashing limited to @WANTED_ROOT_DEV@."
 	exit 1
-	fi
     fi
 
-    . @LIBEXEC@/init.@MACHINE@
+    . @LIBEXEC@/init.@ROOT_DEV_TYPE@
 
     ROOTDEV=`mount | grep "on / type" | sed -e 's/ on.*//'`
 
-    if [ $(echo ${ROOTDEV} | egrep "${ROOT_DEV_SEP}2\$") ]
+    if [ $(echo ${ROOTDEV} | egrep "@ROOT_DEV_SEP@2\$") ]
     then
 	REGULAR=Y
 	logger "Updating phase 1"
@@ -126,7 +137,7 @@ then
 
 	logger "Requesting reboot"
 	reboot
-    elif [ $(echo ${ROOTDEV} | egrep 'p3$') ]
+    elif [ $(echo ${ROOTDEV} | egrep '@ROOT_DEV_SEP@3$') ]
     then
 	RECOVERY=Y
 	logger "Updating phase 2"

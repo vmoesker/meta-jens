@@ -44,7 +44,6 @@ do_compile () {
 
 	sed -i -e "s,@ARGV0@,${sysconfdir}/init.d/flash-device.sh,g" -e "s,@LIBEXEC[@],${libexecdir}/${MACHINE},g" \
 	    -e "s/@MACHINE[@]/${MACHINE}/g" -e "s,@AVAIL_ROOT_DEVS[@],${AVAIL_ROOT_DEVS},g" -e "s,@WANTED_ROOT_DEV[@],${WANTED_ROOT_DEV},g" \
-	    -e "s,@ROOT_DEV_NAME[@],${ROOT_DEV_NAME},g" -e "s,@ROOT_DEV_SEP[@],${ROOT_DEV_SEP},g" -e "s,@ROOT_DEV_TYPE[@],${ROOT_DEV_TYPE},g" \
             $ALL_ROOT_DEV_NAMES \
 	    ${WORKDIR}/flash-device.sh ${WORKDIR}/hw.${MACHINE} ${WORKDIR}/init.*
 }
