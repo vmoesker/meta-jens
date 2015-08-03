@@ -29,11 +29,11 @@ do
         ROOTDEV=`mount | grep "on / type" | sed -e 's/ on.*//'`
     fi
 
-    if [ $(echo ${ROOTDEV} | egrep 'p3$') ]
+    if [ $(echo ${ROOTDEV} | egrep '@ROOT_DEV_SEP@3$') ]
     then
 	if [ -z "${PRIMDEV}" ]
 	then
-	    PRIMDEV=`echo $ROOTDEV | awk -F/ '{print $3}' | sed -E 's/p3$/p2/g'`
+	    PRIMDEV=`echo $ROOTDEV | awk -F/ '{print $3}' | sed -E 's/@ROOT_DEV_SEP@3$/@ROOT_DEV_SEP@2/g'`
 	    if [ ! -d /var/volatile/media ]
 	    then
 		mkdir -p "/var/volatile/media"
