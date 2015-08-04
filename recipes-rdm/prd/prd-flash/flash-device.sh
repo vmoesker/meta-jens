@@ -110,6 +110,8 @@ then
 
     . @LIBEXEC@/init.@ROOT_DEV_TYPE@
 
+    DEVICE_PATH="/dev/${ROOT_DEV_NAME}"
+    DEVICE_PREFIX="/dev/${ROOT_DEV_NAME}${ROOT_DEV_SEP}"
     ROOTDEV=`mount | grep "on / type" | sed -e 's/ on.*//'`
 
     if [ $(echo ${ROOTDEV} | egrep "@ROOT_DEV_SEP@2\$") ]
