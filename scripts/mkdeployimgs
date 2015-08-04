@@ -10,7 +10,6 @@ MKIMGS="`echo $0 | sed -e 's/mkdeployimgs/mkimgs/'`"
 MACHINES="${MACHINES:-curie bohr}"
 for MACHINE in ${MACHINES}
 do
-    echo "MACHINE = \"${MACHINE}\"" > conf/include/machine.inc
     DEFAULT_IMAGES_NM=`eval echo DEFAULT_IMAGES_${MACHINE}`
     images=${IMAGES:-$(eval echo \$$DEFAULT_IMAGES_NM)}
     if [ "$1" = "--dev" ]
@@ -25,7 +24,7 @@ do
 	images="$IMG_LIST"
     fi
 
-    "${MKIMGS}" ${images}
+    env MACHINE=$MACHINE "${MKIMGS}" ${images}
     DEPLOY_DIR_IMAGE="tmp/deploy/images/${MACHINE}"
     SYSIMG_VERSION=$(. ${DEPLOY_DIR_IMAGE}/.settings; echo ${SYSIMG_VER})
     (cd `dirname $0`/post-flash/etc && tar cjf - .) >${DEPLOY_DIR_IMAGE}/post-flash-${SYSIMG_VERSION}.tar.bz2
