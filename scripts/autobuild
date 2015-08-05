@@ -25,7 +25,8 @@ BRANCH="$1"; shift
 
 set -e
 
-cd "${BUILDPATH}"
+oe_builddir use $BUILDPATH
+
 git fetch --all
 git checkout $BRANCH
 git pull --rebase
