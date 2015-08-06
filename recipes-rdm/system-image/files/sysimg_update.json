@@ -7,6 +7,7 @@
 	    [ "Screen", "min_level", "notice", "newline", 1, "stderr", 1 ]
 	]
     ],
+    "download_file_prefix": "@MACHINE@/",
     "restrict_record_installed": [ "system-image" ],
     "record_installed_aliases": {
 	"hp-blob": "hp2"
