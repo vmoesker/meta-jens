@@ -4,6 +4,10 @@ Revision history for HomePilot
     - fix build for z-way development
     - move nginx-legal/manual into dedicated recipes
     - redirect /camera_de.pdf to /manual
+    - update libnfs to 1.9.7
+    - fix kodi dependencies
+    - tidy images
+    - lot's of stability and compatibility issues fixed
 
 4.0.23 2015-07-14
     - re-enable rss feed settings
