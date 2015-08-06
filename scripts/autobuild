@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 die() {
     echo "$@" >&2
@@ -14,6 +14,7 @@ bitbake_var() {
 set -x
 
 RECIPE_DIR="`dirname $0`"
+. ${RECIPE_DIR}/bashrc
 while [ ! -d "${RECIPE_DIR}/conf" ];
 do
     RECIPE_DIR="`realpath ${RECIPE_DIR}/..`"
