@@ -7,7 +7,7 @@ DEFAULT_IMAGES_curie="rdm-hp2-image rdm-hp2-xbmc-image"
 DEFAULT_IMAGES_bohr="rdm-hp2-image"
 
 MKIMGS="`echo $0 | sed -e 's/mkdeployimgs/mkimgs/'`"
-MACHINES="${MACHINES:-curie bohr}"
+MACHINES="${MACHINES:-curie}"
 for MACHINE in ${MACHINES}
 do
     DEFAULT_IMAGES_NM=`eval echo DEFAULT_IMAGES_${MACHINE}`
