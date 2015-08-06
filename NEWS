@@ -8,6 +8,11 @@ Revision history for HomePilot
     - fix kodi dependencies
     - tidy images
     - lot's of stability and compatibility issues fixed
+    - apply ethtool settings
+    - add ethtool configuration page
+    - improve busybox configuration
+      * enable unix domain socket support
+    - configure hp2sm to use starman
 
 4.0.23 2015-07-14
     - re-enable rss feed settings
