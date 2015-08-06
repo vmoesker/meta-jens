@@ -1,3 +1,0 @@
-#!/bin/sh
-
-exec start-stop-daemon -S --pidfile /run/jetty.pid --make-pidfile --chuid @HOMEPILOT_USER@ --exec @HOMEPILOT_BASE@/bin/jetty

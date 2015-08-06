@@ -14,9 +14,9 @@ RDEPENDS_${PN} += "zway-blob"
 
 inherit record-installed-app
 
-HPREV="4777"
+HPREV="4819"
 PV = "4.0.${HPREV}"
-SRC_URI = "svn://192.168.1.186/svn/EW_Prj/001/HP_Blob/trunk/;protocol=http;module=HomePilot_Blob;rev=${HPREV} \
+SRC_URI = "svn://192.168.1.186/svn/EW_Prj/001/HP_Blob/branches/4.1.0.0/;protocol=http;module=HomePilot_Blob;rev=${HPREV} \
                 file://dfservice.run \
                 file://dfservice-log.run \
                 file://homepilot.run \
@@ -24,9 +24,6 @@ SRC_URI = "svn://192.168.1.186/svn/EW_Prj/001/HP_Blob/trunk/;protocol=http;modul
                 file://homepilot.sh \
                 file://homepilot-network-manager.run \
                 file://homepilot-network-manager-log.run \
-                file://jetty.run \
-                file://jetty-log.run \
-                file://jetty.sh \
                 file://z-way.run \
                 file://z-way-log.run \
                 file://init_appdir.sh \
@@ -45,7 +42,6 @@ HOMEPILOT_USER_HOME = "/home/homepilot"
 
 ZWAY_DEST_PREFIX="/opt/z-way"
 INST_DEST_PREFIX="/opt/homepilot"
-jetty_home="/opt/homepilot/opt/jetty"
 # XXX Pat should finally fix that
 TARBALL_NAME="hp-dist_4.0.0.0.tar.gz"
 
@@ -81,8 +77,6 @@ do_install() {
 	install -d ${D}${SVC_SERVICES}/dfservice/log
 	install -d ${D}${SVC_SERVICES}/homepilot
 	install -d ${D}${SVC_SERVICES}/homepilot/log
-	install -d ${D}${SVC_SERVICES}/jetty
-	install -d ${D}${SVC_SERVICES}/jetty/log
 	install -d ${D}${SVC_SERVICES}/z-way
 	install -d ${D}${SVC_SERVICES}/z-way/log
 
@@ -94,28 +88,22 @@ do_install() {
 	install -m 0755 ${WORKDIR}/homepilot.run ${D}${SVC_SERVICES}/homepilot/run
 	install -m 0755 ${WORKDIR}/homepilot.sh ${D}${INST_DEST_PREFIX}/bin/homepilot
 	install -m 0755 ${WORKDIR}/homepilot-log.run ${D}${SVC_SERVICES}/homepilot/log/run
-	install -m 0755 ${WORKDIR}/jetty.run ${D}${SVC_SERVICES}/jetty/run
-	install -m 0755 ${WORKDIR}/jetty-log.run ${D}${SVC_SERVICES}/jetty/log/run
-	install -m 0755 ${WORKDIR}/jetty.sh ${D}${INST_DEST_PREFIX}/bin/jetty
 	install -m 0755 ${WORKDIR}/z-way.run ${D}${SVC_SERVICES}/z-way/run
 	install -m 0755 ${WORKDIR}/z-way-log.run ${D}${SVC_SERVICES}/z-way/log/run
 
 	# 
 	sed -i -e "s,@HOMEPILOT_BASE@,${INST_DEST_PREFIX},g" -e "s,@ZWAY_BASE@,${ZWAY_DEST_PREFIX},g"  \
-	    -e "s,@JETTY_BASE@,${INST_DEST_PREFIX}/opt/jetty,g" -e "s,@JAVA_ELF@,${JAVA_ELF},g" \
+	    -e "s,@JAVA_ELF@,${JAVA_ELF},g" \
 	    -e "s,@HOMEPILOT_USER_HOME@,${HOMEPILOT_USER_HOME},g" -e "s,@HOMEPILOT_USER@,${HOMEPILOT_USER},g" \
 	    ${D}${SVC_SERVICES}/homepilot-network-manager/run \
 	    ${D}${SVC_SERVICES}/dfservice/run \
 	    ${D}${SVC_SERVICES}/homepilot/run \
 	    ${D}${INST_DEST_PREFIX}/bin/homepilot \
-	    ${D}${SVC_SERVICES}/jetty/run \
-	    ${D}${INST_DEST_PREFIX}/bin/jetty \
 	    ${D}${SVC_SERVICES}/z-way/run \
 	    ${D}${HOMEPILOT_USER_HOME}/bin/init_appdir.sh
 
 	# 3 Disable all but hp
 	touch ${D}${SVC_SERVICES}/dfservice/down
-	touch ${D}${SVC_SERVICES}/jetty/down
 	touch ${D}${SVC_SERVICES}/z-way/down
 }
 
