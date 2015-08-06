@@ -17,6 +17,7 @@ RDEPENDS_${PN} += "daemontools"
 RDEPENDS_${PN} += "python-fcntl"
 RDEPENDS_${PN} += "python-logging"
 RDEPENDS_${PN} += "python-pyserial"
+RDEPENDS_${PN} += "starman-perl"
 
 RDEPENDS_${PN} += "encode-perl"
 RDEPENDS_${PN}-dev += "devel-cycle-perl devel-leak-object-perl devel-stacktrace-perl"
