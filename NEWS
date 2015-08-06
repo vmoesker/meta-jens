@@ -13,6 +13,7 @@ Revision history for HomePilot
     - improve busybox configuration
       * enable unix domain socket support
     - configure hp2sm to use starman
+    - add support for future updates for several machines
 
 4.0.23 2015-07-14
     - re-enable rss feed settings
