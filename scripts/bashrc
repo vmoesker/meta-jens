@@ -337,6 +337,24 @@ oe_builddir () {
 	    fi
 	    ;;
 
+	(prune)
+	    test -z "$BUILDDIR" -a -n "$2" && oe_builddir use "$2"
+	    if [ -z "$BUILDDIR" ] ; then
+		echo "oe_builddir use <path>; oe_builddir prune" >&2
+		echo "oe_builddir prune <path>" >&2
+		exit_status=1
+	    else
+		for build_result in cache sstate-cache tmp
+		do
+		    test -d ${BUILDDIR}/${build_result} || continue
+		    mv ${BUILDDIR}/${build_result} ${BUILDPATH}/${build_result}.old
+		    rm -rf ${BUILDDIR}/${build_result}.old &
+		done
+
+		echo "${BUILDDIR} is ready for fresh build"
+	    fi
+	    ;;
+
 	(off)
 	    __oe_deactivate
 	    unset BBPATH
