@@ -1,13 +1,12 @@
 #!/bin/sh 
 
-# Start a Plack daemon.i
-NAME="HomePilot2 Service Monitor"
 PLACK_APP="/opt/rdm/hp2sm/bin/app.pl"
 PLACK_PORT=8081
-CWD=`pwd`
-OPTIONS="--env production --port ${PLACK_PORT} ${PLACK_APP} "
-
-PIDFILE="/var/run/$NAME.pid"
+PLACK_ENV="production"
+STARMAN_WORKERS=2
+OPTIONS="--env ${PLACK_ENV} --listen :${PLACK_PORT} --workers ${STARMAN_WORKERS} ${PLACK_APP}"
+PIDFILE="/var/run/hp2sm.pid"
 
 export SYSTEM_IMAGE_UPDATE_DIR=/data/.update
-exec start-stop-daemon -m --start --quiet --pidfile "$PIDFILE" --exec plackup -- $OPTIONS 2>&1
+
+exec start-stop-daemon -m --start --quiet --pidfile "$PIDFILE" --exec starman -- $OPTIONS 2>&1
