@@ -61,5 +61,5 @@ do
     echo "$MANIFEST" | ssh "${USER}@${target}" "mkdir -p /var/tmp/${SYSIMG_VERSION}-nightly && cat >/var/tmp/${SYSIMG_VERSION}-nightly/manifest.json"
     (cd ${DEPLOY_DIR_IMAGE_BASE} && tar cf - ${IMG_LIST}) | ssh "${USER}@${target}" "cd /var/tmp/${SYSIMG_VERSION}-nightly/ && tar xf -"
 
-    ssh "${USER}@${target}" "sudo /opt/pkg/bin/image-import --directory /var/tmp/${SYSIMG_VERSION}-nightly/"
+    # ssh "${USER}@${target}" "sudo /opt/pkg/bin/image-import --directory /var/tmp/${SYSIMG_VERSION}-nightly/"
 done
