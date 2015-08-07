@@ -1,6 +1,6 @@
 Revision history for HomePilot
 
-4.0.24 2015-08-...
+4.0.24 2015-08-07
     - fix build for z-way development
     - move nginx-legal/manual into dedicated recipes
     - redirect /camera_de.pdf to /manual
@@ -14,6 +14,8 @@ Revision history for HomePilot
       * enable unix domain socket support
     - configure hp2sm to use starman
     - add support for future updates for several machines
+    - temporarily disable image-import
+    - add new manifest
 
 4.0.23 2015-07-14
     - re-enable rss feed settings
