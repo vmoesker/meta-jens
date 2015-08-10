@@ -1,5 +1,9 @@
 Revision history for HomePilot
 
+4.0.25 2015-08-10
+    - fix Updater
+    - fix update_tty
+
 4.0.24 2015-08-07
     - fix build for z-way development
     - move nginx-legal/manual into dedicated recipes
