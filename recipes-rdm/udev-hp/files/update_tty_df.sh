@@ -4,16 +4,25 @@
 #
 # Attempt to symlink radio tty's for DuoFern sticks
 
+tty_df="/dev/ttyDuoFern"
+
 if [ "$ACTION" = "add" ] && [ -n "$DEVNAME" ]
 then
     ttyid=`basename ${DEVPATH}`
-    tty=`basename /sys${DEVPATH}/${ttyid}*/ttyUSB*`
-    echo "DF ADD at $tty on $(date)" >> /tmp/update_tty
-        echo "$tty" >> /tmp/update_tty
-    ln -s $tty /dev/ttyDuoFern
+    tty="/dev/`basename /sys${DEVPATH}/${ttyid}*/ttyUSB*`"
+    echo "DF ADD: $DEVPATH on $(date)" >> /tmp/update_tty
+    echo "DF ADD: $tty" >> /tmp/update_tty
+    ln -sf $tty ${tty_df}
     echo 255 >/sys/class/leds/user2/brightness
 elif [ "$ACTION" = "remove" ] && [ -n "$DEVNAME" ]
 then
-    echo "DF REM from $DEVNAME on $(date)" >> /tmp/update_tty
-    test ! -c /dev/ttyDuoFern && rm /dev/ttyDuoFern
+    # echo "DF REM from $DEVNAME on $(date)" >> /tmp/update_tty
+    # test ! -c ${tty_df} && rm ${tty_df}
+    if [ -e $tty_df ]
+    then
+	tty="`readlink $tty_df`"
+        # DF stick is not present, but maybe the symlink still exists...
+	echo "test \"$DEVNAME\" = \"$tty\" && rm -f $tty_df" >>/tmp/update_tty
+	test "x${DEVNAME}" = "x${tty}" && rm -f $tty_df
+    fi
 fi

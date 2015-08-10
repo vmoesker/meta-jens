@@ -18,7 +18,7 @@ then
     echo 255 >/sys/class/leds/user1/brightness
 elif [ "$ACTION" = "remove" ] && [ -n "$DEVNAME" ]
 then
-    if [ ! -e $tty_zwave ]
+    if [ -e $tty_zwave ]
     then
 	tty="`readlink $tty_zwave`"
 	#if [ ! -c $tty_zwave ]; then
