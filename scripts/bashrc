@@ -347,7 +347,7 @@ oe_builddir () {
 		for build_result in cache sstate-cache tmp
 		do
 		    test -d ${BUILDDIR}/${build_result} || continue
-		    mv ${BUILDDIR}/${build_result} ${BUILDPATH}/${build_result}.old
+		    mv ${BUILDDIR}/${build_result} ${BUILDDIR}/${build_result}.old
 		    rm -rf ${BUILDDIR}/${build_result}.old &
 		done
 
