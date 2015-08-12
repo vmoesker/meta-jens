@@ -94,7 +94,6 @@ RDEPENDS_${PN} = " python-stringold \
                    eglibc-gconv-ibm850 \
                    eglibc-gconv-utf-32 \
                    jasper \
-                   libcec \
                    udev \
                    alsa-lib \
                    alsa-conf \
