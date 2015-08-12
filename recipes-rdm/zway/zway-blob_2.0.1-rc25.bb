@@ -62,7 +62,7 @@ do_install() {
 	ln -sf ${sysconfdir}/z-way.conf ${D}${INST_DEST_PREFIX}/config.xml
 
 	# Edit config file
-	sed -i -e "s#\"port\":\"/dev/ttyACM0\"#\"port\":\"${ZW_TTY_DEVICE}\"#" ${D}${CONF_DEST_PREFIX}/storage/configjson-06b2d3b23dce96e1619d2b53d6c947ec.json
+	sed -i -e 's#"port":"/dev/ttyACM0"#"port":"${ZW_TTY_DEVICE}"#' ${D}${CONF_DEST_PREFIX}/storage/configjson-06b2d3b23dce96e1619d2b53d6c947ec.json
 
 	# Clean-up ZDDX device files
 	cd ${D}${INST_DEST_PREFIX}/ZDDX/
