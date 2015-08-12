@@ -33,7 +33,7 @@ do_install_append () {
     cp ${D}/boot/uImage-*  ${D}/boot/uImage
 
     sed -i -e "s/@UBOOT_LOADADDRESS[@]/${UBOOT_LOADADDRESS}/g" -e "s/@UBOOT_MMC_DEV[@]/${UBOOT_MMC_DEV}/g" \
-	 -e "s/@SDCARD_IMAGE[@]/${SDCARD_IMAGE}/g" -e "s/@KERNEL_MMC_DEV[@]/${KERNEL_MMC_DEV}/g" \
+	   -e "s/@KERNEL_MMC_DEV[@]/${KERNEL_MMC_DEV}/g" \
 	 ${WORKDIR}/bootscript ${WORKDIR}/bootscript.nfs
     uboot-mkimage -T script -C none -n 'Curie Script' -d ${WORKDIR}/bootscript ${D}/boot/bootscript
     uboot-mkimage -T script -C none -n 'Curie Script' -d ${WORKDIR}/bootscript.nfs ${D}/boot/bootscript.nfs
