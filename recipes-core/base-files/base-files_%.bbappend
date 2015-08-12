@@ -2,10 +2,9 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/base-files:"
 
 hostname := "homepilot"
 volatiles := ""
+DEV_PFX="${ROOT_DEV_NAME}${ROOT_DEV_SEP}"
 
 do_install_append () {
-    DEV_PFX="${ROOT_DEV_NAME}${ROOT_DEV_SEP}"
-
     sed -i -e "s,@DEV_PFX@,${DEV_PFX},g" \
          -e "s,@overlay@,${OVERLAY},g" -e "s,@overlayfs@,${OVERLAYFS},g" -e "s,@unionfs@,${UNIONFS},g" \
         ${D}${sysconfdir}/fstab
