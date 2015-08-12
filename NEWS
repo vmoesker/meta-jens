@@ -1,5 +1,12 @@
 Revision history for HomePilot
 
+4.0.26 2015-08-12
+    - hp2sm Update
+      * add more details for network settings
+    - fix machine requirements
+    - tidy up root device picking
+    - prefer volatile conf in sysimg_update
+
 4.0.25 2015-08-10
     - fix Updater
     - fix update_tty
