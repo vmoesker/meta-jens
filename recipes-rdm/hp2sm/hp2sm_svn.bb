@@ -25,7 +25,7 @@ RDEPENDS_${PN}-dev += "test-memory-cycle-perl test-leaktrace-perl"
 
 PV = "0.1"
 
-SRC_URI = "svn://192.168.1.186/svn/EW_Prj/001/HP_ServiceMonitor/trunk;protocol=http;module=hp2sm;rev=4837"
+SRC_URI = "svn://192.168.1.186/svn/EW_Prj/001/HP_ServiceMonitor/trunk;protocol=http;module=hp2sm;rev=4843"
 SRC_URI += "file://hp2sm.run"
 SRC_URI += "file://hp2sm-log.run"
 S = "${WORKDIR}/hp2sm/src"
