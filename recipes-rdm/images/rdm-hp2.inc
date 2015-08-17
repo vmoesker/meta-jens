@@ -3,7 +3,7 @@ HP2_INSTALL = "service-df \
 	${ZWAY_DEPS} \
 	libxml2 \
 	libftdi \
-	openjdk-jdk-blob-arm7 \
+	openjdk-8-jre \
 	zway-blob \
 	hp-blob \
         samba \
