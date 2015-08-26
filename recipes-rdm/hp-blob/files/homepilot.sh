@@ -3,4 +3,6 @@
 @HOMEPILOT_USER_HOME@/bin/init_appdir.sh
 
 cd @HOMEPILOT_BASE@/lib/java
-exec @JAVA_ELF@ -Dfile.encoding=UTF-8 -jar @HOMEPILOT_BASE@/lib/java/homepilot.jar
+@JAVA_ELF@ -jar migrator.jar &> /var/log/hp2/migrator-console.log
+exec @JAVA_ELF@ -Dfile.encoding=UTF-8 -jar homepilot.jar
+
