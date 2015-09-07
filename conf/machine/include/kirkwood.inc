@@ -3,9 +3,6 @@
 
 TARGET_ARCH = "arm"
 
-PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
-PREFERRED_PROVIDER_virtual/kernel = "linux-kirkwood"
-
 OVERLAY = "overlay"
 OVERLAYFS = "#overlayfs"
 UNIONFS = "#unionfs"
