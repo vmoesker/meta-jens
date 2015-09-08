@@ -6,7 +6,7 @@ LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
 
 SRCBRANCH = "curie_v2013.04_3.10.17"
-SRCREV = "20d0e998b0978f87d440f1c46b76116d11ba3128"
+REV = "f0ef55031b9cff41ac2cea37a9955672ed6a051d"
 
 SRC_URI += "file://bootsettings.patch \
 	   "
