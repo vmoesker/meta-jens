@@ -1,5 +1,13 @@
 Revision history for HomePilot
 
+4.0.27
+    - update uboot-curie to support rev-e
+      * Port to RevE with the watchdog reset pin support
+    - update linux-curie to support rev-e and to pass HDMI certification
+      * dt: Change the params to pass HDMI certification
+      * mxc_hdmi: don't require CEA mode
+      * Initialize the Watchdog reset pin in RevE
+
 4.0.26 2015-08-12
     - hp2sm Update
       * add more details for network settings
