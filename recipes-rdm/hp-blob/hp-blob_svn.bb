@@ -38,7 +38,7 @@ SRC_URI = "svn://192.168.1.186/svn/EW_Prj/001/HP_Blob/trunk/;protocol=http;modul
 
 S = "${WORKDIR}/HomePilot_Blob"
 
-JAVA_ELF="/usr/java/bin/java"
+JAVA_ELF="/usr/bin/java"
 
 HOMEPILOT_USER = "homepilot"
 HOMEPILOT_USER_HOME = "/home/homepilot"
