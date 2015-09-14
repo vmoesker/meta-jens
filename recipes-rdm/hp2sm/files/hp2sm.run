@@ -8,5 +8,6 @@ OPTIONS="--env ${PLACK_ENV} --listen :${PLACK_PORT} --workers ${STARMAN_WORKERS}
 PIDFILE="/var/run/hp2sm.pid"
 
 export SYSTEM_IMAGE_UPDATE_DIR=/data/.update
+mkdir ${SYSTEM_IMAGE_UPDATE_DIR}
 
 exec start-stop-daemon -m --start --quiet --pidfile "$PIDFILE" --exec starman -- $OPTIONS 2>&1
