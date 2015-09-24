@@ -1,8 +1,8 @@
 setenv loadaddr @UBOOT_LOADADDRESS@
 setenv fdt_addr @UBOOT_FDTADDRESS@
 setenv bootargs_nand setenv bootargs ${bootargs_base} ip=none ${bootargs_ubi} root=/dev/ubiblock0_2
-setenv bootcmd_nand 'ubi part root; ubifsmount ubi:boot; ubifsload @UBOOT_LOADADDRESS@ /@KERNEL_IMAGETYPE@; ubifsload @UBOOT_FDTADDRESS@ /@KERNEL_DEVICETREE@; ubifsumount; fdt addr @UBOOT_FDTADDRESS@; fdt resize; fdt chosen; run bootargs_nand; bootz @UBOOT_LOADADDRESS@ - @UBOOT_FDTADDRESS@; fi'
+setenv bootcmd_nand 'ubi part root; ubifsmount ubi:boot; if ubifsload @UBOOT_LOADADDRESS@ /@KERNEL_IMAGETYPE@; then ubifsload @UBOOT_FDTADDRESS@ /@KERNEL_DEVICETREE@; ubifsumount; fdt addr @UBOOT_FDTADDRESS@; fdt resize; fdt chosen; run bootargs_nand; bootz @UBOOT_LOADADDRESS@ - @UBOOT_FDTADDRESS@; else ubifsumount; fi'
 setenv bootargs_rec setenv bootargs ${bootargs_base} ip=none ${bootargs_ubi} root=/dev/ubiblock0_3
-setenv bootcmd_rec 'ubi part root; ubifsmount ubi:boot; ubifsload @UBOOT_LOADADDRESS@ /@KERNEL_IMAGETYPE@-bohr; ubifsload @UBOOT_FDTADDRESS@ /@KERNEL_DEVICETREE@; ubifsumount; fdt addr @UBOOT_FDTADDRESS@; fdt resize; fdt chosen; run bootargs_nand; bootz @UBOOT_LOADADDRESS@ - @UBOOT_FDTADDRESS@; fi'
+setenv bootcmd_rec 'ubi part root; ubifsmount ubi:boot; if ubifsload @UBOOT_LOADADDRESS@ /@KERNEL_IMAGETYPE@-bohr; then ubifsload @UBOOT_FDTADDRESS@ /@KERNEL_DEVICETREE@; ubifsumount; fdt addr @UBOOT_FDTADDRESS@; fdt resize; fdt chosen; run bootargs_nand; bootz @UBOOT_LOADADDRESS@ - @UBOOT_FDTADDRESS@; else ubifsumount; fi'
 run bootcmd_rec
 run bootcmd_nand
