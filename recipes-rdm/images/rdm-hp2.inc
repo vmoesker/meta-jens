@@ -1,6 +1,7 @@
 include zway.inc
 HP2_INSTALL = "service-df \
 	${ZWAY_DEPS} \
+	nginx-favs \
 	libxml2 \
 	libftdi \
 	openjre-8 \
