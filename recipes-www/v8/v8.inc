@@ -6,6 +6,8 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD-3-Clause;md5=550794465ba0ec
 file://${COMMON_LICENSE_DIR}/BSD-4-Clause;md5=624d9e67e8ac41a78f6b6c2c55a83a2b"
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
+exec_prefix="/opt/v8"
+
 S = "${WORKDIR}/v8"
 V8_TARGET = "${TUNE_ARCH}"
 # XXX fix them for general use
@@ -45,13 +47,20 @@ do_compile () {
 }
 
 do_install () {
-    install -d ${D}/opt/v8
-    install -d ${D}/opt/v8/include
-    install -d ${D}/opt/v8/lib
-    install -c -m 644 ${S}/out/${V8_TARGET}.release/lib.target/* ${D}/opt/v8/lib
-    install -c -m 644 ${S}/include/* ${D}/opt/v8/include
+    install -d ${D}${exec_prefix}
+    install -d ${D}${includedir}
+    install -d ${D}${libdir}
+
+    install -c -m 644 ${S}/out/${V8_TARGET}.release/lib.target/* ${D}${libdir}
+    install -c -m 644 ${S}/include/* ${D}${includedir}
 }
 
-FILES_${PN} += "/opt/v8"
+FILES_${PN}_append = "\
+    ${exec_prefix}/lib/*.so \
+"
+
+FILES_${PN}-dev_remove = "\
+    ${exec_prefix}/lib/lib*.so \
+"
 
 BBCLASSEXTEND = "native"
