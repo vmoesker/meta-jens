@@ -4,11 +4,13 @@ LICENSE = "commercial"
 LIC_FILES_CHKSUM = "file://${THISDIR}/files/license.txt;md5=3ebe3464e841ddbf115af1f7019017c5"
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
+exec_prefix="/opt/z-way"
+
 PR = "72"
 SRC_URI = "http://internal.rdm.local/blobs/z-way-server-Linux-HomePilot2-v${PV}.tgz;name=server \
 	   file://config.xml"
 
-DEPENDS = "hp2-base"
+DEPENDS = "v8 hp2-base"
 RDEPENDS_${PN} += "hp2-base"
 RDEPENDS_${PN} += "libarchive"
 RDEPENDS_${PN} += "libxml2"
@@ -23,7 +25,7 @@ SRC_URI[server.sha256sum] = "1006970f683c5755a1260f56e609a7d4b103900519b264abcae
 
 S = "${WORKDIR}/z-way-server"
 
-INST_DEST_PREFIX="/opt/z-way"
+INST_DEST_PREFIX="${exec_prefix}"
 CONF_DEST_PREFIX="/home/homepilot/z-way"
 
 ZW_TTY_DEVICE = "/dev/ttyZWave"
@@ -38,6 +40,9 @@ do_install() {
 	rm -f ${D}${INST_DEST_PREFIX}/automation/.gitignore \
 	      ${D}${INST_DEST_PREFIX}/htdocs/z-way-ha-tv/.gitignore \
 	      ${D}${INST_DEST_PREFIX}/htdocs/expert/.gitignore
+
+	# bower manages js packages - nothing we need at runtime (hopefully)
+	rm -fr ${D}${INST_DEST_PREFIX}/automation/node_modules/bower
 
 	# Move config directory into CONF_DEST_PREFIX dir of target
 	install -o homepilot -g users -d ${D}${CONF_DEST_PREFIX}
@@ -76,9 +81,23 @@ do_install() {
 
 INSANE_SKIP_${PN} += "already-stripped"
 
-FILES_${PN} += "${INST_DEST_PREFIX} \
-        ${CONF_DEST_PREFIX} \
+FILES_${PN}_append = "\
+	${INST_DEST_PREFIX}/config \
+	${INST_DEST_PREFIX}/z-way-server \
+	${INST_DEST_PREFIX}/z-get-tty-config \
+	${INST_DEST_PREFIX}/z-get-tty \
+	${INST_DEST_PREFIX}/config.xml \
+	${INST_DEST_PREFIX}/ChangeLog \
+	${INST_DEST_PREFIX}/z-cfg-update \
+	${INST_DEST_PREFIX}/automation \
+	${INST_DEST_PREFIX}/htdocs \
+	${INST_DEST_PREFIX}/translations \
+	${INST_DEST_PREFIX}/libs/_keep \
+	${INST_DEST_PREFIX}/libs/lib*.so \
+	${INST_DEST_PREFIX}/modules/mod*.so \
+	${INST_DEST_PREFIX}/ZDDX \
+	${CONF_DEST_PREFIX} \
 	${sysconfdir}"
 FILES_${PN}-dbg += "${INST_DEST_PREFIX}/.debug ${INST_DEST_PREFIX}/*/.debug"
-FILES_${PN}-dev += "${INST_DEST_PREFIX}/*/*.h"
+#FILES_${PN}-dev += "${INST_DEST_PREFIX}/*/*.h"
 FILES_${PN}-staticdev += "${INST_DEST_PREFIX}/*/*.a"

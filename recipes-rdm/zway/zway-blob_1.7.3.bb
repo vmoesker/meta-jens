@@ -46,7 +46,7 @@ do_install() {
 	      ${D}${INST_DEST_PREFIX}/htdocs/expert/.gitignore \
 	      ${D}${INST_DEST_PREFIX}/htdocs/z-way-ha-tv/.git \
 	      ${D}${INST_DEST_PREFIX}/htdocs/z-way-ha-tv/.gitignore
-	
+
 	# Move config directory into CONF_DEST_PREFIX dir of target
 	install -o homepilot -g users -d ${D}${CONF_DEST_PREFIX}
 	mv ${D}${INST_DEST_PREFIX}/config ${D}${CONF_DEST_PREFIX}
@@ -75,8 +75,11 @@ INSANE_SKIP_${PN} += "already-stripped"
 FILES_${PN} += "${INST_DEST_PREFIX} \
         ${CONF_DEST_PREFIX} \
 	${sysconfdir}"
-FILES_${PN}-dbg += "${INST_DEST_PREFIX}/.debug ${INST_DEST_PREFIX}/*/.debug"
-FILES_${PN}-dev += "${INST_DEST_PREFIX}/*/*.h"
+FILES_${PN}-dbg += "\
+  ${INST_DEST_PREFIX}/.debug \
+  ${INST_DEST_PREFIX}/*/.debug \
+"
+FILES_${PN}-dev += " ${INST_DEST_PREFIX}/*/*.h"
 FILES_${PN}-staticdev += "${INST_DEST_PREFIX}/*/*.a"
 
 INITSCRIPT_NAME = "z-way-server"
