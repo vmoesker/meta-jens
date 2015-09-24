@@ -10,10 +10,14 @@ SRC_URI += "file://collectd-perl.patch \
 
 PACKAGECONFIG[sensors] = "--enable-sensors --with-libsensors=yes, \
         --disable-sensors --with-libsensors=no,lmsensors,lmsensors-sensors"
-PACKAGECONFIG[libstatgrab] = "--with-libstatgrab,--without-libstatgrab,libstatgrab,libstatgrab"
+PACKAGECONFIG[libstatgrab] = "--with-libstatgrab,--without-libstatgrab,libstatgrab"
+PACKAGECONFIG[mysql5] = "--enable-mysql,--disable-mysql --with-libmysql=no,mysql5"
+PACKAGECONFIG[lvm2] = "--enable-lvm,--disable-lvm --with-liblvm2app=no,lvm2"
 
 DEPENDS += "perl-native"
 RDEPENDS_${PN} += "logrotate perl"
+
+DEPENDS_remove = " mysql5 lvm2 "
 
 inherit cpan-base perlnative
 

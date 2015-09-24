@@ -10,7 +10,6 @@ RDM_BASE_INSTALL = "\
 	acl \
 	btrfs-tools \
 	dosfstools \
-	nano \
 	sudo \
 	nginx \
 	nginx-legal \
