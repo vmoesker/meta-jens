@@ -11,12 +11,12 @@ prepare_device () {
     ubiblock -c ${DEVICE_PREFIX}2
     ubiblock -c ${DEVICE_PREFIX}3
 
-    mount -t ubifs ${DEVICE_PREFIX}1 ${TEMP_DIR}/flashimg/root/boot
-    mount -t ubifs ${DEVICE_PREFIX}4 ${TEMP_DIR}/flashimg/root/data
+    mount -t ubifs ${DEVICE_PREFIX}1 ${BOOT_MNT}
+    mount -t ubifs ${DEVICE_PREFIX}4 ${DATA_MNT}
 }
 
 flash_uboot () {
-    dd if=${IMAGE_CONTAINER}/${UBOOT_BIN} of=/dev/mtd0 skip=${UBOOT_PADDING} bs=512
+    dd if=${IMAGE_CONTAINER}/${UBOOT_BIN} of=/dev/mtdblock0 skip=${UBOOT_PADDING} bs=512
 }
 
 flash_rootfs () {
