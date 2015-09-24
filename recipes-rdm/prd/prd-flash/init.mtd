@@ -28,6 +28,7 @@ flash_recoveryfs () {
 }
 
 update_fs () {
+    :
 }
 
 update_uboot () {
