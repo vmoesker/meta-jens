@@ -9,7 +9,7 @@ RDEPENDS_${PN} = "nginx"
 
 PV = "0.1"
 
-SRC_URI = "svn://192.168.1.186/svn/EW_Prj/001/HP_Whitepages/trunk;protocol=http;module=HP_View_Status;rev=5013"
+SRC_URI = "svn://192.168.1.186/svn/EW_Prj/001/HP_Whitepages/trunk;protocol=http;module=HP_View_Status;rev=5015"
 S = "${WORKDIR}/HP_View_Status/src"
 
 do_install() {
