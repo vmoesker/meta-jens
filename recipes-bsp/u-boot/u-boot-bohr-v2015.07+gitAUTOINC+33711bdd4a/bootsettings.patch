@@ -51,12 +51,12 @@ index 5f09567..dd6b4b5 100644
 +	"fdt_addr=0x700000\0" \
 +	"scriptaddr=0x100000\0" \
 +	"nandloadbootscript=" \
-+		"ubi part root; ubifsmount ubi:boot; ubifsload ${scriptaddr} ${script}; ubifsumount; run bootscript;\0" \
++		"ubi part root; ubifsmount ubi:boot; ubifsload ${scriptaddr} ${script}; run bootscript; ubifsumount; ubi remove root\0" \
 +	"usbloadbootscript=" \
-+		"ext2load usb 0:1 ${scriptaddr} ${script}; run bootscript;\0" \
++		"ext2load usb 0:1 ${scriptaddr} ${script}; run bootscript\0" \
 +	"netboot=echo Booting from net ...; " \
 +		"dhcp ${scriptaddr}; " \
-+		"run bootscript;\0" \
++		"run bootscript\0" \
 +	"bootscript=echo Running bootscript ...; " \
 +		"source ${scriptaddr}\0" \
 +	"bootargs_base=${console} ${mtdparts} oops=panic panic=5 ${smp} rootwait consoleblank=0\0" \
