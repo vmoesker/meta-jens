@@ -8,7 +8,6 @@ RDM_BASE_INSTALL = "\
 	e2fsprogs-tune2fs \
 	attr \
 	acl \
-	btrfs-tools \
 	dosfstools \
 	sudo \
 	nginx \
@@ -47,16 +46,19 @@ RDM_BASE_INSTALL_append_bohr = "\
 "
 RDM_BASE_INSTALL_append_mx6qcurie = "\
 	u-boot-fw-utils-curie \
+	btrfs-tools \
 	ledctrl \
 	fb-cursor-off \
 "
 RDM_INSTALL = "${RDM_BASE_INSTALL} \
 	udev-extraconf \
+	ksm-init \
+	openvpn \
+"
+RDM_INSTALL_append_mx6qcurie = "\
 	libntfs-3g \
 	ntfsprogs \
 	ntfs-3g \
-	ksm-init \
-	openvpn \
 "
 RECOVER_INSTALL="parted \
 "

@@ -5,11 +5,16 @@ EXTRA_IMAGE_FEATURES_dev = "tools-debug \
     dev-pkgs \
 "
 
-DEV_INSTALL = "vivante-gpu-sdk \
+DEV_INSTALL = "\
 	ltrace \
 	systemtap \
 	systemtap-uprobes \
-	valgrind \
 	git \
+	git-perltools \
 	subversion \
-"
+	"
+
+DEV_INSTALL_append_mx6qcurie = "\
+	vivante-gpu-sdk \
+	valgrind \
+	"
