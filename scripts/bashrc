@@ -344,7 +344,8 @@ oe_builddir () {
 		echo "oe_builddir prune <path>" >&2
 		exit_status=1
 	    else
-		for build_result in cache sstate-cache tmp
+		rm -f package-depends.dot pn-buildlist pn-depends.dot task-depends.dot
+		for build_result in cache sstate-cache tmp buildhistory
 		do
 		    test -d ${BUILDDIR}/${build_result} || continue
 		    mv ${BUILDDIR}/${build_result} ${BUILDDIR}/${build_result}.old
