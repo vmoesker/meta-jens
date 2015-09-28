@@ -8,7 +8,7 @@ do_install_append () {
     sed -i -e "s,@DEV_PFX@,${DEV_PFX},g" \
          -e "s,@overlay@,${OVERLAY},g" -e "s,@overlayfs@,${OVERLAYFS},g" -e "s,@unionfs@,${UNIONFS},g" \
         ${D}${sysconfdir}/fstab
-    test "${MACHINE}" = "bohr" && sed -i -e "s,ext[24],ubifs,g" \
+    test "${MACHINE}" = "bohr" -a "${WANTED_ROOT_DEV}" = "nand" && sed -i -e "s,ext[24],ubifs,g" \
         ${D}${sysconfdir}/fstab
 
     install -d ${D}/data
