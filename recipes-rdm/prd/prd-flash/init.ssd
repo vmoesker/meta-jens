@@ -73,6 +73,10 @@ update_uboot () {
     dd of=${DEVICE_PATH} seek=2 skip=${UBOOT_PADDING} bs=512
 }
 
+uboot_setenv () {
+    :
+}
+
 update_rootfs () {
     dd of=${DEVICE_PREFIX}2 bs=1M
 }

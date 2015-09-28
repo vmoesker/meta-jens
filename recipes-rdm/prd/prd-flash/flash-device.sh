@@ -72,6 +72,7 @@ then
     prepare_device
 
     flash_uboot
+    uboot_setenv
     flash_rootfs
     flash_recoveryfs
 
@@ -133,6 +134,7 @@ then
 
 	logger "Going to extract u-boot"
 	tar xjf "${IMAGE_CONTAINER}" -O ${UBOOT_BIN} | update_uboot
+	uboot_setenv
 
 	logger "Force rebuild of volatiles.cache next boot"
         rm -f /etc/volatile.cache

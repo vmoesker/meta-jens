@@ -35,6 +35,13 @@ update_uboot () {
     dd of=/dev/mtd0 skip=${UBOOT_PADDING} bs=512
 }
 
+uboot_setenv () {
+    dd if=/dev/zero of=/dev/mtdblock1 bs=128M count=1
+    fw_setenv ethact egiga0
+    fw_setenv ethaddr `cat /sys/class/net/eth0/address`
+    fw_setenv eth1addr `cat /sys/class/net/eth1/address`
+}
+
 update_rootfs () {
     ubiupdatevol ${DEVICE_PREFIX}2 -s ${ROOTFS_SIZE}
 }
