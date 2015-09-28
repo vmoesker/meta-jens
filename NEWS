@@ -7,6 +7,8 @@ Revision history for HomePilot
       * dt: Change the params to pass HDMI certification
       * mxc_hdmi: don't require CEA mode
       * Initialize the Watchdog reset pin in RevE
+    - add service page for favourites
+    - fix broken system-image-update edge-case when booting without internet
 
 4.0.26 2015-08-12
     - hp2sm Update
