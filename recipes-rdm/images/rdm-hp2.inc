@@ -7,7 +7,7 @@ HP2_INSTALL = "service-df \
 	openjre-8 \
 	zway-blob \
 	hp-blob \
-        samba-base \
+        samba \
         wrkeyupload \
 	wrc-startup \
 	udev-hp \

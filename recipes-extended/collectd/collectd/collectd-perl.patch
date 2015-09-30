@@ -1,13 +1,13 @@
 --- a/configure.ac	2015-03-24 19:42:17.678512208 +0100
 +++ b/configure.ac	2015-03-24 19:43:38.879855696 +0100
-@@ -3046,8 +3046,8 @@
+@@ -3262,8 +3262,8 @@
    SAVE_CFLAGS="$CFLAGS"
-   SAVE_LDFLAGS="$LDFLAGS"
+   SAVE_LIBS="$LIBS"
  dnl ARCHFLAGS="" -> disable multi -arch on OSX (see Config_heavy.pl:fetch_string)
 -  PERL_CFLAGS=`ARCHFLAGS="" $perl_interpreter -MExtUtils::Embed -e ccopts`
--  PERL_LDFLAGS=`ARCHFLAGS="" $perl_interpreter -MExtUtils::Embed -e ldopts`
+-  PERL_LIBS=`ARCHFLAGS="" $perl_interpreter -MExtUtils::Embed -e ldopts`
 +  test -z "${PERL_CFLAGS}" && PERL_CFLAGS=`ARCHFLAGS="" $perl_interpreter -MExtUtils::Embed -e ccopts`
-+  test -z "${PERL_LDFLAGS}" && PERL_LDFLAGS=`ARCHFLAGS="" $perl_interpreter -MExtUtils::Embed -e ldopts`
++  test -z "${PERL_LDFLAGS}" && PERL_LIBS=`ARCHFLAGS="" $perl_interpreter -MExtUtils::Embed -e ldopts`
    CFLAGS="$CFLAGS $PERL_CFLAGS"
-   LDFLAGS="$LDFLAGS $PERL_LDFLAGS"
+   LIBS="$LIBS $PERL_LIBS"
  

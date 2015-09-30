@@ -1,7 +1,6 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/collectd:"
 
 SRC_URI += "file://collectd-perl.patch \
-            file://collectd-libstatgrab.patch \
             file://collectd.conf \
             file://collectd-logrotate.conf \
 	    file://logrotate-collectd.conf \
