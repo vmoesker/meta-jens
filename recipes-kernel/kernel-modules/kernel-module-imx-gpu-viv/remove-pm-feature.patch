@@ -1,0 +1,75 @@
+--- a/kernel-module-imx-gpu-viv-src/hal/os/linux/kernel/platform/freescale/gc_hal_kernel_platform_imx6q14.c	2015-09-30 20:06:22.836416377 +0200
++++ b/kernel-module-imx-gpu-viv-src/hal/os/linux/kernel/platform/freescale/gc_hal_kernel_platform_imx6q14.c	2015-09-30 20:15:27.172430476 +0200
+@@ -70,17 +70,6 @@
+ 
+ #if LINUX_VERSION_CODE < KERNEL_VERSION(3,5,0)
+ #include <mach/viv_gpu.h>
+-#else
+-#include <linux/pm_runtime.h>
+-#if LINUX_VERSION_CODE < KERNEL_VERSION(3, 10, 0)
+-#include <mach/busfreq.h>
+-#elif LINUX_VERSION_CODE < KERNEL_VERSION(3, 15, 0)
+-#include <linux/busfreq-imx6.h>
+-#include <linux/reset.h>
+-#else
+-#include <linux/busfreq-imx.h>
+-#include <linux/reset.h>
+-#endif
+ #endif
+ 
+ #include <linux/clk.h>
+@@ -89,6 +78,7 @@
+ #include <mach/hardware.h>
+ #endif
+ #include <linux/pm_runtime.h>
++#include <linux/reset.h>
+ 
+ #include <linux/regulator/consumer.h>
+ 
+@@ -846,24 +836,6 @@
+     return gcvSTATUS_OK;
+ }
+ 
+-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,5,0)
+-#ifdef CONFIG_PM
+-static int gpu_runtime_suspend(struct device *dev)
+-{
+-    release_bus_freq(BUS_FREQ_HIGH);
+-    return 0;
+-}
+-
+-static int gpu_runtime_resume(struct device *dev)
+-{
+-    request_bus_freq(BUS_FREQ_HIGH);
+-    return 0;
+-}
+-
+-static struct dev_pm_ops gpu_pm_ops;
+-#endif
+-#endif
+-
+ gceSTATUS
+ _AdjustDriver(
+     IN gckPLATFORM Platform
+@@ -877,21 +849,6 @@
+     driver->driver.of_match_table = mxs_gpu_dt_ids;
+ #endif
+ 
+-    /* Override PM callbacks to add runtime PM callbacks. */
+-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,5,0)
+-    /* Fill local structure with original value. */
+-    memcpy(&gpu_pm_ops, driver->driver.pm, sizeof(struct dev_pm_ops));
+-
+-    /* Add runtime PM callback. */
+-#ifdef CONFIG_PM_RUNTIME
+-    gpu_pm_ops.runtime_suspend = gpu_runtime_suspend;
+-    gpu_pm_ops.runtime_resume = gpu_runtime_resume;
+-    gpu_pm_ops.runtime_idle = NULL;
+-#endif
+-
+-    /* Replace callbacks. */
+-    driver->driver.pm = &gpu_pm_ops;
+-#endif
+     return gcvSTATUS_OK;
+ }
+ 

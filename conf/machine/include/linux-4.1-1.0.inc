@@ -4,11 +4,10 @@ UBOOT_ENTRYPOINT = "0x17800000"
 UBOOT_LOADADDRESS = "0x12000000"
 UBOOT_FDTADDRESS = "0x18000000"
 
-PREFERRED_VERSION_firmware-imx = "5.0"
+PREFERRED_VERSION_firmware-imx = "5.2"
 PREFERRED_VERSION_imx-lib = "5.1"
 PREFERRED_VERSION_imx-vpu = "5.4.31"
-PREFERRED_VERSION_gpu-viv-bin-mx6q = "5.0.11.p6.3-hfp"
-PREFERRED_VERSION_gpu-viv-bin-mx6dl = "5.0.11.p6.3-hfp"
+PREFERRED_VERSION_gpu-viv-bin-mx6q = "5.0.11.p7.1-hfp"
 
 OVERLAY = "overlay"
 OVERLAYFS = "#overlayfs"

@@ -1,0 +1,20 @@
+--- a/kernel-module-imx-gpu-viv-src/hal/os/linux/kernel/gc_hal_kernel_debugfs.c	2015-09-30 20:17:41.948433967 +0200
++++ b/kernel-module-imx-gpu-viv-src/hal/os/linux/kernel/gc_hal_kernel_debugfs.c	2015-09-30 20:17:51.468434214 +0200
+@@ -559,7 +559,7 @@
+     caddr_t data_to_return ;
+     gcsDEBUGFS_Node* node ;
+     /* get the metadata about this emlog */
+-    if ( ( node = _GetNodeInfo ( file->f_dentry->d_inode ) ) == NULL )
++    if ( ( node = _GetNodeInfo ( file->f_path.dentry->d_inode ) ) == NULL )
+     {
+         printk ( "debugfs_read: record not found\n" ) ;
+         return - EIO ;
+@@ -626,7 +626,7 @@
+     gcsDEBUGFS_Node*node ;
+ 
+     /* get the metadata about this log */
+-    if ( ( node = _GetNodeInfo ( file->f_dentry->d_inode ) ) == NULL )
++    if ( ( node = _GetNodeInfo ( file->f_path.dentry->d_inode ) ) == NULL )
+     {
+         return - EIO ;
+     }

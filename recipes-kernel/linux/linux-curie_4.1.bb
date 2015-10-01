@@ -9,13 +9,11 @@ require recipes-kernel/linux/linux-dtb.inc
 DEPENDS += "lzop-native bc-native u-boot-curie u-boot-mkimage-native"
 
 REV="6f33945ad2f3c7d972430405132fd1314f26d127"
-SRCBRANCH = "4.1/rdm"
+SRCREPO="rehsack"
+SRCBRANCH = "curie_4.1"
 LOCALVERSION = "+curie"
 
-#GIT_URL = "git:///srv/projects/rdm/bsp/workspace/linux_4.1-curie;protocol=file"
-GIT_URL = "git://github.com/mrabe89sigma/linux.git"
-
-SRC_URI = "${GIT_URL};branch=${SRCBRANCH};rev=${REV}"
+SRC_URI = "git://github.com/${SRCREPO}/linux-curie.git;branch=${SRCBRANCH};rev=${REV}"
 SRC_URI_append = " \
    file://defconfig \
    file://bootscript.mmc \
