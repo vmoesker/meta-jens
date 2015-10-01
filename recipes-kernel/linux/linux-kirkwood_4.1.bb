@@ -13,7 +13,7 @@ require recipes-kernel/linux/linux-dtb.inc
 # u-boot-curie
 DEPENDS += "lzop-native bc-native u-boot u-boot-mkimage-native"
 
-REV="c8bde72f9af412de57f0ceae218d648640118b0b"
+REV="cbc890891ddaf0240ad669dd9f0e48c599ff3d63"
 SRCREPO="rehsack"
 SRCBRANCH = "linux-4.1.y"
 
@@ -22,6 +22,7 @@ SRC_URI = "git://github.com/${SRCREPO}/linux-curie.git;branch=${SRCBRANCH};rev=$
 	   file://bootscript.nand \
 	   file://bootscript.nfs \
 	   file://bootscript.usb \
+	   file://omit-to-optimize-some-printf.patch \
           "
 
 # patches for hp

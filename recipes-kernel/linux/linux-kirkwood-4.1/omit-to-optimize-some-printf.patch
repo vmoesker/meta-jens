@@ -1,0 +1,25 @@
+commit 3c1245d162ccb55de1af42bcf3dbf690457bf9e4
+Author: Jianchuan Wang <jianchuan.wang@windriver.com>
+Date:   Wed Aug 26 13:54:57 2015 +0800
+
+    Omit to optimize vsprintf.c/kasprintf.c
+    
+    Add "-O0" for vsprintf.c/kasprintf.c
+    
+    Signed-off-by: Jianchuan Wang <jianchuan.wang@windriver.com>
+    Signed-off-by: Bruce Ashfield <bruce.ashfield@windriver.com>
+
+diff --git a/lib/Makefile b/lib/Makefile
+index 6c37933..ec534f5b 100644
+--- a/lib/Makefile
++++ b/lib/Makefile
+@@ -45,6 +45,9 @@ CFLAGS_kobject.o += -DDEBUG
+ CFLAGS_kobject_uevent.o += -DDEBUG
+ endif
+ 
++CFLAGS_vsprintf.o += -O0
++CFLAGS_asprintf.o += -O0
++
+ obj-$(CONFIG_GENERIC_IOMAP) += iomap.o
+ obj-$(CONFIG_GENERIC_PCI_IOMAP) += pci_iomap.o
+ obj-$(CONFIG_HAS_IOMEM) += iomap_copy.o devres.o
