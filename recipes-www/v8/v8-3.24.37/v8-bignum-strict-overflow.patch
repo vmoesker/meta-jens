@@ -1,0 +1,32 @@
+--- v8/src/bignum.cc.orig	2015-09-30 18:47:42.892294125 +0200
++++ v8/src/bignum.cc	2015-09-30 18:58:36.464311053 +0200
+@@ -89,11 +89,11 @@
+ 
+ 
+ static uint64_t ReadUInt64(Vector<const char> buffer,
+-                           int from,
+-                           int digits_to_read) {
++                           size_t from,
++                           size_t digits_to_read) {
+   uint64_t result = 0;
+-  for (int i = from; i < from + digits_to_read; ++i) {
+-    int digit = buffer[i] - '0';
++  for (size_t i = from; i < from + digits_to_read; ++i) {
++    unsigned digit = buffer[i] - '0';
+     ASSERT(0 <= digit && digit <= 9);
+     result = result * 10 + digit;
+   }
+@@ -103,10 +103,10 @@
+ 
+ void Bignum::AssignDecimalString(Vector<const char> value) {
+   // 2^64 = 18446744073709551616 > 10^19
+-  const int kMaxUint64DecimalDigits = 19;
++  const size_t kMaxUint64DecimalDigits = 19;
+   Zero();
+-  int length = value.length();
+-  int pos = 0;
++  size_t length = value.length();
++  size_t pos = 0;
+   // Let's just say that each digit needs 4 bits.
+   while (length >= kMaxUint64DecimalDigits) {
+     uint64_t digits = ReadUInt64(value, pos, kMaxUint64DecimalDigits);
