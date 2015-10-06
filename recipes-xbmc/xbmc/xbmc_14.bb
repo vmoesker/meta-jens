@@ -2,7 +2,7 @@ DESCRIPTION = "software media player and entertainment hub"
 
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://copying.txt;md5=8c8473d035f42f5883d82c5f6828eba7"
-DEPENDS = "ffmpeg mysql5 libsamplerate0 alsa-lib udev libvorbis boost libass mpeg2dec libmad libmodplug tiff yajl libtinyxml taglib libcdio jasper libmicrohttpd libssh samba rtmpdump libnfs swig-native libxslt libplist shairplay flac libgpg-error avahi lzo libsdl"
+DEPENDS = "ffmpeg mysql5 libsamplerate0 alsa-lib udev libvorbis boost libass mpeg2dec libmad libmodplug tiff yajl libtinyxml taglib libcdio jasper libmicrohttpd libssh samba rtmpdump libnfs swig-native libxslt libplist shairplay flac libgpg-error avahi lzo libsdl openjdk-8-native"
 DEPENDS_append_mx6 = " virtual/kernel virtual/libgles2 virtual/egl libfslvpuwrap libcec"
 
 SRC_URI = "git://github.com/xbmc/xbmc.git;rev=${SRCREV};branch=${SRCBRANCH} \
@@ -25,8 +25,16 @@ B := "${S}"
 
 inherit autotools lib_package pkgconfig gettext python-dir record-installed-app
 
-EXTRA_OECONF="ac_cv_path_JAVA_EXE=/usr/bin/java \
---prefix=/imx6/kodi --disable-x11 --disable-sdl --disable-xrandr --disable-gl --disable-vdpau --disable-vaapi --disable-openmax --enable-gles --enable-udev --enable-codec=imxvpu --disable-debug --disable-texturepacker --enable-airplay --enable-airtunes"
+#ac_cv_path_JAVA_EXE=/usr/bin/java
+
+EXTRA_OECONF=" --prefix=/imx6/kodi \
+    --disable-x11 --disable-sdl --disable-xrandr --disable-gl \
+    --disable-vdpau --disable-vaapi --disable-openmax \
+    --enable-gles --enable-udev --enable-codec=imxvpu \
+    --disable-debug --disable-texturepacker \
+    --enable-airplay --enable-airtunes \
+    --with-ffmpeg=shared \
+"
 
 CPPFLAGS += " -I${STAGING_KERNEL_DIR}/include/uapi -I${STAGING_KERNEL_DIR}/include "
 CXXFLAGS += " -I${STAGING_KERNEL_DIR}/include/uapi -I${STAGING_KERNEL_DIR}/include "
@@ -39,9 +47,6 @@ do_configure() {
   export PYTHON_NOVERSIONCHECK="no-check"
   export PYTHON_CPPFLAGS="-I/${STAGING_INCDIR}/${PYTHON_DIR}"
   export PYTHON_LDFLAGS="-L${STAGING_LIBDIR} -lpython${PYTHON_BASEVERSION}"
-
-  #We will use the host java during build because there is no native recipe for full openjdk and jamvm is not able to build xbmc
-  export JAVA="/usr/bin/java"
 
   rm -rf ${S}/addons/service.xbmc.versioncheck
 
