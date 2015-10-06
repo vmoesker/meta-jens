@@ -55,14 +55,11 @@ do_configure() {
   ${S}/configure ${EXTRA_OECONF}
 }
 
-
 FFMPEG_LIBS = "libavcodec libavdevice libavformat \
                libavutil libpostproc libswscale libavfilter libswresample"
 
+ALLOW_EMPTY_${PN} = "1"
 PACKAGES += "${PN}-vhook-dbg ${PN}-vhook ffmpeg-x264-presets"
-
-FILES_${PN} = "${bindir}"
-FILES_${PN}-dev = "${includedir}/${PN}"
 
 FILES_${PN}-vhook = "${libdir}/vhook"
 FILES_${PN}-vhook-dbg += "${libdir}/vhook/.debug"
@@ -112,4 +109,3 @@ python populate_packages_prepend() {
 }
 
 PACKAGES_DYNAMIC += "^lib(av(codec|device|filter|format|util)|postproc).*"
-
