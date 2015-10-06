@@ -35,13 +35,8 @@ do_install_append () {
     uboot-mkimage -T script -C none -n 'Curie Script' -d ${WORKDIR}/bootscript.nfs ${D}/boot/bootscript.nfs
     uboot-mkimage -T script -C none -n 'Curie Script' -d ${WORKDIR}/bootscript.usb ${D}/boot/bootscript.usb
 
-    echo "options 8189es rtw_power_mgnt=0" >${WORKDIR}/8189es.conf
-    echo "blacklist 8189es" >${WORKDIR}/blacklist-8189es.conf
     echo "blacklist cfg80211" >${WORKDIR}/blacklist-cfg80211.conf
     echo "blacklist ahci_imx" >${WORKDIR}/blacklist-ahci_imx.conf
-    install -d ${D}${sysconfdir}/modprobe.d/
-    install -m 644 ${WORKDIR}/8189es.conf ${D}${sysconfdir}/modprobe.d/
-    install -m 644 ${WORKDIR}/blacklist-8189es.conf ${D}${sysconfdir}/modprobe.d/
     install -m 644 ${WORKDIR}/blacklist-cfg80211.conf ${D}${sysconfdir}/modprobe.d/
     install -m 644 ${WORKDIR}/blacklist-ahci_imx.conf ${D}${sysconfdir}/modprobe.d/
 }
@@ -61,7 +56,6 @@ do_deploy_append () {
     : # exit 0
 }
 
-FILES_kernel-module-8189es += "${sysconfdir}/modprobe.d/blacklist-8189es.conf"
 FILES_kernel-module-ahci-imx += "${sysconfdir}/modprobe.d/blacklist-ahci_imx.conf"
 FILES_kernel-module-cfg80211 += "${sysconfdir}/modprobe.d/blacklist-cfg80211.conf"
 FILES_kernel-image += "/boot/bootscript.mmc /boot/bootscript.nfs /boot/bootscript.usb"
