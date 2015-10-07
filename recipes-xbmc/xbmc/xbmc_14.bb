@@ -47,6 +47,8 @@ do_configure() {
   export PYTHON_NOVERSIONCHECK="no-check"
   export PYTHON_CPPFLAGS="-I/${STAGING_INCDIR}/${PYTHON_DIR}"
   export PYTHON_LDFLAGS="-L${STAGING_LIBDIR} -lpython${PYTHON_BASEVERSION}"
+  export ac_cv_path_JAVA_EXE="${STAGING_LIBDIR_NATIVE}/jvm/openjdk-8-native/bin/java"
+  export JAVA="${STAGING_LIBDIR_NATIVE}/jvm/openjdk-8-native/bin/java"
 
   rm -rf ${S}/addons/service.xbmc.versioncheck
 
