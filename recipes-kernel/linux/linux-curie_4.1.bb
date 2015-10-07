@@ -8,12 +8,12 @@ require recipes-kernel/linux/linux-dtb.inc
 
 DEPENDS += "lzop-native bc-native u-boot-curie u-boot-mkimage-native"
 
-REV="d63392637671555d535852156795d3f8e8ec970b"
-SRCREPO="mrabe89sigma"
-SRCBRANCH = "4.1/rdm_gpu-viv"
+REV="f65cfa577010eb02cdedb687c3189104fc2e66e6"
+SRCREPO="rehsack"
+SRCBRANCH = "curie_4.1"
 LOCALVERSION = "+curie"
 
-SRC_URI = "git://github.com/${SRCREPO}/rdm-linux.git;branch=${SRCBRANCH};rev=${REV}"
+SRC_URI = "git://github.com/${SRCREPO}/linux-curie.git;branch=${SRCBRANCH};rev=${REV}"
 SRC_URI_append = " \
    file://defconfig \
    file://bootscript.mmc \
