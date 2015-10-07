@@ -12,7 +12,7 @@ PREFERRED_VERSION_gpu-viv-bin-mx6q = "5.0.11.p7.1-hfp"
 OVERLAY = "overlay"
 OVERLAYFS = "#overlayfs"
 UNIONFS = "#unionfs"
-UNION_SHADOWS=".shadow/.etc .shadow/.home"
+UNION_SHADOWS=".shadow/.etc .shadow/.home .work/.etc .work/.home"
 
 # 2.6.37 and later kernels use OMAP_SERIAL, ttyO2
 # earlier kernels use ttyS2
@@ -20,8 +20,7 @@ SERIAL_CONSOLE = "115200 ttymxc0"
 
 # kernel device tree
 KERNEL_DEVICETREE = "imx6q-curie.dtb"
-KERNEL_MMC_BASE_DEV = "3"
 
-KERNEL_MMC_DEV-emmc = "3"
-KERNEL_MMC_DEV-sd = "2"
+KERNEL_MMC_DEV-emmc = "1"
+KERNEL_MMC_DEV-sd = "0"
 KERNEL_MMC_DEV = "${KERNEL_MMC_DEV-${WANTED_ROOT_DEV}}"
