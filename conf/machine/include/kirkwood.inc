@@ -2,6 +2,7 @@
 #@DESCRIPTION: Machine configuration for various different Marvell Kirkwood based devices
 
 TARGET_ARCH = "arm"
+DEFAULTTUNE = "arm926ejs"
 
 OVERLAY = "overlay"
 OVERLAYFS = "#overlayfs"
