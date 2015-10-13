@@ -19,7 +19,7 @@ INITSCRIPT_PARAMS_${PN} = "defaults 05"
 
 do_install_append() {
 	install -m 644 ${WORKDIR}/ifplugd.conf ${D}${sysconfdir}/ifplugd/
-	sed -i -e "s,^/bin/bash,/bin/sh," ${D}${sysconfdir}/init.d/ifplugd
+	sed -i -e "s,/bin/bash,/bin/sh," ${D}${sysconfdir}/init.d/ifplugd
 }
 
 inherit autotools update-rc.d pkgconfig
