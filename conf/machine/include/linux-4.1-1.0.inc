@@ -21,6 +21,6 @@ SERIAL_CONSOLE = "115200 ttymxc0"
 # kernel device tree
 KERNEL_DEVICETREE = "imx6q-curie.dtb"
 
-KERNEL_MMC_DEV-emmc = "1"
-KERNEL_MMC_DEV-sd = "0"
+KERNEL_MMC_DEV-emmc = "2"
+KERNEL_MMC_DEV-sd = "1"
 KERNEL_MMC_DEV = "${KERNEL_MMC_DEV-${WANTED_ROOT_DEV}}"
