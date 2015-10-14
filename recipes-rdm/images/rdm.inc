@@ -44,6 +44,9 @@ RDM_BASE_INSTALL_append_bohr = "\
 	mtd-utils-ubifs \
 	mtd-utils-misc \
 "
+RDM_BASE_INSTALL_append_mx6 = "\
+	udev-rules-imx \
+"
 RDM_BASE_INSTALL_append_mx6qcurie = "\
 	u-boot-fw-utils-curie \
 	btrfs-tools \

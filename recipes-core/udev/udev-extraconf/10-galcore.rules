@@ -1,2 +1,0 @@
-# Anyone has r/w permission to HDMI/CEC
-KERNEL=="galcore",  MODE="0666"
