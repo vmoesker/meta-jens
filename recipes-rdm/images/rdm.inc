@@ -43,6 +43,8 @@ RDM_BASE_INSTALL_append_bohr = "\
 	mtd-utils-jffs2 \
 	mtd-utils-ubifs \
 	mtd-utils-misc \
+	linux-firmware-sd8686 \
+	linux-firmware-sd8787 \
 "
 RDM_BASE_INSTALL_append_mx6 = "\
 	udev-rules-imx \
