@@ -8,7 +8,7 @@ require recipes-kernel/linux/linux-dtb.inc
 
 DEPENDS += "lzop-native bc-native u-boot-curie u-boot-mkimage-native"
 
-REV="9d1d0d18139dc8dd37f5e4270f214516b464fece"
+REV="bc7d93c786485bc5721e79c81d485d829133cb0a"
 SRCREPO="rehsack"
 SRCBRANCH = "curie_4.1"
 LOCALVERSION = "+curie"
