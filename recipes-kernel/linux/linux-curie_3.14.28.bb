@@ -10,7 +10,7 @@ DEPENDS += "lzop-native bc-native u-boot-curie u-boot-mkimage-native"
 
 #REV="46c6340116723f88fee094fc8300f8cc7128be35"
 REV="4d941c54a1acde68d76113d388cfc92f944312d4"
-SRCREPO="rehsack"
+SRCREPO="rdm-dev"
 SRCBRANCH = "curie_3.14.28_1.0.0_ga"
 LOCALVERSION = "+curie"
 

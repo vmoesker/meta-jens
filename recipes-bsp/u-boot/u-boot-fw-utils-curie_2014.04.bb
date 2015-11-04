@@ -7,7 +7,7 @@ require recipes-bsp/u-boot/u-boot-fw-utils-curie.inc
 SRCBRANCH = "curie_v2014.04_3.14.28_1.0.0_ga"
 REV = "af097c3f6874e6b9149548ea357590c15319a6c6"
 
-SRCREPO = "rehsack"
+SRCREPO = "rdm-dev"
 
 SRC_URI += "file://bootsettings.patch \
 	   "

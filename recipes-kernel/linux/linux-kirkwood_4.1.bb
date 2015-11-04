@@ -14,7 +14,7 @@ require recipes-kernel/linux/linux-dtb.inc
 DEPENDS += "lzop-native bc-native u-boot u-boot-mkimage-native"
 
 REV="27f1b7fed9c305ef46f8708f1bdde9cdb5f166bd"
-SRCREPO="rehsack"
+SRCREPO="rdm-dev"
 SRCBRANCH = "linux-4.1.y"
 
 SRC_URI = "git://github.com/${SRCREPO}/linux-curie.git;branch=${SRCBRANCH};rev=${REV} \
