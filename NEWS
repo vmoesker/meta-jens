@@ -1,5 +1,19 @@
 Revision history for HomePilot
 
+4.1.0
+    - add wrc-startup-2.0 and update preferred version
+    - add zway-stick-updater and add zway-stick-updater to rdm-hp2.inc
+    - configure nginx proxy timeouts for hp2sm
+    - disable informational messages for drop_caches
+    - fix hp2sm build directory and add revision to version
+    - limit interfaces for avahi-daemon
+    - remove openvpn and use openvpn provided by meta-oe
+    - update hp2sm
+        * add basic wrc api
+        * correct runtime dependencies
+        * remove jetty service and camera page
+        * use Net::Async::HTTP::Server
+
 4.0.27
     - update uboot-curie to support rev-e
       * Port to RevE with the watchdog reset pin support
