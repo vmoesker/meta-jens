@@ -2,7 +2,7 @@ DESCRIPTION = "This software will proide the HomePilot2 Service Monitor e.g :81 
 MAINTAINER= "HP2 Dev Team <verteiler.hp2dev.team@rademacher.de>"
 HOMEPAGE = "http://www.rademacher.de"
 
-LICENSE = "commercial"
+LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://${THISDIR}/files/license.txt;md5=3ebe3464e841ddbf115af1f7019017c5"
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 

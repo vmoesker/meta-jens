@@ -1,7 +1,7 @@
 DESCRIPTION = "RDM DF Service"
 HOMEPAGE = "http://www.rademacher.de"
 
-LICENSE = "commercial"
+LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://${THISDIR}/files/license.txt;md5=3ebe3464e841ddbf115af1f7019017c5"
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 

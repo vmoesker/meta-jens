@@ -1,6 +1,6 @@
 DESCRIPTION = "WR Connect 2 startup script"
 
-LICENSE = "commercial"
+LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://${THISDIR}/wrc-startup-2.0/license.txt;md5=3ebe3464e841ddbf115af1f7019017c5"
 
 SRC_URI += "file://route-up"
