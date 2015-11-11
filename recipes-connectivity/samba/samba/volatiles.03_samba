@@ -1,2 +1,2 @@
 # <type> <owner> <group> <mode> <path> <linksource>
-d root root 1750 /var/lock/usershares none
+d root root 1750 /var/log/samba none
