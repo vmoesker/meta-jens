@@ -23,6 +23,13 @@ SRC_URI_append_bohr = "\
 	file://ubinize.cfg \
 "
 
+SRC_URI_append_bohr-update = "\
+	file://init.mtd \
+	file://init.bohr-update \
+	file://hw.bohr-update \
+	file://ubinize.cfg \
+"
+
 def all_root_dev_names (d) :
     rc = []
     root_dev_names = d.getVar("AVAIL_ROOT_DEVS", True).split(" ")

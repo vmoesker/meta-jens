@@ -97,7 +97,7 @@ then
     . ./.settings
     rm -f .settings
 
-    if [ "${MACHINE}" != "@MACHINE@" ]
+    if [ "${MACHINE}" != "echo @MACHINE@ | sed -e 's/-*//'" ]
     then
 	logger -s "Cannot perform an update for ${MACHINE}."
 	exit 1

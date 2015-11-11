@@ -10,7 +10,7 @@ UNIONFS = "#unionfs"
 UNION_SHADOWS=".shadow/.etc .shadow/.home .work/.etc .work/.home"
 
 SERIAL_CONSOLE = "115200 ttyS0"
-KERNEL_IMAGETYPE = "zImage"
+KERNEL_IMAGETYPE ?= "zImage"
 KERNEL_DEVICETREE = "kirkwood-guruplug-server-plus.dtb"
 
 UBOOT_MACHINE = "guruplug_config"

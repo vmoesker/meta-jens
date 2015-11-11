@@ -1,0 +1,15 @@
+trigger_recover () {
+    :
+}
+
+trigger_root () {
+    :
+}
+
+silence_recover () {
+    :
+}
+
+silence_root () {
+    :
+}
