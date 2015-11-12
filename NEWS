@@ -22,6 +22,9 @@ Revision history for HomePilot
     - fix "install correct Module.symvers" where it should be - in poky
     - adopt daisy fixes for samba
 
+4.0.28 2015-11-12
+    - remove collectd-graphs
+
 4.0.27 2015-11-11
     - update uboot-curie to support rev-e
       * Port to RevE with the watchdog reset pin support
