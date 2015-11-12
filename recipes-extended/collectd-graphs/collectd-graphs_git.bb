@@ -13,7 +13,10 @@ file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
 SRC_URI = "git://github.com/rehsack/Collectd-Graphs.git;rev=30a84dd39e3fff7420e28b5fc4af85dbbe3f3971 \
 "
 
+RDEPENDS_${PN} += "fontconfig"
+RDEPENDS_${PN} += "liberation-fonts"
 RDEPENDS_${PN} += "collectd"
+
 RDEPENDS_${PN} += "log-any-adapter-dispatch-perl"
 RDEPENDS_${PN} += "experimental-perl"
 RDEPENDS_${PN} += "file-find-rule-perl"

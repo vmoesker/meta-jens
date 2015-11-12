@@ -1,8 +1,5 @@
 RDM_BASE_INSTALL = "\
 	cronie \
-	collectd-graphs \
-	fontconfig \
-	liberation-fonts \
 	date-set \
 	e2fsprogs \
 	e2fsprogs-tune2fs \
@@ -71,4 +68,5 @@ SKIPPED_DEPS = "sysdetails \
 	thermaldetails \
 	mmc-slowdown \
 	stressapptest \
+	collectd-graphs \
 	"
