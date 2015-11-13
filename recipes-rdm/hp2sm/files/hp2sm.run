@@ -1,13 +1,14 @@
 #!/bin/sh 
 
-PLACK_APP="/opt/rdm/hp2sm/bin/app.psgi"
-PLACK_ENV="production"
-PLACK_PORT=8081
-PLACK_SERVER="Net::Async::HTTP::Server"
-OPTIONS="--server ${PLACK_SERVER} --env ${PLACK_ENV} --listen :${PLACK_PORT} ${PLACK_APP}"
-PIDFILE="/var/run/hp2sm.pid"
+: ${PLACK_APP:="/opt/rdm/hp2sm/bin/app.psgi"}
+: ${PLACK_ENV:="production"}
+: ${PLACK_PORT:=8081}
+: ${PLACK_SERVER:="Net::Async::HTTP::Server"}
+: ${OPTIONS:="--server ${PLACK_SERVER} --env ${PLACK_ENV} --listen :${PLACK_PORT} ${PLACK_APP}"}
+: ${PIDFILE:="/var/run/hp2sm.pid"}
+: ${SYSTEM_IMAGE_UPDATE_DIR:='/data/.update'}
 
-export SYSTEM_IMAGE_UPDATE_DIR=/data/.update
 mkdir ${SYSTEM_IMAGE_UPDATE_DIR}
+export SYSTEM_IMAGE_UPDATE_DIR
 
 exec start-stop-daemon -m --start --quiet --pidfile "$PIDFILE" --exec plackup -- $OPTIONS 2>&1
