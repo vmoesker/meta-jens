@@ -11,18 +11,23 @@ cat /etc/fstab | sed -E 's/#.*//g' | while read device mountpt fstype options fr
 do
     case "$fstype" in
     unionfs)
-        lowerdir=`echo "$options" | sed -E 's/.*dirs=([^=]+)=rw.*/\1/g'`
+        upperdir=`echo "$options" | sed -E 's/.*dirs=([^=]+)=rw.*/\1/g'`
         ;;
     overlayfs)
-        lowerdir=`echo "$options" | sed -E 's/.*upperdir=([^,]+).*/\1/g'`
+        upperdir=`echo "$options" | sed -E 's/.*upperdir=([^,]+).*/\1/g'`
+        ;;
+    overlay)
+        upperdir=`echo "$options" | sed -E 's/.*upperdir=([^,]+).*/\1/g'`
+        workdir=`echo "$options" | sed -E 's/.*workdir=([^,]+).*/\1/g'`
         ;;
     *)
         # skip
         ;;
     esac
 
-    test -n "$lowerdir" || continue
-    mkdir -p "${lowerdir}"
+    test -n "$upperdir" || continue
+    mkdir -p "${upperdir}"
+    test -n "$workdir" && mkdir -p "${workdir}"
 
     if [ -z "$ROOTDEV" ]
     then
@@ -54,13 +59,13 @@ do
     cat /var/volatile/media/${PRIMDEV}/etc/fstab | sed -E 's/#.*//g' | while read pri_dev pri_mnt pri_fs pri_opt pri_freq pri_pno
     do
         case "${pri_fs}->${fstype}" in
-        "unionfs->overlayfs")
+        "unionfs->overlayfs" | "unionfs->overlay")
             pri_lower=`echo "$pri_opt" | sed -E 's/.*dirs=([^=]+)=rw.*/\1/g'`
-            if [ "$pri_lower" = "$lowerdir" ]
+            if [ "$pri_lower" = "$upperdir" ]
             then
                 # yeah, we want to migrate
                 (
-		find $lowerdir | while read path_entry
+		find "$upperdir" | while read path_entry
                 do
                     bn=`basename "$path_entry"`
                     dn=`dirname "$path_entry"`
