@@ -8,7 +8,7 @@ DESCRIPTION = "Linux Kernel for Bohr Board"
 LICENSE = "GPLv2"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
-FILESEXTRAPATHS_prepend := "${THISDIR}/linux-kirkwood-${PV}:"
+FILESEXTRAPATHS_prepend := "${THISDIR}/linux-bohr-${PV}:"
 
 KERNEL_CLASSES := " kernel-uimage-dtb "
 
