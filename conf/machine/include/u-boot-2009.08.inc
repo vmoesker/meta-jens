@@ -1,9 +1,0 @@
-PREFERRED_VERSION_u-boot-curie = "2009.08"
-
-UBOOT_MACHINE = "mx6q_sabresd_config"
-
-UBOOT_SUFFIX = "bin"
-UBOOT_PADDING = "2"
-UBOOT_MMC_DEV-emmc = "3"
-UBOOT_MMC_DEV-sd = "2"
-UBOOT_MMC_DEV = "${UBOOT_MMC_DEV-${WANTED_ROOT_DEV}}"
