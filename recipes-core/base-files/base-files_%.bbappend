@@ -2,14 +2,12 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/base-files:"
 
 hostname := "homepilot"
 volatiles := ""
-DEV_PFX="${ROOT_DEV_NAME}${ROOT_DEV_SEP}"
+
+DEPENDS_append = "virtual-fstab-${WANTED_ROOT_DEV}"
+RDEPENDS_${PN}_append = "virtual-fstab-${WANTED_ROOT_DEV}"
 
 do_install_append () {
-    sed -i -e "s,@DEV_PFX@,${DEV_PFX},g" \
-         -e "s,@overlay@,${OVERLAY},g" -e "s,@overlayfs@,${OVERLAYFS},g" -e "s,@unionfs@,${UNIONFS},g" \
-        ${D}${sysconfdir}/fstab
-    test "${MACHINE}" = "bohr" -a "${WANTED_ROOT_DEV}" = "nand" && sed -i -e "s,ext[24],ubifs,g" \
-        ${D}${sysconfdir}/fstab
+    rm -f ${D}${sysconfdir}/fstab
 
     install -d ${D}/data
     rm -f ${D}/var/log ${D}/var/tmp
