@@ -27,6 +27,7 @@ RDM_BASE_INSTALL = "\
 	logrotate \
 	qbrqry \
 	boot-fsck \
+	udev-extraconf-mount-blacklist-${WANTED_ROOT_DEV} \
 	initoverlay \
 	system-image-update \
 	hp2sm \
@@ -52,7 +53,6 @@ RDM_BASE_INSTALL_append_mx6qcurie = "\
 	fb-cursor-off \
 "
 RDM_INSTALL = "${RDM_BASE_INSTALL} \
-	udev-extraconf \
 	ksm-init \
 	openvpn \
 "
