@@ -12,6 +12,7 @@ SRC_URI = "http://internal.rdm.local/blobs/z-way-stick-updater-${PV}.tar.gz;name
 
 DEPENDS = "hp2-base"
 RDEPENDS_${PN} += "hp2-base"
+RDEPENDS_${PN} += "perl"
 RDEPENDS_${PN} += "python-fcntl"
 RDEPENDS_${PN} += "python-logging"
 RDEPENDS_${PN} += "python-pyserial"
