@@ -28,7 +28,7 @@ RDM_BASE_INSTALL = "\
 	qbrqry \
 	boot-fsck \
 	udev-extraconf-mount-blacklist-${WANTED_ROOT_DEV} \
-	initoverlay \
+	initoverlay-${WANTED_ROOT_DEV} \
 	system-image-update \
 	hp2sm \
 	prd-flash \

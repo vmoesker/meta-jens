@@ -24,7 +24,7 @@ RDM_BASE_INSTALL_remove = "\
 	lsof \
 	logrotate \
 	boot-fsck \
-	initoverlay \
+	initoverlay-${WANTED_ROOT_DEV} \
 	system-image-update \
 	hp2sm \
 	wifi-fallback \
