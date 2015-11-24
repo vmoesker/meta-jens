@@ -31,7 +31,7 @@ RDM_BASE_INSTALL = "\
 	initoverlay-${WANTED_ROOT_DEV} \
 	system-image-update \
 	hp2sm \
-	prd-flash \
+	prd-flash-${WANTED_ROOT_DEV} \
 	wifi-fallback \
 "
 RDM_BASE_INSTALL_append_bohr = "\

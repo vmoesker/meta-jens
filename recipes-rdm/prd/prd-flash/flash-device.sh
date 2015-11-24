@@ -20,9 +20,9 @@ logger -s "Starting flash ..."
 # use last image container
 for c in /data/.flashimg/*-complete.cpi /data/flashimg/*-complete
 do
-    if [ -f $c -o -d $c ]
+    if [ -f "${c}" -o -d "${c}" ]
     then
-	IMAGE_CONTAINER="$c"
+	IMAGE_CONTAINER="${c}"
 
 	break
     fi
@@ -47,8 +47,8 @@ then
 	dev=$(eval echo /dev/\$${devnm})
 	if test -e $dev
 	then
-	    test $DEV_FOUND -eq 1 && continue
-	    if [ "$WANTED_ROOT_DEV" != "$w" ]
+	    test ${DEV_FOUND} -eq 1 && continue
+	    if [ "${WANTED_ROOT_DEV}" != "$w" ]
 	    then
 		logger -s "Cannot flash incompatible image ($dev but no $w image)"
 		exit 1
@@ -90,7 +90,7 @@ then
     silence_recover
     silence_root
 
-    test "${DEVICE_PATH}" = "${dev}" && reboot
+    test "@INTERNAL_ROOT_DEV@" = "${WANTED_ROOT_DEV}" && reboot
 elif [ -f "${IMAGE_CONTAINER}" ]
 then
     tar xjf "${IMAGE_CONTAINER}" .settings
