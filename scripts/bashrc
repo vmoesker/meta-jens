@@ -65,6 +65,14 @@ __oe_remove_path()  {
     export PATH=${PATH/%:/}
 }
 
+__oe_append_extrawhite() { NEW=${1/%\//}; __oe_remove_extrawhite $NEW; export BB_ENV_EXTRAWHITE="$BB_ENV_EXTRAWHITE $NEW"; }
+__oe_prepend_extrawhite() { NEW=${1/%\//}; __oe_remove_extrawhite $NEW; export BB_ENV_EXTRAWHITE="$NEW $BB_ENV_EXTRAWHITE"; }
+__oe_remove_extrawhite()  {
+    # New format not supported by some old versions of awk
+    BB_ENV_EXTRAWHITE=`echo -n "$BB_ENV_EXTRAWHITE" | awk  'BEGIN { RS=" "; ORS=" " } $0 != "'$1'" '`
+    export BB_ENV_EXTRAWHITE=${BB_ENV_EXTRAWHITE/%:/}
+}
+
 __oe_init () {
     if [ ! -n "$OE_BUILDDIR_SKIP_INIT" ]; then
 	if [ -f "$OE_BUILDDIR_HOME/init" ]; then
@@ -227,16 +235,17 @@ EOM
 }
 
 __oe_activate() {
-    __oe_init
-    test -d ${BUILDDIR}/conf || __oe_setup_builddir
     BB_ENV_EXTRAWHITE="MACHINE DISTRO TCMODE TCLIBC HTTP_PROXY http_proxy \
 HTTPS_PROXY https_proxy FTP_PROXY ftp_proxy FTPS_PROXY ftps_proxy ALL_PROXY \
 all_proxy NO_PROXY no_proxy SSH_AGENT_PID SSH_AUTH_SOCK BB_SRCREV_POLICY \
 SDKMACHINE BB_NUMBER_THREADS BB_NO_NETWORK PARALLEL_MAKE GIT_PROXY_COMMAND \
 SOCKS5_PASSWD SOCKS5_USER SCREENDIR STAMPS_DIR"
-
-    export BUILDDIR
     export BB_ENV_EXTRAWHITE
+
+    __oe_init
+    test -d ${BUILDDIR}/conf || __oe_setup_builddir
+    export BUILDDIR
+
     cd "${BUILDDIR}"
 }
 
@@ -252,6 +261,10 @@ __oe_deactivate() {
 
     if [ -n "$BBSERVER" ]; then
        unset BBSERVER
+    fi
+
+    if [ -n "$BB_ENV_EXTRAWHITE" ]; then
+       unset BB_ENV_EXTRAWHITE
     fi
 
     if [ ! -n "$OE_BUILDDIR_SKIP_DOWN" ]; then
