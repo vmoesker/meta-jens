@@ -13,6 +13,14 @@ Revision history for HomePilot
         * correct runtime dependencies
         * remove jetty service and camera page
         * use Net::Async::HTTP::Server
+    - introduce perl6 support for JVM
+    - fix overlayfs maintenance for kernel >= 3.18
+    - fix a lot of license QA issues with Yocto 1.8+
+    - improve hp2sm run script for development purposes
+    - clean up prd-flash
+    - add initial support for building a bohr-update image
+    - fix "install correct Module.symvers" where it should be - in poky
+    - adopt daisy fixes for samba
 
 4.0.27
     - update uboot-curie to support rev-e
