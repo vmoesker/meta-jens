@@ -16,8 +16,7 @@ KERNEL_CLASSES := " kernel-uimage-dtb "
 inherit kernel
 require recipes-kernel/linux/linux-dtb.inc
 
-# u-boot-curie
-DEPENDS += "lzop-native bc-native u-boot u-boot-mkimage-native"
+DEPENDS += "lzop-native bc-native bootscript-${MACHINE}-${WANTED_ROOT_DEV}"
 
 REV="27f1b7fed9c305ef46f8708f1bdde9cdb5f166bd"
 SRCREPO="rdm-dev"

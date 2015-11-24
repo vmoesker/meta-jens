@@ -10,8 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
 inherit kernel
 require recipes-kernel/linux/linux-dtb.inc
 
-# u-boot-curie
-DEPENDS += "lzop-native bc-native u-boot u-boot-mkimage-native"
+DEPENDS += "lzop-native bc-native bootscript-${MACHINE}-${WANTED_ROOT_DEV}"
 
 REV="27f1b7fed9c305ef46f8708f1bdde9cdb5f166bd"
 SRCREPO="rdm-dev"
@@ -19,9 +18,6 @@ SRCBRANCH = "linux-4.1.y"
 
 SRC_URI = "git://github.com/${SRCREPO}/linux-curie.git;branch=${SRCBRANCH};rev=${REV} \
 	   file://defconfig \
-	   file://bootscript.nand \
-	   file://bootscript.nfs \
-	   file://bootscript.usb \
 	   file://omit-to-optimize-some-printf.patch \
           "
 
@@ -65,31 +61,9 @@ do_configure_prepend() {
 }
 
 do_install_append () {
-    sed -i -e "s/@UBOOT_LOADADDRESS[@]/${UBOOT_LOADADDRESS}/g" -e "s/@UBOOT_FDTADDRESS[@]/${UBOOT_FDTADDRESS}/g" \
-           -e "s/@KERNEL_IMAGETYPE[@]/${KERNEL_IMAGETYPE}/g" -e "s/@KERNEL_DEVICETREE[@]/${KERNEL_DEVICETREE}/g" \
-	   -e "s/@MACHINE[@]/${MACHINE}/g" -e "s/@BRANCH[@]/${METADATA_BRANCH}/g" \
-	 ${WORKDIR}/bootscript.nand ${WORKDIR}/bootscript.nfs ${WORKDIR}/bootscript.usb
-    uboot-mkimage -T script -C none -n 'Bohr Script' -d ${WORKDIR}/bootscript.nand ${D}/boot/bootscript.nand
-    uboot-mkimage -T script -C none -n 'Bohr Script' -d ${WORKDIR}/bootscript.nfs ${D}/boot/bootscript.nfs
-    uboot-mkimage -T script -C none -n 'Bohr Script' -d ${WORKDIR}/bootscript.usb ${D}/boot/bootscript.usb
-
     echo "blacklist cfg80211" >${WORKDIR}/blacklist-cfg80211.conf
     install -d ${D}${sysconfdir}/modprobe.d/
     install -m 644 ${WORKDIR}/blacklist-cfg80211.conf ${D}${sysconfdir}/modprobe.d/
 }
 
-do_deploy_append () {
-    set -x
-    cp ${D}/boot/bootscript.nand ${DEPLOYDIR}/bootscript.nand-${DATETIME}
-    cp ${D}/boot/bootscript.nfs ${DEPLOYDIR}/bootscript.nfs-${DATETIME}
-    cp ${D}/boot/bootscript.usb ${DEPLOYDIR}/bootscript.usb-${DATETIME}
-    ln -sf bootscript.nand-${DATETIME} ${DEPLOYDIR}/bootscript.nand
-    ln -sf bootscript.nfs-${DATETIME} ${DEPLOYDIR}/bootscript.nfs
-    ln -sf bootscript.usb-${DATETIME} ${DEPLOYDIR}/bootscript.usb
-
-    ln -sf bootscript.${WANTED_ROOT_DEV}-${DATETIME} ${DEPLOYDIR}/bootscript
-    : # exit 0
-}
-
 FILES_kernel-module-cfg80211 += "${sysconfdir}/modprobe.d/blacklist-cfg80211.conf"
-FILES_kernel-image += "/boot/bootscript.nand /boot/bootscript.nfs /boot/bootscript.usb"
