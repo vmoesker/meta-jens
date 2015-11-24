@@ -8,12 +8,9 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3
 include recipes-core/images/core-image-base.bb
 include rdm.inc
 
-inherit core-image distro_features_check
+inherit core-image distro_features_check rootdev-check
 
-# Add extra image features
-EXTRA_IMAGE_FEATURES += " \
-    ssh-server-dropbear \
-"
+COMPAT_ROOT_DEVS = "nfs"
 
 IMAGE_INSTALL += " \
 	${CORE_IMAGE_BASE_INSTALL} \

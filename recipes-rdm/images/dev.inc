@@ -18,3 +18,7 @@ DEV_INSTALL_append_mx6qcurie = "\
 	vivante-gpu-sdk \
 	valgrind \
 	"
+
+inherit rootdev-check
+
+CONFLICT_ROOT_DEVS = "${INTERNAL_ROOT_DEV} nfs"

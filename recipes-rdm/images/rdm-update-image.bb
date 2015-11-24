@@ -13,7 +13,9 @@ COMPATIBLE_MACHINE = "(bohr-update)"
 include recipes-core/images/core-image-base.bb
 include rdm.inc
 
-inherit core-image distro_features_check
+inherit core-image distro_features_check rootdev-check
+
+COMPAT_ROOT_DEVS = "usb"
 
 # Add extra image features
 EXTRA_IMAGE_FEATURES += " \

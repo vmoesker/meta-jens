@@ -9,11 +9,12 @@ include recipes-core/images/core-image-base.bb
 include rdm.inc
 include dev.inc
 
-inherit core-image distro_features_check
+inherit core-image distro_features_check rootdev-check
+
+COMPAT_ROOT_DEVS = "nfs"
 
 # Add extra image features
 EXTRA_IMAGE_FEATURES += " \
-    ssh-server-dropbear \
     ${EXTRA_IMAGE_FEATURES_dev} \
 "
 
