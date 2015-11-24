@@ -1,6 +1,5 @@
 RDM_BASE_INSTALL = "\
 	cronie \
-	date-set \
 	e2fsprogs \
 	e2fsprogs-tune2fs \
 	attr \
