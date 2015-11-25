@@ -8,7 +8,7 @@ require recipes-kernel/linux/linux-dtb.inc
 
 DEPENDS += "lzop-native bc-native bootscript-${MACHINE}-${WANTED_ROOT_DEV}"
 
-REV="eaa6b47a62afa4735a4ac5eb6fe23f949d131788"
+REV="252ec68fb7feea8afd00db17559069c57d70f7bb"
 SRCREPO="rdm-dev"
 SRCBRANCH = "curie_4.1"
 LOCALVERSION = "+curie"

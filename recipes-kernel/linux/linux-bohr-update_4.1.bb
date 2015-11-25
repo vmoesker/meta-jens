@@ -18,7 +18,7 @@ require recipes-kernel/linux/linux-dtb.inc
 
 DEPENDS += "lzop-native bc-native bootscript-${MACHINE}-${WANTED_ROOT_DEV}"
 
-REV="27f1b7fed9c305ef46f8708f1bdde9cdb5f166bd"
+REV="1f2ce4a2e7aea3a2123b17aff62a80553df31e21"
 SRCREPO="rdm-dev"
 SRCBRANCH = "linux-4.1.y"
 
