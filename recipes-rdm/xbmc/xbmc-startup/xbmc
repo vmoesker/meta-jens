@@ -15,6 +15,4 @@ test -d /tmp/xbmc || setuidgid xbmc mkdir /tmp/xbmc
 rm -f ${HOME}/@APPLICATION_DIRECTORY@/temp
 setuidgid xbmc ln -s /tmp/xbmc ${HOME}/@APPLICATION_DIRECTORY@/temp
 
-insmod /lib/modules/4.1.*/extra/galcore.ko
 exec 2>&1 start-stop-daemon -S --pidfile /run/xbmc.pid --make-pidfile --chuid xbmc --exec @APPLICATION_BIN@
-rmmod /lib/modules/4.1.*/extra/galcore.ko
