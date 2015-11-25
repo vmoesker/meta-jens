@@ -6,7 +6,7 @@ HP2_INSTALL = "service-df \
 	libftdi \
 	openjre-8 \
 	zway-blob \
-	zway-stick-updater \
+	hp2sm-zway \
 	hp-blob \
         samba \
         wrkeyupload \

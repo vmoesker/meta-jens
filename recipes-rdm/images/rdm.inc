@@ -20,7 +20,7 @@ RDM_BASE_INSTALL = "\
 	ntpdate \
 	ntp-utils \
 	util-linux \
-	ethtool \
+	hp2sm-ethtool \
 	crda \
 	xz \
 	lsof \

@@ -1,4 +1,4 @@
-DESCRIPTION = "This software will proide the HomePilot2 Service Monitor e.g :81 Interface"
+DESCRIPTION = "This software will provide the HomePilot2 Service Monitor e.g :81 Interface"
 MAINTAINER= "HP2 Dev Team <verteiler.hp2dev.team@rademacher.de>"
 HOMEPAGE = "http://www.rademacher.de"
 
@@ -15,7 +15,6 @@ RDEPENDS_${PN} += "file-find-rule-perl"
 RDEPENDS_${PN} += "file-slurp-tiny-perl"
 RDEPENDS_${PN} += "http-tiny-perl"
 RDEPENDS_${PN} += "json-perl"
-RDEPENDS_${PN} += "libwww-perl-perl"
 RDEPENDS_${PN} += "module-pluggable-perl"
 RDEPENDS_${PN} += "moo-perl"
 RDEPENDS_${PN} += "namespace-clean-perl"
@@ -33,7 +32,7 @@ RDEPENDS_${PN}-dev += "devel-stacktrace-perl"
 RDEPENDS_${PN}-dev += "test-leaktrace-perl"
 RDEPENDS_${PN}-dev += "test-memory-cycle-perl"
 
-HP2SM_REV="5022"
+HP2SM_REV="5147"
 PV = "0.1-${HP2SM_REV}"
 
 SRC_URI += "svn://192.168.1.186/svn/EW_Prj/001/HP_ServiceMonitor/branches/next;protocol=http;module=hp2sm;rev=${HP2SM_REV}"
@@ -58,10 +57,28 @@ do_install() {
 
 	# copy source
 	(cd ${WORKDIR}/hp2sm/src && tar cf - .) | (cd ${D}${HP2SM_BASE} && tar xf -)
+    chown -R root:root ${D}${HP2SM_BASE}
 }
 
-FILES_${PN} += "/opt/rdm/hp2sm"
+FILES_${PN} += "${HP2SM_BASE}"
 FILES_${PN} += "${SERVICE_ROOT}"
 
+PACKAGES =+ "${PN}-ethtool"
 PACKAGES =+ "${PN}-xbmc"
+PACKAGES =+ "${PN}-zway"
+
+RDEPENDS_${PN}-zway += "zway-stick-updater"
+RDEPENDS_${PN}-ethtool += "init-ifupdown"
+RDEPENDS_${PN}-xbmc_append_curie += "init-iecset"
+
+FILES_${PN}-dev += "${HP2SM_BASE}/t"
+FILES_${PN}-ethtool += "${HP2SM_BASE}/lib/hp2sm/Plugins/Ethtool.pm"
+FILES_${PN}-ethtool += "${HP2SM_BASE}/views/ethtool.tt"
+FILES_${PN}-xbmc += "${HP2SM_BASE}/lib/hp2sm/Plugins/Mediaplayer.pm"
 FILES_${PN}-xbmc += "${HP2SM_BASE}/lib/hp2sm/RestAPI/System/Services/Plugins/xbmc.pm"
+FILES_${PN}-xbmc += "${HP2SM_BASE}/views/mediaplayer.tt"
+FILES_${PN}-xbmc += "${HP2SM_BASE}/views/navigation/40-mediaplayer.tt"
+FILES_${PN}-zway += "${HP2SM_BASE}/lib/hp2sm/Plugins/ZWave.pm"
+FILES_${PN}-zway += "${HP2SM_BASE}/lib/hp2sm/RestAPI/System/Services/Plugins/z_way.pm"
+FILES_${PN}-zway += "${HP2SM_BASE}/views/navigation/60-zwave.tt"
+FILES_${PN}-zway += "${HP2SM_BASE}/views/zwave.tt"
