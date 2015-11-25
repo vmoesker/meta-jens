@@ -62,8 +62,6 @@ then
 		KERNEL_FILES="${KERNEL_FILES} ${KERNEL_IMAGETYPE}-${DTS_BASE_NAME}.dtb ${bin_for_dtb}"
 		KERNEL="${KERNEL} ${bin_for_dtb}"
 		KERNEL_PREPARE="${KERNEL_PREPARE} && mv ${bin_for_dtb} ${DTS_BASE_NAME}.dtb"
-		# KERNEL_RECOVERY="${KERNEL_RECOVERY} && ln -f ${KERNEL_IMAGETYPE}-${MACHINE}-${DTS_BASE_NAME}.dtb ${KERNEL_IMAGETYPE}-${DTS_BASE_NAME}.dtb"
-		# KERNEL_SANITIZE="${KERNEL_SANITIZE} && mv ${KERNEL_IMAGETYPE}-${DTS_BASE_NAME}.dtb ${KERNEL_IMAGETYPE}-${DTS_BASE_NAME}.dtb"
 	    fi
 	fi
     done
@@ -71,7 +69,7 @@ fi
 
 for IMAGE in ${BUILD_IMAGES}
 do
-    SYSIMG_FILES=".${IMAGE}-${SYSIMG_VERSION}-settings .settings"
+    SYSIMG_FILES=".${IMAGE}-${WANTED_ROOT_DEV}-${SYSIMG_VERSION}-settings .settings"
     FILES="${SYSIMG_FILES} ${KERNEL_FILES}"
     DEV=0
     RECOVERY_IMAGE="rdm-core-image"
@@ -85,15 +83,15 @@ do
     uboot_bin="`readlink ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.${UBOOT_SUFFIX}`"
     FILES="${FILES} u-boot-${MACHINE}.${UBOOT_SUFFIX} ${uboot_bin}"
 
-    rootimg="`readlink ${DEPLOY_DIR_IMAGE}/${IMAGE}-${MACHINE}.squashfs-xz`"
+    rootimg="`readlink ${DEPLOY_DIR_IMAGE}/${IMAGE}-${WANTED_ROOT_DEV}-${MACHINE}.squashfs-xz`"
     rootimg_size=`du -b ${DEPLOY_DIR_IMAGE}/${rootimg} | awk '{ print $1 }'`
     FILES="${FILES} ${rootimg}"
 
-    recimg="`readlink ${DEPLOY_DIR_IMAGE}/${RECOVERY_IMAGE}-${MACHINE}.squashfs-xz`"
+    recimg="`readlink ${DEPLOY_DIR_IMAGE}/${RECOVERY_IMAGE}-${WANTED_ROOT_DEV}-${MACHINE}.squashfs-xz`"
     recimg_size=`du -b ${DEPLOY_DIR_IMAGE}/${recimg} | awk '{ print $1 }'`
     FILES="${FILES} ${recimg}"
 
-cat >${DEPLOY_DIR_IMAGE}/.${IMAGE}-${SYSIMG_VERSION}-settings <<EOS
+cat >${DEPLOY_DIR_IMAGE}/.${IMAGE}-${WANTED_ROOT_DEV}-${SYSIMG_VERSION}-settings <<EOS
 SYSIMG_VER=${SYSIMG_VERSION}
 DEV=${DEV}
 MACHINE=${MACHINE}
@@ -116,8 +114,8 @@ ROOT_DEV_TYPE="${ROOT_DEV_TYPE}"
 EOS
 
     # XXX change next line into ln -sf after next applied update ...
-    (cd ${DEPLOY_DIR_IMAGE} && cp -f .${IMAGE}-${SYSIMG_VERSION}-settings .settings)
-    (cd ${DEPLOY_DIR_IMAGE} && rm -f ${IMAGE}-${SYSIMG_VERSION}-complete.cpi)
-    (cd ${DEPLOY_DIR_IMAGE} && tar cjf ${IMAGE}-${SYSIMG_VERSION}-complete.cpi ${FILES})
-    (cd ${DEPLOY_DIR_IMAGE} && ln -sf ${IMAGE}-${SYSIMG_VERSION}-complete.cpi ${IMAGE}-complete.cpi)
+    (cd ${DEPLOY_DIR_IMAGE} && cp -f .${IMAGE}-${WANTED_ROOT_DEV}-${SYSIMG_VERSION}-settings .settings)
+    (cd ${DEPLOY_DIR_IMAGE} && rm -f ${IMAGE}-${WANTED_ROOT_DEV}-${SYSIMG_VERSION}-complete.cpi)
+    (cd ${DEPLOY_DIR_IMAGE} && tar cjf ${IMAGE}-${WANTED_ROOT_DEV}-${SYSIMG_VERSION}-complete.cpi ${FILES})
+    (cd ${DEPLOY_DIR_IMAGE} && ln -sf ${IMAGE}-${WANTED_ROOT_DEV}-${SYSIMG_VERSION}-complete.cpi ${IMAGE}-${WANTED_ROOT_DEV}-complete.cpi)
 done
