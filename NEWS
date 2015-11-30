@@ -28,6 +28,10 @@ Revision history for HomePilot
     - adopt daisy fixes for samba
     - remove duplicate, early date-set
     - zway-stick-updater: add perl to rdepends
+    - use default gcc version 5.2
+    - decouple bootscripts
+    - allow different images in same build environment
+    - update kernel to latest stable release 4.1.13
 
 4.0.28 2015-11-12
     - remove collectd-graphs
