@@ -1,0 +1,15 @@
+post_flash () {
+    DROPBEAR_PATH=${DATA_MNT}/.var/lib/dropbear
+    test -d ${DROPBEAR_PATH} || mkdir -p ${DROPBEAR_PATH}
+    rm -f ${DROPBEAR_PATH}/rsa_host_key
+    for kc in ${wrc1key}
+    do
+	echo $kc | openssl enc -d -base64 >> ${DROPBEAR_PATH}/rsa_host_key
+    done
+    wrc1cmp=`openssl dgst -sha -r < ${DROPBEAR_PATH}/rsa_host_key | awk '{print $1}'`
+    if [ "${wrc1sha}" = "${wrc1cmp}" ]
+    then
+	dropbearconvert openssh dropbear ${DROPBEAR_PATH}/rsa_host_key ${DROPBEAR_PATH}/dropbear_rsa_host_key
+	rm -f ${DROPBEAR_PATH}/rsa_host_key
+    fi
+}

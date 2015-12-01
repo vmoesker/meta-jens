@@ -14,6 +14,7 @@ trigger_root () {
 	mkdir -p /run/media/ubi0_0
 	mount /dev/ubi0_0 /run/media/ubi0_0
 
+	flash_erase /dev/mtd0 0 0
 	flash_uboot
 	uboot_setenv
 	fw_setenv wrc1key `cat /run/media/ubi0_0/home/${ETH0_ADDR}/.ssh/id_rsa | openssl enc -base64`
@@ -22,6 +23,9 @@ trigger_root () {
 	umount /run/media/ubi0_0
 	reboot
     else
+	wrc1key="`fw_printenv -n wrc1key`"
+	wrc1sha="`fw_printenv -n wrc1sha`"
+
 	echo 0 >/sys/class/leds/guruplug:green:health/brightness
 	echo heartbeat >/sys/class/leds/guruplug:green:health/trigger
     fi

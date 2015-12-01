@@ -1,11 +1,12 @@
 prepare_device () {
-    test -e /dev/ubi0_0 && ubidetach /dev/ubi_ctrl -m 2
+    ubidetach /dev/ubi_ctrl -m 2
     cd $TEMP_DIR
     mkfs.ubifs -o boot.img -m 2048 -e 129024 -c 96
     mkfs.ubifs -o root.img -m 2048 -e 129024 -c 1024
     mkfs.ubifs -o recover.img -m 2048 -e 129024 -c 384
     mkfs.ubifs -o data.img -m 2048 -e 129024 -c 2400
     ubinize -o ubi.img -m 2048 -p 128KiB -s 512 @LIBEXEC@/ubinize.cfg
+    flash_erase /dev/mtd2 0 0
     ubiformat /dev/mtd2 -f ubi.img
     ubiattach /dev/ubi_ctrl -m 2
     rm *.img
@@ -37,7 +38,7 @@ update_uboot () {
 }
 
 uboot_setenv () {
-    dd if=/dev/zero of=/dev/mtdblock1 bs=128M count=1
+    flash_erase /dev/mtd1 0 0
     fw_setenv ethact egiga0
     fw_setenv ethaddr `cat /sys/class/net/eth0/address`
     fw_setenv eth1addr `cat /sys/class/net/eth1/address`

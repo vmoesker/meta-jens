@@ -15,7 +15,8 @@ test "${FLOCKER}" != "@ARGV0@" && exec env FLOCKER="@ARGV0@" flock -en "@ARGV0@"
 logger -s "Starting flash ..."
 
 . @LIBEXEC@/hw
-. @LIBEXEC@/init.@MACHINE@
+. @LIBEXEC@/init
+test -f @LIBEXEC@/post && . @LIBEXEC@/post
 
 # use last image container
 for c in /data/.flashimg/*-complete.cpi /data/flashimg/*-complete
@@ -83,6 +84,10 @@ then
     chmod 01777 ${DATA_MNT}/tmp
     (cd ${DATA_MNT} && mkdir -p ${UNION_SHADOWS})
 
+    declare -f post_flash >/dev/null && post_flash
+
+    sync
+
     umount ${BOOT_MNT}
     umount ${DATA_MNT}
 
@@ -91,7 +96,7 @@ then
     silence_recover
     silence_root
 
-    test "@INTERNAL_ROOT_DEV@" = "${WANTED_ROOT_DEV}" && reboot
+    test "@INTERNAL_ROOT_DEV@" = "${WANTED_ROOT_DEV}" && @FINALIZE_FLASH@
 elif [ -f "${IMAGE_CONTAINER}" ]
 then
     tar xjf "${IMAGE_CONTAINER}" .settings

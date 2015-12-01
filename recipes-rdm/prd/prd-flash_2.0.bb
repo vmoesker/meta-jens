@@ -14,6 +14,7 @@ SRC_URI_append_curie = "\
     file://init.ssd \
     file://init.curie \
     file://hw.curie \
+    file://post.curie \
 "
 
 SRC_URI_append_bohr = "\
@@ -21,6 +22,7 @@ SRC_URI_append_bohr = "\
     file://init.ssd \
     file://init.bohr \
     file://hw.bohr \
+    file://post.bohr \
     file://ubinize.cfg \
 "
 
@@ -28,6 +30,7 @@ SRC_URI_append_bohr-update = "\
     file://init.mtd \
     file://init.bohr-update \
     file://hw.bohr-update \
+    file://post.bohr-update \
     file://ubinize.cfg \
 "
 
@@ -38,6 +41,9 @@ def all_root_dev_names (d) :
         devnm = "ROOT_DEV_NAME-" + dev
         rc.append("s,@" + devnm + "[@]," + d.getVar(devnm, True) + ",g")
     return " ".join(rc)
+
+FINALIZE_FLASH = "reboot"
+FINALIZE_FLASH_bohr-update = "poweroff"
 
 do_compile () {
     set -x
@@ -54,6 +60,7 @@ do_compile () {
         -e "s/@MACHINE[@]/${MACHINE}/g" -e "s,@AVAIL_ROOT_DEVS[@],${AVAIL_ROOT_DEVS},g" \
         -e "s,@INTERNAL_ROOT_DEV[@],${INTERNAL_ROOT_DEV},g" -e "s,@WANTED_ROOT_DEV[@],${WANTED_ROOT_DEV},g" \
         -e "s,@ROOT_DEV_TYPE[@],${ROOT_DEV_TYPE},g" -e "s,@ROOT_DEV_SEP[@],${ROOT_DEV_SEP},g" \
+	-e "s,@FINALIZE_FLASH[@],${FINALIZE_FLASH},g" \
         $ALL_ROOT_DEV_NAMES \
         ${WORKDIR}/flash-device.sh ${WORKDIR}/hw.${MACHINE} ${WORKDIR}/init.*
 }
@@ -64,13 +71,14 @@ do_install () {
 
     install -m 0755 ${WORKDIR}/flash-device.sh ${D}${sysconfdir}/init.d
     install -m 0644 ${WORKDIR}/hw.${MACHINE} ${D}${libexecdir}/${MACHINE}/hw
-    install -m 0644 ${WORKDIR}/init.${MACHINE} ${D}${libexecdir}/${MACHINE}/init.${MACHINE}
+    install -m 0644 ${WORKDIR}/init.${MACHINE} ${D}${libexecdir}/${MACHINE}/init
 
     update-rc.d -r ${D} flash-device.sh start 25 3 5 .
 }
 
 do_install_append_curie () {
     install -d ${D}${libexecdir}/${MACHINE}
+    test "${WANTED_ROOT_DEV}" = "nfs" && install -m 0644 ${WORKDIR}/post.${MACHINE} ${D}${libexecdir}/${MACHINE}/post
     install -m 0644 ${WORKDIR}/init.ssd ${D}${libexecdir}/${MACHINE}
 }
 
@@ -78,12 +86,14 @@ do_install_append_bohr () {
     install -d ${D}${libexecdir}/${MACHINE}
     install -m 0644 ${WORKDIR}/init.mtd ${D}${libexecdir}/${MACHINE}
     install -m 0644 ${WORKDIR}/init.ssd ${D}${libexecdir}/${MACHINE}
+    test "${WANTED_ROOT_DEV}" = "nfs" && install -m 0644 ${WORKDIR}/post.${MACHINE} ${D}${libexecdir}/${MACHINE}/post
     install -m 0644 ${WORKDIR}/ubinize.cfg ${D}${libexecdir}/${MACHINE}
 }
 
 do_install_append_bohr-update () {
     install -d ${D}${libexecdir}/${MACHINE}
     install -m 0644 ${WORKDIR}/init.mtd ${D}${libexecdir}/${MACHINE}
+    install -m 0644 ${WORKDIR}/post.${MACHINE} ${D}${libexecdir}/${MACHINE}/post
     install -m 0644 ${WORKDIR}/ubinize.cfg ${D}${libexecdir}/${MACHINE}
 }
 

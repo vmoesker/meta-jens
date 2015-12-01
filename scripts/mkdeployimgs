@@ -27,6 +27,6 @@ do
     env MACHINE=$MACHINE "${MKIMGS}" ${images}
     DEPLOY_DIR_IMAGE="tmp/deploy/images/${MACHINE}"
     SYSIMG_VERSION=$(. ${DEPLOY_DIR_IMAGE}/.settings; echo ${SYSIMG_VER})
-    (cd `dirname $0`/post-flash/etc && tar cjf - .) >${DEPLOY_DIR_IMAGE}/post-flash-${SYSIMG_VERSION}.tar.bz2
+    (cd `dirname $0`/post-flash && tar cjf - .) >${DEPLOY_DIR_IMAGE}/post-flash-${SYSIMG_VERSION}.tar.bz2
     (cd ${DEPLOY_DIR_IMAGE} && ln -sf post-flash-${SYSIMG_VERSION}.tar.bz2 post-flash.tar.bz2)
 done
