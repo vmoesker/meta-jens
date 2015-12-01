@@ -4,8 +4,6 @@
 DESCRIPTION = "U-Boot BootScripts for linux-bohr-4.1"
 PN = "bootscript-bohr-update-${WANTED_ROOT_DEV}"
 
-inherit bootscript
-
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
 
@@ -21,12 +19,14 @@ COMPATIBLE_MACHINE = "(bohr-update)"
 
 do_install () {
     set -x
+    . ${DEPLOY_DIR}/images/bohr/.rdm-hp2-image-nand-${DISTRO_VERSION}-settings
+    BOHR_DEVICE_TREE=`echo ${KERNEL_PREPARE} | awk -F '&&' '{print $3}' | awk '{print $3}'`
+    BOHR_KERNEL_IMAGETYPE=`echo ${KERNEL_SANITIZE} | awk '{print $3}'`
     sed -i -e "s/@UBOOT_LOADADDRESS[@]/${UBOOT_LOADADDRESS}/g" -e "s/@UBOOT_FDTADDRESS[@]/${UBOOT_FDTADDRESS}/g" \
-           -e "s/@KERNEL_IMAGETYPE[@]/${KERNEL_IMAGETYPE}/g" -e "s/@KERNEL_DEVICETREE[@]/${KERNEL_DEVICETREE}/g" \
-	   -e "s/@MACHINE[@]/${MACHINE}/g" -e "s/@BRANCH[@]/${METADATA_BRANCH}/g" \
+           -e "s/@KERNEL_IMAGETYPE[@]/${BOHR_KERNEL_IMAGETYPE}/g" -e "s/@KERNEL_DEVICETREE[@]/${BOHR_DEVICE_TREE}/g" \
 	 ${WORKDIR}/bootscript.${WANTED_ROOT_DEV}
-    install -d ${D}/boot
-    uboot-mkimage -T script -C none -n 'Bohr Script' -d ${WORKDIR}/bootscript.${WANTED_ROOT_DEV} ${D}/boot/bootscript.${WANTED_ROOT_DEV}
+    install -d ${D}
+    uboot-mkimage -T script -C none -n 'Bohr Script' -d ${WORKDIR}/bootscript.${WANTED_ROOT_DEV} ${D}/bootscript
 }
 
-FILES_${PN} += "/boot/bootscript*"
+FILES_${PN} += "/bootscript"

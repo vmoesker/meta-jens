@@ -1,6 +1,6 @@
 setenv loadaddr @UBOOT_LOADADDRESS@
 setenv fdt_addr @UBOOT_FDTADDRESS@
 setenv bootargs_usb setenv bootargs ${bootargs_base} ip=none ${bootargs_ubi} root=/dev/sda1
-setenv bootcmd_usb 'if ext2load usb 0:1 @UBOOT_LOADADDRESS@ /data/.flashimg/rdm-hp2-image-complete/@KERNEL_IMAGETYPE@; then run bootargs_usb; ext2load usb 0:1 @UBOOT_FDTADDRESS@ /data/.flashimg/rdm-hp2-image-complete/@KERNEL_DEVICETREE@; fdt addr @UBOOT_FDTADDRESS@; fdt resize; fdt chosen; bootz @UBOOT_LOADADDRESS@ - @UBOOT_FDTADDRESS@; fi'
+setenv bootcmd_usb 'if ext2load usb 0:1 @UBOOT_LOADADDRESS@ /boot/@KERNEL_IMAGETYPE@; then run bootargs_usb; ext2load usb 0:1 @UBOOT_FDTADDRESS@ /boot/@KERNEL_DEVICETREE@; fdt addr @UBOOT_FDTADDRESS@; fdt resize; fdt chosen; bootz @UBOOT_LOADADDRESS@ - @UBOOT_FDTADDRESS@; fi'
 usb dev 0
 run bootcmd_usb
