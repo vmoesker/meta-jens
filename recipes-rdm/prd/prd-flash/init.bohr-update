@@ -1,15 +1,38 @@
 trigger_recover () {
-    :
+    echo 0 >/sys/class/leds/guruplug:green:wmode/brightness
+    echo heartbeat >/sys/class/leds/guruplug:green:wmode/trigger
 }
 
 trigger_root () {
-    :
+    if [ `fw_printenv wrc1key 2>/dev/null | wc -l` -eq 0 ]
+    then
+	# no wrc1key backup'ed - fresh update starts
+	ubiattach /dev/ubi_ctrl -m 2
+	echo 0 >/sys/class/leds/guruplug:green:health/brightness
+	echo heartbeat >/sys/class/leds/guruplug:green:health/trigger
+
+	mkdir -p /run/media/ubi0_0
+	mount /dev/ubi0_0 /run/media/ubi0_0
+
+	flash_uboot
+	uboot_setenv
+	fw_setenv wrc1key `cat /run/media/ubi0_0/home/${ETH0_ADDR}/.ssh/id_rsa | openssl enc -base64`
+	fw_setenv wrc1sha `cat /run/media/ubi0_0/home/${ETH0_ADDR}/.ssh/id_rsa | openssl dgst -sha -r | awk '{print $1}'`
+
+	umount /run/media/ubi0_0
+	reboot
+    else
+	echo 0 >/sys/class/leds/guruplug:green:health/brightness
+	echo heartbeat >/sys/class/leds/guruplug:green:health/trigger
+    fi
 }
 
 silence_recover () {
-    :
+    echo none >/sys/class/leds/guruplug:green:wmode/trigger
+    echo 0 >/sys/class/leds/guruplug:green:wmode/brightness
 }
 
 silence_root () {
-    :
+    echo none >/sys/class/leds/guruplug:green:health/trigger
+    echo 0 >/sys/class/leds/guruplug:green:health/brightness
 }

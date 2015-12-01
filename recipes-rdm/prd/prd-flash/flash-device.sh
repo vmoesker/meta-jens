@@ -41,7 +41,7 @@ then
 
     DEV_FOUND=0
 
-    for w in @AVAIL_ROOT_DEVS@
+    for w in ${AVAIL_ROOT_DEVS}
     do
 	devnm="ROOT_DEV_NAME_${w}"
 	dev=$(eval echo /dev/\$${devnm})
@@ -65,10 +65,11 @@ then
     DATA_MNT=${TEMP_DIR}/flashimg/root/data/${ETH0_ADDR}
     mkdir -p ${BOOT_MNT} ${DATA_MNT}
 
+    . @LIBEXEC@/init.${ROOT_DEV_TYPE}
+
     trigger_root
     trigger_recover
 
-    . @LIBEXEC@/init.${ROOT_DEV_TYPE}
     prepare_device
 
     flash_uboot

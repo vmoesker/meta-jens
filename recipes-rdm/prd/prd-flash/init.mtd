@@ -1,4 +1,5 @@
 prepare_device () {
+    test -e /dev/ubi0_0 && ubidetach /dev/ubi_ctrl -m 2
     cd $TEMP_DIR
     mkfs.ubifs -o boot.img -m 2048 -e 129024 -c 96
     mkfs.ubifs -o root.img -m 2048 -e 129024 -c 1024

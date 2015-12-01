@@ -81,4 +81,10 @@ do_install_append_bohr () {
     install -m 0644 ${WORKDIR}/ubinize.cfg ${D}${libexecdir}/${MACHINE}
 }
 
+do_install_append_bohr-update () {
+    install -d ${D}${libexecdir}/${MACHINE}
+    install -m 0644 ${WORKDIR}/init.mtd ${D}${libexecdir}/${MACHINE}
+    install -m 0644 ${WORKDIR}/ubinize.cfg ${D}${libexecdir}/${MACHINE}
+}
+
 FILES_${PN} += "${libexecdir}/${MACHINE}"

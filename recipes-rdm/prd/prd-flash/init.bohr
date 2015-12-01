@@ -1,15 +1,19 @@
 trigger_recover () {
-    :
+    echo 0 >/sys/class/leds/guruplug:green:wmode/brightness
+    echo heartbeat >/sys/class/leds/guruplug:green:wmode/trigger
 }
 
 trigger_root () {
-    :
+    echo 0 >/sys/class/leds/guruplug:green:health/brightness
+    echo heartbeat >/sys/class/leds/guruplug:green:health/trigger
 }
 
 silence_recover () {
-    :
+    echo none >/sys/class/leds/guruplug:green:wmode/trigger
+    echo 0 >/sys/class/leds/guruplug:green:wmode/brightness
 }
 
 silence_root () {
-    :
+    echo none >/sys/class/leds/guruplug:green:health/trigger
+    echo 0 >/sys/class/leds/guruplug:green:health/brightness
 }
