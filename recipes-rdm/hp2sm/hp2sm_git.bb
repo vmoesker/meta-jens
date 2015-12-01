@@ -32,10 +32,10 @@ RDEPENDS_${PN}-dev += "devel-stacktrace-perl"
 RDEPENDS_${PN}-dev += "test-leaktrace-perl"
 RDEPENDS_${PN}-dev += "test-memory-cycle-perl"
 
-HP2SM_REV="5147"
-PV = "0.1-${HP2SM_REV}"
+SRCREV="e7b0ac749a5c8d5abf9561f9d75774bb02f7021d"
+PV = "0.1.0+git${SRCPV}"
 
-SRC_URI += "svn://192.168.1.186/svn/EW_Prj/001/HP_ServiceMonitor/branches/next;protocol=http;module=hp2sm;rev=${HP2SM_REV}"
+SRC_URI += "git://git@bitbucket.org/rdm-dev/hp2sm.git;protocol=ssh;branch=jethro"
 SRC_URI += "file://hp2sm.run"
 SRC_URI += "file://hp2sm-log.run"
 
@@ -44,19 +44,19 @@ SERVICE_ROOT = "${sysconfdir}/daemontools/service"
 HP2SM_SERVICE_DIR = "${SERVICE_ROOT}/hp2sm"
 
 do_install() {
-	# create service directory
-	install -d ${D}${HP2SM_SERVICE_DIR}
-	install -d ${D}${HP2SM_SERVICE_DIR}/log
-	
-	# install svc run script and make it executable
-	install -m 0755 ${WORKDIR}/hp2sm.run ${D}${HP2SM_SERVICE_DIR}/run
-	install -m 0755 ${WORKDIR}/hp2sm-log.run ${D}${HP2SM_SERVICE_DIR}/log/run
-	
-	# create directory for source
-	install -d ${D}${HP2SM_BASE}
+    # create service directory
+    install -d ${D}${HP2SM_SERVICE_DIR}
+    install -d ${D}${HP2SM_SERVICE_DIR}/log
 
-	# copy source
-	(cd ${WORKDIR}/hp2sm/src && tar cf - .) | (cd ${D}${HP2SM_BASE} && tar xf -)
+    # install svc run script and make it executable
+    install -m 0755 ${WORKDIR}/hp2sm.run ${D}${HP2SM_SERVICE_DIR}/run
+    install -m 0755 ${WORKDIR}/hp2sm-log.run ${D}${HP2SM_SERVICE_DIR}/log/run
+
+    # create directory for source
+    install -d ${D}${HP2SM_BASE}
+
+    # copy source
+    (cd ${WORKDIR}/git && tar cf - bin config.yml environments lib public t views) | (cd ${D}${HP2SM_BASE} && tar xf -)
     chown -R root:root ${D}${HP2SM_BASE}
 }
 
