@@ -8,6 +8,7 @@ Revision history for HomePilot
     - fix hp2sm build directory and add revision to version
     - limit interfaces for avahi-daemon
     - remove openvpn and use openvpn provided by meta-oe
+    - Move hp2sm to git on Bitbucket
     - update hp2sm
         * add basic wrc api
         * correct runtime dependencies
@@ -18,6 +19,7 @@ Revision history for HomePilot
 	* rename multimedia to mediaplayer
 	* move systemmanagement page, reset page, diagnosis page and system-update-image into plugins
 	* Style harmonization using Perl::Tidy
+	* add z-wave blackist reset
     - introduce perl6 support for JVM
     - fix overlayfs maintenance for kernel >= 3.18
     - fix a lot of license QA issues with Yocto 1.8+
