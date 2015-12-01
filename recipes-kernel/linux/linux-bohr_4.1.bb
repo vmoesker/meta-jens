@@ -11,6 +11,7 @@ inherit kernel
 require recipes-kernel/linux/linux-dtb.inc
 
 DEPENDS += "lzop-native bc-native bootscript-${MACHINE}-${WANTED_ROOT_DEV}"
+RDEPENDS_kernel-image += "bootscript-${MACHINE}-${WANTED_ROOT_DEV}"
 
 REV="1f2ce4a2e7aea3a2123b17aff62a80553df31e21"
 SRCREPO="rdm-dev"

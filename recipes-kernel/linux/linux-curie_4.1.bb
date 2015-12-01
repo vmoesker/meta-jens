@@ -7,6 +7,7 @@ require recipes-kernel/linux/linux-imx.inc
 require recipes-kernel/linux/linux-dtb.inc
 
 DEPENDS += "lzop-native bc-native bootscript-${MACHINE}-${WANTED_ROOT_DEV}"
+RDEPENDS_kernel-image += "bootscript-${MACHINE}-${WANTED_ROOT_DEV}"
 
 REV="252ec68fb7feea8afd00db17559069c57d70f7bb"
 SRCREPO="rdm-dev"
