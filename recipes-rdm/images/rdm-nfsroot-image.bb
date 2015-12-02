@@ -16,6 +16,7 @@ IMAGE_INSTALL += " \
 	${CORE_IMAGE_BASE_INSTALL} \
 	${RDM_ESSENTIALS} \
 	${RECOVER_INSTALL} \
+	udev-extraconf-mount-blacklist-${WANTED_ROOT_DEV} \
 	rdm-data-nfs \
 "
 
