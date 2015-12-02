@@ -19,7 +19,11 @@ Revision history for HomePilot
 	* rename multimedia to mediaplayer
 	* move systemmanagement page, reset page, diagnosis page and system-update-image into plugins
 	* Style harmonization using Perl::Tidy
-	* add z-wave blackist reset
+	* adjust automounter path
+	* reset: append components instead of override for factory reset
+	* z-wave: blackist reset
+	* z-wave: fix compatibility check for firmware upgrade
+	* z-wave: fix log level configuration page
     - update DuoFern service
         * applying patch to fix compile errors upstream
 	* fix a deadlock for environment sensor
