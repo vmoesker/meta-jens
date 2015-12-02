@@ -20,6 +20,7 @@ RDM_ESSENTIALS = "\
 "
 RDM_BASE_INSTALL = "\
 	${RDM_ESSENTIALS} \
+	date-set \
 	cronie \
 	dosfstools \
 	sudo \
@@ -45,6 +46,7 @@ RDM_ESSENTIALS_append_bohr = "\
 	mtd-utils-misc \
 "
 RDM_ESSENTIALS_append_bohr-update = "\
+	date-set \
 	u-boot-fw-utils \
 	mtd-utils \
 	mtd-utils-jffs2 \
