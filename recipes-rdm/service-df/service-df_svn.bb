@@ -9,10 +9,7 @@ DEPENDS = "libxml2 libftdi"
 
 PV = "1.2.0"
 
-SRC_URI = "svn://192.168.1.186/svn/EW_Prj/001/HP_DuoFern_Service/trunk/;protocol=http;module=DuoFern_Service;rev=4865 \
-	  file://use-ftdi1-too.patch \
-	  file://clean-up.patch \
-	  "
+SRC_URI = "svn://192.168.1.186/svn/EW_Prj/001/HP_DuoFern_Service/trunk/;protocol=http;module=DuoFern_Service;rev=5130"
 
 S = "${WORKDIR}/DuoFern_Service"
 
