@@ -24,7 +24,7 @@ EXTRA_IMAGE_FEATURES += " \
 
 IMAGE_INSTALL += " \
 	${CORE_IMAGE_BASE_INSTALL} \
-	${RDM_BASE_INSTALL} \
+	${RDM_ESSENTIALS} \
 	${RECOVER_INSTALL} \
 	bohr-update-image \
 "

@@ -12,26 +12,9 @@ inherit core-image distro_features_check rootdev-check
 
 COMPAT_ROOT_DEVS = "nfs"
 
-RDM_BASE_INSTALL_remove = "\
-	cronie \
-	dosfstools \
-	sudo \
-	nginx \
-	nginx-legal \
-	nginx-manual \
-	libstatgrab \
-	crda \
-	lsof \
-	logrotate \
-	boot-fsck \
-	initoverlay-${WANTED_ROOT_DEV} \
-	system-image-update \
-	hp2sm \
-	wifi-fallback \
-"
 IMAGE_INSTALL += " \
 	${CORE_IMAGE_BASE_INSTALL} \
-	${RDM_BASE_INSTALL} \
+	${RDM_ESSENTIALS} \
 	${RECOVER_INSTALL} \
 	rdm-data-nfs \
 "

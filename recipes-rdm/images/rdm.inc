@@ -1,18 +1,11 @@
-RDM_BASE_INSTALL = "\
-	cronie \
+RDM_ESSENTIALS = "\
 	e2fsprogs \
 	e2fsprogs-tune2fs \
 	attr \
 	acl \
-	dosfstools \
-	sudo \
-	nginx \
-	nginx-legal \
-	nginx-manual \
 	tzdata \
 	tcpdump \
 	ifplugd \
-	libstatgrab \
 	procps \
 	util-linux-mount \
 	nfs-utils-client \
@@ -20,38 +13,48 @@ RDM_BASE_INSTALL = "\
 	ntpdate \
 	ntp-utils \
 	util-linux \
-	hp2sm-ethtool \
-	crda \
 	xz \
+	qbrqry \
+	udev-extraconf-mount-blacklist-${WANTED_ROOT_DEV} \
+	prd-flash-${WANTED_ROOT_DEV} \
+"
+RDM_BASE_INSTALL = "\
+	${RDM_ESSENTIALS} \
+	cronie \
+	dosfstools \
+	sudo \
+	nginx \
+	nginx-legal \
+	nginx-manual \
+	libstatgrab \
+	crda \
 	lsof \
 	logrotate \
-	qbrqry \
 	boot-fsck \
-	udev-extraconf-mount-blacklist-${WANTED_ROOT_DEV} \
 	initoverlay-${WANTED_ROOT_DEV} \
 	system-image-update \
 	hp2sm \
-	prd-flash-${WANTED_ROOT_DEV} \
+	hp2sm-ethtool \
 	wifi-fallback \
 "
-RDM_BASE_INSTALL_append_bohr = "\
+RDM_ESSENTIALS_append_bohr = "\
 	u-boot-fw-utils \
 	mtd-utils \
 	mtd-utils-jffs2 \
 	mtd-utils-ubifs \
 	mtd-utils-misc \
 "
-RDM_BASE_INSTALL_append_bohr-update = "\
+RDM_ESSENTIALS_append_bohr-update = "\
 	u-boot-fw-utils \
 	mtd-utils \
 	mtd-utils-jffs2 \
 	mtd-utils-ubifs \
 	mtd-utils-misc \
 "
-RDM_BASE_INSTALL_append_mx6 = "\
+RDM_ESSENTIALS_append_mx6 = "\
 	udev-rules-imx \
 "
-RDM_BASE_INSTALL_append_mx6qcurie = "\
+RDM_ESSENTIALS_append_mx6qcurie = "\
 	u-boot-fw-utils-curie \
 	btrfs-tools \
 	ledctrl \
