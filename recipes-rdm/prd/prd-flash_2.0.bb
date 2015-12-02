@@ -36,6 +36,11 @@ SRC_URI_append_bohr-update = "\
     file://ubinize.cfg \
 "
 
+DEPENDS_append_bohr-update = "\
+    openssl \
+    u-boot-fw-utils \
+"
+
 def all_root_dev_names (d) :
     rc = []
     root_dev_names = d.getVar("AVAIL_ROOT_DEVS", True).split(" ")
