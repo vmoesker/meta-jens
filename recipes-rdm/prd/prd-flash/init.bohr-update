@@ -8,11 +8,14 @@ trigger_root () {
     then
 	# no wrc1key backup'ed - fresh update starts
 	ubiattach /dev/ubi_ctrl -m 2
-	echo 0 >/sys/class/leds/guruplug:green:health/brightness
-	echo heartbeat >/sys/class/leds/guruplug:green:health/trigger
+
+	test -e /dev/ubi0_4 && poweroff
 
 	mkdir -p /run/media/ubi0_0
 	mount /dev/ubi0_0 /run/media/ubi0_0
+
+	echo 0 >/sys/class/leds/guruplug:green:health/brightness
+	echo heartbeat >/sys/class/leds/guruplug:green:health/trigger
 
 	flash_erase /dev/mtd0 0 0
 	flash_uboot
