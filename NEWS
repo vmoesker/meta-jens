@@ -20,6 +20,9 @@ Revision history for HomePilot
 	* move systemmanagement page, reset page, diagnosis page and system-update-image into plugins
 	* Style harmonization using Perl::Tidy
 	* add z-wave blackist reset
+    - update DuoFern service
+        * applying patch to fix compile errors upstream
+	* fix a deadlock for environment sensor
     - introduce perl6 support for JVM
     - fix overlayfs maintenance for kernel >= 3.18
     - fix a lot of license QA issues with Yocto 1.8+
