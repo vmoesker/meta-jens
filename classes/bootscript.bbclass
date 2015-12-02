@@ -8,4 +8,4 @@ do_deploy () {
     : # exit 0
 }
 
-addtask deploy after do_populate_sysroot
+addtask deploy after do_install
