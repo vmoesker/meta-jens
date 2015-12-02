@@ -7,6 +7,8 @@ PN = "bootscript-bohr-update-${WANTED_ROOT_DEV}"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
 
+PACKAGE_ARCH = "${MACHINE_ARCH}"
+
 DEPENDS = "u-boot-mkimage-native"
 RDEPENDS_${PN} = "u-boot"
 
