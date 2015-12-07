@@ -1,5 +1,5 @@
 DESCRIPTION = "RDM DF Service"
-HOMEPAGE = "http://www.rademacher.de"
+HOMEPAGE = "http://www.rademacher.de/"
 
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://${THISDIR}/files/license.txt;md5=3ebe3464e841ddbf115af1f7019017c5"
@@ -7,11 +7,12 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 DEPENDS = "libxml2 libftdi"
 
-PV = "1.2.0"
+SRCREV="f8c50890b958a04f11d2c07e8959f2103fc2a329"
+PV = "1.2.0+git${SRCPV}"
 
-SRC_URI = "svn://192.168.1.186/svn/EW_Prj/001/HP_DuoFern_Service/trunk/;protocol=http;module=DuoFern_Service;rev=5130"
+SRC_URI = "git://git@bitbucket.org/rdm-dev/DuoFern-Service.git;protocol=ssh;branch=jethro"
 
-S = "${WORKDIR}/DuoFern_Service"
+S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 
