@@ -1,43 +1,18 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
-SRC_URI += "file://nginx-logrotate.conf"
-SRC_URI += "file://nginx-varlib.volatiles"
-SRC_URI += "http://internal.rdm.local/blobs/nginx-html-0.2.tar.gz;name=html"
+SRC_URI_append = "\
+    git://git@bitbucket.org/rdm-dev/nginx-html.git;protocol=ssh;branch=master;name=html;destsuffix=html \
+    file://nginx-logrotate.conf \
+    file://nginx-varlib.volatiles \
+"
 
-SRC_URI[html.md5sum] = "ab456627a7b5871badb77995c95a61a4"
-SRC_URI[html.sha256sum] = "c370d6fce8a81fb2bf5ba0454d230263ea4ec57aa50626ca8fccb3a5269be17c"
+SRCREV_html = "ee41a55a20b20a2a6a6ba5efa09c2da2c12b97a4"
 
-do_configure () {
-	if [ "${SITEINFO_BITS}" = "64" ]; then
-		PTRSIZE=8
-	else
-		PTRSIZE=4
-	fi
+PACKAGES_prepend = "${PN}-favs ${PN}-legal ${PN}-manual "
 
-	echo $CFLAGS
-	echo $LDFLAGS
-
-	./configure \
-	--crossbuild=Linux:${TUNE_ARCH} \
-	--with-endian=${@base_conditional('SITEINFO_ENDIANNESS', 'le', 'little', 'big', d)} \
-	--with-int=4 \
-	--with-long=${PTRSIZE} \
-	--with-long-long=8 \
-	--with-ptr-size=${PTRSIZE} \
-	--with-sig-atomic-t=${PTRSIZE} \
-	--with-size-t=${PTRSIZE} \
-	--with-off-t=${PTRSIZE} \
-	--with-time-t=${PTRSIZE} \
-	--with-sys-nerr=132 \
-	--conf-path=${sysconfdir}/nginx/nginx.conf \
-	--http-log-path=${localstatedir}/log/nginx/access.log \
-	--error-log-path=${localstatedir}/log/nginx/error.log \
-	--pid-path=/run/nginx/nginx.pid \
-	--prefix=${prefix} \
-	--with-http_ssl_module \
-	--with-http_gzip_static_module \
-	--with-http_stub_status_module
-}
+EXTRA_OECONF_append = "\
+    --with-http_stub_status_module \
+"
 
 do_install_append () {
 	install -d ${D}${localstatedir}/lib/nginx/
@@ -47,5 +22,19 @@ do_install_append () {
 	install -m 755 -d ${D}${sysconfdir}/logrotate.d
 	install -m 644 ${WORKDIR}/nginx-logrotate.conf ${D}${sysconfdir}/logrotate.d/nginx
 
-	install -o www -g www-data -m 0755 -t ${D}${localstatedir}/www/localhost/html/ ${WORKDIR}/html/*
+	install -o www -g www-data -m 0755 -d ${D}${localstatedir}/www/localhost/html/
+	install -o www -g www-data -m 0644 ${WORKDIR}/html/50x.html ${WORKDIR}/html/logo-50x.png ${D}${localstatedir}/www/localhost/html/
+
+	install -o www -g www-data -m 0755 -d ${D}${localstatedir}/www/localhost/favs
+	install -o www -g www-data -m 0644 ${WORKDIR}/html/favs/index.html ${WORKDIR}/html/favs/jquery-1.7.1.min.js ${D}${localstatedir}/www/localhost/favs
+
+	install -o www -g www-data -m 0755 -d ${D}${localstatedir}/www/localhost/legal
+	install -o www -g www-data -m 0644 ${WORKDIR}/html/legal/* ${D}${localstatedir}/www/localhost/legal
+
+	install -o www -g www-data -m 0755 -d ${D}${localstatedir}/www/localhost/manual
+	install -o www -g www-data -m 0644 ${WORKDIR}/html/manual/* ${D}${localstatedir}/www/localhost/manual
 }
+
+FILES_${PN}-favs = "${localstatedir}/www/localhost/favs"
+FILES_${PN}-legal = "${localstatedir}/www/localhost/legal"
+FILES_${PN}-manual = "${localstatedir}/www/localhost/manual"
