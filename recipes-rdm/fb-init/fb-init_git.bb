@@ -7,10 +7,11 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 RDEPENDS_${PN} = "fbset imagemagick liberation-fonts"
 
-PV = "0.1"
+SRCREV="3be362581931a117831f3d236bb6a8bb86ac3428"
+PV = "0.1+git${SRCPV}"
 
-SRC_URI = "svn://192.168.1.186/svn/EW_Prj/001/HP_FrameBuffer/trunk/;protocol=http;module=IEBF;rev=4645"
-S = "${WORKDIR}/IEBF/src"
+SRC_URI = "git://git@bitbucket.org/rdm-dev/IEBF.git;protocol=ssh;branch=jethro"
+S = "${WORKDIR}/git/src"
 
 inherit update-rc.d
 
