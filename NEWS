@@ -35,7 +35,6 @@ Revision history for HomePilot
     - add initial support for building a bohr-update image
     - fix "install correct Module.symvers" where it should be - in poky
     - adopt daisy fixes for samba
-    - remove duplicate, early date-set
     - zway-stick-updater: add perl to rdepends
     - use default gcc version 5.2
     - decouple bootscripts
