@@ -8,8 +8,8 @@ PR = "r0"
 SRC_URI = "file://run \
 	file://log-run \
 "
-#XXX maybe add dropbear to depends
 RDEPENDS_${PN} += "daemontools"
+RDEPENDS_${PN} += "dropbear"
 
 SERVICE_ROOT = "${sysconfdir}/daemontools/service"
 WRC_SERVICE_DIR = "${SERVICE_ROOT}/wrc"
