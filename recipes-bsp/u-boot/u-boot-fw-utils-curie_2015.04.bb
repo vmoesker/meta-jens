@@ -12,5 +12,7 @@ REV = "f84ba75401dd4777a59a9eaef683b829fbb03e93"
 
 SRCREPO = "rdm-dev"
 
-SRC_URI += "file://bootsettings.patch \
-	   "
+SRC_URI += "\
+    file://bootsettings.patch \
+    file://fw_env.config.patch \
+"

@@ -14,6 +14,12 @@ INSANE_SKIP_${PN} = "already-stripped"
 EXTRA_OEMAKE_class-target = 'CROSS_COMPILE=${TARGET_PREFIX} CC="${CC} ${CFLAGS} ${LDFLAGS}" V=1'
 EXTRA_OEMAKE_class-cross = 'ARCH=${TARGET_ARCH} CC="${CC} ${CFLAGS} ${LDFLAGS}" V=1'
 
+do_patch[postfuncs] += " adjust_env_device"
+
+adjust_env_device() {
+    sed -i -e 's/@EMMC_DEV[@]/${ROOT_DEV_NAME-${INTERNAL_ROOT_DEV}}/g' ${S}/tools/env/fw_env.config
+}
+
 do_compile () {
 	oe_runmake ${UBOOT_MACHINE}
 	oe_runmake env
