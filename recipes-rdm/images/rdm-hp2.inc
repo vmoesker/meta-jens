@@ -10,7 +10,7 @@ HP2_INSTALL = "service-df \
 	hp-blob \
         samba \
         wrkeyupload \
-	wrc-startup \
+	hp2sm-system-wrc${WRC_VERSION} \
 	udev-hp \
 "
 RDEPENDS_append = " packagegroup-base-zeroconf"

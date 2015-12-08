@@ -13,8 +13,8 @@ SRC_URI += "file://wrc_register-log.run"
 SRC_URI += "file://wrc_register.run"
 
 RDEPENDS_${PN} += "daemontools"
-RDEPENDS_${PN} += "hp2sm"
 RDEPENDS_${PN} += "openvpn"
+RDEPENDS_${PN} += "hp2sm-system-wrc2"
 
 SERVICE_ROOT = "${sysconfdir}/daemontools/service"
 WRC_SERVICE_DIR = "${SERVICE_ROOT}/wrc"

@@ -5,10 +5,11 @@ LIC_FILES_CHKSUM = "file://${THISDIR}/files/license.txt;md5=3ebe3464e841ddbf115a
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 DEPENDS = "zway-blob hp2-base rakudo-star"
-RDEPENDS_${PN} += "hp2-base"
-RDEPENDS_${PN} += "daemontools"
 RDEPENDS_${PN} += "at"
+RDEPENDS_${PN} += "daemontools"
 RDEPENDS_${PN} += "gnupg"
+RDEPENDS_${PN} += "hp2-base"
+RDEPENDS_${PN} += "hp2sm-system-date"
 RDEPENDS_${PN} += "rakudo-star"
 RDEPENDS_${PN} += "service-df"
 RDEPENDS_${PN} += "zway-blob"
