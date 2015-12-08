@@ -28,7 +28,7 @@ test -f /etc/fstab && (
 #
 #	Read through fstab line by line and mount overlay file systems
 #
-cat /etc/fstab | sed -E 's/#.*//g' | while read device mountpt fstype options
+egrep '^(unionfs|overlay)' /etc/fstab | while read device mountpt fstype options
 do
 	if test "$fstype" = unionfs -o "$fstype" = "overlayfs" -o "$fstype" = "overlay"
 	then
