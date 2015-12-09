@@ -24,6 +24,17 @@ Revision history for HomePilot
 	* z-wave: blackist reset
 	* z-wave: fix compatibility check for firmware upgrade
 	* z-wave: fix log level configuration page
+	* developer: only support user button on curie
+	* diagnosis: add uid to log filename
+	* mediaplayer: add status and start/stop buttons
+	* mediaplayer: cleanup spdif configuration
+	* services: add description to services
+	* services: add uptime and cleanup services
+	* services: add wrc1 service
+	* system-update-image: use installed image/version provided by System::Image::Update
+	* system: use Module::Pluggable to load plugins
+    - create hp2sm-system-date, -services, -wrc1/2 packages
+    - allow selecting WRC version, prefer v1
     - update DuoFern service
         * applying patch to fix compile errors upstream
 	* fix a deadlock for environment sensor
