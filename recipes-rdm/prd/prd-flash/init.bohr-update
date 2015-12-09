@@ -3,16 +3,39 @@ trigger_recover () {
     echo heartbeat >/sys/class/leds/guruplug:green:wmode/trigger
 }
 
+update_fail () {
+    echo none >/sys/class/leds/guruplug:green:wmode/trigger
+    echo 0 >/sys/class/leds/guruplug:green:wmode/brightness
+    echo none >/sys/class/leds/guruplug:green:health/trigger
+    echo 0 >/sys/class/leds/guruplug:green:health/brightness
+
+    echo 255 > /sys/class/leds/guruplug:red:wmode/brightness
+    echo 255 > /sys/class/leds/guruplug:red:health/brightness
+
+    poweroff
+}
+
+load_wifi () {
+    modprobe libertas_sdio
+    modprobe mwifiex_sdio
+    sleep 2
+    test -d /sys/class/net/mlan0 || update_fail
+    WLAN_ADDR=`cat /sys/class/net/mlan0/address | sed -e 's/://g'`
+}
+
 trigger_root () {
     if [ `fw_printenv wrc1key 2>/dev/null | wc -l` -eq 0 ]
     then
 	# no wrc1key backup'ed - fresh update starts
 	ubiattach /dev/ubi_ctrl -m 2
 
-	test -e /dev/ubi0_4 && poweroff
+	test -e /dev/ubi0_4 && update_fail
 
 	mkdir -p /run/media/ubi0_0
 	mount /dev/ubi0_0 /run/media/ubi0_0
+
+	avail_hp_major_version=$(source /run/media/ubi0_0/etc/serverbox/version; echo "${MAJOR}")
+	test "${avail_hp_major_version}" < 3 && update_fail
 
 	echo 0 >/sys/class/leds/guruplug:green:health/brightness
 	echo heartbeat >/sys/class/leds/guruplug:green:health/trigger
