@@ -8,13 +8,11 @@ RDM_ESSENTIALS = "\
 	ntp \
 	ntpdate \
 	ntp-utils \
-	openssl \
 	prd-flash-${WANTED_ROOT_DEV} \
 	procps \
 	qbrqry \
 	tcpdump \
 	tzdata \
-	util-linux \
 	util-linux-mount \
 	xz \
 "
@@ -39,23 +37,10 @@ RDM_BASE_INSTALL = "\
 	hp2sm-ethtool \
 	wifi-fallback \
 "
-RDM_ESSENTIALS_append_bohr = "\
-	u-boot-fw-utils \
-	mtd-utils \
-	mtd-utils-jffs2 \
-	mtd-utils-ubifs \
-	mtd-utils-misc \
-"
 RDM_ESSENTIALS_append_bohr-update = "\
 	date-set \
-	u-boot-fw-utils \
-	mtd-utils \
-	mtd-utils-jffs2 \
-	mtd-utils-ubifs \
-	mtd-utils-misc \
 "
 RDM_ESSENTIALS_append_mx6qcurie = "\
-	u-boot-fw-utils-curie \
 	btrfs-tools \
 	ledctrl \
 	fb-cursor-off \
@@ -70,7 +55,7 @@ RDM_INSTALL_append_mx6qcurie = "\
 	ntfsprogs \
 	ntfs-3g \
 "
-RECOVER_INSTALL="parted \
+RECOVER_INSTALL="\
 "
 SKIPPED_DEPS = "sysdetails \
 	thermaldetails \

@@ -4,6 +4,8 @@ OPN := "${PN}"
 PN = "${OPN}-${WANTED_ROOT_DEV}"
 FILESEXTRAPATHS_prepend := "${THISDIR}/${OPN}:"
 
+include recipes-rdm/prd/${PN}.inc
+
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
 
@@ -36,9 +38,25 @@ SRC_URI_append_bohr-update = "\
     file://ubinize.cfg \
 "
 
-DEPENDS_append_bohr-update = "\
-    openssl \
+RDEPENDS_${PN}_append = "\
+    perl-module-version \
+    util-linux \
+"
+
+RDEPENDS_${PN}_append_mx6 = "\
+    u-boot-fw-utils-curie \
+"
+
+RDEPENDS_${PN}_append_kirkwood = "\
+    mtd-utils \
+    mtd-utils-jffs2 \
+    mtd-utils-ubifs \
+    mtd-utils-misc \
     u-boot-fw-utils \
+"
+
+RDEPENDS_${PN}_append_bohr-update = "\
+    openssl \
 "
 
 def all_root_dev_names (d) :
