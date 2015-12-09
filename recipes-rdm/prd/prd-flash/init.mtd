@@ -33,15 +33,30 @@ update_fs () {
     :
 }
 
+require_update_uboot () {
+    $(echo "@BOOTABLE_ROOT_DEVS@" | egrep -q -E "\<${WANTED_ROOT_DEV}\>") || return 1
+    if test "@INTERNAL_ROOT_DEV@" = "${WANTED_ROOT_DEV}"
+    then
+        installed_sysimg_version=`fw_printenv -n sysimg_version`
+        test -z "${installed_sysimg_version}" && return 0
+        $(perl -Mversion -e 'exit(version->parse("'${U_BOOT_MIN_SYSIMG_VER}'") <= version->parse("'${installed_sysimg_version}'"))') || return 1
+    fi
+    return 0
+}
+
 update_uboot () {
     dd of=/dev/mtd0 skip=${UBOOT_PADDING} bs=512
 }
 
 uboot_setenv () {
-    flash_erase /dev/mtd1 0 0
-    fw_setenv ethact egiga0
-    fw_setenv ethaddr `cat /sys/class/net/eth0/address`
-    fw_setenv eth1addr `cat /sys/class/net/eth1/address`
+    if test "@INTERNAL_ROOT_DEV@" = "${WANTED_ROOT_DEV}"
+    then
+	flash_erase /dev/mtd1 0 0
+	fw_setenv ethact egiga0
+	fw_setenv ethaddr `cat /sys/class/net/eth0/address`
+	fw_setenv eth1addr `cat /sys/class/net/eth1/address`
+	fw_setenv sysimg_version ${SYSIMG_VER}
+    fi
 }
 
 update_rootfs () {

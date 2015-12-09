@@ -85,7 +85,7 @@ do_compile () {
         -e "s/@MACHINE[@]/${MACHINE}/g" -e "s,@AVAIL_ROOT_DEVS[@],${AVAIL_ROOT_DEVS},g" \
         -e "s,@INTERNAL_ROOT_DEV[@],${INTERNAL_ROOT_DEV},g" -e "s,@WANTED_ROOT_DEV[@],${WANTED_ROOT_DEV},g" \
         -e "s,@ROOT_DEV_TYPE[@],${ROOT_DEV_TYPE},g" -e "s,@ROOT_DEV_SEP[@],${ROOT_DEV_SEP},g" \
-	-e "s,@FINALIZE_FLASH[@],${FINALIZE_FLASH},g" \
+	-e "s,@BOOTABLE_ROOT_DEVS[@],${BOOTABLE_ROOT_DEVS},g" -e "s,@FINALIZE_FLASH[@],${FINALIZE_FLASH},g" \
         $ALL_ROOT_DEV_NAMES \
         ${WORKDIR}/flash-device.sh ${WORKDIR}/hw.${MACHINE} ${WORKDIR}/init.*
 }

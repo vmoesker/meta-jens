@@ -73,7 +73,7 @@ then
 
     prepare_device
 
-    flash_uboot
+    require_update_uboot && flash_uboot
     uboot_setenv
     flash_rootfs
     flash_recoveryfs
@@ -103,7 +103,7 @@ then
     . ./.settings
     rm -f .settings
 
-    if [ "${MACHINE}" != "echo @MACHINE@ | sed -e 's/-*//'" ]
+    if [ "${MACHINE}" != "`echo @MACHINE@ | sed -e 's/-*//'`" ]
     then
 	logger -s "Cannot perform an update for ${MACHINE}."
 	exit 1
@@ -138,9 +138,14 @@ then
 	logger "Going to extract kernel"
 	(cd /boot && tar xjf "${IMAGE_CONTAINER}" ${KERNEL} && chown -R root:root . && eval ${KERNEL_PREPARE})
 
-	logger "Going to extract u-boot"
-	tar xjf "${IMAGE_CONTAINER}" -O ${UBOOT_BIN} | update_uboot
-	uboot_setenv
+	if require_update_uboot
+	then
+	    logger "Going to extract u-boot"
+	    tar xjf "${IMAGE_CONTAINER}" -O ${UBOOT_BIN} | update_uboot
+	    uboot_setenv
+	else
+	    logger "u-boot is fine, remains untouched"
+	fi
 
 	logger "Force rebuild of volatiles.cache next boot"
         rm -f /etc/volatile.cache
