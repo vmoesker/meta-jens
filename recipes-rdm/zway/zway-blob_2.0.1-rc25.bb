@@ -7,8 +7,12 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 exec_prefix="/opt/z-way"
 
 PR = "72"
-SRC_URI = "http://internal.rdm.local/blobs/z-way-server-Linux-HomePilot2-v${PV}.tgz;name=server \
-	   file://config.xml"
+SRCREV = "a7c05ca689767570f40f020da4d9e83edd633ca8"
+SRC_URI = "\
+    git://git@bitbucket.org/rdm-dev/rdm-z-way-server.git;protocol=ssh;branch=z-way-server-Linux-HomePilot2-v2.0.1-rc25 \
+    file://config.xml \
+    file://configjson-06b2d3b23dce96e1619d2b53d6c947ec.json \
+"
 
 DEPENDS = "v8 hp2-base"
 RDEPENDS_${PN} += "hp2-base"
@@ -20,10 +24,7 @@ RDEPENDS_${PN} += "curl"
 RDEPENDS_${PN} += "v8"
 RDEPENDS_${PN} += "zlib"
 
-SRC_URI[server.md5sum] = "0de675f8fc08cf83ccc363404806fb11"
-SRC_URI[server.sha256sum] = "1006970f683c5755a1260f56e609a7d4b103900519b264abcae2f80dd2a63c1d"
-
-S = "${WORKDIR}/z-way-server"
+S = "${WORKDIR}/git/z-way-server"
 
 INST_DEST_PREFIX="${exec_prefix}"
 CONF_DEST_PREFIX="/home/homepilot/z-way"
@@ -34,6 +35,8 @@ do_install() {
         # create target install folders
         install -d ${D}${INST_DEST_PREFIX}
 	install -d ${D}${sysconfdir}
+	install -d -o homepilot -g users ${D}${CONF_DEST_PREFIX}
+	install -d -o homepilot -g users ${D}${CONF_DEST_PREFIX}/storage
 
         # Extract tarball into INST_DEST_PREFIX dir of target
 	(cd ${S} && tar cf - .) | (cd ${D}${INST_DEST_PREFIX} && tar xf -)
@@ -41,14 +44,8 @@ do_install() {
 	      ${D}${INST_DEST_PREFIX}/htdocs/z-way-ha-tv/.gitignore \
 	      ${D}${INST_DEST_PREFIX}/htdocs/expert/.gitignore
 
-	# bower manages js packages - nothing we need at runtime (hopefully)
-	rm -fr ${D}${INST_DEST_PREFIX}/automation/node_modules/bower
-
 	# Move config directory into CONF_DEST_PREFIX dir of target
-	install -o homepilot -g users -d ${D}${CONF_DEST_PREFIX}
 	mv ${D}${INST_DEST_PREFIX}/config ${D}${CONF_DEST_PREFIX}
-	mv ${D}${INST_DEST_PREFIX}/automation/storage ${D}${CONF_DEST_PREFIX}
-	chown -R homepilot:users ${D}${CONF_DEST_PREFIX}
 
 	# Create link to config
 	(cd ${D}${INST_DEST_PREFIX} && ln -s ${CONF_DEST_PREFIX}/config)
@@ -67,7 +64,8 @@ do_install() {
 	ln -sf ${sysconfdir}/z-way.conf ${D}${INST_DEST_PREFIX}/config.xml
 
 	# Edit config file
-	sed -i -e 's#"port":"/dev/ttyACM0"#"port":"${ZW_TTY_DEVICE}"#' ${D}${CONF_DEST_PREFIX}/storage/configjson-06b2d3b23dce96e1619d2b53d6c947ec.json
+	cp ${WORKDIR}/configjson-06b2d3b23dce96e1619d2b53d6c947ec.json ${D}${CONF_DEST_PREFIX}/storage
+	sed -i -e 's#@ZW_TTY_DEVICE[@]#"${ZW_TTY_DEVICE}#' ${D}${CONF_DEST_PREFIX}/storage/configjson-06b2d3b23dce96e1619d2b53d6c947ec.json
 
 	# Clean-up ZDDX device files
 	cd ${D}${INST_DEST_PREFIX}/ZDDX/
@@ -77,6 +75,9 @@ do_install() {
 	# Fix permissions
 	# access("automation/modules/ZWave/index.js", R_OK) = -1 EACCES (Permission denied)
 	chmod 644 ${D}${INST_DEST_PREFIX}/automation/modules/ZWave/index.js
+
+	chown -R root:root ${D}${INST_DEST_PREFIX} ${D}${sysconfdir}
+	chown -R homepilot:users ${D}${CONF_DEST_PREFIX}
 }
 
 INSANE_SKIP_${PN} += "already-stripped"
