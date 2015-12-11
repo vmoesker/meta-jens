@@ -1,5 +1,7 @@
 setenv loadaddr @UBOOT_LOADADDRESS@
-setenv fdtaddr @UBOOT_FDTADDRESS@
+setenv kernel @KERNEL_IMAGETYPE@
+setenv fdt_addr @UBOOT_FDTADDRESS@
+setenv fdt_file @KERNEL_DEVICETREE@
 setenv bootargs_nfs setenv bootargs ${bootargs_base} ip=dhcp root=/dev/nfs ro
-setenv bootcmd_nfs 'run bootargs_nfs; tftp @UBOOT_LOADADDRESS@ @MACHINE@/@BRANCH@/4.1/@KERNEL_IMAGETYPE@; tftp @UBOOT_FDTADDRESS@ @MACHINE@/@BRANCH@/4.1/@KERNEL_DEVICETREE@; bootz ${loadaddr} - ${fdtaddr}'
+setenv bootcmd_nfs 'run bootargs_nfs; tftp ${loadaddr} @MACHINE@/@BRANCH@/4.1/${kernel}; tftp ${fdt_addr} @MACHINE@/@BRANCH@/4.1/${fdt_file}; bootz ${loadaddr} - ${fdt_addr}'
 run bootcmd_nfs
