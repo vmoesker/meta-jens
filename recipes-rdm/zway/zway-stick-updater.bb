@@ -8,7 +8,10 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/z-way-stick-updater:"
 
 PV = "0.4"
 
-SRC_URI = "http://internal.rdm.local/blobs/z-way-stick-updater-${PV}.tar.gz;name=updater;unpack=0"
+SRC_URI = "\
+    git://git@bitbucket.org/rdm-dev/z-way-stick-updater.git;protocol=ssh;branch=import \
+"
+SRCREV = "031474999a20ee7b2199536700ef5eaf34afdbc6"
 
 DEPENDS = "hp2-base"
 RDEPENDS_${PN} += "hp2-base"
@@ -17,14 +20,18 @@ RDEPENDS_${PN} += "python-fcntl"
 RDEPENDS_${PN} += "python-logging"
 RDEPENDS_${PN} += "python-pyserial"
 
-SRC_URI[updater.md5sum] = "795881353712024d1a07178dc7cc8ab1"
-SRC_URI[updater.sha256sum] = "638c90b8377bd534a944fbd81162d5c0d4d8154df96b0d980cc21efdd3ab9249"
-
+S = "${WORKDIR}/git"
 INST_DEST_PREFIX="/opt/z-way-stick-updater"
 
 do_install() {
     install -d ${D}${INST_DEST_PREFIX}
-    (cd ${D}${INST_DEST_PREFIX} && tar xf ${WORKDIR}/z-way-stick-updater-${PV}.tar.gz)
+    install -d ${D}${INST_DEST_PREFIX}/ZStickUpdater
+    install -m 755 zwave_update.pl ${D}${INST_DEST_PREFIX}
+    install -m 755 ZStickUpdater/ZStickUpdater.py ${D}${INST_DEST_PREFIX}/ZStickUpdater
+    install -m 644 ZStickUpdater/IntelHex.py ZStickUpdater/SerialAPI.py \
+                   ZStickUpdater/ZLogging.py \
+                   ZStickUpdater/Rademacher4.ehex ZStickUpdater/Rademacher5.ehex \
+                   ${D}${INST_DEST_PREFIX}/ZStickUpdater
 }
 
 FILES_${PN} += "${INST_DEST_PREFIX}"
