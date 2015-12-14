@@ -6,13 +6,20 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 exec_prefix="/opt/z-way"
 
-PR = "72"
-SRCREV = "a7c05ca689767570f40f020da4d9e83edd633ca8"
 SRC_URI = "\
-    git://git@bitbucket.org/rdm-dev/rdm-z-way-server.git;protocol=ssh;branch=z-way-server-Linux-HomePilot2-v2.0.1-rc25 \
     file://config.xml \
     file://configjson-06b2d3b23dce96e1619d2b53d6c947ec.json \
 "
+
+SRC_URI_append_mx6 = "\
+    git://git@bitbucket.org/rdm-dev/rdm-z-way-server.git;protocol=ssh;branch=z-way-server-Linux-HomePilot2-v2.2.0-9-gd1c0cb6 \
+"
+SRCREV_mx6 = "192685109407cae5ee68d597c55f654c8cd36c6a"
+
+SRC_URI_append_kirkwood = "\
+    git://git@bitbucket.org/rdm-dev/rdm-z-way-server.git;protocol=ssh;branch=z-way-server-Linux-HomePilot2-v2.2.0-9-gd1c0cb6 \
+"
+SRCREV_kirkwood = "192685109407cae5ee68d597c55f654c8cd36c6a"
 
 DEPENDS = "v8 hp2-base"
 RDEPENDS_${PN} += "hp2-base"
@@ -20,7 +27,7 @@ RDEPENDS_${PN} += "libarchive"
 RDEPENDS_${PN} += "libxml2"
 RDEPENDS_${PN} += "openssl"
 RDEPENDS_${PN} += "yajl"
-RDEPENDS_${PN} += "curl"
+RDEPENDS_${PN} += "libcurl"
 RDEPENDS_${PN} += "v8"
 RDEPENDS_${PN} += "zlib"
 
@@ -65,7 +72,7 @@ do_install() {
 
 	# Edit config file
 	cp ${WORKDIR}/configjson-06b2d3b23dce96e1619d2b53d6c947ec.json ${D}${CONF_DEST_PREFIX}/storage
-	sed -i -e 's#@ZW_TTY_DEVICE[@]#"${ZW_TTY_DEVICE}#' ${D}${CONF_DEST_PREFIX}/storage/configjson-06b2d3b23dce96e1619d2b53d6c947ec.json
+	sed -i -e 's#@ZW_TTY_DEVICE[@]#${ZW_TTY_DEVICE}#' ${D}${CONF_DEST_PREFIX}/storage/configjson-06b2d3b23dce96e1619d2b53d6c947ec.json
 
 	# Clean-up ZDDX device files
 	cd ${D}${INST_DEST_PREFIX}/ZDDX/
