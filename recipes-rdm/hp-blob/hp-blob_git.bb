@@ -14,28 +14,32 @@ RDEPENDS_${PN} += "rakudo-star"
 RDEPENDS_${PN} += "service-df"
 RDEPENDS_${PN} += "zway-blob"
 
-inherit record-installed-app
+inherit record-installed-app gradlenative
 
-HPREV="5042"
-PV = "4.0.${HPREV}"
-SRC_URI = "svn://192.168.1.186/svn/EW_Prj/001/HP_Blob/trunk/;protocol=http;module=HomePilot_Blob;rev=${HPREV} \
-                file://dfservice.run \
-                file://dfservice-log.run \
-                file://homepilot.run \
-                file://homepilot-log.run \
-                file://homepilot.sh \
-                file://homepilot-network-manager.run \
-                file://homepilot-network-manager-log.run \
-                file://z-way.run \
-                file://z-way-log.run \
-                file://init_appdir.sh \
-                file://gpg/pubring.gpg \
-                file://gpg/random_seed \
-                file://gpg/secring.gpg \
-                file://gpg/trustdb.gpg \
+SRCREV="86690469aaa2aa5f1ff05b5705e5dc3e5de89b06"
+PV = "4.0+git${SRCPV}"
+SRC_URI = "\
+    git://git@bitbucket.org/rdm-dev/hp-blob.git;protocol=ssh;branch=master \
+    file://dfservice.run \
+    file://dfservice-log.run \
+    file://homepilot.run \
+    file://homepilot-log.run \
+    file://homepilot.sh \
+    file://homepilot-network-manager.run \
+    file://homepilot-network-manager-log.run \
+    file://z-way.run \
+    file://z-way-log.run \
+    file://init_appdir.sh \
+    file://gpg/pubring.gpg \
+    file://gpg/random_seed \
+    file://gpg/secring.gpg \
+    file://gpg/trustdb.gpg \
 "
 
-S = "${WORKDIR}/HomePilot_Blob"
+S = "${WORKDIR}/git"
+GRADLE_S = "${S}/HomePilot_Blob"
+EXTRA_GRADLE_OPTS = "-Pdestdir=${D}"
+GRADLE_COMPILE_TARGET = "jar"
 
 JAVA_ELF="/usr/bin/java"
 
@@ -44,25 +48,14 @@ HOMEPILOT_USER_HOME = "/home/homepilot"
 
 ZWAY_DEST_PREFIX="/opt/z-way"
 INST_DEST_PREFIX="/opt/homepilot"
-# XXX Pat should finally fix that
-TARBALL_NAME="hp-dist_4.0.0.0.tar.gz"
 
 SVC_SERVICES="${sysconfdir}/daemontools/service"
 
-do_install() {
+do_install_append () {
         # create homepilot user dir
 	install -o homepilot -g users -m 0755 -d ${D}${HOMEPILOT_USER_HOME}
 	install -o homepilot -g users -m 0755 -d ${D}${HOMEPILOT_USER_HOME}/bin
 	install -o homepilot -g users -m 0755 ${WORKDIR}/init_appdir.sh ${D}${HOMEPILOT_USER_HOME}/bin/init_appdir.sh
-
-	# create INST_DEST_PREFIX folder
-	install -d ${D}${INST_DEST_PREFIX}
-
-	# Extract tarball into INST_DEST_PREFIX dir of target
-	tar xzf ${S}/${TARBALL_NAME} -C ${D}${INST_DEST_PREFIX}
-
-	# Clean-up messed up so-files from Jetty distribution ... 
-	find ${D}${INST_DEST_PREFIX} -name '*.so' | xargs rm -f
 
         # Install some gpg stuff
         install -o homepilot -g users -m 0700 -d ${D}${HOMEPILOT_USER_HOME}/.gpg
