@@ -52,6 +52,13 @@ Revision history for HomePilot
     - allow different images in same build environment
     - update kernel to latest stable release 4.1.13
     - fb-init: update picture
+    - strongly reduce output of initoverlay (mount, migrate) when nothing to do
+    - tidy curie u-boot env
+    - tweak bohr/bohr-update machine conf for future updates (stop misusing kirkwood.inc for bohr related kernel settings, ...)
+    - import z-way-server to bitbucket
+    - avoid unnecessary u-boot/u-boot-env updates
+    - fix image dependencies vs. prd-flash RDEPENDS
+    - prd-flash knows when to update u-boot
 
 4.0.28 2015-11-12
     - remove collectd-graphs
