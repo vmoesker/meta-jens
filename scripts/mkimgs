@@ -2,6 +2,8 @@
 
 set -x
 
+. `dirname $0`/algorithms
+
 IMGSPC=""
 BUILD_IMAGES=""
 IMAGES=""
@@ -80,16 +82,45 @@ do
     test "$DEV" -eq 1 && RECOVERY_IMAGE="rdm-core-dev-image"
     set -e
 
+    A=""
+    SPC=""
+
+    for a in $ALGORITHMS
+    do
+        S=""
+        K=""
+        for k in ${KERNEL}
+        do
+            K="${K}${S}`$a ${DEPLOY_DIR_IMAGE}/${k}`"
+            S=" "
+        done
+        A="${A}${SPC}kernel_${a}=\"$K\""
+        SPC=" "
+    done
+
     uboot_bin="`readlink ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.${UBOOT_SUFFIX}`"
+    for a in $ALGORITHMS
+    do
+        A="${A}${SPC}uboot_${a}=`$a ${DEPLOY_DIR_IMAGE}/${uboot_bin}`"
+        SPC=" "
+    done
     FILES="${FILES} u-boot-${MACHINE}.${UBOOT_SUFFIX} ${uboot_bin}"
 
     rootimg="`readlink ${DEPLOY_DIR_IMAGE}/${IMAGE}-${WANTED_ROOT_DEV}-${MACHINE}.squashfs-xz`"
-    rootimg_size=`du -b ${DEPLOY_DIR_IMAGE}/${rootimg} | awk '{ print $1 }'`
+    for a in $ALGORITHMS
+    do
+        A="${A}${SPC}rootimg_${a}=`$a ${DEPLOY_DIR_IMAGE}/${rootimg}`"
+    done
     FILES="${FILES} ${rootimg}"
 
     recimg="`readlink ${DEPLOY_DIR_IMAGE}/${RECOVERY_IMAGE}-${WANTED_ROOT_DEV}-${MACHINE}.squashfs-xz`"
-    recimg_size=`du -b ${DEPLOY_DIR_IMAGE}/${recimg} | awk '{ print $1 }'`
+    for a in $ALGORITHMS
+    do
+        A="${A}${SPC}recimg_${a}=`$a ${DEPLOY_DIR_IMAGE}/${recimg}`"
+    done
     FILES="${FILES} ${recimg}"
+
+    eval $A
 
 cat >${DEPLOY_DIR_IMAGE}/.${IMAGE}-${WANTED_ROOT_DEV}-${SYSIMG_VERSION}-settings <<EOS
 SYSIMG_VER=${SYSIMG_VERSION}
@@ -97,12 +128,26 @@ U_BOOT_MIN_SYSIMG_VER=${U_BOOT_MIN_SYSIMG_VER}
 DEV=${DEV}
 MACHINE=${MACHINE}
 UBOOT_BIN=${uboot_bin}
+UBOOT_SIZE=${uboot_size}
+UBOOT_MD5=${uboot_md5}
+UBOOT_SHA1=${uboot_sha1}
+UBOOT_RMD160=${uboot_rmd160}
 UBOOT_PADDING="${UBOOT_PADDING}"
-KERNEL="${KERNEL}"
 ROOTIMG=${rootimg}
 ROOTIMG_SIZE=${rootimg_size}
+ROOTIMG_MD5=${rootimg_md5}
+ROOTIMG_SHA1=${rootimg_sha1}
+ROOTIMG_RMD160=${rootimg_rmd160}
 RECOVERIMG=${recimg}
 RECOVERIMG_SIZE=${recimg_size}
+RECOVERIMG_MD5=${recimg_md5}
+RECOVERIMG_SHA1=${recimg_sha1}
+RECOVERIMG_RMD160=${recimg_rmd160}
+KERNEL="${KERNEL}"
+KERNEL_SIZE="${kernel_size}"
+KERNEL_MD5="${kernel_md5}"
+KERNEL_SHA1="${kernel_sha1}"
+KERNEL_RMD160="${kernel_rmd160}"
 KERNEL_PREPARE="${KERNEL_PREPARE}"
 KERNEL_RECOVERY="${KERNEL_RECOVERY}"
 KERNEL_SANITIZE="${KERNEL_SANITIZE}"
