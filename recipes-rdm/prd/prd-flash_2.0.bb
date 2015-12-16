@@ -21,21 +21,23 @@ SRC_URI_append_curie = "\
     file://post.curie \
 "
 
-SRC_URI_append_bohr = "\
+SRC_URI_append_kirkwood = "\
     file://init.mtd \
+    file://ubinize.cfg \
+"
+
+SRC_URI_append_bohr = "\
     file://init.ssd \
     file://init.bohr \
     file://hw.bohr \
     file://post.bohr \
-    file://ubinize.cfg \
 "
 
 SRC_URI_append_bohr-update = "\
-    file://init.mtd \
     file://init.bohr-update \
     file://hw.bohr-update \
     file://post.bohr-update \
-    file://ubinize.cfg \
+    file://algorithms \
 "
 
 RDEPENDS_${PN}_append = "\
@@ -120,6 +122,7 @@ do_install_append_bohr-update () {
     install -m 0644 ${WORKDIR}/init.mtd ${D}${libexecdir}/${MACHINE}
     install -m 0644 ${WORKDIR}/post.${MACHINE} ${D}${libexecdir}/${MACHINE}/post
     install -m 0644 ${WORKDIR}/ubinize.cfg ${D}${libexecdir}/${MACHINE}
+    install -m 0644 ${WORKDIR}/algorithms ${D}${libexecdir}/${MACHINE}
 }
 
 FILES_${PN} += "${libexecdir}/${MACHINE}"

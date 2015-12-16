@@ -39,6 +39,9 @@ cd ${TEMP_DIR}/
 if [ -d "${IMAGE_CONTAINER}" ]
 then
     . "${IMAGE_CONTAINER}"/.settings
+    . @LIBEXEC@/algorithms
+
+    prove_image
 
     DEV_FOUND=0
 
