@@ -60,9 +60,9 @@ uboot_setenv () {
 }
 
 update_rootfs () {
-    ubiupdatevol ${DEVICE_PREFIX}2 -s ${ROOTFS_SIZE}
+    ubiupdatevol ${DEVICE_PREFIX}2 -s ${ROOTIMG_SIZE}
 }
 
 update_recoveryfs () {
-    ubiupdatevol ${DEVICE_PREFIX}3 -s ${RECOVERYFS_SIZE}
+    ubiupdatevol ${DEVICE_PREFIX}3 -s ${RECOVERIMG_SIZE}
 }
