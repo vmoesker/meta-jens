@@ -1,5 +1,5 @@
---- v8/src/cpu.cc
-+++ v8/src/cpu.cc
+--- src/cpu.cc
++++ src/cpu.cc
 @@ -379,7 +379,12 @@ CPU::CPU() : stepping_(0),
      // an ARMv6-one. For example, the Raspberry Pi is one popular
      // ARMv6 device that reports architecture 7.

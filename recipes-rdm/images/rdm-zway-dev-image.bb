@@ -24,6 +24,7 @@ IMAGE_INSTALL += " \
 	${CORE_IMAGE_BASE_INSTALL} \
 	${ZWAY_DEPS} \
 	${DEV_INSTALL} \
+	v8-shell \
 "
 
 export IMAGE_BASENAME = "rdm-zway-dev-image"

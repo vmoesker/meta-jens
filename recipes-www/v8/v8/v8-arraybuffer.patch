@@ -1,5 +1,5 @@
---- v8/include/v8.h
-+++ v8/include/v8.h
+--- include/v8.h
++++ include/v8.h
 @@ -2611,6 +2611,11 @@ class V8_EXPORT ArrayBuffer : public Object {
     * Data length in bytes.
     */
@@ -12,8 +12,8 @@
  
    /**
     * Create a new ArrayBuffer. Allocate |byte_length| bytes.
---- v8/src/api.cc
-+++ v8/src/api.cc
+--- src/api.cc
++++ src/api.cc
 @@ -5827,6 +5827,10 @@ size_t v8::ArrayBuffer::ByteLength() const {
    return static_cast<size_t>(obj->byte_length()->Number());
  }

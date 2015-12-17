@@ -1,0 +1,25 @@
+--- src/arm/constants-arm.h	2015-12-17 19:07:36.019983481 +0100
++++ src/arm/constants-arm.h	2015-12-17 19:17:22.243998665 +0100
+@@ -64,6 +64,11 @@
+ # define CAN_USE_THUMB_INSTRUCTIONS 1
+ #endif
+ 
++#if defined(__ARM_ARCH_5E__)
++# define CAN_USE_ARMV5_INSTRUCTIONS 1
++# define CAN_USE_UNALIGNED_ACCESSES 0
++#endif
++
+ // Simulator should support ARM5 instructions and unaligned access by default.
+ #if !defined(__arm__)
+ # define CAN_USE_ARMV5_INSTRUCTIONS 1
+--- src/arm/macro-assembler-arm.cc	2015-12-17 19:07:15.951982962 +0100
++++ src/arm/macro-assembler-arm.cc	2015-12-17 19:22:26.856006555 +0100
+@@ -61,7 +61,7 @@
+ // We do not support thumb inter-working with an arm architecture not supporting
+ // the blx instruction (below v5t).  If you know what CPU you are compiling for
+ // you can use -march=armv7 or similar.
+-#if defined(USE_THUMB_INTERWORK) && !defined(CAN_USE_THUMB_INSTRUCTIONS)
++#if defined(__thumb__) && defined(USE_THUMB_INTERWORK) && !defined(CAN_USE_THUMB_INSTRUCTIONS)
+ # error "For thumb inter-working we require an architecture which supports blx"
+ #endif
+ 
