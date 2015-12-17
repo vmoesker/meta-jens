@@ -61,10 +61,19 @@ do_configure_prepend() {
 	fi
 }
 
-do_install_append () {
+do_compile_append () {
     echo "blacklist cfg80211" >${WORKDIR}/blacklist-cfg80211.conf
+    echo "blacklist libertas_sdio" >${WORKDIR}/blacklist-libertas_sdio.conf
+    echo "blacklist mwifiex_sdio" >${WORKDIR}/blacklist-mwifiex_sdio.conf
+}
+
+do_install_append () {
     install -d ${D}${sysconfdir}/modprobe.d/
     install -m 644 ${WORKDIR}/blacklist-cfg80211.conf ${D}${sysconfdir}/modprobe.d/
+    install -m 644 ${WORKDIR}/blacklist-libertas_sdio.conf ${D}${sysconfdir}/modprobe.d/
+    install -m 644 ${WORKDIR}/blacklist-mwifiex_sdio.conf ${D}${sysconfdir}/modprobe.d/
 }
 
 FILES_kernel-module-cfg80211 += "${sysconfdir}/modprobe.d/blacklist-cfg80211.conf"
+FILES_kernel-module-libertas-sdio += "${sysconfdir}/modprobe.d/blacklist-libertas_sdio.conf"
+FILES_kernel-module-mwifiex-sdio += "${sysconfdir}/modprobe.d/blacklist-mwifiex_sdio.conf"
