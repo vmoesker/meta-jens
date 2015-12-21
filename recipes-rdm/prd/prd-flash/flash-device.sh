@@ -14,10 +14,6 @@ logger -s "Prove being the one and only ..."
 test "${FLOCKER}" != "@ARGV0@" && exec env FLOCKER="@ARGV0@" flock -en "@ARGV0@" "@ARGV0@" || :
 logger -s "Starting flash ..."
 
-. @LIBEXEC@/hw
-. @LIBEXEC@/init
-test -f @LIBEXEC@/post && . @LIBEXEC@/post
-
 # use last image container
 for c in /data/.flashimg/*-complete.cpi /data/flashimg/*-complete
 do
@@ -28,6 +24,12 @@ do
 	break
     fi
 done
+
+test -z "${IMAGE_CONTAINER}" && exit 0
+
+. @LIBEXEC@/hw
+. @LIBEXEC@/init
+test -f @LIBEXEC@/post && . @LIBEXEC@/post
 
 for tmp in /var/tmp /data/tmp /tmp
 do
@@ -76,8 +78,11 @@ then
 
     prepare_device
 
-    require_update_uboot && flash_uboot
-    uboot_setenv
+    if require_update_uboot
+    then
+        flash_uboot
+        uboot_setenv
+    fi
     flash_rootfs
     flash_recoveryfs
 
@@ -134,6 +139,7 @@ then
 	update_fs
 
 	logger "Going to extract recovery image"
+	wipe_recoveryfs
 	tar xjf "${IMAGE_CONTAINER}" -O ${RECOVERIMG} | update_recoveryfs
 
 	mount /boot
@@ -163,7 +169,9 @@ then
 	trigger_root
 
 	logger "Going to extract rootfs image"
+	wipe_rootfs
 	tar xjf "${IMAGE_CONTAINER}" -O ${ROOTIMG} | update_rootfs
+
 	logger "Sanitize kernel"
 	mount /boot
 	(cd /boot && eval ${KERNEL_SANITIZE})

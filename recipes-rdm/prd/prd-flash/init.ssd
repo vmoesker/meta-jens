@@ -93,8 +93,16 @@ uboot_setenv () {
     fi
 }
 
+wipe_rootfs () {
+    blkdiscard ${DEVICE_PREFIX}2
+}
+
 update_rootfs () {
     dd of=${DEVICE_PREFIX}2 bs=1M
+}
+
+wipe_recoveryfs () {
+    blkdiscard ${DEVICE_PREFIX}3
 }
 
 update_recoveryfs () {

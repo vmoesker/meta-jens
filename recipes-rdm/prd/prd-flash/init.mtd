@@ -59,8 +59,16 @@ uboot_setenv () {
     fi
 }
 
+wipe_rootfs () {
+    ubiupdatevol ${DEVICE_PREFIX}2 -t
+}
+
 update_rootfs () {
     ubiupdatevol ${DEVICE_PREFIX}2 -s ${ROOTIMG_SIZE}
+}
+
+wipe_recoveryfs () {
+    ubiupdatevol ${DEVICE_PREFIX}3 -t
 }
 
 update_recoveryfs () {
