@@ -18,7 +18,7 @@ sha1 () {
 
 prove_fail () {
     echo "Proving $1 fails for $2: $3 != $4" >&2
-    exit 1
+    trigger_fail
 }
 
 prove_image () {

@@ -57,7 +57,7 @@ then
 	    if [ "${WANTED_ROOT_DEV}" != "$w" ]
 	    then
 		logger -s "Cannot flash incompatible image ($dev but no $w image)"
-		exit 1
+		trigger_error
 	    fi
 	    DEV_FOUND=1
 	fi
@@ -114,13 +114,13 @@ then
     if [ "${MACHINE}" != "`echo @MACHINE@ | sed -e 's/-*//'`" ]
     then
 	logger -s "Cannot perform an update for ${MACHINE}."
-	exit 1
+	trigger_error
     fi
 
     if [ "$WANTED_ROOT_DEV" != "@WANTED_ROOT_DEV@" ]
     then
 	logger -s "Cannot write to ${WANTED_ROOT_DEV}, flashing limited to @WANTED_ROOT_DEV@."
-	exit 1
+	trigger_error
     fi
 
     . @LIBEXEC@/init.@ROOT_DEV_TYPE@
@@ -215,6 +215,6 @@ then
     else
 	rm -f .settings
 	logger -s "Cannot detect normal mode nor recovery mode. Fix and retry."
-	exit 1
+	trigger_error
     fi
 fi

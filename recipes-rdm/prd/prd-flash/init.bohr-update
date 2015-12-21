@@ -1,9 +1,10 @@
-trigger_recover () {
-    echo 0 >/sys/class/leds/guruplug:green:wmode/brightness
-    echo heartbeat >/sys/class/leds/guruplug:green:wmode/trigger
+trigger_error () {
+    echo heartbeat > /sys/class/leds/guruplug:red:wmode/trigger
+    echo heartbeat > /sys/class/leds/guruplug:red:health/trigger
+    exit 1
 }
 
-update_fail () {
+trigger_fail () {
     echo none >/sys/class/leds/guruplug:green:wmode/trigger
     echo 0 >/sys/class/leds/guruplug:green:wmode/brightness
     echo none >/sys/class/leds/guruplug:green:health/trigger
@@ -13,13 +14,20 @@ update_fail () {
     echo 255 > /sys/class/leds/guruplug:red:health/brightness
 
     poweroff
+    exit 1 # safety first
+}
+
+trigger_recover () {
+    echo 0 > /sys/class/leds/guruplug:red:wmode/brightness
+    echo 0 >/sys/class/leds/guruplug:green:wmode/brightness
+    echo heartbeat >/sys/class/leds/guruplug:green:wmode/trigger
 }
 
 load_wifi () {
     modprobe libertas_sdio
     modprobe mwifiex_sdio
     sleep 2
-    test -d /sys/class/net/mlan0 || update_fail
+    test -d /sys/class/net/mlan0 || trigger_fail
     WLAN_ADDR=`cat /sys/class/net/mlan0/address | sed -e 's/://g'`
 }
 
@@ -29,14 +37,15 @@ trigger_root () {
 	# no wrc1key backup'ed - fresh update starts
 	ubiattach /dev/ubi_ctrl -m 2
 
-	test -e /dev/ubi0_4 && update_fail
+	test -e /dev/ubi0_4 && trigger_fail
 
 	mkdir -p /run/media/ubi0_0
 	mount /dev/ubi0_0 /run/media/ubi0_0
 
 	avail_hp_major_version=$(source /run/media/ubi0_0/etc/serverbox/version; echo "${MAJOR}")
-	test "${avail_hp_major_version}" < 3 && update_fail
+	test "${avail_hp_major_version}" < 3 && trigger_fail
 
+	echo 0 > /sys/class/leds/guruplug:red:health/brightness
 	echo 0 >/sys/class/leds/guruplug:green:health/brightness
 	echo heartbeat >/sys/class/leds/guruplug:green:health/trigger
 

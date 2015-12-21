@@ -1,9 +1,31 @@
+trigger_error () {
+    echo heartbeat >/sys/class/leds/error/trigger
+    exit 1
+}
+
+trigger_fail () {
+    echo none >/sys/class/leds/user2/trigger
+    echo 0 >/sys/class/leds/user2/brightness
+    echo none >/sys/class/leds/user1/trigger
+    echo 0 >/sys/class/leds/user1/brightness
+
+    echo heartbeat >/sys/class/leds/boot/trigger
+    echo 255 >/sys/class/leds/error/brightness
+
+    poweroff
+    exit 1 # safety first
+}
+
 trigger_recover () {
+    echo 0 >/sys/class/leds/boot/brightness
+    echo 0 >/sys/class/leds/error/brightness
     echo 0 >/sys/class/leds/user2/brightness
     echo heartbeat >/sys/class/leds/user2/trigger
 }
 
 trigger_root () {
+    echo 0 >/sys/class/leds/boot/brightness
+    echo 0 >/sys/class/leds/error/brightness
     echo 0 >/sys/class/leds/user1/brightness
     echo heartbeat >/sys/class/leds/user1/trigger
 }
