@@ -9,6 +9,7 @@ DEPENDS = "ncurses"
 PV = "0.91"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/patches:"
+PACKAGES_prepend = "statgrab statgrab-dbg saidar saidar-dbg ${PN}-mrtg "
 
 SRCREV = "c39988855a9d1eb54adadb899b3865304da2cf84"
 SRC_URI = "git://github.com/i-scream/libstatgrab.git \
@@ -21,6 +22,9 @@ S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 
-# libstatgrab-client need the .so present to work :(
-FILES_${PN} += "${libdir}/*.so"
-INSANE_SKIP_${PN} = "dev-so"
+FILES_statgrab = "${bindir}/statgrab"
+FILES_statgrab-dbg = "${bindir}/.debug/statgrab"
+FILES_saidar = "${bindir}/saidar"
+FILES_saidar-dbg = "${bindir}/.debug/saidar"
+FILES_${PN}-mrtg = "${bindir}/statgrab-make-mrtg-config ${bindir}/statgrab-make-mrtg-index"
+RDEPENDS_${PN}-mrtg_append = "perl statgrab"
