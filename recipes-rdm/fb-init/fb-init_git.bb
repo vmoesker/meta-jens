@@ -7,7 +7,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 RDEPENDS_${PN} = "fbset imagemagick liberation-fonts"
 
-SRCREV="3be362581931a117831f3d236bb6a8bb86ac3428"
+SRCREV="82194efeb4808dd53b6ce4e9d91f61f1544ea9a7"
 PV = "0.1+git${SRCPV}"
 
 SRC_URI = "git://git@bitbucket.org/rdm-dev/IEBF.git;protocol=ssh;branch=jethro"
