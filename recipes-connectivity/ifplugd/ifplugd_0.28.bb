@@ -4,7 +4,7 @@ DESCRIPTION = "Daemon for monitoring ethernet device link state"
 SRC_URI     = "http://0pointer.de/lennart/projects/ifplugd/ifplugd-0.28.tar.gz \
                file://ifplugd.conf"
 DEPENDS     = "libdaemon"
-LICENSE     = "GPLv2"
+LICENSE     = "GPL-2.0"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=94d55d512a9ba36caa9b7df079bae19f"
 

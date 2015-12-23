@@ -1,7 +1,7 @@
 DESCRIPTION = "Use this script and have KSM enabled during boot-time"
 HOMEPAGE = "https://github.com/dnaeon/ksm-init.d-debian"
 
-LICENSE = "GPLv2+"
+LICENSE = "GPL-2.0+"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
 
 DEPENDS = "ncurses"

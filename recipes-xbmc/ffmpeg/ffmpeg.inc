@@ -1,6 +1,6 @@
 DESCRIPTION = "FFmpeg is the leading multimedia framework, able to decode, encode, transcode, mux, demux, stream, filter"
 HOMEPAGE = "http://www.ffmpeg.org/"
-LICENSE = "GPLv2+ & LGPLv2.1+"
+LICENSE = "GPL-2.0+ & LGPL-2.1+"
 
 SRC_URI = "git://git.videolan.org/ffmpeg.git"
 DEPENDS = " zlib libvorbis bzip2 "

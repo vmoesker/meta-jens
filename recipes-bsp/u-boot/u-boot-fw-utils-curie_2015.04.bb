@@ -1,7 +1,7 @@
 # Copyright (C) 2015 Jens Rehsack <sno@netbsd.org>
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-LICENSE = "GPLv2+"
+LICENSE = "GPL-2.0+"
 LIC_FILES_CHKSUM = "file://Licenses/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/u-boot-curie-${PV}:"

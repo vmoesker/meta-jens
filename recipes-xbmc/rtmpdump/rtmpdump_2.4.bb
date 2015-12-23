@@ -2,7 +2,7 @@ DESCRIPTION = "Toolkit for RTMP streams."
 
 DEPENDS = "zlib openssl"
 HOMEPAGE = "http://rtmpdump.mplayerhq.hu/"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
 #KSV Patch is from http://stream-recorder.com/forum/customized-rtmpdump-binaries-patch-file-t16103.html

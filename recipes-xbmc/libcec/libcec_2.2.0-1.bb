@@ -1,5 +1,5 @@
 DESCRIPTION = "libCEC allows you in combination with the right hardware to control your device with your TV remote control. Utilising your existing HDMI cabling"
-LICENSE = "GPLv2+"
+LICENSE = "GPL-2.0+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=e296fd6027598da75a7516ce1ae4f56a"
 
 inherit autotools pkgconfig

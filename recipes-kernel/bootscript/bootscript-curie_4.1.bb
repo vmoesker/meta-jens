@@ -1,12 +1,12 @@
 # Copyright (C) 2015 Jens Rehsack <sno@netbsd.org>
-# Released under the GPLv2 license (see COPYING.MIT for the terms)
+# Released under the GPL-2.0 license (see COPYING.MIT for the terms)
 
 DESCRIPTION = "U-Boot BootScripts for linux-curie-4.1"
 PN = "bootscript-curie-${WANTED_ROOT_DEV}"
 
 inherit bootscript
 
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}-${WANTED_ROOT_DEV}"

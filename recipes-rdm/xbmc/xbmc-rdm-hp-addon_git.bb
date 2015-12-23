@@ -1,6 +1,6 @@
 DESCRIPTION = "XBMC HomePilot addon"
 
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0"
 DEPENDS += "xbmc"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=85f28f254857486f13360c0e8b34f38b"
 
