@@ -1,2 +1,4 @@
 # <type> <owner> <group> <mode> <path> <linksource>
+d root root 0750 /run/samba none
 d root root 1750 /var/log/samba none
+d root root 0700 /var/lib/samba/private none

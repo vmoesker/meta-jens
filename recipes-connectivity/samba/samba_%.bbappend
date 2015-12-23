@@ -8,6 +8,8 @@ SRC_URI += "file://volatiles.03_samba"
 SYSVINITTYPE := "lsb"
 
 do_install_append() {
+    rm -rf "${D}/${localstatedir}"
+
     install -m 755 -d ${D}${sysconfdir}/logrotate.d
     install -m 644 ${WORKDIR}/samba-logrotate.conf ${D}${sysconfdir}/logrotate.d/samba
 
