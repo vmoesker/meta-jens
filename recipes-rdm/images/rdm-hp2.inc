@@ -8,7 +8,7 @@ HP2_INSTALL = "service-df \
 	zway-blob \
 	hp2sm-zway \
 	hp-blob \
-        samba \
+        samba-base \
         wrkeyupload \
 	hp2sm-system-wrc${WRC_VERSION} \
 	udev-hp \

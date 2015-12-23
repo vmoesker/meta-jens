@@ -2,7 +2,7 @@ DESCRIPTION = "software media player and entertainment hub"
 
 LICENSE = "GPL-2.0"
 LIC_FILES_CHKSUM = "file://copying.txt;md5=8c8473d035f42f5883d82c5f6828eba7"
-DEPENDS = "ffmpeg mysql5 libsamplerate0 alsa-lib udev libvorbis boost libass mpeg2dec libmad libmodplug tiff yajl libtinyxml taglib libcdio jasper libmicrohttpd libssh samba rtmpdump libnfs swig-native libxslt libplist shairplay flac libgpg-error avahi lzo libsdl openjdk-8-native"
+DEPENDS = "ffmpeg mysql5 libsamplerate0 alsa-lib udev libvorbis boost libass mpeg2dec libmad libmodplug tiff yajl libtinyxml taglib libcdio jasper libmicrohttpd libssh samba cifs-utils rtmpdump libnfs swig-native libxslt libplist shairplay flac libgpg-error avahi lzo libsdl openjdk-8-native"
 DEPENDS_append_mx6 = " virtual/kernel virtual/libgles2 virtual/egl libfslvpuwrap libcec"
 
 SRC_URI = "git://github.com/xbmc/xbmc.git;rev=${SRCREV};branch=${SRCBRANCH} \
