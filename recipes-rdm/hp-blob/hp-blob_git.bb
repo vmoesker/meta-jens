@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://${THISDIR}/files/license.txt;md5=3ebe3464e841ddbf115a
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 DEPENDS = "zway-blob hp2-base rakudo-star"
-RDEPENDS_${PN} += "at"
 RDEPENDS_${PN} += "daemontools"
 RDEPENDS_${PN} += "gnupg"
 RDEPENDS_${PN} += "hp2-base"
@@ -16,7 +15,7 @@ RDEPENDS_${PN} += "zway-blob"
 
 inherit record-installed-app gradlenative
 
-SRCREV="86690469aaa2aa5f1ff05b5705e5dc3e5de89b06"
+SRCREV="1ae39877fb39f94ec83ea35a13ed2cb08532b446"
 PV = "4.0+git${SRCPV}"
 SRC_URI = "\
     git://git@bitbucket.org/rdm-dev/hp-blob.git;protocol=ssh;branch=master \
@@ -27,6 +26,8 @@ SRC_URI = "\
     file://homepilot.sh \
     file://homepilot-network-manager.run \
     file://homepilot-network-manager-log.run \
+    file://homepilot-backup-restore.run \
+    file://homepilot-backup-restore-log.run \
     file://z-way.run \
     file://z-way-log.run \
     file://init_appdir.sh \
@@ -68,6 +69,8 @@ do_install_append () {
 	# 1 Create all the folders
 	install -d ${D}${SVC_SERVICES}/homepilot-network-manager
 	install -d ${D}${SVC_SERVICES}/homepilot-network-manager/log
+	install -d ${D}${SVC_SERVICES}/homepilot-backup-restore
+	install -d ${D}${SVC_SERVICES}/homepilot-backup-restore/log
 	install -d ${D}${SVC_SERVICES}/dfservice
 	install -d ${D}${SVC_SERVICES}/dfservice/log
 	install -d ${D}${SVC_SERVICES}/homepilot
@@ -78,6 +81,8 @@ do_install_append () {
 	# 2 Move all the run-files
 	install -m 0755 ${WORKDIR}/homepilot-network-manager.run ${D}${SVC_SERVICES}/homepilot-network-manager/run
 	install -m 0755 ${WORKDIR}/homepilot-network-manager-log.run ${D}${SVC_SERVICES}/homepilot-network-manager/log/run
+	install -m 0755 ${WORKDIR}/homepilot-backup-restore.run ${D}${SVC_SERVICES}/homepilot-backup-restore/run
+	install -m 0755 ${WORKDIR}/homepilot-backup-restore-log.run ${D}${SVC_SERVICES}/homepilot-backup-restore/log/run
 	install -m 0755 ${WORKDIR}/dfservice.run ${D}${SVC_SERVICES}/dfservice/run
 	install -m 0755 ${WORKDIR}/dfservice-log.run ${D}${SVC_SERVICES}/dfservice/log/run
 	install -m 0755 ${WORKDIR}/homepilot.run ${D}${SVC_SERVICES}/homepilot/run
@@ -91,6 +96,7 @@ do_install_append () {
 	    -e "s,@JAVA_ELF@,${JAVA_ELF},g" \
 	    -e "s,@HOMEPILOT_USER_HOME@,${HOMEPILOT_USER_HOME},g" -e "s,@HOMEPILOT_USER@,${HOMEPILOT_USER},g" \
 	    ${D}${SVC_SERVICES}/homepilot-network-manager/run \
+	    ${D}${SVC_SERVICES}/homepilot-backup-restore/run \
 	    ${D}${SVC_SERVICES}/dfservice/run \
 	    ${D}${SVC_SERVICES}/homepilot/run \
 	    ${D}${INST_DEST_PREFIX}/bin/homepilot \
@@ -99,6 +105,7 @@ do_install_append () {
 
 	# 3 Disable all but hp
 	touch ${D}${SVC_SERVICES}/dfservice/down
+	touch ${D}${SVC_SERVICES}/homepilot-backup-restore/down
 	touch ${D}${SVC_SERVICES}/z-way/down
 }
 
