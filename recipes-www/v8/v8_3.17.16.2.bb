@@ -1,6 +1,6 @@
 include v8.inc
-SRC_URI = "svn://v8.googlecode.com/svn;protocol=http;module=tags/3.17.16.2;rev=25343;path_spec=${BPN}-${PV} \
-    svn://gyp.googlecode.com/svn;module=trunk;protocol=http;rev=1501;path_spec=${BPN}-${PV}/build/gyp \
+SRC_URI = "svn://v8.googlecode.com/svn;protocol=https;module=tags/3.17.16.2;rev=25343;path_spec=${BPN}-${PV} \
+    svn://gyp.googlecode.com/svn;module=trunk;protocol=https;rev=1501;path_spec=${BPN}-${PV}/build/gyp \
     file://v8-bignum-strict-overflow.patch;striplevel=0 \
     file://v8-sane-arm5e-handling.patch;striplevel=0 \
 "
