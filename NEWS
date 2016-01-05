@@ -59,6 +59,13 @@ Revision history for HomePilot
     - avoid unnecessary u-boot/u-boot-env updates
     - fix image dependencies vs. prd-flash RDEPENDS
     - prd-flash knows when to update u-boot
+    - add support for proving extracted image before flash as well as packed images before update
+    - add downgraded v8 version for kirkwood
+    - minor fixes for mtd update procedure, kirkwood kernel/u-boot ...
+    - fix QA issues (license names, insane RDEPENDS, ...)
+    - handle errors uniq way in prd-flash, fix typo in HP1 Software version approval
+    - fix unfortunate horizontal line in psplash
+    - fix samba4 packaging and integration
 
 4.0.28 2015-11-12
     - remove collectd-graphs
