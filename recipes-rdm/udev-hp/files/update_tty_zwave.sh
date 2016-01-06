@@ -15,7 +15,7 @@ then
 
     echo "test -n \"$tty\" -a ! -c $tty_zwave && ln -fs $tty $tty_zwave" >>/tmp/update_tty
     test -n "$tty" -a ! -c $tty_zwave && ln -fs $tty $tty_zwave
-    echo 255 >/sys/class/leds/user1/brightness
+    echo 255 >/sys/class/leds/@ZWAVE_LED@/brightness
 elif [ "$ACTION" = "remove" ] && [ -n "$DEVNAME" ]
 then
     if [ -e $tty_zwave ]

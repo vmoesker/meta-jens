@@ -13,7 +13,7 @@ then
     echo "DF ADD: $DEVPATH on $(date)" >> /tmp/update_tty
     echo "DF ADD: $tty" >> /tmp/update_tty
     ln -sf $tty ${tty_df}
-    echo 255 >/sys/class/leds/user2/brightness
+    echo 255 >/sys/class/leds/@DUOFERN_LED@/brightness
 elif [ "$ACTION" = "remove" ] && [ -n "$DEVNAME" ]
 then
     # echo "DF REM from $DEVNAME on $(date)" >> /tmp/update_tty
