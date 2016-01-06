@@ -38,10 +38,13 @@ RDM_BASE_INSTALL = "\
 	hp2sm-ethtool \
 	wifi-fallback \
 "
+RDM_ESSENTIALS_append_bohr = "\
+	ledctrl \
+"
 RDM_ESSENTIALS_append_bohr-update = "\
 	date-set \
 "
-RDM_ESSENTIALS_append_mx6qcurie = "\
+RDM_ESSENTIALS_append_curie = "\
 	btrfs-tools \
 	ledctrl \
 	fb-cursor-off \
@@ -50,7 +53,7 @@ RDM_INSTALL = "${RDM_BASE_INSTALL} \
 	ksm-init \
 	openvpn \
 "
-RDM_INSTALL_append_mx6qcurie = "\
+RDM_INSTALL_append_curie = "\
 	udev-rules-imx \
 	libntfs-3g \
 	ntfsprogs \

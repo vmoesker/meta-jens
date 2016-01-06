@@ -1,0 +1,16 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:             ledplay
+# Required-Start:       $local_fs
+# Required-Stop:      $local_fs
+# Default-Start:
+# Default-Stop:
+# Short-Description:  Enables/Disables each LED once at boot
+### END INIT INFO
+
+echo 0 >/sys/class/leds/guruplug:red:health/brightness
+echo 255 >/sys/class/leds/guruplug:red:health/brightness
+echo 0 >/sys/class/leds/guruplug:red:wmode/brightness
+echo 255 >/sys/class/leds/guruplug:red:wmode/brightness
+
+exit 0

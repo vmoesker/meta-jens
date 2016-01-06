@@ -1,6 +1,6 @@
 #!/bin/sh
 ### BEGIN INIT INFO
-# Provides:             ledplay_s
+# Provides:             ledplay_m
 # Required-Start:       $local_fs
 # Required-Stop:      $local_fs
 # Default-Start:
@@ -8,11 +8,15 @@
 # Short-Description:  Enables/Disables each LED once at boot
 ### END INIT INFO
 
-for led in user2 user1
+for led in guruplug:red:health guruplug:red:wmode
 do
+    echo 0 >/sys/class/leds/${led}/brightness
     echo 255 >/sys/class/leds/${led}/brightness
     sleep 1
     echo 0 >/sys/class/leds/${led}/brightness
 done
+
+echo 255 >/sys/class/leds/guruplug:red:health/brightness
+echo heartbeat >/sys/class/leds/guruplug:red:health/trigger
 
 exit 0
