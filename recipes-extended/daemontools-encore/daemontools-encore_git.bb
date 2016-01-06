@@ -8,7 +8,7 @@ HOMEPAGE = "http://untroubled.org/daemontools-encore/"
 LICENSE = "PD"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/PD;md5=b3597d12946881e13cb3b548d1173851"
 
-inherit djbware update-rc.d
+inherit djbware update-rc.d useradd
 
 #FILESEXTRAPATHS_prepend := "${THISDIR}/${PV}-${PV}:"
 
@@ -18,13 +18,16 @@ DJB_CONFIG_DIR = "${S}"
 SRCREV = "5526cf4499b9756d41e511422acd8cf47bb8c9c4"
 SRC_URI = "git://github.com/bruceg/daemontools-encore.git \
 	   file://init-daemontools-encore.sh \
-	   file://sv-enc-as-users.sudoers \
+	   file://sv-enc-via-ctrl-grp.sudoers \
 	   file://do-no-run-crosscompiled.patch \
 	   file://svscanboot-target-fs-adoptions.patch \
           "
 
 INITSCRIPT_NAME = "init-daemontools-encore.sh"
 INITSCRIPT_PARAMS = "start 30 3 5 . stop 20 0 1 6 ."
+
+USERADD_PACKAGES = "${PN}"
+GROUPADD_PARAM_${PN} = "-r svcctrl"
 
 do_configure_append () {
     (cd ${S} && ./makemake)
@@ -53,9 +56,9 @@ do_install () {
     # prepare for installing base-dir for services
     install -d 0755 ${D}${sysconfdir}/daemontools/service
 
-    # allow %users to call svc
+    # allow %svcctrl to call svc
     install -d ${D}${sysconfdir}/sudoers.d
-    install -m 600 ${WORKDIR}/sv-enc-as-users.sudoers ${D}${sysconfdir}/sudoers.d/sv-enc-as-users
+    install -m 600 ${WORKDIR}/sv-enc-via-ctrl-grp.sudoers ${D}${sysconfdir}/sudoers.d/sv-enc-via-ctrl-grp
 }
 
 PROVIDES = "daemontools"

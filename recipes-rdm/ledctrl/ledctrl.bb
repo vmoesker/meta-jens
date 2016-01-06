@@ -8,9 +8,15 @@ SRC_URI = "file://ledplay_s.${MACHINE} \
 	file://ledgodown.${MACHINE} \
 	file://ledbootdown.${MACHINE} \
 	file://ledreadyonce.sh \
+	file://ready-led-nonroot.sudoers \
 "
 
 RDEPENDS_${PN} += "daemontools"
+
+inherit useradd
+
+USERADD_PACKAGES = "${PN}"
+GROUPADD_PARAM_${PN} = "-r ledctrl"
 
 SERVICE_ROOT = "${sysconfdir}/daemontools/service"
 LEDREADY_SERVICE_DIR = "${SERVICE_ROOT}/ledready"
@@ -43,6 +49,10 @@ do_install () {
 	#install svc run script and make it executable
 	install -m 0755 ${WORKDIR}/ledbootup.${MACHINE} ${D}${LEDREADY_SERVICE_DIR}/run
 	touch ${D}${LEDREADY_SERVICE_DIR}/down
+
+	# allow %ledctrl to call ledgodown.sh and ledreadyonce.sh
+	install -d ${D}${sysconfdir}/sudoers.d
+	install -m 600 ${WORKDIR}/ready-led-nonroot.sudoers ${D}${sysconfdir}/sudoers.d/ready-led-nonroot
 }
 
 FILES_${PN} += "${SERVICE_ROOT} \

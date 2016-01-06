@@ -8,6 +8,8 @@ inherit useradd
 
 SRC_URI = "file://hp2.volatiles"
 
+RDEPENDS_${PN} = "daemontools ledctrl"
+
 HOMEPILOT_USER = "homepilot"
 HOMEPILOT_USER_HOME = "/home/homepilot"
 
@@ -22,8 +24,7 @@ do_install() {
 }
 
 USERADD_PACKAGES = "${PN}"
-
-USERADD_PARAM_${PN} = "-u 800 -d ${HOMEPILOT_USER_HOME} -g users -G dialout -r -m -s /bin/sh ${HOMEPILOT_USER}"
+USERADD_PARAM_${PN} = "-u 800 -d ${HOMEPILOT_USER_HOME} -g users -G dialout,svcctrl,ledctrl -r -m -s /bin/sh ${HOMEPILOT_USER}"
 
 FILES_${PN} += "${HOMEPILOT_USER_HOME} \
 		${sysconfdir} \
