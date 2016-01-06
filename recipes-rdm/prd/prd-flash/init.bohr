@@ -1,17 +1,13 @@
 trigger_error () {
     echo heartbeat > /sys/class/leds/guruplug:red:wmode/trigger
-    echo heartbeat > /sys/class/leds/guruplug:red:health/trigger
     exit 1
 }
 
 trigger_fail () {
     echo none >/sys/class/leds/guruplug:green:wmode/trigger
     echo 0 >/sys/class/leds/guruplug:green:wmode/brightness
-    echo none >/sys/class/leds/guruplug:green:health/trigger
-    echo 0 >/sys/class/leds/guruplug:green:health/brightness
 
     echo 255 > /sys/class/leds/guruplug:red:wmode/brightness
-    echo 255 > /sys/class/leds/guruplug:red:health/brightness
 
     poweroff
     exit 1 # safety first
