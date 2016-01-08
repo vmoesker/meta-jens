@@ -66,6 +66,14 @@ Revision history for HomePilot
     - handle errors uniq way in prd-flash, fix typo in HP1 Software version approval
     - fix unfortunate horizontal line in psplash
     - fix samba4 packaging and integration
+    - hp-blob: build within Yocto from git repository
+    - hp-blob: remove atd dependency for restoring backups
+    - ledctrl: add support for bohr, fix minor (unlikely) issues in current behavior
+    - udev-hp: control LED's on curie and bohr
+    - sudo/permissions: restrict permissions to control services a bit finer
+    - linux-bohr: add required firmware for some wifi modules and enable bt driver
+    - hp-blob: add timer around HP DB migrator
+    - prd-flash: adopt bohr LED's as negotiated with Per
 
 4.0.28 2015-11-12
     - remove collectd-graphs
