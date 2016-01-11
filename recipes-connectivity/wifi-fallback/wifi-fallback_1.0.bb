@@ -11,5 +11,5 @@ do_install () {
 	install -d ${D}${sysconfdir}/init.d
 	install -m 0755 ${WORKDIR}/wifi-fallback.sh ${D}${sysconfdir}/init.d
 
-	update-rc.d -r ${D} wifi-fallback.sh start 07 2 3 4 5 .
+	update-rc.d -r ${D} wifi-fallback.sh start 22 2 3 4 5 .
 }
