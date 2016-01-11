@@ -14,30 +14,31 @@ Revision history for HomePilot
         * correct runtime dependencies
         * remove jetty service and camera page
         * use Net::Async::HTTP::Server
-	* use plugins and dynamic navigation
-	* optimize zwave http request
-	* rename multimedia to mediaplayer
-	* move systemmanagement page, reset page, diagnosis page and system-update-image into plugins
-	* Style harmonization using Perl::Tidy
-	* adjust automounter path
-	* reset: append components instead of override for factory reset
-	* z-wave: blackist reset
-	* z-wave: fix compatibility check for firmware upgrade
-	* z-wave: fix log level configuration page
-	* developer: only support user button on curie
-	* diagnosis: add uid to log filename
-	* mediaplayer: add status and start/stop buttons
-	* mediaplayer: cleanup spdif configuration
-	* services: add description to services
-	* services: add uptime and cleanup services
-	* services: add wrc1 service
-	* system-update-image: use installed image/version provided by System::Image::Update
-	* system: use Module::Pluggable to load plugins
+        * use plugins and dynamic navigation
+        * optimize zwave http request
+        * rename multimedia to mediaplayer
+        * move systemmanagement page, reset page, diagnosis page and system-update-image into plugins
+        * Style harmonization using Perl::Tidy
+        * adjust automounter path
+        * reset: append components instead of override for factory reset
+        * z-wave: blackist reset
+        * z-wave: fix compatibility check for firmware upgrade
+        * z-wave: fix log level configuration page
+        * developer: only support user button on curie
+        * diagnosis: add uid to log filename
+        * mediaplayer: add status and start/stop buttons
+        * mediaplayer: cleanup spdif configuration
+        * services: add description to services
+        * services: add uptime and cleanup services
+        * services: add wrc1 service
+        * system-update-image: use installed image/version provided by System::Image::Update
+        * system: use Module::Pluggable to load plugins
     - create hp2sm-system-date, -services, -wrc1/2 packages
     - allow selecting WRC version, prefer v1
     - update DuoFern service
         * applying patch to fix compile errors upstream
-	* fix a deadlock for environment sensor
+        * fix a deadlock for environment sensor
+        * disable syslog messages to avoid syslog spamming
     - introduce perl6 support for JVM
     - fix overlayfs maintenance for kernel >= 3.18
     - fix a lot of license QA issues with Yocto 1.8+
@@ -55,7 +56,9 @@ Revision history for HomePilot
     - strongly reduce output of initoverlay (mount, migrate) when nothing to do
     - tidy curie u-boot env
     - tweak bohr/bohr-update machine conf for future updates (stop misusing kirkwood.inc for bohr related kernel settings, ...)
-    - import z-way-server to bitbucket
+    - z-way-server:
+        * import into bitbucket
+        * move run scripts into zway-blob recipe
     - avoid unnecessary u-boot/u-boot-env updates
     - fix image dependencies vs. prd-flash RDEPENDS
     - prd-flash knows when to update u-boot
@@ -66,13 +69,15 @@ Revision history for HomePilot
     - handle errors uniq way in prd-flash, fix typo in HP1 Software version approval
     - fix unfortunate horizontal line in psplash
     - fix samba4 packaging and integration
-    - hp-blob: build within Yocto from git repository
-    - hp-blob: remove atd dependency for restoring backups
+    - hp-blob
+        * build within Yocto from git repository
+        * remove atd dependency for restoring backups
+        * add timer around HP DB migrator
+        * fix migrator startup: don't run migration in background
     - ledctrl: add support for bohr, fix minor (unlikely) issues in current behavior
     - udev-hp: control LED's on curie and bohr
     - sudo/permissions: restrict permissions to control services a bit finer
     - linux-bohr: add required firmware for some wifi modules and enable bt driver
-    - hp-blob: add timer around HP DB migrator
     - prd-flash: adopt bohr LED's as negotiated with Per
 
 4.0.28 2015-11-12
