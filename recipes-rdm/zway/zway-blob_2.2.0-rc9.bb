@@ -9,6 +9,8 @@ exec_prefix="/opt/z-way"
 SRC_URI = "\
     file://config.xml \
     file://configjson-06b2d3b23dce96e1619d2b53d6c947ec.json \
+    file://z-way.run \
+    file://z-way-log.run \
 "
 
 SRC_URI_append_mx6 = "\
@@ -22,19 +24,23 @@ SRC_URI_append_kirkwood = "\
 SRCREV_kirkwood = "192685109407cae5ee68d597c55f654c8cd36c6a"
 
 DEPENDS = "v8 hp2-base"
+RDEPENDS_${PN} += "daemontools"
 RDEPENDS_${PN} += "hp2-base"
 RDEPENDS_${PN} += "libarchive"
+RDEPENDS_${PN} += "libcurl"
 RDEPENDS_${PN} += "libxml2"
 RDEPENDS_${PN} += "openssl"
-RDEPENDS_${PN} += "yajl"
-RDEPENDS_${PN} += "libcurl"
 RDEPENDS_${PN} += "v8"
+RDEPENDS_${PN} += "yajl"
 RDEPENDS_${PN} += "zlib"
 
 S = "${WORKDIR}/git/z-way-server"
 
 INST_DEST_PREFIX="${exec_prefix}"
 CONF_DEST_PREFIX="/home/homepilot/z-way"
+
+HOMEPILOT_USER="homepilot"
+SVC_SERVICES="${sysconfdir}/daemontools/service"
 
 ZW_TTY_DEVICE = "/dev/ttyZWave"
 
@@ -46,10 +52,8 @@ do_install() {
 	install -d -o homepilot -g users ${D}${CONF_DEST_PREFIX}/storage
 
         # Extract tarball into INST_DEST_PREFIX dir of target
-	(cd ${S} && tar cf - .) | (cd ${D}${INST_DEST_PREFIX} && tar xf -)
-	rm -f ${D}${INST_DEST_PREFIX}/automation/.gitignore \
-	      ${D}${INST_DEST_PREFIX}/htdocs/z-way-ha-tv/.gitignore \
-	      ${D}${INST_DEST_PREFIX}/htdocs/expert/.gitignore
+    (cd ${S} && tar cf - *) | (cd ${D}${INST_DEST_PREFIX} && tar xf -)
+    rm -f ${D}${INST_DEST_PREFIX}/htdocs/expert/.gitignore
 
 	# Move config directory into CONF_DEST_PREFIX dir of target
 	mv ${D}${INST_DEST_PREFIX}/config ${D}${CONF_DEST_PREFIX}
@@ -79,9 +83,13 @@ do_install() {
 	rm *.xml
 	python2 MakeIndex.py
 
-	# Fix permissions
-	# access("automation/modules/ZWave/index.js", R_OK) = -1 EACCES (Permission denied)
-	chmod 644 ${D}${INST_DEST_PREFIX}/automation/modules/ZWave/index.js
+    # Configure startup
+    install -d ${D}${SVC_SERVICES}/z-way
+    install -d ${D}${SVC_SERVICES}/z-way/log
+    install -m 0755 ${WORKDIR}/z-way.run ${D}${SVC_SERVICES}/z-way/run
+    install -m 0755 ${WORKDIR}/z-way-log.run ${D}${SVC_SERVICES}/z-way/log/run
+    sed -i -e "s,@ZWAY_BASE@,${INST_DEST_PREFIX},g" -e "s,@HOMEPILOT_USER@,${HOMEPILOT_USER},g" ${D}${SVC_SERVICES}/z-way/run
+    touch ${D}${SVC_SERVICES}/z-way/down
 
 	chown -R root:root ${D}${INST_DEST_PREFIX} ${D}${sysconfdir}
 	chown -R homepilot:users ${D}${CONF_DEST_PREFIX}
@@ -100,7 +108,6 @@ FILES_${PN}_append = "\
 	${INST_DEST_PREFIX}/automation \
 	${INST_DEST_PREFIX}/htdocs \
 	${INST_DEST_PREFIX}/translations \
-	${INST_DEST_PREFIX}/libs/_keep \
 	${INST_DEST_PREFIX}/libs/lib*.so \
 	${INST_DEST_PREFIX}/modules/mod*.so \
 	${INST_DEST_PREFIX}/ZDDX \
