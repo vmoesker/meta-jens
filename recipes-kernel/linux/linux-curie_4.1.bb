@@ -23,11 +23,8 @@ SRC_URI_append = " \
 COMPATIBLE_MACHINE = "(curie)"
 
 do_install_append () {
-    echo "blacklist cfg80211" >${WORKDIR}/blacklist-cfg80211.conf
     echo "blacklist ahci_imx" >${WORKDIR}/blacklist-ahci_imx.conf
-    install -m 644 ${WORKDIR}/blacklist-cfg80211.conf ${D}${sysconfdir}/modprobe.d/
     install -m 644 ${WORKDIR}/blacklist-ahci_imx.conf ${D}${sysconfdir}/modprobe.d/
 }
 
 FILES_kernel-module-ahci-imx += "${sysconfdir}/modprobe.d/blacklist-ahci_imx.conf"
-FILES_kernel-module-cfg80211 += "${sysconfdir}/modprobe.d/blacklist-cfg80211.conf"

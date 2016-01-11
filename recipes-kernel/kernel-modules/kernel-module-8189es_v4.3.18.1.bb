@@ -17,13 +17,9 @@ S = "${WORKDIR}/git"
 
 do_compile_append () {
     echo "options 8189es rtw_power_mgnt=0" >${WORKDIR}/8189es.conf
-    echo "blacklist 8189es" >${WORKDIR}/blacklist-8189es.conf
 }
 
 do_install_append () {
     install -d ${D}${sysconfdir}/modprobe.d/
     install -m 644 ${WORKDIR}/8189es.conf ${D}${sysconfdir}/modprobe.d/
-    install -m 644 ${WORKDIR}/blacklist-8189es.conf ${D}${sysconfdir}/modprobe.d/
 }
-
-FILES_${PN} += "${sysconfdir}/modprobe.d/blacklist-8189es.conf"

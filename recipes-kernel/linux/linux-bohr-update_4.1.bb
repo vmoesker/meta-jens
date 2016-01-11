@@ -3,8 +3,8 @@
 
 # Copyright (C) 2015 Jens Rehsack
 
-SUMMARY = "Linux Kernel for Bohr Board"
-DESCRIPTION = "Linux Kernel for Bohr Board"
+SUMMARY = "Linux Kernel for Bohr Board, Update USB Stick configuration"
+DESCRIPTION = "Linux Kernel for Bohr Board, Update USB Stick configuration"
 LICENSE = "GPL-2.0"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
@@ -69,20 +69,3 @@ do_configure_prepend() {
 		printf "%s%s" +g $head > ${S}/.scmversion
 	fi
 }
-
-do_compile_append () {
-    echo "blacklist cfg80211" >${WORKDIR}/blacklist-cfg80211.conf
-    echo "blacklist libertas_sdio" >${WORKDIR}/blacklist-libertas_sdio.conf
-    echo "blacklist mwifiex_sdio" >${WORKDIR}/blacklist-mwifiex_sdio.conf
-}
-
-do_install_append () {
-    install -d ${D}${sysconfdir}/modprobe.d/
-    install -m 644 ${WORKDIR}/blacklist-cfg80211.conf ${D}${sysconfdir}/modprobe.d/
-    install -m 644 ${WORKDIR}/blacklist-libertas_sdio.conf ${D}${sysconfdir}/modprobe.d/
-    install -m 644 ${WORKDIR}/blacklist-mwifiex_sdio.conf ${D}${sysconfdir}/modprobe.d/
-}
-
-FILES_kernel-module-cfg80211 += "${sysconfdir}/modprobe.d/blacklist-cfg80211.conf"
-FILES_kernel-module-libertas-sdio += "${sysconfdir}/modprobe.d/blacklist-libertas_sdio.conf"
-FILES_kernel-module-mwifiex-sdio += "${sysconfdir}/modprobe.d/blacklist-mwifiex_sdio.conf"
