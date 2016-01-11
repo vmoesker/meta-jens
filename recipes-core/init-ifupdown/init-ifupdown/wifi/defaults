@@ -1,3 +1,0 @@
-wifi_module="8189es"
-wifi_modprobe_loaded_path="/etc/modules-load.d/wifi.conf"
-wifi_if=wlan0

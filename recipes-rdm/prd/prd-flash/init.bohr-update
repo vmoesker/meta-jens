@@ -23,8 +23,10 @@ load_wifi () {
     modprobe libertas_sdio
     modprobe mwifiex_sdio
     sleep 2
-    test -d /sys/class/net/mlan0 || trigger_fail
-    WLAN_ADDR=`cat /sys/class/net/mlan0/address | sed -e 's/://g'`
+    # no udev on update-usb-stick
+    WLAN_DEV=`echo echo /sys/class/net/[mw]lan0`
+    test -n "${WLAN_DEV}" -a -d "${WLAN_DEV}" || trigger_fail
+    WLAN_ADDR=`cat "${WLAN_DEV}/address" | sed -e 's/://g'`
 }
 
 trigger_root () {
