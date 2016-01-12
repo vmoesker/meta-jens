@@ -53,6 +53,9 @@ RDM_INSTALL = "${RDM_BASE_INSTALL} \
 	ksm-init \
 	openvpn \
 "
+RDM_INSTALL_append_bohr = "\
+	udev-rules-bohr \
+"
 RDM_INSTALL_append_curie = "\
 	udev-rules-imx \
 	libntfs-3g \

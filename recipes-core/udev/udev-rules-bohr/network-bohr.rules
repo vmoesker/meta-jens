@@ -1,0 +1,5 @@
+# matches the devpath of the event device
+#SUBSYSTEM=="net", DEVPATH=="/devices/platform/ocp@*/*.mvsdio/mmc_host/mmc0/mmc0*/mmc0*/net/*", NAME="wlan%n"
+
+# matches the name of the event device
+SUBSYSTEM=="net", KERNEL=="mlan*", NAME="wlan%n"
