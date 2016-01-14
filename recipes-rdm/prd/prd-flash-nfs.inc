@@ -8,5 +8,5 @@ SRC_URI_append = "\
 "
 
 do_install_append () {
-    install -m 0644 ${WORKDIR}/algorithms ${D}${libexecdir}/${MACHINE}
+    install -m 0644 ${WORKDIR}/algorithms ${D}${libexecdir}
 }

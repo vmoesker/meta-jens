@@ -85,8 +85,8 @@ do_compile () {
         ALL_ROOT_DEV_NAMES_S=" "
     done
 
-    sed -i -e "s,@ARGV0@,${sysconfdir}/init.d/flash-device.sh,g" -e "s,@LIBEXEC[@],${libexecdir}/${MACHINE},g" \
-        -e "s,@LEDCTRL[@],${libdir}/ledctrl,g" \
+    sed -i -e "s,@ARGV0@,${sysconfdir}/init.d/flash-device.sh,g" \
+        -e "s,@LIBEXEC[@],${libexecdir},g" -e "s,@LEDCTRL[@],${libdir}/ledctrl,g" \
         -e "s/@MACHINE[@]/${MACHINE}/g" -e "s,@AVAIL_ROOT_DEVS[@],${AVAIL_ROOT_DEVS},g" \
         -e "s,@INTERNAL_ROOT_DEV[@],${INTERNAL_ROOT_DEV},g" -e "s,@WANTED_ROOT_DEV[@],${WANTED_ROOT_DEV},g" \
         -e "s,@ROOT_DEV_TYPE[@],${ROOT_DEV_TYPE},g" -e "s,@ROOT_DEV_SEP[@],${ROOT_DEV_SEP},g" \
@@ -97,35 +97,32 @@ do_compile () {
 
 do_install () {
     install -d ${D}${sysconfdir}/init.d
-    install -d ${D}${libexecdir}/${MACHINE}
+    install -d ${D}${libexecdir}
 
     install -m 0755 ${WORKDIR}/flash-device.sh ${D}${sysconfdir}/init.d
-    install -m 0644 ${WORKDIR}/hw.${MACHINE} ${D}${libexecdir}/${MACHINE}/hw
-    install -m 0644 ${WORKDIR}/init.${MACHINE} ${D}${libexecdir}/${MACHINE}/init
+    install -m 0644 ${WORKDIR}/hw.${MACHINE} ${D}${libexecdir}/hw
+    install -m 0644 ${WORKDIR}/init.${MACHINE} ${D}${libexecdir}/init
 
     update-rc.d -r ${D} flash-device.sh start 25 3 5 .
 }
 
 do_install_append_curie () {
-    install -d ${D}${libexecdir}/${MACHINE}
-    test "${WANTED_ROOT_DEV}" = "nfs" && install -m 0644 ${WORKDIR}/post.${MACHINE} ${D}${libexecdir}/${MACHINE}/post
-    install -m 0644 ${WORKDIR}/init.ssd ${D}${libexecdir}/${MACHINE}
+    test "${WANTED_ROOT_DEV}" = "nfs" && install -m 0644 ${WORKDIR}/post.${MACHINE} ${D}${libexecdir}/post
+    install -m 0644 ${WORKDIR}/init.ssd ${D}${libexecdir}
 }
 
 do_install_append_bohr () {
-    install -d ${D}${libexecdir}/${MACHINE}
-    install -m 0644 ${WORKDIR}/init.mtd ${D}${libexecdir}/${MACHINE}
-    install -m 0644 ${WORKDIR}/init.ssd ${D}${libexecdir}/${MACHINE}
-    test "${WANTED_ROOT_DEV}" = "nfs" && install -m 0644 ${WORKDIR}/post.${MACHINE} ${D}${libexecdir}/${MACHINE}/post
-    install -m 0644 ${WORKDIR}/ubinize.cfg ${D}${libexecdir}/${MACHINE}
+    install -m 0644 ${WORKDIR}/init.mtd ${D}${libexecdir}
+    install -m 0644 ${WORKDIR}/init.ssd ${D}${libexecdir}
+    test "${WANTED_ROOT_DEV}" = "nfs" && install -m 0644 ${WORKDIR}/post.${MACHINE} ${D}${libexecdir}/post
+    install -m 0644 ${WORKDIR}/ubinize.cfg ${D}${libexecdir}
 }
 
 do_install_append_bohr-update () {
-    install -d ${D}${libexecdir}/${MACHINE}
-    install -m 0644 ${WORKDIR}/init.mtd ${D}${libexecdir}/${MACHINE}
-    install -m 0644 ${WORKDIR}/post.${MACHINE} ${D}${libexecdir}/${MACHINE}/post
-    install -m 0644 ${WORKDIR}/ubinize.cfg ${D}${libexecdir}/${MACHINE}
-    install -m 0644 ${WORKDIR}/algorithms ${D}${libexecdir}/${MACHINE}
+    install -m 0644 ${WORKDIR}/init.mtd ${D}${libexecdir}
+    install -m 0644 ${WORKDIR}/post.${MACHINE} ${D}${libexecdir}/post
+    install -m 0644 ${WORKDIR}/ubinize.cfg ${D}${libexecdir}
+    install -m 0644 ${WORKDIR}/algorithms ${D}${libexecdir}
 }
 
-FILES_${PN} += "${libexecdir}/${MACHINE}"
+FILES_${PN} += "${libexecdir}"
