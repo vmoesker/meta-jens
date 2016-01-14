@@ -53,7 +53,6 @@ RDEPENDS_${PN}_append_mx6 = "\
 
 RDEPENDS_${PN}_append_kirkwood = "\
     mtd-utils \
-    mtd-utils-jffs2 \
     mtd-utils-ubifs \
     mtd-utils-misc \
     u-boot-fw-utils \
