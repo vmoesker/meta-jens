@@ -79,6 +79,7 @@ Revision history for HomePilot
     - sudo/permissions: restrict permissions to control services a bit finer
     - linux-bohr: add required firmware for some wifi modules and enable bt driver
     - prd-flash: adopt bohr LED's as negotiated with Per
+    - ensure WiFi on HP1 is always called wlan%n
 
 4.0.28 2015-11-12
     - remove collectd-graphs
