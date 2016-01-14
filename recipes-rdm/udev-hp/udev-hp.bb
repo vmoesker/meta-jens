@@ -5,9 +5,10 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 
 PR = "r0"
 
-SRC_URI = "file://hp2radio.rules \
-           file://update_tty_df.sh \
-           file://update_tty_zwave.sh \
+SRC_URI = "\
+    file://hp2radio.rules \
+    file://update_tty_df.sh \
+    file://update_tty_zwave.sh \
 "
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
