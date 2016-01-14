@@ -1,4 +1,6 @@
 #!/bin/sh
 
+. @LEDCTRL@/ledctrl
+
 # Enable LED
-echo 255 > /sys/class/leds/wifi/brightness
+led_wifi

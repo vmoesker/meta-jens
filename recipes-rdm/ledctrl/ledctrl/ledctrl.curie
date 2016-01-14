@@ -1,0 +1,104 @@
+led_error () {
+    echo 0 >/sys/class/leds/error/brightness
+    echo heartbeat >/sys/class/leds/error/trigger
+}
+
+led_failure () {
+    echo 0 >/sys/class/leds/boot/brightness
+    echo heartbeat >/sys/class/leds/boot/trigger
+    echo 255 >/sys/class/leds/error/brightness
+}
+
+led_recover_update () {
+    echo 0 >/sys/class/leds/boot/brightness
+    echo 0 >/sys/class/leds/error/brightness
+    echo 0 >/sys/class/leds/user2/brightness
+    echo heartbeat >/sys/class/leds/user2/trigger
+}
+
+led_root_update () {
+    echo 0 >/sys/class/leds/boot/brightness
+    echo 0 >/sys/class/leds/error/brightness
+    echo 0 >/sys/class/leds/user1/brightness
+    echo heartbeat >/sys/class/leds/user1/trigger
+}
+
+silence_recover_update () {
+    echo none >/sys/class/leds/user2/trigger
+    echo 0 >/sys/class/leds/user2/brightness
+}
+
+silence_root_update () {
+    echo none >/sys/class/leds/user1/trigger
+    echo 0 >/sys/class/leds/user1/brightness
+}
+
+led_duofern () {
+    echo 0 >/sys/class/leds/user2/brightness
+    echo 255 >/sys/class/leds/user2/brightness
+}
+
+led_zwave () {
+    echo 0 >/sys/class/leds/user1/brightness
+    echo 255 >/sys/class/leds/user1/brightness
+}
+
+silence_duofern () {
+    echo none >/sys/class/leds/user2/trigger
+    echo 0 >/sys/class/leds/user2/brightness
+}
+
+silence_zwave () {
+    echo none >/sys/class/leds/user1/trigger
+    echo 0 >/sys/class/leds/user1/brightness
+}
+
+led_wifi () {
+    echo 0 > /sys/class/leds/wifi/brightness
+    echo 255 > /sys/class/leds/wifi/brightness
+}
+
+silence_wifi () {
+    echo 0 > /sys/class/leds/wifi/brightness
+}
+
+led_bootup () {
+    echo none >/sys/class/leds/boot/trigger
+    echo 0 >/sys/class/leds/boot/brightness
+}
+
+led_bootdown () {
+    echo 0 >/sys/class/leds/boot/brightness
+    echo 255 >/sys/class/leds/boot/brightness
+    echo 0 >/sys/class/leds/error/brightness
+    echo 255 >/sys/class/leds/error/brightness
+}
+
+led_bootgodown () {
+    echo 0 >/sys/class/leds/boot/brightness
+    echo 255 >/sys/class/leds/boot/brightness
+    echo heartbeat >/sys/class/leds/boot/trigger
+}
+
+led_test_s () {
+    for led in user2 user1
+    do
+	echo 0 >/sys/class/leds/${led}/brightness
+	echo 255 >/sys/class/leds/${led}/brightness
+	sleep 1
+	echo 0 >/sys/class/leds/${led}/brightness
+    done
+}
+
+led_test_m () {
+    for led in error wifi boot
+    do
+	echo 0 >/sys/class/leds/${led}/brightness
+	echo 255 >/sys/class/leds/${led}/brightness
+	sleep 1
+	echo 0 >/sys/class/leds/${led}/brightness
+    done
+
+    echo 255 >/sys/class/leds/boot/brightness
+    echo heartbeat >/sys/class/leds/boot/trigger
+}

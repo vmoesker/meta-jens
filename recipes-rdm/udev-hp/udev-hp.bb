@@ -10,19 +10,14 @@ SRC_URI = "file://hp2radio.rules \
            file://update_tty_zwave.sh \
 "
 
-DUOFERN_LED_curie = "user2"
-DUOFERN_LED_bohr = "guruplug:green:health"
-ZWAVE_LED_curie = "user1"
-ZWAVE_LED_bohr = "guruplug:green:wmode"
-
 PACKAGE_ARCH = "${MACHINE_ARCH}"
+
+RDEPENDS_${PN} = "ledctrl"
 
 do_compile() {
     cp ${WORKDIR}/update_tty_df.sh ${B}/update_tty_df.sh
-    sed -i -e "s,@DUOFERN_LED@,${DUOFERN_LED},g" ${B}/update_tty_df.sh
-
     cp ${WORKDIR}/update_tty_zwave.sh ${B}/update_tty_zwave.sh
-    sed -i -e "s,@ZWAVE_LED@,${ZWAVE_LED},g" ${B}/update_tty_zwave.sh
+    sed -i -e "s,@LEDCTRL[@],${libdir}/ledctrl,g" ${B}/update_tty_df.sh ${B}/update_tty_zwave.sh
 
     cp ${WORKDIR}/hp2radio.rules ${B}/hp2radio.rules
 }

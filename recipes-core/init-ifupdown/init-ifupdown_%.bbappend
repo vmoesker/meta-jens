@@ -4,6 +4,10 @@ RRECOMMENDS_${PN} += "ethtool"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
+RDEPENDS_${PN}_append = "\
+    ledctrl \
+"
+
 SRC_URI += "\
     file://eth/pre_up.sh \
     file://eth/post_up.sh \
@@ -14,6 +18,10 @@ SRC_URI += "\
     file://wifi/pre_down.sh \
     file://wifi/post_down.sh \
 "
+
+do_compile_append () {
+    sed -i -e "s,@LEDCTRL[@],${libdir}/ledctrl,g" ${WORKDIR}/eth/*.sh ${WORKDIR}/wifi/*.sh
+}
 
 do_install_append () {
     install -d ${D}${sysconfdir}/network/eth

@@ -3,6 +3,7 @@
 # Called from udev
 #
 # Attempt to symlink radio tty's for DuoFern sticks
+. @LEDCTRL@/ledctrl
 
 tty_df="/dev/ttyDuoFern"
 
@@ -13,7 +14,7 @@ then
     echo "DF ADD: $DEVPATH on $(date)" >> /tmp/update_tty
     echo "DF ADD: $tty" >> /tmp/update_tty
     ln -sf $tty ${tty_df}
-    echo 255 >/sys/class/leds/@DUOFERN_LED@/brightness
+    led_duofern
 elif [ "$ACTION" = "remove" ] && [ -n "$DEVNAME" ]
 then
     # echo "DF REM from $DEVNAME on $(date)" >> /tmp/update_tty

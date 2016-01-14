@@ -1,8 +1,10 @@
 #!/bin/sh
 
-echo 0 > /sys/class/leds/wifi/brightness
+. @LEDCTRL@/ledctrl
+
+silence_wifi
 if test `cat /sys/class/net/eth0/carrier` -eq 0
 then
 	logger -s "eth0 got no-carrier ..."
-	echo 255 > /sys/class/leds/error/brightness
+	led_error
 fi

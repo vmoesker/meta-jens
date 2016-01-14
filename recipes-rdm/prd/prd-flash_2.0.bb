@@ -40,9 +40,11 @@ SRC_URI_append_bohr-update = "\
     file://algorithms \
 "
 
+# append to the base setting from ${OPN}-${WANTED_ROOT_DEV}.inc
 RDEPENDS_${PN}_append = "\
     perl-module-version \
     util-linux \
+    ledctrl \
 "
 
 RDEPENDS_${PN}_append_mx6 = "\
@@ -84,10 +86,11 @@ do_compile () {
     done
 
     sed -i -e "s,@ARGV0@,${sysconfdir}/init.d/flash-device.sh,g" -e "s,@LIBEXEC[@],${libexecdir}/${MACHINE},g" \
+        -e "s,@LEDCTRL[@],${libdir}/ledctrl,g" \
         -e "s/@MACHINE[@]/${MACHINE}/g" -e "s,@AVAIL_ROOT_DEVS[@],${AVAIL_ROOT_DEVS},g" \
         -e "s,@INTERNAL_ROOT_DEV[@],${INTERNAL_ROOT_DEV},g" -e "s,@WANTED_ROOT_DEV[@],${WANTED_ROOT_DEV},g" \
         -e "s,@ROOT_DEV_TYPE[@],${ROOT_DEV_TYPE},g" -e "s,@ROOT_DEV_SEP[@],${ROOT_DEV_SEP},g" \
-	-e "s,@BOOTABLE_ROOT_DEVS[@],${BOOTABLE_ROOT_DEVS},g" -e "s,@FINALIZE_FLASH[@],${FINALIZE_FLASH},g" \
+        -e "s,@BOOTABLE_ROOT_DEVS[@],${BOOTABLE_ROOT_DEVS},g" -e "s,@FINALIZE_FLASH[@],${FINALIZE_FLASH},g" \
         $ALL_ROOT_DEV_NAMES \
         ${WORKDIR}/flash-device.sh ${WORKDIR}/hw.${MACHINE} ${WORKDIR}/init.*
 }

@@ -1,6 +1,6 @@
 #!/bin/sh
 ### BEGIN INIT INFO
-# Provides:             ledplay
+# Provides:             ledplay_m
 # Required-Start:       $local_fs
 # Required-Stop:      $local_fs
 # Default-Start:
@@ -8,9 +8,7 @@
 # Short-Description:  Enables/Disables each LED once at boot
 ### END INIT INFO
 
-echo 0 >/sys/class/leds/boot/brightness
-echo 255 >/sys/class/leds/boot/brightness
-echo 0 >/sys/class/leds/error/brightness
-echo 255 >/sys/class/leds/error/brightness
+. @LIBEXEC@/ledctrl
+led_test_m
 
 exit 0

@@ -8,9 +8,7 @@
 # Short-Description:  Enables/Disables each LED once at boot
 ### END INIT INFO
 
-echo 0 >/sys/class/leds/guruplug:red:health/brightness
-echo 255 >/sys/class/leds/guruplug:red:health/brightness
-echo 0 >/sys/class/leds/guruplug:red:wmode/brightness
-echo 255 >/sys/class/leds/guruplug:red:wmode/brightness
+. @LIBEXEC@/ledctrl
+led_bootgodown
 
 exit 0

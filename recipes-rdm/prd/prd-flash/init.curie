@@ -1,41 +1,29 @@
+. @LEDCTRL@/ledctrl
+
 trigger_error () {
-    echo heartbeat >/sys/class/leds/error/trigger
+    led_error
     exit 1
 }
 
 trigger_fail () {
-    echo none >/sys/class/leds/user2/trigger
-    echo 0 >/sys/class/leds/user2/brightness
-    echo none >/sys/class/leds/user1/trigger
-    echo 0 >/sys/class/leds/user1/brightness
-
-    echo heartbeat >/sys/class/leds/boot/trigger
-    echo 255 >/sys/class/leds/error/brightness
+    led_failure
 
     poweroff
     exit 1 # safety first
 }
 
 trigger_recover () {
-    echo 0 >/sys/class/leds/boot/brightness
-    echo 0 >/sys/class/leds/error/brightness
-    echo 0 >/sys/class/leds/user2/brightness
-    echo heartbeat >/sys/class/leds/user2/trigger
+    led_recover_update
 }
 
 trigger_root () {
-    echo 0 >/sys/class/leds/boot/brightness
-    echo 0 >/sys/class/leds/error/brightness
-    echo 0 >/sys/class/leds/user1/brightness
-    echo heartbeat >/sys/class/leds/user1/trigger
+    led_root_update
 }
 
 silence_recover () {
-    echo none >/sys/class/leds/user2/trigger
-    echo 0 >/sys/class/leds/user2/brightness
+    silence_recover_update
 }
 
 silence_root () {
-    echo none >/sys/class/leds/user1/trigger
-    echo 0 >/sys/class/leds/user1/brightness
+    silence_root_update
 }

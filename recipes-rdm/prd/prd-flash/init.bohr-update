@@ -1,22 +1,19 @@
+. @LEDCTRL@/ledctrl
+
 trigger_error () {
-    echo heartbeat > /sys/class/leds/guruplug:red:wmode/trigger
+    led_error
     exit 1
 }
 
 trigger_fail () {
-    echo none >/sys/class/leds/guruplug:green:wmode/trigger
-    echo 0 >/sys/class/leds/guruplug:green:wmode/brightness
-
-    echo 255 > /sys/class/leds/guruplug:red:wmode/brightness
+    led_failure
 
     poweroff
     exit 1 # safety first
 }
 
 trigger_recover () {
-    echo 0 > /sys/class/leds/guruplug:red:wmode/brightness
-    echo 0 >/sys/class/leds/guruplug:green:wmode/brightness
-    echo heartbeat >/sys/class/leds/guruplug:green:wmode/trigger
+    led_recover_update
 }
 
 load_wifi () {
@@ -43,9 +40,7 @@ trigger_root () {
 	avail_hp_major_version=$(source /run/media/ubi0_0/etc/serverbox/version; echo "${MAJOR}")
 	test "${avail_hp_major_version}" -lt 3 && trigger_fail
 
-	echo 0 > /sys/class/leds/guruplug:red:health/brightness
-	echo 0 >/sys/class/leds/guruplug:green:health/brightness
-	echo heartbeat >/sys/class/leds/guruplug:green:health/trigger
+	led_root_update
 
 	flash_erase /dev/mtd0 0 0
 	flash_uboot
@@ -59,17 +54,14 @@ trigger_root () {
 	wrc1key="`fw_printenv -n wrc1key`"
 	wrc1sha="`fw_printenv -n wrc1sha`"
 
-	echo 0 >/sys/class/leds/guruplug:green:health/brightness
-	echo heartbeat >/sys/class/leds/guruplug:green:health/trigger
+	led_root_update
     fi
 }
 
 silence_recover () {
-    echo none >/sys/class/leds/guruplug:green:wmode/trigger
-    echo 0 >/sys/class/leds/guruplug:green:wmode/brightness
+    silence_recover_update
 }
 
 silence_root () {
-    echo none >/sys/class/leds/guruplug:green:health/trigger
-    echo 0 >/sys/class/leds/guruplug:green:health/brightness
+    silence_root_update
 }
