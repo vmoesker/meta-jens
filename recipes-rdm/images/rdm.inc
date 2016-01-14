@@ -3,7 +3,7 @@ RDM_ESSENTIALS = "\
 	acl \
 	e2fsprogs \
 	e2fsprogs-tune2fs \
-	ifplugd \
+	busybox-ifplugd \
 	nfs-utils-client \
 	ntp \
 	ntpdate \
