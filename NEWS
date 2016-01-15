@@ -59,6 +59,7 @@ Revision history for HomePilot
     - z-way-server:
         * import into bitbucket
         * move run scripts into zway-blob recipe
+	* added Version number:	v2.2.1-rc3
     - avoid unnecessary u-boot/u-boot-env updates
     - fix image dependencies vs. prd-flash RDEPENDS
     - prd-flash knows when to update u-boot
