@@ -59,7 +59,7 @@ Revision history for HomePilot
     - z-way-server:
         * import into bitbucket
         * move run scripts into zway-blob recipe
-	* added Version number:	v2.2.1-rc3
+        * added Version number: v2.2.1-rc3
     - avoid unnecessary u-boot/u-boot-env updates
     - fix image dependencies vs. prd-flash RDEPENDS
     - prd-flash knows when to update u-boot
@@ -442,13 +442,13 @@ Revision history for HomePilot
 3.11.25 2015-02-03
     - improve xbmc configuration
         * increase buffer for playing streams
-	    * tested with local media, smb and ftp streams
-	    * set limit to 32 MB because more cache was never used by xbmc
+        * tested with local media, smb and ftp streams
+        * set limit to 32 MB because more cache was never used by xbmc
         * correct deprecated parameter
     - update hp-blob
         * reduced backup size
 
-3.11.24	2015-02-03
+3.11.24 2015-02-03
     - Bail out flash procedure when already running
     - Update update service to avoid end-user issues
     - Revert "reboot immediately on kernel panic"
@@ -465,11 +465,11 @@ Revision history for HomePilot
 
 3.11.23 2015-01-30
     - update hp-blob
-	* Removed SAC scheduling.
-	* 1-channel-actor acts like 2-channel-actor on automation-fixing.
-	* bug fix firmware ui: deinstall button reappears after click
-	* Removed Decor.ScheduleSac from propr. sensors.
-	* 1 channel actor acts like universal actor on automation fixing.
+        * Removed SAC scheduling.
+        * 1-channel-actor acts like 2-channel-actor on automation-fixing.
+        * bug fix firmware ui: deinstall button reappears after click
+        * Removed Decor.ScheduleSac from propr. sensors.
+        * 1 channel actor acts like universal actor on automation fixing.
     - fix wpa_supplicant startup
     - update nginx-legal to 0.2
         * remove oracle binary code license
@@ -477,7 +477,7 @@ Revision history for HomePilot
     - hide nslookup output on boot
     - update udev rules to support new z-wave stick
 
-3.11.22	2015-01-26
+3.11.22 2015-01-26
     - force /etc/daemontools into tmpfs
     - switch back to wext driver to stabilize wifi
     - enable ext2-options for underlying fs to improve
@@ -485,15 +485,15 @@ Revision history for HomePilot
     - update hp2sm: add z-wave warning, fix memory leak in plackup
     - update hp-blob: Automations been executed, though days didn't fit.
     - update xbmc-rdm-hp-addon
-	* Auto update for sensors overview
-	* Fix update call for sensor windows
-	* Update values on sensor window
-	* Fix navigation for favorites
-	* Fix inverted icons for switches
-	* Fix scene navigation
-	* Add new fanart
-	* Add License file
-	* Clean up changelog
+        * Auto update for sensors overview
+        * Fix update call for sensor windows
+        * Update values on sensor window
+        * Fix navigation for favorites
+        * Fix inverted icons for switches
+        * Fix scene navigation
+        * Add new fanart
+        * Add License file
+        * Clean up changelog
     - fix xbmc startup to avoid fb-issues when two processes block it
     - set default xbmc settingslevel to easy
 
@@ -508,9 +508,9 @@ Revision history for HomePilot
     - add start-stop-daemon to startup scripts
     - disable tty1 to remove login screen
     - update hp2sm
-	* set log filename
-	* avoid capturing stdout unless required
-	* use common objects unless fresh init needed
+        * set log filename
+        * avoid capturing stdout unless required
+        * use common objects unless fresh init needed
     - delay first start of xbmc and wait until psplash is closed
     - migrate to new svn structure and move xbmc-rdm-hp-addon to github
     - enable reboot on kernel panic, kernel oops and oom
@@ -525,11 +525,11 @@ Revision history for HomePilot
     - HP1 Z-Way-config file location fix.
     - add sysdetails to log files
 
-3.11.16	2014-12-19
+3.11.16 2014-12-19
     - revert weird relic from first boot fixes
     - fix first boot (after production or update)
 
-3.11.15	2014-12-18
+3.11.15 2014-12-18
     - fix broken led startup
     - revert always enabled error led
     - fine tune stability issues from 3.11.13
@@ -548,12 +548,12 @@ Revision history for HomePilot
     - Fix Web-UI of HomePilot (Fixed datetime in config, Refactored system-time label)
     - improve effort getting correct system time at boot
 
-3.11.12	2014-12-04
+3.11.12 2014-12-04
     - add function to save current log files
     - updated zway-blob
     - Implemented updated-service for iOS- and Android-apps. 
 
-3.11.11  2014-12-03
+3.11.11 2014-12-03
     - add hostname to network configuration (fix http://homepilot/ in some networks)
     - enable error led for testing purpose
     - HP: Added Holiday Service project support.
@@ -561,42 +561,42 @@ Revision history for HomePilot
     - HP: Adjusted timings on web UI after pressing 'download'-button.
     - XBMC: update xbmc-rdm-hp-addon
 
-3.11.10	 2014-11-27
+3.11.10 2014-11-27
     - improved ntp setup
     - fixed hanging downloads
     - included hp-blob svn revision in package version
 
-3.11.9   2014-11-26
+3.11.9 2014-11-26
     - sysdetails improvment: fix startup, create and keep recent archives and minor changes
     - Change manual order in /manual
     - Fix camera motion detection: set enable flag
     - Use utf8 file encoding for homepilot
     - Workaround for reboot issue
 
-3.11.6   2014-11-23
+3.11.6 2014-11-23
     - XBMC: Use service requests for CEC adapter
     - add xbmc manual and update other manuals
     - update homepilot: fix language
     - initial de keymap support
 
-0.1.5	2014-11-20
+0.1.5 2014-11-20
     - Disable nginx accesslog
     - Fix HP backups to accept files greater than 1M (now 5M max)
     - Update hp-blob: web-ui fixes
     - Remove unused service pages
 
-0.1.4	2014-11-18
+0.1.4 2014-11-18
     - Enable Exitbutton in XBMC
     - Add changelog link in UI
     - Fix several update issues
     - Improve WR Connect: add port check, fix data and state after reboot
 
-0.1.3	2014-11-14
+0.1.3 2014-11-14
     - copy old files from shadow to use old key
     - update hp-blob
     - some WRC statistic related fixes
 
-0.1.2   2014-11-13
+0.1.2 2014-11-13
     - Implement blinking LED's on system update (instead of traffic-wise LED control)
     - Add some extensive logging to update for reboot-debugging
     - update xbmc-rdm-hp-addon
@@ -606,8 +606,8 @@ Revision history for HomePilot
     - Cleanup volatiles, user settings (homepilot) and provide rough
       template for hard-reset of overlayfs base layers.
 
-0.1.1	2014-11-10
+0.1.1 2014-11-10
     - Updated release using Yocto 1.6.2
 
-0.1.0	2014-11-07
+0.1. 2014-11-07
     - Initial release to an unsuspecting world
