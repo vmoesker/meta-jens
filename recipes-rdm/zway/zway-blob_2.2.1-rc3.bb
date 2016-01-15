@@ -14,9 +14,9 @@ SRC_URI = "\
 "
 
 SRC_URI_append_mx6 = "\
-    git://git@bitbucket.org/rdm-dev/rdm-z-way-server.git;protocol=ssh;branch=z-way-server-Linux-HomePilot2-v2.2.0-9-gd1c0cb6 \
+    git://git@bitbucket.org/rdm-dev/rdm-z-way-server;protocol=ssh;branch=z-way-server-HomePilot2-v2.2.1-rc3 \
 "
-SRCREV_mx6 = "192685109407cae5ee68d597c55f654c8cd36c6a"
+SRCREV_mx6 = "efb14d70560e4a45d225b37352f1108b37fd1096"
 
 SRC_URI_append_kirkwood = "\
     git://git@bitbucket.org/rdm-dev/rdm-z-way-server.git;protocol=ssh;branch=z-way-server-Linux-HomePilot2-v2.2.0-9-gd1c0cb6 \
