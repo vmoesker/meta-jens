@@ -1,6 +1,6 @@
 Revision history for HomePilot
 
-4.1.0
+4.1.0 2016-01-15
     - add wrc-startup-2.0 and update preferred version
     - add zway-stick-updater and add zway-stick-updater to rdm-hp2.inc
     - configure nginx proxy timeouts for hp2sm
@@ -75,6 +75,16 @@ Revision history for HomePilot
         * remove atd dependency for restoring backups
         * add timer around HP DB migrator
         * fix migrator startup: don't run migration in background
+        * Migrate Zwave devices with known properties without stick
+        * Camera Provider: skip network interfaces which doesn't support IPv4
+        * Cameras: add new devices
+        * Change did for sensor state with old actuator dids
+        * Enable ping to zwave server
+        * Scene Manager: Handle earliest and latest, insert store feature for the events dawn and dusk
+        * SceneManager: handle latest and earliest for envsensor
+        * Sensorstates: fetch sensor states instead of default
+        * Z-Wave: Block execution from scenes when automation is not on.
+        * Zwave-Devices: add mode switch for dimmers and switches
     - ledctrl: add support for bohr, fix minor (unlikely) issues in current behavior
     - udev-hp: control LED's on curie and bohr
     - sudo/permissions: restrict permissions to control services a bit finer
