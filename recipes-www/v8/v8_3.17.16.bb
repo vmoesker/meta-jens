@@ -1,8 +1,10 @@
 include v8.inc
-SRC_URI = "svn://v8.googlecode.com/svn;protocol=https;module=tags/3.17.16.2;rev=25343;path_spec=${BPN}-${PV} \
-    svn://gyp.googlecode.com/svn;module=trunk;protocol=https;rev=1501;path_spec=${BPN}-${PV}/build/gyp \
+SRC_URI = "\
+    git://git@bitbucket.org/rdm-dev/v8-armv5-serguei.git;protocol=ssh;branch=trunk;tag=${PV};destsuffix=${BPN}-${PV} \
+    git://chromium.googlesource.com/external/gyp;protocol=https;rev=f7bc250ccc4d619a1cf238db87e5979f89ff36d7;destsuffix=${BPN}-${PV}/build/gyp \
     file://v8-bignum-strict-overflow.patch;striplevel=0 \
     file://v8-sane-arm5e-handling.patch;striplevel=0 \
+    file://v8_3.17.16-weird-dirty-serguei.patch \
 "
 
 do_patch_ancient_v8 () {

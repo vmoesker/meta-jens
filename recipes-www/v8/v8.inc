@@ -48,6 +48,8 @@ do_patch_for_rpath () {
 
 do_patch[postfuncs] += " do_patch_for_rpath "
 
+CLEANBROKEN = "1"
+
 do_compile () {
     export LD="${CXX}"
     export LINK="${CXX}"
