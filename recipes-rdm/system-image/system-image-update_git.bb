@@ -13,6 +13,7 @@ file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
 
 SRC_URI = "git://github.com/rehsack/System-Image-Update.git;rev=487eff6efab05f938142e1181be4b159bd0c8d6c \
            file://run \
+           file://log.run \
 	   file://sysimg_update.json \
 	   file://system-image-update-logrotate.conf \
 "
@@ -56,7 +57,9 @@ do_install_append() {
     install -m 0644 ${WORKDIR}/sysimg_update.json ${D}${sysconfdir}
 
     install -d ${D}${SYSUPDT_SERVICE_DIR}
+    install -d ${D}${SYSUPDT_SERVICE_DIR}/log
     install -m 0755 ${WORKDIR}/run ${D}${SYSUPDT_SERVICE_DIR}/run
+    install -m 0755 ${WORKDIR}/log.run ${D}${SYSUPDT_SERVICE_DIR}/log/run
 
     install -m 755 -d ${D}${sysconfdir}/logrotate.d
     install -m 644 ${WORKDIR}/system-image-update-logrotate.conf ${D}${sysconfdir}/logrotate.d/system-image-update

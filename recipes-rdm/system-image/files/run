@@ -7,4 +7,4 @@ touch /tmp/sysimg_update.once
 export SYSTEM_IMAGE_UPDATE_DIR=/data/.update
 export SYSTEM_IMAGE_UPDATE_FLASH_DIR=/data/.flashimg
 mkdir ${SYSTEM_IMAGE_UPDATE_DIR}
-exec /usr/bin/sysimg_update
+exec /usr/bin/sysimg_update 2>&1
