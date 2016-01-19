@@ -1,1 +1,0 @@
-%ledctrl   ALL= NOPASSWD: /etc/init.d/ledgodown.sh,/etc/init.d/ledreadyonce.sh

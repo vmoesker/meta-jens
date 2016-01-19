@@ -9,7 +9,8 @@ SRC_URI = "\
     file://ledgodown.sh \
     file://ledbootdown.sh \
     file://ledreadyonce.sh \
-    file://ready-led-nonroot.sudoers \
+    file://ledctrl-helper.sh \
+    file://ledctrl-helper.sudoers \
 "
 
 SRC_URI_append_curie = "\
@@ -35,8 +36,9 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 do_compile () {
     cp ${WORKDIR}/ledplay_s.sh ${WORKDIR}/ledplay_m.sh ${WORKDIR}/ledreadyonce.sh \
         ${WORKDIR}/ledgodown.sh ${WORKDIR}/ledbootdown.sh ${WORKDIR}/ledbootup.sh \
-        ${B}/
-    sed -i -e "s,@LEDREADY_SERVICE_DIR@,${LEDREADY_SERVICE_DIR},g" -e "s,@LIBEXEC[@],${libexecdir},g" ${B}/*.sh
+        ${WORKDIR}/ledctrl-helper.sh ${WORKDIR}/ledctrl-helper.sudoers ${B}/
+    sed -i -e "s,@LEDREADY_SERVICE_DIR@,${LEDREADY_SERVICE_DIR},g" -e "s,@LIBEXEC[@],${libexecdir},g" \
+        -e "s,@BINDIR[@],${bindir},g" ${B}/*.sh ${B}/*.sudoers
 }
 
 do_install_prepend_curie () {
@@ -52,9 +54,15 @@ do_install_prepend_bohr () {
 }
 
 do_install () {
+    install -d ${D}${bindir}
+    install -m 0755 ${B}/ledctrl-helper.sh ${D}${bindir}/ledctrl-helper
+
+    # allow %ledctrl to call ledctrl-helper
+    install -d ${D}${sysconfdir}/sudoers.d
+    install -m 600 ${B}/ledctrl-helper.sudoers ${D}${sysconfdir}/sudoers.d/ledctrl-helper
+
     # install and setup SysV init scripts
     install -d ${D}${sysconfdir}/init.d
-
     install -m 0755 ${B}/ledplay_s.sh ${B}/ledplay_m.sh ${B}/ledreadyonce.sh ${B}/ledgodown.sh ${B}/ledbootdown.sh ${D}${sysconfdir}/init.d/
 
     update-rc.d -r ${D} ledplay_s.sh start 03 S .
@@ -69,10 +77,6 @@ do_install () {
     #install svc run script and make it executable
     install -m 0755 ${B}/ledbootup.sh ${D}${LEDREADY_SERVICE_DIR}/run
     touch ${D}${LEDREADY_SERVICE_DIR}/down
-
-    # allow %ledctrl to call ledgodown.sh and ledreadyonce.sh
-    install -d ${D}${sysconfdir}/sudoers.d
-    install -m 600 ${WORKDIR}/ready-led-nonroot.sudoers ${D}${sysconfdir}/sudoers.d/ready-led-nonroot
 }
 
 FILES_${PN} += "\
