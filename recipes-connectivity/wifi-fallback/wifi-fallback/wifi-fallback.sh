@@ -38,7 +38,7 @@ start)
 	test -f /sys/class/net/eth0/address && logger -s "eth0 has address `cat /sys/class/net/eth0/address`"
 	if test `cat /sys/class/net/eth0/carrier` -eq 0
 	then
-		if [ -e /sys/class/net/wlan0/address -a -f /data/.shadow/.etc/wpa_supplicant.conf ]
+		if [ -e /sys/class/net/wlan0/address -a -f /data/.shadow/.etc/wpa_supplicant.enabled -a -f /data/.shadow/.etc/wpa_supplicant.conf ]
 		then
 			logger -s "eth0 got no-carrier, starting wlan0 instead."
 			ifup wlan0 && started_wifi || logger -s "starting wlan0 failed."
