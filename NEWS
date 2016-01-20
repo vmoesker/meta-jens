@@ -11,6 +11,12 @@ Revision history for HomePilot
     - Fix wireless network configuration
     - homepilot-migrator: use log4j for logging
     - system-image-update: configure logging
+    - Replace ifplugstatus and improve wireless scanning
+    - Camera-Provider: search issue on homepilot device
+    - Visible Automation: set correct value for automation in device dialog
+    - Web-ui: Print out correct hp version via wrc
+    - Z-Wave: Handle mode state only for changes
+    - Automation button: Automation switch state not correct on device page.
 
 4.1.0 2016-01-15
     - add wrc-startup-2.0 and update preferred version
