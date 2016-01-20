@@ -2,9 +2,15 @@ Revision history for HomePilot
 
 4.1.1 2016-01-xx
     - v8: rewrite recipe's to rely on git repositories
+    - WiFi support generalized
+    - remove jffs2
+    - prd-flash: remove duplicate abstraction removing machine subdir
+    - ledctrl: harmonize with API for supported Devices
     - HomePilot_Helper_Skripte: tidy backup create/restore, use ledctrl-helper
     - homepilot-networking-manager: fix wireless configuration
     - Fix wireless network configuration
+    - homepilot-migrator: use log4j for logging
+    - system-image-update: configure logging
 
 4.1.0 2016-01-15
     - add wrc-startup-2.0 and update preferred version
