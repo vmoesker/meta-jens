@@ -17,6 +17,10 @@ Revision history for HomePilot
     - Web-ui: Print out correct hp version via wrc
     - Z-Wave: Handle mode state only for changes
     - Automation button: Automation switch state not correct on device page.
+    - favor ifplugd from busybox over stand-alone
+    - prefer state-of-the-art netlink ip configuration via iproute2 provided
+      by busybox over ifconfig's ioctl way
+    - enable domain search support (RFC3397)
 
 4.1.0 2016-01-15
     - add wrc-startup-2.0 and update preferred version
