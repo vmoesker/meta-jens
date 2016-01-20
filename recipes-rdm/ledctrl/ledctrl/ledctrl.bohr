@@ -33,21 +33,21 @@ silence_root_update () {
 }
 
 led_duofern () {
-    echo 0 >/sys/class/leds/guruplug:green:wmode/brightness
-    echo 255 >/sys/class/leds/guruplug:green:wmode/brightness
-}
-
-led_zwave () {
     echo 0 >/sys/class/leds/guruplug:green:health/brightness
     echo 255 >/sys/class/leds/guruplug:green:health/brightness
 }
 
-silence_duofern () {
+led_zwave () {
     echo 0 >/sys/class/leds/guruplug:green:wmode/brightness
+    echo 255 >/sys/class/leds/guruplug:green:wmode/brightness
+}
+
+silence_duofern () {
+    echo 0 >/sys/class/leds/guruplug:green:health/brightness
 }
 
 silence_zwave () {
-    echo 0 >/sys/class/leds/guruplug:green:health/brightness
+    echo 0 >/sys/class/leds/guruplug:green:wmode/brightness
 }
 
 led_wifi () {
