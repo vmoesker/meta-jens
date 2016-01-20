@@ -1,5 +1,8 @@
 Revision history for HomePilot
 
+4.1.1 2016-01-xx
+    - v8: rewrite recipe's to rely on git repositories
+
 4.1.0 2016-01-15
     - add wrc-startup-2.0 and update preferred version
     - add zway-stick-updater and add zway-stick-updater to rdm-hp2.inc
