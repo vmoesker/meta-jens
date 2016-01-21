@@ -14,14 +14,14 @@ SRC_URI = "\
 "
 
 SRC_URI_append_mx6 = "\
-    git://git@bitbucket.org/rdm-dev/rdm-z-way-server;protocol=ssh;branch=z-way-server-HomePilot2-v2.2.1-rc3 \
+    git://git@bitbucket.org/rdm-dev/rdm-z-way-server;protocol=ssh;branch=z-way-server-HomePilot2-v2.2.1-rc4 \
 "
-SRCREV_mx6 = "efb14d70560e4a45d225b37352f1108b37fd1096"
+SRCREV_mx6 = "eea4d03b7fe430bd3e69764d403f8dcd8c6de77a"
 
 SRC_URI_append_kirkwood = "\
-    git://git@bitbucket.org/rdm-dev/rdm-z-way-server.git;protocol=ssh;branch=z-way-server-Linux-HomePilot2-v2.2.0-9-gd1c0cb6 \
+    git://git@bitbucket.org/rdm-dev/rdm-z-way-server.git;protocol=ssh;branch=z-way-server-HomePilot1-v2.2.1-rc4 \
 "
-SRCREV_kirkwood = "192685109407cae5ee68d597c55f654c8cd36c6a"
+SRCREV_kirkwood = "1ae4441f5ec6e0673afef9f10ab290ac04c8c1c8"
 
 DEPENDS = "v8 hp2-base"
 RDEPENDS_${PN} += "daemontools"
