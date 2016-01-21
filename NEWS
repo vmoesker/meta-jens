@@ -24,6 +24,9 @@ Revision history for HomePilot
     - deploy-images: fix name extraction pattern
     - hp2sm diagnosis: support build/update information
     - hp2sm diagnosis: remove deprecated log files
+    - Migrator: Set default codeset to UTF8
+    - Start-up: remove messurement of start-up time.
+    - WRConnect: Fixed Handle state update of the WRC switch.
 
 4.1.0 2016-01-15
     - add wrc-startup-2.0 and update preferred version
