@@ -25,8 +25,10 @@ Revision history for HomePilot
     - hp2sm diagnosis: support build/update information
     - hp2sm diagnosis: remove deprecated log files
     - Migrator: Set default codeset to UTF8
-    - Start-up: remove messurement of start-up time.
-    - WRConnect: Fixed Handle state update of the WRC switch.
+    - Start-up: remove messurement of start-up time
+    - WRConnect: Fixed Handle state update of the WRC switch
+    - wpa-supplicant: replace gnutls by openssl
+    - zway-blob: update to z-way-server-v2.2.1-rc4
 
 4.1.0 2016-01-15
     - add wrc-startup-2.0 and update preferred version
