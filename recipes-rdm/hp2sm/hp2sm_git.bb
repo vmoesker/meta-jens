@@ -32,7 +32,7 @@ RDEPENDS_${PN}-dev += "devel-stacktrace-perl"
 RDEPENDS_${PN}-dev += "test-leaktrace-perl"
 RDEPENDS_${PN}-dev += "test-memory-cycle-perl"
 
-SRCREV="47ddc21df93d63d314b992375884485b3c58675e"
+SRCREV="ed4279714fc63a5d144b0f6b8fda974046a7c29e"
 PV = "0.1.0+git${SRCPV}"
 
 SRC_URI += "git://git@bitbucket.org/rdm-dev/hp2sm.git;protocol=ssh;branch=jethro"
