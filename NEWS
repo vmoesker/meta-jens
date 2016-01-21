@@ -21,6 +21,9 @@ Revision history for HomePilot
     - prefer state-of-the-art netlink ip configuration via iproute2 provided
       by busybox over ifconfig's ioctl way
     - enable domain search support (RFC3397)
+    - deploy-images: fix name extraction pattern
+    - hp2sm diagnosis: support build/update information
+    - hp2sm diagnosis: remove deprecated log files
 
 4.1.0 2016-01-15
     - add wrc-startup-2.0 and update preferred version
