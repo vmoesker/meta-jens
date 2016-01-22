@@ -205,6 +205,15 @@ then
 	logger "Cleanup deprecated xbmc folder"
 	test -d /data/.shadow/.home/xbmc/.xbmc && echo "/data/.shadow/.home/xbmc/.xbmc" >> /etc/overlay.mrproper
 
+	if [ -f /data/.shadow/.etc/modules-load.d/wifi.conf ]
+	then
+		logger "Migrate wireless configuration"
+		grep -q "^8189es$" /data/.shadow/.etc/modules-load.d/wifi.conf && touch /etc/wpa_supplicant.enabled
+
+		logger "Cleanup modules-load.d"
+		echo "/data/.shadow/.etc/modules-load.d/wifi.conf" >> /etc/overlay.mrproper
+	fi
+
 	logger "Removing update container"
 	rm -f "${IMAGE_CONTAINER}"
 	logger "Force rebuild of volatiles.cache next boot"
