@@ -1,6 +1,6 @@
 Revision history for HomePilot
 
-4.1.2 2016-0x-xx
+4.1.2 2016-01-27
     - WiFi migration to new abstraction layer for HP1 & HP2
     - Camera-Provider: Save new camera-credentials.json file
     - Migrator: handle special german characters
