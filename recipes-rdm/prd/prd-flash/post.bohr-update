@@ -12,4 +12,21 @@ post_flash () {
 	dropbearconvert openssh dropbear ${DROPBEAR_PATH}/rsa_host_key ${DROPBEAR_PATH}/dropbear_rsa_host_key
 	rm -f ${DROPBEAR_PATH}/rsa_host_key
     fi
+
+    interfaces_cfg="/data/.migrate/${WLAN_ADDR}/interfaces.cfg"
+    wpa_sup_conf="/data/.migrate/${WLAN_ADDR}/wpa_supplicant.conf"
+    if test -f "${interfaces_cfg}" -a -f "${wpa_sup_conf}" && grep -q '"wifiEnabled" : "true"' "${interfaces_cfg}"
+    then
+	ssid=$(perl -ne 'print "$1" and last if /^\s+ssid=([0-9a-fA-F]+)$/' "${wpa_sup_conf}")
+	psk=$(perl -ne 'print "$1" and last if /^\s+psk=([0-9a-fA-F]+)$/' "${wpa_sup_conf}")
+	ssidc=$(perl -e "print pack 'H*', '${ssid}'")
+	if [ -n "${ssid}" -a -n "${psk}" -a -n "${ssidc}" ]
+	then
+	    touch ${DATA_MNT}/.shadow/.etc/wpa_supplicant.enabled
+	    printf "ctrl_interface=/run/wpa_supplicant\nupdate_config=1\ncountry=EU\nnetwork={\n\t# ssid=\"%s\"\n\tssid=%s\n\tpsk=%s\n\tscan_ssid=1\n}\n" \
+		"${ssidc}" "${ssid}" "${psk}" >> ${DATA_MNT}/.shadow/.etc/wpa_supplicant.conf
+	    sync
+	fi
+    fi
+
 }

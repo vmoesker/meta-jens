@@ -21,12 +21,15 @@ load_wifi () {
     modprobe mwifiex_sdio
     sleep 2
     # no udev on update-usb-stick
-    WLAN_DEV=`echo echo /sys/class/net/[mw]lan0`
+    WLAN_DEV=`echo /sys/class/net/[mw]lan0`
     test -n "${WLAN_DEV}" -a -d "${WLAN_DEV}" || trigger_fail
     WLAN_ADDR=`cat "${WLAN_DEV}/address" | sed -e 's/://g'`
+    test -n "${WLAN_ADDR}" || trigger_fail
 }
 
 trigger_root () {
+    load_wifi
+
     if [ `fw_printenv wrc1key 2>/dev/null | wc -l` -eq 0 ]
     then
 	# no wrc1key backup'ed - fresh update starts
@@ -41,6 +44,11 @@ trigger_root () {
 	test "${avail_hp_major_version}" -lt 3 && trigger_fail
 
 	led_root_update
+
+	if mkdir -p /data/.migrate/${WLAN_ADDR}; then
+	    test -f /run/media/ubi0_0/etc/serverbox/network/interfaces.cfg && cp /run/media/ubi0_0/etc/serverbox/network/interfaces.cfg /data/.migrate/${WLAN_ADDR}/
+	    test -f /run/media/ubi0_0/etc/wpa_supplicant.conf && cp /run/media/ubi0_0/etc/wpa_supplicant.conf /data/.migrate/${WLAN_ADDR}/
+	fi
 
 	flash_erase /dev/mtd0 0 0
 	flash_uboot
