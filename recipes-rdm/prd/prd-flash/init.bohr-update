@@ -48,6 +48,13 @@ trigger_root () {
 	if mkdir -p /data/.migrate/${WLAN_ADDR}; then
 	    test -f /run/media/ubi0_0/etc/serverbox/network/interfaces.cfg && cp /run/media/ubi0_0/etc/serverbox/network/interfaces.cfg /data/.migrate/${WLAN_ADDR}/
 	    test -f /run/media/ubi0_0/etc/wpa_supplicant.conf && cp /run/media/ubi0_0/etc/wpa_supplicant.conf /data/.migrate/${WLAN_ADDR}/
+
+	    ( cd /run/media/ubi0_0 && \
+		test -f etc/hp_backups/backup.files && \
+		perl -ne 's,^/,,; -e $_ and printf "%s\n", $_ for glob $_' etc/hp_backups/backup.files > /data/.migrate/${WLAN_ADDR}/hp.files && \
+		tar czf /data/.migrate/${WLAN_ADDR}/hp.tar.gz -T /data/.migrate/${WLAN_ADDR}/hp.files && \
+		cd bin/homepilot/zwave/z-way-server-u2/config/zddx && \
+		tar czf /data/.migrate/${WLAN_ADDR}/zddx.tar.gz *DevicesData.xml )
 	fi
 
 	flash_erase /dev/mtd0 0 0

@@ -29,4 +29,34 @@ post_flash () {
 	fi
     fi
 
+    ROOTFS_MNT=${TEMP_DIR}/flashimg/root/rootfs/${ETH0_ADDR}
+    if test -f /data/.migrate/${WLAN_ADDR}/hp.tar.gz && mkdir /tmp/migrate_hp
+    then
+	mkdir /tmp/migrate_hp/data && tar xzf /data/.migrate/${WLAN_ADDR}/hp.tar.gz -C /tmp/migrate_hp/data
+	if [ -d /tmp/migrate_hp/data/etc ]
+	then
+	    test -f /data/.migrate/${WLAN_ADDR}/zddx.tar.gz && mkdir /tmp/migrate_hp/zddx && tar xzf /data/.migrate/${WLAN_ADDR}/zddx.tar.gz -C /tmp/migrate_hp/zddx
+	    mkdir -p ${ROOTFS_MNT} && mount -o ro /dev/ubiblock0_2 ${ROOTFS_MNT}
+	    test -f ${ROOTFS_MNT}/opt/homepilot/libexec/backup_restore_hp1_to_hp2.sh && \
+		mount -o bind ${DATA_MNT} ${ROOTFS_MNT}/data && \
+		mount -o bind /dev ${ROOTFS_MNT}/dev && \
+		mount -o bind /tmp ${ROOTFS_MNT}/tmp && \
+		chroot ${ROOTFS_MNT} chown -R homepilot:users /tmp/migrate_hp && \
+		chroot ${ROOTFS_MNT} sudo -u homepilot sh -c 'set -x;
+		    mkdir /tmp/migrate_hp/.homepilot &&
+		    source /opt/homepilot/libexec/backup_restore_hp1_to_hp2.sh "/tmp/migrate_hp/data" "/tmp/migrate_hp/.homepilot"'
+	fi
+	if [ -d /tmp/migrate_hp/.homepilot ]
+	then
+		chroot ${ROOTFS_MNT} sh -c 'set -x;
+		    mkdir -m 2755 -p /data/.shadow/.home/homepilot && chown homepilot:users /data/.shadow/.home/homepilot' && \
+		chroot ${ROOTFS_MNT} sudo -u homepilot sh -c 'set -x;
+		    mv /tmp/migrate_hp/.homepilot /data/.shadow/.home/homepilot/.homepilot_1 &&
+		    touch /data/.shadow/.home/homepilot/.homepilot_1/validated &&
+		    (cd /data/.shadow/.home/homepilot && ln -s /home/homepilot/.homepilot_1 .homepilot)'
+	fi
+	umount ${ROOTFS_MNT}/data ${ROOTFS_MNT}/dev ${ROOTFS_MNT}/tmp ${ROOTFS_MNT}
+	sync
+    fi
+
 }

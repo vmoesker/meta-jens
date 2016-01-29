@@ -59,6 +59,7 @@ RDEPENDS_${PN}_append_kirkwood = "\
 
 RDEPENDS_${PN}_append_bohr-update = "\
     openssl \
+    perl-module-file-glob \
 "
 
 def all_root_dev_names (d) :
