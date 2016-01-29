@@ -1,0 +1,29 @@
+DR_GUESS_WHAT="etc|network|home|homepilot|kodi|qbrqry"
+
+delivery_reset_for_etc () {
+    echo "/data/.shadow/.etc" >> "${CLEANUP_SPEC}"
+}
+
+delivery_reset_for_network () {
+    cat << EONWF >> "${CLEANUP_SPEC}"
+/data/.shadow/.etc/network/interfaces
+/data/.shadow/.etc/wpa-suuplicant.conf
+/data/.shadow/.etc/wpa-suuplicant.enabled
+EONWF
+}
+
+delivery_reset_for_home () {
+    echo "/data/.shadow/.home" >> "${CLEANUP_SPEC}"
+}
+
+delivery_reset_for_homepilot () {
+    echo "/data/.shadow/.home/homepilot" >> "${CLEANUP_SPEC}"
+}
+
+delivery_reset_for_kodi () {
+    echo "/data/.shadow/.home/xbmc" >> "${CLEANUP_SPEC}"
+}
+
+delivery_reset_for_qbrqry () {
+    echo "/data/.shadow/.home/qbrqry" >> "${CLEANUP_SPEC}"
+}
