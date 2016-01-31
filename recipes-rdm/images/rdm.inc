@@ -50,6 +50,7 @@ RDM_ESSENTIALS_append_curie = "\
 	fb-cursor-off \
 "
 RDM_INSTALL = "${RDM_BASE_INSTALL} \
+	delivery-reset \
 	ksm-init \
 	openvpn \
 "
