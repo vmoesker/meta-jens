@@ -8,7 +8,7 @@
 : ${PIDFILE:="/var/run/hp2sm.pid"}
 : ${SYSTEM_IMAGE_UPDATE_DIR:='/data/.update'}
 
-mkdir ${SYSTEM_IMAGE_UPDATE_DIR}
+mkdir -p ${SYSTEM_IMAGE_UPDATE_DIR}
 export SYSTEM_IMAGE_UPDATE_DIR
 
 exec start-stop-daemon -m --start --quiet --pidfile "$PIDFILE" --exec plackup -- $OPTIONS 2>&1
