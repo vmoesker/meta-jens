@@ -45,7 +45,7 @@ require_update_uboot () {
 }
 
 update_uboot () {
-    dd of=/dev/mtd0 skip=${UBOOT_PADDING} bs=512
+    dd of=/dev/mtdblock0 skip=${UBOOT_PADDING} bs=512
 }
 
 uboot_setenv () {
@@ -64,7 +64,7 @@ wipe_rootfs () {
 }
 
 update_rootfs () {
-    ubiupdatevol ${DEVICE_PREFIX}2 -s ${ROOTIMG_SIZE}
+    ubiupdatevol ${DEVICE_PREFIX}2 - -s ${ROOTIMG_SIZE}
 }
 
 wipe_recoveryfs () {
@@ -72,5 +72,5 @@ wipe_recoveryfs () {
 }
 
 update_recoveryfs () {
-    ubiupdatevol ${DEVICE_PREFIX}3 -s ${RECOVERIMG_SIZE}
+    ubiupdatevol ${DEVICE_PREFIX}3 - -s ${RECOVERIMG_SIZE}
 }
