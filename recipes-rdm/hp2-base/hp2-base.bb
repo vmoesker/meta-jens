@@ -8,6 +8,7 @@ inherit useradd
 
 SRC_URI = "file://hp2.volatiles"
 
+DEPENDS = "daemontools ledctrl"
 RDEPENDS_${PN} = "daemontools ledctrl"
 
 HOMEPILOT_USER = "homepilot"
