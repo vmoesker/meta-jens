@@ -17,6 +17,7 @@ LOCALVERSION = "+curie"
 SRC_URI = "git://github.com/${SRCREPO}/linux-curie.git;branch=${SRCBRANCH};rev=${REV}"
 SRC_URI_append = " \
    file://defconfig \
+   file://0001-fbcon-ensure-vc-NULL.patch \
 "
 
 # patches for curie

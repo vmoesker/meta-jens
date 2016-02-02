@@ -1,0 +1,28 @@
+From 09ee6421f9a97e4f7baf0b371397977a86e60489 Mon Sep 17 00:00:00 2001
+From: Matthias Rabe <matthias.rabe@sigma-chemnitz.de>
+Date: Mon, 1 Feb 2016 17:01:32 +0100
+Subject: [PATCH] fbcon: ensure vc != NULL
+
+Signed-off-by: Matthias Rabe <matthias.rabe@sigma-chemnitz.de>
+---
+ drivers/video/console/fbcon.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/drivers/video/console/fbcon.c b/drivers/video/console/fbcon.c
+index b972106..2cb14cc 100644
+--- a/drivers/video/console/fbcon.c
++++ b/drivers/video/console/fbcon.c
+@@ -3199,6 +3199,10 @@ static void fbcon_new_modelist(struct fb_info *info)
+ 		if (!fb_display[i].mode)
+ 			continue;
+ 		vc = vc_cons[i].d;
++		if (!vc) {
++			pr_err("%s: vc is NULL\n", __func__);
++			continue;
++		}
+ 		display_to_var(&var, &fb_display[i]);
+ 		mode = fb_find_nearest_mode(fb_display[i].mode,
+ 					    &info->modelist);
+-- 
+2.5.0
+
