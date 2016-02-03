@@ -9,8 +9,7 @@ test -n "$TARGETS" || exit 1
 MACHINES="${MACHINES:-curie bohr}"
 DEPLOY_DIR_IMAGE_BASE="tmp/deploy/images"
 
-# possible values are md5 rmd160 sha1 sha256 sha384 sha512 tiger whirlpool
-ALGORITHMS="md5 rmd160 sha1"
+. `dirname $0`/algorithms
 
 MANI=""
 MANISPC=""
@@ -30,10 +29,9 @@ do
 	HASH=""
 	for alg in ${ALGORITHMS}
 	do
-	    HASH="${HASH}${SPC}${alg}=`/opt/pkg/bin/digest ${alg} "${IMAGE}" | awk '{print $4}'`"
+	    HASH="${HASH}${SPC}${alg}=`${alg} "${IMAGE}"`"
 	    SPC=";"
 	done
-	HASH="${HASH}${SPC}size=`stat -c %s "${IMAGE}"`"
 	IMAGE=`echo ${IMAGE} | sed -e "s,${DEPLOY_DIR_IMAGE_BASE}/,,"`
 	NAME=`echo ${IMAGE} | sed -e "s,rdm-,," -e "s,-image-${WANTED_ROOT_DEV}-${SYSIMG_VERSION}-complete.cpi,," -e 's,-,+,g'`
 	MANI="${MANI}${MANISPC}\"${NAME}\": \"${IMAGE};${HASH}\""
