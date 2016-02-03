@@ -41,11 +41,10 @@ trigger_root () {
 	mount /dev/ubi0_0 /run/media/ubi0_0
 
 	avail_hp_major_version=$(source /run/media/ubi0_0/etc/serverbox/version; echo "${MAJOR}")
-	test "${avail_hp_major_version}" -lt 3 && trigger_fail
 
 	led_root_update
 
-	if mkdir -p /data/.migrate/${WLAN_ADDR}; then
+	if test "${avail_hp_major_version}" -gt 2 && mkdir -p /data/.migrate/${WLAN_ADDR}; then
 	    test -f /run/media/ubi0_0/etc/serverbox/network/interfaces.cfg && cp /run/media/ubi0_0/etc/serverbox/network/interfaces.cfg /data/.migrate/${WLAN_ADDR}/
 	    test -f /run/media/ubi0_0/etc/wpa_supplicant.conf && cp /run/media/ubi0_0/etc/wpa_supplicant.conf /data/.migrate/${WLAN_ADDR}/
 
