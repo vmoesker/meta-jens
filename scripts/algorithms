@@ -13,5 +13,5 @@ rmd160 () {
 }
 
 sha1 () {
-    openssl dgst -sha -hex -r $1 | awk '{print $1}'
+    openssl dgst -sha1 -hex -r $1 | awk '{print $1}'
 }
