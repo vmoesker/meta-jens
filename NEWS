@@ -6,6 +6,8 @@ Revision history for HomePilot
         * remove camera documentation
         * support HP1/2
         * update manuals
+    - HP2:
+	* fix HDMI reboot issue when plug in HDMI cable into operating device
 
 4.1.2 2016-01-27
     - WiFi migration to new abstraction layer for HP1 & HP2
