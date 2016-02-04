@@ -19,6 +19,7 @@ Revision history for HomePilot
         * Metering-Manager: take care that update message is allways the latest entry in Meter output
         * Job-Manager: Solve issue in if statement after dusk time
         * Fixed issue with Troll comfort device
+        * Edit textfiles for 4.1
     - hp2sm:
         * Improve hp2sm::Plugins::SystemUpdateImage by refactoring and minor style fixes
         * Add initial implementation of /images overview
