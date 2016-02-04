@@ -39,6 +39,9 @@ Revision history for HomePilot
         * prd-flash: migrate wireless configuration on bohr-update
         * prd-flash: migrate homepilot configuration on bohr-update
         * prd-flash: only migrate versions >= 3.0.0 on bohr-update
+        * ntp: update conf to match updated ntpd
+    - meta-openembedded
+        * ntp: update 4.2.8p4 to 4.2.8p6
 
 4.1.2 2016-01-27
     - WiFi migration to new abstraction layer for HP1 & HP2
