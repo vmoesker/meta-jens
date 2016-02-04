@@ -8,6 +8,31 @@ Revision history for HomePilot
         * update manuals
     - HP2:
 	* fix HDMI reboot issue when plug in HDMI cable into operating device
+    - hp-blob:
+        * Failure detection: Insert function of barrier-, blocking-, light barrier- and wicket door detection
+        * Camera-Provider: Reduce password length to 12
+        * SacStateManager: Reset of dawn and dusk state from HP astro time
+        * Migrator: fix testing on hardware the migration of special characters
+        * Z-Wave-Provider: Invert funationality of "modus" switch 
+        * DF-Provider: Add capabillity "Blocking" to device SX
+        * Z-Wave-Provider: Fix timing problem for battery value output
+        * Metering-Manager: take care that update message is allways the latest entry in Meter output
+        * Job-Manager: Solve issue in if statement after dusk time
+        * Fixed issue with Troll comfort device
+    - hp2sm:
+        * Improve hp2sm::Plugins::SystemUpdateImage by refactoring and minor style fixes
+        * Add initial implementation of /images overview
+        * sysimg_update: refactor to improve against errors
+        * sysimg_update: implement images API
+        * sysimg_update: refactor is_running and service ready
+    - meta-jens:
+        * add delivery reset via external media
+        * tidy prd-flash recipe
+        * fix prd-flash bohr update
+        * add available_images attribute to sysimg_update
+        * fix dependencies of hp2sm with regarding to outstanding meta-cpan merge
+        * fix pointless error message at start of hp2sm/sysimg_update
+        * fix build-error for hp2-base regarding svc/led-ctrl groups
 
 4.1.2 2016-01-27
     - WiFi migration to new abstraction layer for HP1 & HP2
