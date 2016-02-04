@@ -1,13 +1,28 @@
 Revision history for HomePilot
 
 4.1.3 2016-02-04
+    - add delivery reset via external media
+    - tidy prd-flash recipe
+    - fix prd-flash bohr update
+    - add available_images attribute to sysimg_update
+    - fix dependencies of hp2sm with regarding to outstanding meta-cpan merge
+    - fix pointless error message at start of hp2sm/sysimg_update
+    - fix build-error for hp2-base regarding svc/led-ctrl groups
+    - fix hash algorithm usage
+    - prd-flash/u-boot: prevent update request each nightly
+    - bohr-update: set IMAGE_ROOTFS_SIZE to 280MB
+    - prd-flash: migrate wireless configuration on bohr-update
+    - prd-flash: migrate homepilot configuration on bohr-update
+    - prd-flash: only migrate versions >= 3.0.0 on bohr-update
+    - ntp: update conf to match updated ntpd
+    - ntp: update 4.2.8p4 to 4.2.8p6
+    - HP2:
+	* fix HDMI reboot issue when plug in HDMI cable into operating device
     - nginx: update nginx-html to latest version
         * improve language
         * remove camera documentation
         * support HP1/2
         * update manuals
-    - HP2:
-	* fix HDMI reboot issue when plug in HDMI cable into operating device
     - hp-blob:
         * Failure detection: Insert function of barrier-, blocking-, light barrier- and wicket door detection
         * Camera-Provider: Reduce password length to 12
@@ -26,23 +41,6 @@ Revision history for HomePilot
         * sysimg_update: refactor to improve against errors
         * sysimg_update: implement images API
         * sysimg_update: refactor is_running and service ready
-    - meta-jens:
-        * add delivery reset via external media
-        * tidy prd-flash recipe
-        * fix prd-flash bohr update
-        * add available_images attribute to sysimg_update
-        * fix dependencies of hp2sm with regarding to outstanding meta-cpan merge
-        * fix pointless error message at start of hp2sm/sysimg_update
-        * fix build-error for hp2-base regarding svc/led-ctrl groups
-        * fix hash algorithm usage
-        * prd-flash/u-boot: prevent update request each nightly
-        * bohr-update: set IMAGE_ROOTFS_SIZE to 280MB
-        * prd-flash: migrate wireless configuration on bohr-update
-        * prd-flash: migrate homepilot configuration on bohr-update
-        * prd-flash: only migrate versions >= 3.0.0 on bohr-update
-        * ntp: update conf to match updated ntpd
-    - meta-openembedded
-        * ntp: update 4.2.8p4 to 4.2.8p6
 
 4.1.2 2016-01-27
     - WiFi migration to new abstraction layer for HP1 & HP2
