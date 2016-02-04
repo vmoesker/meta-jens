@@ -1,6 +1,6 @@
 Revision history for HomePilot
 
-4.1.3
+4.1.3 2016-02-04
     - nginx: update nginx-html to latest version
         * improve language
         * remove camera documentation
@@ -35,6 +35,10 @@ Revision history for HomePilot
         * fix build-error for hp2-base regarding svc/led-ctrl groups
         * fix hash algorithm usage
         * prd-flash/u-boot: prevent update request each nightly
+        * bohr-update: set IMAGE_ROOTFS_SIZE to 280MB
+        * prd-flash: migrate wireless configuration on bohr-update
+        * prd-flash: migrate homepilot configuration on bohr-update
+        * prd-flash: only migrate versions >= 3.0.0 on bohr-update
 
 4.1.2 2016-01-27
     - WiFi migration to new abstraction layer for HP1 & HP2
