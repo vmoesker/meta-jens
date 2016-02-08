@@ -27,6 +27,7 @@ IMAGE_INSTALL += " \
 	${RDM_ESSENTIALS} \
 	${RECOVER_INSTALL} \
 	bohr-update-image \
+	init-update-stick \
 "
 
 export IMAGE_BASENAME = "rdm-update-image"

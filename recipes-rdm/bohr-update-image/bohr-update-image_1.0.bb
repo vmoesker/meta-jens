@@ -18,17 +18,17 @@ COMPATIBLE_MACHINE = "(bohr-update)"
 do_install () {
     set -x
     # expect bohr/rdm-hp2-image-nand has been build already
-    rm -rf ${D}/data/flashimg/rdm-hp2-nand-image-complete
-    install -d ${D}/data/flashimg/rdm-hp2-nand-image-complete
-    (cd ${D}/data/flashimg/rdm-hp2-nand-image-complete && tar xvjf ${WORKDIR}/rdm-hp2-image-nand-${DISTRO_VERSION}-complete.cpi)
+    rm -rf ${D}/${datadir}/flashimg/rdm-hp2-nand-image-complete
+    install -d ${D}/${datadir}/flashimg/rdm-hp2-nand-image-complete
+    (cd ${D}/${datadir}/flashimg/rdm-hp2-nand-image-complete && tar xvjf ${WORKDIR}/rdm-hp2-image-nand-${DISTRO_VERSION}-complete.cpi)
     rm -rf ${D}/boot
     install -d ${D}/boot
-    . ${D}/data/flashimg/rdm-hp2-nand-image-complete/.settings
-    (cd ${D}/data/flashimg/rdm-hp2-nand-image-complete && tar cf - ${KERNEL}) | (cd ${D}/boot && tar xf - && chown -R root:root . && eval ${KERNEL_PREPARE} && eval ${KERNEL_SANITIZE})
-    chown -R root:root ${D}/data/flashimg/rdm-hp2-nand-image-complete
+    . ${D}/${datadir}/flashimg/rdm-hp2-nand-image-complete/.settings
+    (cd ${D}/${datadir}/flashimg/rdm-hp2-nand-image-complete && tar cf - ${KERNEL}) | (cd ${D}/boot && tar xf - && chown -R root:root . && eval ${KERNEL_PREPARE} && eval ${KERNEL_SANITIZE})
+    chown -R root:root ${D}/${datadir}/flashimg/rdm-hp2-nand-image-complete
 }
 
 FILES_${PN} = "\
-    /data/flashimg/rdm-hp2-nand-image-complete \
+    ${datadir}/flashimg/rdm-hp2-nand-image-complete \
     /boot \
 "
