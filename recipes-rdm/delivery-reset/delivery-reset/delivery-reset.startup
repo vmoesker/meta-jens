@@ -11,7 +11,7 @@
 set -x
 
 CLEANUP_SPEC="/data/.shadow/.etc/@CLEANUP_SPEC@"
-. @LIBEXEC@/delivery_reset
+. @LIBEXEC@/delivery-reset
 
 OVERLAY_MOUNTED=`mount | egrep '^(unionfs|overlay)' | wc -l`
 test ${OVERLAY_MOUNTED:-0} -eq 0 || exit 1
