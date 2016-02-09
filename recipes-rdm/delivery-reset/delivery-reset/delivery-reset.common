@@ -5,11 +5,11 @@ delivery_reset_for_etc () {
 }
 
 delivery_reset_for_network () {
-    cat << EONWF >> "${CLEANUP_SPEC}"
+    echo "/data/.shadow/.etc/ethtool-config
+/data/.shadow/.etc/wpa_supplicant.enabled
+/data/.shadow/.etc/wpa_supplicant.conf
 /data/.shadow/.etc/network/interfaces
-/data/.shadow/.etc/wpa-suuplicant.conf
-/data/.shadow/.etc/wpa-suuplicant.enabled
-EONWF
+" >> "${CLEANUP_SPEC}"
 }
 
 delivery_reset_for_home () {
