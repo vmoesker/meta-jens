@@ -34,11 +34,15 @@ RDEPENDS_${PN}-dev += "test-leaktrace-perl"
 RDEPENDS_${PN}-dev += "test-memory-cycle-perl"
 
 SRCREV="26cc199596be8cb3fe7a2f0b8749ed75e01510b9"
+SRCBRANCH="jethro"
+SRCREPO="rdm-dev"
 PV = "0.1.0+git${SRCPV}"
 
-SRC_URI += "git://git@bitbucket.org/rdm-dev/hp2sm.git;protocol=ssh;branch=jethro"
-SRC_URI += "file://hp2sm.run"
-SRC_URI += "file://hp2sm-log.run"
+SRC_URI = "\
+    git://git@bitbucket.org/${SRCREPO}/hp2sm.git;protocol=ssh;branch=${SRCBRANCH} \
+    file://hp2sm.run \
+    file://hp2sm-log.run \
+"
 
 HP2SM_BASE="/opt/rdm/hp2sm"
 SERVICE_ROOT = "${sysconfdir}/daemontools/service"
