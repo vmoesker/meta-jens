@@ -1,5 +1,7 @@
 post_flash () {
     DROPBEAR_PATH=${DATA_MNT}/.var/lib/dropbear
+    MIGRATE_BASE="/data/.migrate"
+    MIGRATE_STORE="${MIGRATE_BASE}/${WLAN_ADDR}"
     test -d ${DROPBEAR_PATH} || mkdir -p ${DROPBEAR_PATH}
     rm -f ${DROPBEAR_PATH}/rsa_host_key
     for kc in ${wrc1key}
@@ -13,8 +15,8 @@ post_flash () {
 	rm -f ${DROPBEAR_PATH}/rsa_host_key
     fi
 
-    interfaces_cfg="/data/.migrate/${WLAN_ADDR}/interfaces.cfg"
-    wpa_sup_conf="/data/.migrate/${WLAN_ADDR}/wpa_supplicant.conf"
+    interfaces_cfg="${MIGRATE_STORE}/interfaces.cfg"
+    wpa_sup_conf="${MIGRATE_STORE}/wpa_supplicant.conf"
     if test -f "${interfaces_cfg}" -a -f "${wpa_sup_conf}" && grep -q '"wifiEnabled" : "true"' "${interfaces_cfg}"
     then
 	ssid=$(perl -ne 'print "$1" and last if /^\s+ssid=([0-9a-fA-F]+)$/' "${wpa_sup_conf}")
@@ -30,12 +32,12 @@ post_flash () {
     fi
 
     ROOTFS_MNT=${TEMP_DIR}/flashimg/root/rootfs/${ETH0_ADDR}
-    if test -f /data/.migrate/${WLAN_ADDR}/hp.tar.gz && mkdir /tmp/migrate_hp
+    if test -f ${MIGRATE_STORE}/hp.tar.gz && mkdir /tmp/migrate_hp
     then
-	mkdir /tmp/migrate_hp/data && tar xzf /data/.migrate/${WLAN_ADDR}/hp.tar.gz -C /tmp/migrate_hp/data
+	mkdir /tmp/migrate_hp/data && tar xzf ${MIGRATE_STORE}/hp.tar.gz -C /tmp/migrate_hp/data
 	if [ -d /tmp/migrate_hp/data/etc ]
 	then
-	    test -f /data/.migrate/${WLAN_ADDR}/zddx.tar.gz && mkdir /tmp/migrate_hp/zddx && tar xzf /data/.migrate/${WLAN_ADDR}/zddx.tar.gz -C /tmp/migrate_hp/zddx
+	    test -f ${MIGRATE_STORE}/zddx.tar.gz && mkdir /tmp/migrate_hp/zddx && tar xzf ${MIGRATE_STORE}/zddx.tar.gz -C /tmp/migrate_hp/zddx
 	    mkdir -p ${ROOTFS_MNT} && mount -o ro /dev/ubiblock0_2 ${ROOTFS_MNT}
 	    test -f ${ROOTFS_MNT}/opt/homepilot/libexec/backup_restore_hp1_to_hp2.sh && \
 		mount -o bind ${DATA_MNT} ${ROOTFS_MNT}/data && \
@@ -58,5 +60,4 @@ post_flash () {
 	umount ${ROOTFS_MNT}/data ${ROOTFS_MNT}/dev ${ROOTFS_MNT}/tmp ${ROOTFS_MNT}
 	sync
     fi
-
 }

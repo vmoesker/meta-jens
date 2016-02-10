@@ -59,6 +59,7 @@ RDEPENDS_${PN}_append_kirkwood = "\
 
 RDEPENDS_${PN}_append_bohr-update = "\
     openssl \
+    bohr-update-backup-restore \
     perl-module-file-glob \
 "
 

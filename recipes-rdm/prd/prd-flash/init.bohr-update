@@ -30,8 +30,20 @@ load_wifi () {
 trigger_root () {
     load_wifi
 
-    if [ `fw_printenv wrc1key 2>/dev/null | wc -l` -eq 0 ]
+    MIGRATE_BASE="/data/.migrate"
+    MIGRATE_STORE="${MIGRATE_BASE}/${WLAN_ADDR}"
+    BACKUP_BASE="/data/.backup"
+    BACKUP_STORE="${BACKUP_BASE}/${WLAN_ADDR}"
+
+    if [ -f /etc/build -a -d "${BACKUP_STORE}" -a `fw_printenv nand_restore 2>/dev/null | wc -l` -eq 1 ]
     then
+	restore-nand
+	poweroff
+	exit 1
+    elif [ `fw_printenv wrc1key 2>/dev/null | wc -l` -eq 0 ]
+    then
+	test -f /etc/build -a ! -d "${BACKUP_STORE}" && backup-nand
+
 	# no wrc1key backup'ed - fresh update starts
 	ubiattach /dev/ubi_ctrl -m 2
 
@@ -44,16 +56,16 @@ trigger_root () {
 
 	led_root_update
 
-	if test "${avail_hp_major_version}" -gt 2 && mkdir -p /data/.migrate/${WLAN_ADDR}; then
-	    test -f /run/media/ubi0_0/etc/serverbox/network/interfaces.cfg && cp /run/media/ubi0_0/etc/serverbox/network/interfaces.cfg /data/.migrate/${WLAN_ADDR}/
-	    test -f /run/media/ubi0_0/etc/wpa_supplicant.conf && cp /run/media/ubi0_0/etc/wpa_supplicant.conf /data/.migrate/${WLAN_ADDR}/
+	if test "${avail_hp_major_version}" -gt 2 && mkdir -p ${MIGRATE_STORE}; then
+	    test -f /run/media/ubi0_0/etc/serverbox/network/interfaces.cfg && cp /run/media/ubi0_0/etc/serverbox/network/interfaces.cfg ${MIGRATE_STORE}
+	    test -f /run/media/ubi0_0/etc/wpa_supplicant.conf && cp /run/media/ubi0_0/etc/wpa_supplicant.conf ${MIGRATE_STORE}
 
 	    ( cd /run/media/ubi0_0 && \
 		test -f etc/hp_backups/backup.files && \
-		perl -ne 's,^/,,; -e $_ and printf "%s\n", $_ for glob $_' etc/hp_backups/backup.files > /data/.migrate/${WLAN_ADDR}/hp.files && \
-		tar czf /data/.migrate/${WLAN_ADDR}/hp.tar.gz -T /data/.migrate/${WLAN_ADDR}/hp.files && \
+		perl -ne 's,^/,,; -e $_ and printf "%s\n", $_ for glob $_' etc/hp_backups/backup.files > ${MIGRATE_STORE}/hp.files && \
+		tar czf ${MIGRATE_STORE}/hp.tar.gz -T ${MIGRATE_STORE}/hp.files && \
 		cd bin/homepilot/zwave/z-way-server-u2/config/zddx && \
-		tar czf /data/.migrate/${WLAN_ADDR}/zddx.tar.gz *DevicesData.xml )
+		tar czf ${MIGRATE_STORE}/zddx.tar.gz *DevicesData.xml )
 	fi
 
 	flash_erase /dev/mtd0 0 0
@@ -64,6 +76,7 @@ trigger_root () {
 
 	umount /run/media/ubi0_0
 	reboot
+	exit 1
     else
 	wrc1key="`fw_printenv -n wrc1key`"
 	wrc1sha="`fw_printenv -n wrc1sha`"
