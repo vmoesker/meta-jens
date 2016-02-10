@@ -3,6 +3,14 @@ Revision history for HomePilot
 4.1.4
     - configure smb.conf to avoid syslog spamming
     - add unique entry for reseting mediaplayer settings
+    - hp2sm: improve recipe for quick tests
+    - hp-blob:
+        * Rest2-API: Remove cameras from device list
+        * Job-Manager: Solve access problem during startup
+        * Web-UI: Change value of special characters like degree
+        * Web-UI: Hide multi media update information when no multimedia update is available
+    - hp2sm:
+        * sysimg_update: download requires recent_update
 
 4.1.3 2016-02-04
     - add delivery reset via external media
