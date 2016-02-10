@@ -3,6 +3,7 @@ Revision history for HomePilot
 4.1.4
     - configure smb.conf to avoid syslog spamming
     - add unique entry for reseting mediaplayer settings
+    - samba: fix logrotate configuration
     - hp2sm: improve recipe for quick tests
     - hp-blob:
         * Rest2-API: Remove cameras from device list
