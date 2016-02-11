@@ -42,6 +42,9 @@ trigger_root () {
 	exit 1
     elif [ `fw_printenv wrc1key 2>/dev/null | wc -l` -eq 0 ]
     then
+        test -d "${MIGRATE_BASE}" && rm -rf "${MIGRATE_BASE}"
+        test -d "${BACKUP_BASE}" && rm -rf "${BACKUP_BASE}"
+
 	test -f /etc/build -a ! -d "${BACKUP_STORE}" && backup-nand
 
 	# no wrc1key backup'ed - fresh update starts
