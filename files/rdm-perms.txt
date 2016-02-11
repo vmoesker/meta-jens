@@ -44,9 +44,8 @@ ${oldincludedir}	0755	root	root	true	0644	root	root
 /usr/src/debug		0755	root	root	true	-	root	root
 
 # Items from base-files
-# Links
-${localstatedir}/run	link	/run
-${localstatedir}/lock	link	/run/lock
+#${localstatedir}/run	0755	root	root	true	-	root	root
+#${localstatedir}/lock	0755	root	root	true	-	root	root
 
 # Special permissions from base-files
 # Set 1777

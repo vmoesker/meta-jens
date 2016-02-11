@@ -10,7 +10,9 @@ do_install_append () {
     rm -f ${D}${sysconfdir}/fstab
 
     install -d ${D}/data
-    rm -f ${D}/var/log ${D}/var/tmp
-    install -d ${D}/var/log
-    install -d ${D}/var/tmp
+    rm -f ${D}${localstatedir}/log ${D}${localstatedir}/tmp ${D}${localstatedir}/run ${D}${localstatedir}/lock
+    install -d ${D}${localstatedir}/log
+    install -d ${D}${localstatedir}/tmp
+    install -d ${D}${localstatedir}/run
+    install -d ${D}${localstatedir}/lock
 }
