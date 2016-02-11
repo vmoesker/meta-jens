@@ -52,21 +52,21 @@ do
     if [ -z "${PRIMDEV}" ]
     then
 	PRIMDEV=`echo $ROOTDEV | awk -F/ '{print $3}' | sed -E 's/@ROOT_DEV_NAME@@ROOT_DEV_SEP@3$/@ROOT_DEV_NAME@@ROOT_DEV_SEP@2/g'`
-	if [ ! -d /var/volatile/media ]
+	if [ ! -d /run/media ]
 	then
-	    mkdir -p "/var/volatile/media"
-	    chmod 0755 /var/volatile/media
+	    mkdir -p "/run/media"
+	    chmod 0755 /run/media
 	fi
 
-	if [ ! -d /var/volatile/media/${PRIMDEV} ]
+	if [ ! -d /run/media/${PRIMDEV} ]
 	then
-	    mkdir /var/volatile/media/${PRIMDEV}
-	    mount -o ro /dev/${PRIMDEV} /var/volatile/media/${PRIMDEV}
+	    mkdir /run/media/${PRIMDEV}
+	    mount -o ro /dev/${PRIMDEV} /run/media/${PRIMDEV}
 	fi
     fi
 
     (
-    egrep '^(unionfs|overlay)' /var/volatile/media/${PRIMDEV}/etc/fstab | while read pri_dev pri_mnt pri_fs pri_opt pri_freq pri_pno
+    egrep '^(unionfs|overlay)' /run/media/${PRIMDEV}/etc/fstab | while read pri_dev pri_mnt pri_fs pri_opt pri_freq pri_pno
     do
         case "${pri_fs}->${fstype}" in
         "unionfs->overlayfs" | "unionfs->overlay")
@@ -115,10 +115,10 @@ do
     touch /var/volatile/tmp/overlay-migrated.${check_md5}
 done
 
-if [ -n "$PRIMDEV" -a -d /var/volatile/media/${PRIMDEV} ]
+if [ -n "$PRIMDEV" -a -d /run/media/${PRIMDEV} ]
 then
-    busybox umount /var/volatile/media/${PRIMDEV}
-    rmdir /var/volatile/media/${PRIMDEV}
+    busybox umount /run/media/${PRIMDEV}
+    rmdir /run/media/${PRIMDEV}
 fi
 
 : exit 0

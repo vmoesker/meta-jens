@@ -25,7 +25,6 @@ d root root 1777 /run/lock none
 d root root 0755 /data/.var/lib none
 d root root 0755 /data/.var/log none
 d root root 0755 /data/.var/spool none
-d root root 0755 /var/volatile/media none
 d root root 1777 /var/volatile/tmp none
 b root root 1777 /var/lock /run/lock
 b root root 0755 /var/lib /data/.var/lib
@@ -34,7 +33,6 @@ b root root 0755 /var/spool /data/.var/spool
 b root root 0755 /var/run /run
 b root root 1777 /tmp /var/volatile/tmp
 d root root 1777 /tmp/temp none
-b root root 1777 /media /var/volatile/media
 b root root 1777 /var/tmp /data/tmp
 d root root 0755 /var/lock/subsys none
 f root root 0664 /var/log/wtmp none
