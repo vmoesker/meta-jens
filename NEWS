@@ -1,6 +1,6 @@
 Revision history for HomePilot
 
-4.1.4
+4.1.4 2016-02-11
     - configure smb.conf to avoid syslog spamming
     - add unique entry for reseting mediaplayer settings
     - samba: fix logrotate configuration
@@ -11,6 +11,7 @@ Revision history for HomePilot
         * Job-Manager: Solve access problem during startup
         * Web-UI: Change value of special characters like degree
         * Web-UI: Hide multi media update information when no multimedia update is available
+        * WebUI: avoid extra downloading trigger after selecting image
     - hp2sm:
         * sysimg_update: download requires recent_update
 
