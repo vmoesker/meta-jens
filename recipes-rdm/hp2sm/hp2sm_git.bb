@@ -70,7 +70,7 @@ FILES_${PN} += "${SERVICE_ROOT}"
 
 PACKAGES =+ "${PN}-ethtool"
 PACKAGES =+ "${PN}-system-date"
-PACKAGES =+ "${PN}-system-services"
+PACKAGES =+ "${PN}-system-service"
 PACKAGES =+ "${PN}-system-wrc1"
 PACKAGES =+ "${PN}-system-wrc2"
 PACKAGES =+ "${PN}-system-wrc2-test"
