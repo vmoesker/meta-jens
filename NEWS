@@ -6,6 +6,8 @@ Revision history for HomePilot
     - samba: fix logrotate configuration
     - improve hp2sm recipe for quick tests
     - fix network delivery reset
+    - init-update-stick with data partition
+    - hp1 update safety
     - hp-blob:
         * Rest2-API: Remove cameras from device list
         * Job-Manager: Solve access problem during startup
