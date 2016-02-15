@@ -1,5 +1,9 @@
 Revision history for HomePilot
 
+4.1.5
+    - hp-blob:
+        * Improve battery state update
+
 4.1.4 2016-02-11
     - configure smb.conf to avoid syslog spamming
     - add unique entry for reseting mediaplayer settings
