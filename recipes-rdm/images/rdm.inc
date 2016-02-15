@@ -19,6 +19,7 @@ RDM_ESSENTIALS = "\
 RDM_BASE_INSTALL = "\
 	${RDM_ESSENTIALS} \
 	date-set \
+	dnsmasq \
 	cronie \
 	dosfstools \
 	sudo \
@@ -27,6 +28,7 @@ RDM_BASE_INSTALL = "\
 	nginx-manual \
 	statgrab \
 	saidar \
+	pstree \
 	crda \
 	lsof \
 	logrotate \
