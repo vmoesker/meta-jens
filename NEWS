@@ -1,6 +1,6 @@
 Revision history for HomePilot
 
-4.1.5
+4.1.5 2016-02-17
     - glibc: add patch from release/2.22/master fix memory corruption (updated comment)
     - initscripts: populate-volatiles.sh: add mount-bind feature
     - initscripts: start urandom after populate-volatiles
@@ -8,6 +8,7 @@ Revision history for HomePilot
     - fix automount at boot
     - hp-blob:
         * Improve battery state update
+        * Camera-Provider: Fixing camera issues (IP update , save name)
 
 4.1.4 2016-02-11
     - configure smb.conf to avoid syslog spamming
