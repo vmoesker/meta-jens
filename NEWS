@@ -1,5 +1,9 @@
 Revision history for HomePilot
 
+4.1.6 2016-02-19
+    - hp-blob
+        * Camera Provider: Solve issue with "Too many open files" error message
+
 4.1.5 2016-02-17
     - glibc: add patch from release/2.22/master fix memory corruption (updated comment)
     - initscripts: populate-volatiles.sh: add mount-bind feature
