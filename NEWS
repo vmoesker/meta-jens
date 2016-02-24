@@ -1,5 +1,9 @@
 Revision history for HomePilot
 
+4.1.7 2016-02-24
+    - hp-blob
+        * Camera-migrator: Solve migration problem
+
 4.1.6 2016-02-22
     - Update: Fix route exception
     - system-image-update: Introduce new update_manifest_basename (manifest-4.1.json)
