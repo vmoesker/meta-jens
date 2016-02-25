@@ -12,6 +12,8 @@ SRC_URI += "\
     file://ifplugd/ifplugd.conf \
     file://ifplugd/ifplugd.init \
     file://pstree.cfg \
+    \
+    file://0001-ifupdown-improve-debian-compatibility-for-mapping.patch \
 "
 
 PACKAGES =+ "${PN}-ifplugd"
