@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425
 
 inherit module
 
-REV="64949c5f46485974bb0e8d2f3d8dcf71e6118a66"
-SRCREPO="rdm-dev"
+REV="cef931fc0614acbba15f6b08402fe253629411db"
+SRCREPO="rehsack"
 SRCBRANCH = "master"
 
 SRC_URI = "git://github.com/${SRCREPO}/rtl8189ES_linux.git;branch=${SRCBRANCH};rev=${REV}"
