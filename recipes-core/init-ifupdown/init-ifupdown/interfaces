@@ -4,16 +4,47 @@
 auto lo
 iface lo inet loopback
 
-# Wired or wireless interfaces
-iface eth0 inet dhcp
+# Wired interfaces
+mapping eth0
+	script /etc/network/mapping/activate
+	map DYN eth0-dhcp
+	map STATIC eth0-static
+
+iface eth0-static inet static
+	address 0.0.0.0
+	netmask 255.255.255.0
+	gateway 0.0.0.0
+
+iface eth0-dhcp inet dhcp
 	hostname homepilot
-	pre-up /etc/network/eth/pre_up.sh
-	post-up /etc/network/eth/post_up.sh
-	pre-down /etc/network/eth/pre_down.sh
-	post-down /etc/network/eth/post_down.sh
 
 # Wireless interfaces
-iface wlan0 inet dhcp
+auto wlan0
+mapping wlan0
+	script /etc/network/mapping/activate
+	map NONET wlan0-nonet
+	map DYN wlan0-dhcp
+	map STATIC wlan0-static
+
+iface wlan0-nonet inet manual
+	wireless_mode managed
+	wpa-driver nl80211,wext
+	wpa-conf /etc/wpa_supplicant.conf
+	pre-up /etc/network/wifi/pre_up.sh
+
+iface wlan0-static inet static
+	wireless_mode managed
+	wpa-driver nl80211,wext
+	wpa-conf /etc/wpa_supplicant.conf
+	address 0.0.0.0
+	netmask 255.255.255.0
+	gateway 0.0.0.0
+	pre-up /etc/network/wifi/pre_up.sh
+	post-up /etc/network/wifi/post_up.sh
+	pre-down /etc/network/wifi/pre_down.sh
+	post-down /etc/network/wifi/post_down.sh
+
+iface wlan0-dhcp inet dhcp
 	hostname homepilot
 	wireless_mode managed
 	wirless_essid any

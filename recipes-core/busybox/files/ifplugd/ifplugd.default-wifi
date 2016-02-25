@@ -1,0 +1,11 @@
+#!/bin/sh
+
+exec 2>/tmp/default-wifi.$$
+set -x
+
+sleep 30
+while pgrep ifup; do
+        sleep 1
+done
+grep -q @DEFAULT_WIFI_DEV@ /run/ifstate && exit 0
+test -f /etc/wpa_supplicant.enabled && /sbin/ifup @DEFAULT_WIFI_DEV@

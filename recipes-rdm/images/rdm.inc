@@ -37,7 +37,6 @@ RDM_BASE_INSTALL = "\
 	system-image-update \
 	hp2sm \
 	hp2sm-ethtool \
-	wifi-fallback \
 "
 RDM_ESSENTIALS_append_bohr = "\
 	ledctrl \
@@ -71,4 +70,5 @@ SKIPPED_DEPS = "sysdetails \
 	mmc-slowdown \
 	stressapptest \
 	collectd-graphs \
+	wifi-fallback \
 	"
