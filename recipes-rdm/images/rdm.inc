@@ -28,7 +28,6 @@ RDM_BASE_INSTALL = "\
 	nginx-manual \
 	statgrab \
 	saidar \
-	pstree \
 	crda \
 	lsof \
 	logrotate \

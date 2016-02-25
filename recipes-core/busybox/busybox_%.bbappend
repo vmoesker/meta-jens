@@ -1,6 +1,7 @@
 FILESEXTRAPATHS_append := "${THISDIR}/files:"
 
-SRC_URI += "file://udhcpc-opts.cfg \
+SRC_URI += "\
+    file://udhcpc-opts.cfg \
     file://netstat.cfg \
     file://nice.cfg \
     file://unix-local.cfg \
@@ -10,7 +11,8 @@ SRC_URI += "file://udhcpc-opts.cfg \
     file://ifplugd/ifplugd.action \
     file://ifplugd/ifplugd.conf \
     file://ifplugd/ifplugd.init \
-    "
+    file://pstree.cfg \
+"
 
 PACKAGES =+ "${PN}-ifplugd"
 FILES_${PN}-ifplugd = "${sysconfdir}/init.d/busybox-ifplugd ${sysconfdir}/ifplugd ${sysconfdir}/rc*/*busybox-ifplugd"
