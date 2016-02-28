@@ -14,11 +14,12 @@ bitbake_var() {
 set -x
 
 RECIPE_DIR="`dirname $0`"
-. ${RECIPE_DIR}/bashrc
 while [ ! -d "${RECIPE_DIR}/conf" ];
 do
-    RECIPE_DIR="`realpath ${RECIPE_DIR}/..`"
+    RECIPE_DIR="`dirname ${RECIPE_DIR}`"
 done
+test -z "${OEROOT}" && OEROOT=`readlink -f ${RECIPE_DIR}/../poky`
+. ${OEROOT}/scripts/oe-init-bashrc
 DISTRO_VERSION_FILE="conf/distro/rdm.conf"
 DISTRO_VERSION_PATH="${RECIPE_DIR}/${DISTRO_VERSION_FILE}"
 BUILDPATH="$1"; shift
@@ -28,12 +29,8 @@ set -e
 
 oe_builddir use $BUILDPATH
 
-git fetch --all
-git checkout $BRANCH
-git pull --rebase
-
-BBFILE_PATTERN=`bitbake_var "BBFILE_PATTERN[^=]*" | awk -F = '{print $2}' | sed -e 's,"^,,' -e 's,/"$,,'`
-for d in ${BBFILE_PATTERN}
+REPOS=`oe_builddir repos`
+for d in ${REPOS}
 do
     cd $d
     git fetch --all
@@ -57,7 +54,7 @@ time env APPLY_TS=null TARGETS="update.homepilot.de" deployimgs
 PS=`printf 'my @v = split(/\./, "%s"); $v[$#v]++; print join( ".", @v)\n' "${SYSIMG_VERSION}"`
 SYSIMG_BUMPED=`perl -le "$PS"`
 
-for d in "${BUILDPATH}" ${BBFILE_PATTERN}
+for d in ${REPOS}
 do
     cd "$d"
     git tag "$SYSIMG_VERSION" && git push --tags || :
