@@ -6,6 +6,7 @@ SRC_URI += "\
     file://nice.cfg \
     file://unix-local.cfg \
     file://udhcp.cfg \
+    file://simple.hostname \
     file://ifupdown.cfg \
     file://ifplugd.cfg \
     file://ifplugd/ifplugd.action \
@@ -31,11 +32,11 @@ do_compile_append () {
 
 do_install_append() {
     if grep -q "CONFIG_IFPLUGD=y" ${B}/.config; then
-        install -m 755 ${WORKDIR}/ifplugd/ifplugd.init ${D}${sysconfdir}/init.d/busybox-ifplugd
+        install -m 0755 ${WORKDIR}/ifplugd/ifplugd.init ${D}${sysconfdir}/init.d/busybox-ifplugd
 
         install -d ${D}${sysconfdir}/ifplugd
-        install -m 755 ${WORKDIR}/ifplugd/ifplugd.action ${D}${sysconfdir}/ifplugd/ifplugd.action
-        install -m 644 ${WORKDIR}/ifplugd/ifplugd.conf ${D}${sysconfdir}/ifplugd/ifplugd.conf
+        install -m 0755 ${WORKDIR}/ifplugd/ifplugd.action ${D}${sysconfdir}/ifplugd/ifplugd.action
+        install -m 0644 ${WORKDIR}/ifplugd/ifplugd.conf ${D}${sysconfdir}/ifplugd/ifplugd.conf
 
 	install -d ${D}${DEFWIFI_SERVICE_DIR}
 
@@ -44,5 +45,9 @@ do_install_append() {
 	touch ${D}${DEFWIFI_SERVICE_DIR}/down
 
         update-rc.d -r ${D} busybox-ifplugd defaults 05
+    fi
+
+    if grep -q "CONFIG_UDHCPC=y" ${B}/.config; then
+	install -m 0755 ${WORKDIR}/simple.hostname ${D}${sysconfdir}/udhcpc.d/51hostname
     fi
 }
