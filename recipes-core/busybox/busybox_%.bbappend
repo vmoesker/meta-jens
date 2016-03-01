@@ -14,9 +14,20 @@ SRC_URI += "\
     file://ifplugd/ifplugd.default-wifi \
     file://ifplugd/ifplugd.init \
     file://pstree.cfg \
+    file://user.cfg \
+    file://ls.cfg \
+    file://mknod.cfg \
+    file://realpath.cfg \
+    file://procps.cfg \
+    file://swap.cfg \
+    file://util-linux.cfg \
+    file://ash.cfg \
+    file://if-sysctl.cfg \
     \
     file://0001-ifupdown-improve-debian-compatibility-for-mapping.patch \
 "
+
+SRC_URI += "${@bb.utils.contains("IMAGE_FEATURES", 'debug-tweaks', ' file://procstat.cfg ', '', d )}"
 
 SERVICE_ROOT = "${sysconfdir}/daemontools/service"
 DEFWIFI_SERVICE_DIR = "${SERVICE_ROOT}/default-wifi"

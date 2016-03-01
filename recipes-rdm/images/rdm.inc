@@ -29,7 +29,6 @@ RDM_BASE_INSTALL = "\
 	statgrab \
 	saidar \
 	crda \
-	lsof \
 	logrotate \
 	boot-fsck \
 	initoverlay-${WANTED_ROOT_DEV} \
