@@ -1,4 +1,4 @@
-FILESEXTRAPATHS_append := "${THISDIR}/files:"
+FILESEXTRAPATHS_append := "${THISDIR}/files:${THISDIR}/busybox:"
 
 SRC_URI += "\
     file://udhcpc-opts.cfg \
