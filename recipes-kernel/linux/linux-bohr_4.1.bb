@@ -60,3 +60,13 @@ do_configure_prepend() {
 		printf "%s%s" +g $head > ${S}/.scmversion
 	fi
 }
+
+do_install_append() {
+    echo "blacklist btmrvl" > ${WORKDIR}/blacklist-btmrvl.conf
+    echo "blacklist btmrvl_sdio" > ${WORKDIR}/blacklist-btmrvl-sdio.conf
+    install -m 644 ${WORKDIR}/blacklist-btmrvl.conf ${D}${sysconfdir}/modprobe.d/
+    install -m 644 ${WORKDIR}/blacklist-btmrvl-sdio.conf ${D}${sysconfdir}/modprobe.d/
+}
+
+FILES_kernel-module-btmrvl += "${sysconfdir}/modprobe.d/blacklist-btmrvl.conf"
+FILES_kernel-module-btmrvl-sdio += "${sysconfdir}/modprobe.d/blacklist-btmrvl-sdio.conf"
