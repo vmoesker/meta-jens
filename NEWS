@@ -1,5 +1,11 @@
 Revision history for HomePilot
 
+4.1.8 2016-03-10
+    - linux-bohr: blacklist btmrvl and btmrvl_sdio
+    - hp-blob
+        * EnvironmentAutomationManager: Fix dawn and dusk problem
+        * DF-Provider: Log communication between df-service and provider for debug
+
 4.1.7 2016-02-24
     - hp-blob
         * Camera-migrator: Solve migration problem
