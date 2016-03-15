@@ -25,6 +25,7 @@ SRC_URI += "\
     file://if-sysctl.cfg \
     \
     file://0001-ifupdown-improve-debian-compatibility-for-mapping.patch \
+    file://0001-udhcpc-obtain-hostname-from-OS-by-default.patch \
 "
 
 SRC_URI += "${@bb.utils.contains("IMAGE_FEATURES", 'debug-tweaks', ' file://procstat.cfg ', '', d )}"

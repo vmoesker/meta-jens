@@ -16,7 +16,6 @@ iface eth0-static inet static
 	gateway 0.0.0.0
 
 iface eth0-dhcp inet dhcp
-	hostname homepilot
 
 # Wireless interfaces
 auto wlan0
@@ -45,7 +44,6 @@ iface wlan0-static inet static
 	post-down /etc/network/wifi/post_down.sh
 
 iface wlan0-dhcp inet dhcp
-	hostname homepilot
 	wireless_mode managed
 	wirless_essid any
 	wpa-driver nl80211,wext
