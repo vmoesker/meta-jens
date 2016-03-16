@@ -1,8 +1,11 @@
 Revision history for HomePilot
 
-4.1.9 2016-03-14
+4.1.9 2016-03-16
     - hp-blob
         * CoreDeviceManager: Synchronized methods where device lists are modified
+        * SetEnvTime: Remove doubled status answer of setTime request
+        * ServerboxStub: Print error log to std.err
+        * CoreDeviceManager: Enhance synchronized method to solve ConcurrentModification
 
 4.1.8 2016-03-10
     - linux-bohr: blacklist btmrvl and btmrvl_sdio
