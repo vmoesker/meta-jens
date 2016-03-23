@@ -23,6 +23,7 @@ SRC_URI += "\
     file://util-linux.cfg \
     file://ash.cfg \
     file://if-sysctl.cfg \
+    file://arping.cfg \
     \
     file://0001-ifupdown-improve-debian-compatibility-for-mapping.patch \
     file://0001-udhcpc-obtain-hostname-from-OS-by-default.patch \
