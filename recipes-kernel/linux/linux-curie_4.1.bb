@@ -9,9 +9,9 @@ require recipes-kernel/linux/linux-dtb.inc
 DEPENDS += "lzop-native bc-native bootscript-${MACHINE}-${WANTED_ROOT_DEV}"
 RDEPENDS_kernel-image += "bootscript-${MACHINE}-${WANTED_ROOT_DEV}"
 
-REV="33cefb668b66f791f28f3d89b64398a56955d251"
+REV="6614871bbb6cb2b866723dbd3798392095e17c84"
 SRCREPO="rdm-dev"
-SRCBRANCH = "curie_4.1"
+SRCBRANCH = "curie_4.1.18"
 LOCALVERSION = "+curie"
 
 SRC_URI = "git://github.com/${SRCREPO}/linux-curie.git;branch=${SRCBRANCH};rev=${REV}"
