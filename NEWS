@@ -1,5 +1,9 @@
 Revision history for HomePilot
 
+4.1.10 2016-03-24
+    - hp-blob
+        * MessageDispatcher: Fix issue with crash of scene functionality
+
 4.1.9 2016-03-16
     - hp-blob
         * CoreDeviceManager: Synchronized methods where device lists are modified
