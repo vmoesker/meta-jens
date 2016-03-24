@@ -9,7 +9,7 @@ require recipes-kernel/linux/linux-dtb.inc
 DEPENDS += "lzop-native bc-native bootscript-${MACHINE}-${WANTED_ROOT_DEV}"
 RDEPENDS_kernel-image += "bootscript-${MACHINE}-${WANTED_ROOT_DEV}"
 
-REV="252ec68fb7feea8afd00db17559069c57d70f7bb"
+REV="33cefb668b66f791f28f3d89b64398a56955d251"
 SRCREPO="rdm-dev"
 SRCBRANCH = "curie_4.1"
 LOCALVERSION = "+curie"
@@ -17,7 +17,6 @@ LOCALVERSION = "+curie"
 SRC_URI = "git://github.com/${SRCREPO}/linux-curie.git;branch=${SRCBRANCH};rev=${REV}"
 SRC_URI_append = " \
    file://defconfig \
-   file://0001-fbcon-ensure-vc-NULL.patch \
 "
 
 # patches for curie
