@@ -18,7 +18,8 @@ fi
 test "$2" = "${IFPLUGD_CURRENT}" || exit 0
 
 if [ "$2" = "up" ] ; then
-        grep -q $1 /run/ifstate && exit 0
+	@BINDIR@/disable-error no-carrier
+	grep -q $1 /run/ifstate && exit 0
 
         /sbin/ifdown @DEFAULT_WIFI_DEV@ 2>/dev/null || :
         test -f /tmp/${1}.settled || sleep 5s

@@ -6,6 +6,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 RDEPENDS_${PN}_append = "\
     file-slurp-tiny-perl \
+    errhlp \
     ledctrl \
     perl \
     netaddr-ip-perl \
@@ -20,7 +21,7 @@ SRC_URI += "\
 "
 
 do_compile_append () {
-    sed -i -e "s,@LEDCTRL[@],${libdir}/ledctrl,g" ${WORKDIR}/wifi/*.sh
+    sed -i -e "s,@LEDCTRL[@],${libdir}/ledctrl,g" -e "s,@BINDIR[@],${bindir},g" ${WORKDIR}/wifi/*.sh
 }
 
 do_install_append () {

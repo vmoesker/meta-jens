@@ -9,3 +9,4 @@ while pgrep ifup; do
 done
 grep -q @DEFAULT_WIFI_DEV@ /run/ifstate && exit 0
 test -f /etc/wpa_supplicant.enabled && /sbin/ifup @DEFAULT_WIFI_DEV@
+test -x /etc/init.d/check-connectivity.sh && /etc/init.d/check-connectivity.sh start

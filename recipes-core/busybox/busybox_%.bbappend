@@ -39,7 +39,8 @@ FILES_${PN}-ifplugd = "${sysconfdir}/init.d/busybox-ifplugd ${sysconfdir}/rc*/*b
 RDEPENDS_${PN}-ifplugd += " daemontools"
 
 do_compile_append () {
-    sed -i -e "s,@DEFAULT_ETH_DEV[@],${DEFAULT_ETH_DEV},g"  -e "s,@DEFAULT_WIFI_DEV[@],${DEFAULT_WIFI_DEV},g"\
+    sed -i -e "s,@DEFAULT_ETH_DEV[@],${DEFAULT_ETH_DEV},g" -e "s,@DEFAULT_WIFI_DEV[@],${DEFAULT_WIFI_DEV},g" \
+        -e "s,@BINDIR[@],${bindir},g" \
         ${WORKDIR}/ifplugd/ifplugd.action ${WORKDIR}/ifplugd/ifplugd.conf ${WORKDIR}/ifplugd/ifplugd.default-wifi
 }
 
