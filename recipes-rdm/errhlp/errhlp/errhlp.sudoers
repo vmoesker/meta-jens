@@ -1,0 +1,1 @@
+%errhlp		ALL= NOPASSWD: @BINDIR@/enable-error,@BINDIR@/disable-error,@BINDIR@/enable-counted-error,@BINDIR@/enable-counted-error

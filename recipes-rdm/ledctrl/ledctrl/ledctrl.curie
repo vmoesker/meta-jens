@@ -9,6 +9,11 @@ led_failure () {
     echo 255 >/sys/class/leds/error/brightness
 }
 
+silence_error () {
+    echo none >/sys/class/leds/error/trigger
+    echo 0 >/sys/class/leds/error/brightness
+}
+
 led_recover_update () {
     echo 0 >/sys/class/leds/boot/brightness
     echo 0 >/sys/class/leds/error/brightness
@@ -81,7 +86,7 @@ led_bootgodown () {
 }
 
 led_test_s () {
-    for led in user2 user1
+    for led in user2 user1 error
     do
 	echo 0 >/sys/class/leds/${led}/brightness
 	echo 255 >/sys/class/leds/${led}/brightness
@@ -91,7 +96,7 @@ led_test_s () {
 }
 
 led_test_m () {
-    for led in error wifi boot
+    for led in wifi boot
     do
 	echo 0 >/sys/class/leds/${led}/brightness
 	echo 255 >/sys/class/leds/${led}/brightness

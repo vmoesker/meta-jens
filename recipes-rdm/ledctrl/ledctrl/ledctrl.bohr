@@ -4,10 +4,13 @@ led_error () {
 }
 
 led_failure () {
-    echo none >/sys/class/leds/guruplug:red:health/trigger
-    echo heartbeat > /sys/class/leds/guruplug:red:health/trigger
     echo none >/sys/class/leds/guruplug:red:wmode/trigger
     echo 255 > /sys/class/leds/guruplug:red:wmode/brightness
+}
+
+silence_error () {
+    echo none > /sys/class/leds/guruplug:red:wmode/trigger
+    echo 0 > /sys/class/leds/guruplug:red:wmode/brightness
 }
 
 led_recover_update () {
@@ -77,7 +80,7 @@ led_bootgodown () {
 }
 
 led_test_s () {
-    for led in guruplug:green:health guruplug:green:wmode
+    for led in guruplug:green:health guruplug:green:wmode guruplug:red:wmode
     do
 	echo 0 >/sys/class/leds/${led}/brightness
 	echo 255 >/sys/class/leds/${led}/brightness
@@ -87,14 +90,8 @@ led_test_s () {
 }
 
 led_test_m () {
-    for led in guruplug:red:health guruplug:red:wmode
-    do
-	echo 0 >/sys/class/leds/${led}/brightness
-	echo 255 >/sys/class/leds/${led}/brightness
-	sleep 1
-	echo 0 >/sys/class/leds/${led}/brightness
-    done
-
+    echo 0 >/sys/class/leds/guruplug:red:health/brightness
     echo 255 >/sys/class/leds/guruplug:red:health/brightness
+    sleep 1
     echo heartbeat >/sys/class/leds/guruplug:red:health/trigger
 }
