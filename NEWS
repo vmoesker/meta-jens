@@ -1,5 +1,49 @@
 Revision history for HomePilot
 
+4.2.0
+    - Introduction new network manager
+        * rdm-images: add dnsmasq with resolvconf support
+        * conf/machine: define default network interfaces
+        * wpa-supplicant: adopt build-configuration to our needs
+        * busybox-ifupdown: add fix for proper mapping support
+        * init-ifupdown: adopt behavior of eth precedence while keep wpa_supplicant scanning
+        * busybox-udhcpc: add script setting hostname, if desired
+        * busybox: distinguish between busybox config and configuration for target
+        * busybox: obtain hostname from OS unless given
+        * wpa_supplicant: add config containing country
+        * busybox-udhcpc: use arping to validate offered address
+        * busybox: add arping to provided applets
+        * connectivity: improve connectivity check (wifi or wired)
+        * init-ifupdown: don't use static IP addresses failed DAD check (received responses on ARP requests)
+        * prd-flash: migrate wpa_supplicant.conf
+        * align with head of networkmgr feature branch of hp2sm
+    - base-files: urandom: save daily seed
+    - avahi: prepare for upstream fixes
+    - distro/rdm.conf: remove ptest from distro-features
+    - distro/rdm.conf: size matters - turn on more optimization
+    - busybox: enable pstree applet
+    - distro: remove dbus from all images beside xbmc
+    - machine/bohr-update.conf: derive from bohr.conf
+    - busybox: tiny image / busybox cleanup
+    - scripts/bashrc: move to poky
+    - sysvinit: increase logsize of bootlogd
+    - initscripts: avoid checkroot tries weird stuff on squashfs volumes
+    - errhlp: add recipe to support managing errors on system level
+    - kernel-module-8189es: Update module compile time settings
+    - system-image-update: update to head revision
+    - linux-kernel: rebase kernels for bohr/curie to 4.1.18
+    - bump minor version for jethro (bodensee) to .2
+    - Update meta-cpan
+    - Update meta-openembedded
+    - Update poky
+    - errhlp: check syslog before using logger
+    - errhlp: create symlink for disable-counted-error
+    - hp2sm
+        * network manager added
+        * add new dependencies for NetworkMgr within HP(2) Service Manager
+        * networkmgr: fix HTTP_ constants
+        * Networkmgr: support hidden ssids
+
 4.1.11
     - HP2 poweroff fix
     - HP2 HDMI CEC fix
