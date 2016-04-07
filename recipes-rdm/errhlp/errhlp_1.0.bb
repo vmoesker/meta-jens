@@ -30,7 +30,7 @@ do_compile () {
 do_install() {
     install -d ${D}${bindir}
     install -m 0755 ${B}/errhlp.sh ${D}${bindir}/errhlp
-    for call_id in enable-error disable-error enable-counted-error enable-counted-error
+    for call_id in enable-error disable-error enable-counted-error disable-counted-error
     do
         (cd ${D}${bindir} && ln -sf errhlp $call_id)
     done

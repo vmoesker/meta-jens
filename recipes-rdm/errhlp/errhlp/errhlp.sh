@@ -32,7 +32,7 @@ case "$CALL_NAME" in
 	test -z "$ERRCNT" && ERRCNT=1
 	ERRCNT=$(expr $ERRCNT - 1)
 	echo "$ERRCNT" > /run/hp-errors/count-$1
-	test "$ERRCNT" > 1 || rm -f "/run/hp-errors/count-$1"
+	test "$ERRCNT" -gt 0 || rm -f "/run/hp-errors/count-$1"
         test /run/hp-errors/* = "/run/hp-errors/*" && silence_error
         ;;
     *)
