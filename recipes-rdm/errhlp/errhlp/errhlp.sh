@@ -40,4 +40,5 @@ case "$CALL_NAME" in
         ;;
 esac
 
-logger -s "$0 $1"
+test -S /dev/log && logger -s "$0 $1" || echo "$0 $1" >&2
+exit 0
