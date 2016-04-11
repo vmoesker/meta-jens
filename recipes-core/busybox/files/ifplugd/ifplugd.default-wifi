@@ -1,8 +1,5 @@
 #!/bin/sh
 
-exec 2>/tmp/default-wifi.$$
-set -x
-
 sleep 30
 while pgrep ifup; do
         sleep 1
