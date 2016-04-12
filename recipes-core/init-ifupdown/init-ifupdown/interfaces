@@ -8,7 +8,6 @@ iface lo inet loopback
 mapping eth0
 	script /etc/network/mapping/activate
 	map DYN eth0-dhcp
-	map STATIC eth0-static
 
 iface eth0-static inet static
 	address 0.0.0.0
@@ -23,7 +22,6 @@ mapping wlan0
 	script /etc/network/mapping/activate
 	map NONET wlan0-nonet
 	map DYN wlan0-dhcp
-	map STATIC wlan0-static
 
 iface wlan0-nonet inet manual
 	wireless_mode managed
