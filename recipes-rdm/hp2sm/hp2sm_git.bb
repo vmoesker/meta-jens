@@ -39,11 +39,12 @@ RDEPENDS_${PN}-dev += "test-memory-cycle-perl"
 
 SRCREV="94b6d3e396a1cb29e5f201f05e5d28059ce3d95c"
 SRCBRANCH="jethro-bodensee"
-SRCREPO="rdm-dev"
+SRCREPO="${PN}"
+SRCUSER="rdm-dev"
 PV = "0.1.0+git${SRCPV}"
 
 SRC_URI = "\
-    git://git@bitbucket.org/${SRCREPO}/hp2sm.git;protocol=ssh;branch=${SRCBRANCH} \
+    git://git@bitbucket.org/${SRCUSER}/${SRCREPO}.git;protocol=ssh;branch=${SRCBRANCH} \
     file://hp2sm.run \
     file://hp2sm-log.run \
 "
