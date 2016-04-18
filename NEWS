@@ -49,6 +49,8 @@ Revision history for HomePilot
         * Networkmgr: support hidden ssids
         * diagnosis: remove deprecated tools
         * networkmgr: allow switching between ip configs
+    - DuoFern-Service
+        * Support of temperature controller
 
 4.1.11
     - HP2 poweroff fix
