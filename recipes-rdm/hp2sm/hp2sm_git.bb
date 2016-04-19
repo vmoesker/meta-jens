@@ -37,7 +37,7 @@ RDEPENDS_${PN}-dev += "devel-stacktrace-perl"
 RDEPENDS_${PN}-dev += "test-leaktrace-perl"
 RDEPENDS_${PN}-dev += "test-memory-cycle-perl"
 
-SRCREV="73b3e0d54827c269fdaa1798e075b8f96d4c1bb0"
+SRCREV="b4bebc199bbbbd954e4261f6f987e10a18932bbc"
 SRCBRANCH="jethro-bodensee"
 SRCREPO="${PN}"
 SRCUSER="rdm-dev"
