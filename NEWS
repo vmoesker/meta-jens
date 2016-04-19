@@ -51,6 +51,7 @@ Revision history for HomePilot
         * networkmgr: allow switching between ip configs
     - DuoFern-Service
         * Support of temperature controller
+    - networkmgr: removed DAD check
 
 4.1.11
     - HP2 poweroff fix
