@@ -53,6 +53,50 @@ Revision history for HomePilot
         * networkmgr: send error if the device is unknown
     - DuoFern-Service
         * Support of temperature controller
+    - hp-blob
+        * Camera-Provider: search issue on homepilot device.
+        * Camera-Provider: insert more debug output, solve nullpointer exception and insert selection for indoor and outdoor
+        * Simulation: add Temperatur regler
+        * Temperatur controller: insert some features for testing.
+        * Automation: set correct state for automation.
+        * Failure detection: Insert function of barrier-, blocking-, light barrier- and wicket door detection
+        * Temperaturregler: Add some test interfaces in statusMap and min and max pos
+        * added bladePos  to device
+        * WebUI: added dynamic height
+        * show blade control for devices
+        * slider changes
+        * fixed flexbox bug for firefox
+        * Enhanced "StatusMap" in Rest2 API for Temperatur controller and blade/slat support
+        * DF-Provider: changes for temerature controller
+        * Adapterdevice-Thermostat: Change status update
+        * Rest-Api: Insert command slat position integer into rest API
+        * Definition of command: add command to set the active temperature limit value
+        * Rest-Api: Put new camera properties to the Rest API
+        * CSS Fixes
+        * adding heating device to scene
+        * Metering-Manager: Put new meter info from temperatur controller to meter data
+        * MeteringManager: Insert new meter values for temperature controller
+        * Add new labels for Thermostat and slat functionality
+        * Web-UI: Change sizes for application-container in web-ui
+        * DuoFern-Provider: Insert first integration of new function of low power transmitter
+        * Web-UI: Insert function for Thermostat in scenes
+        * DF-Provider: Log communcation between df-service and provider for debug
+        * CoreDeviceManager: Synchronized methods where device list are modified
+        * Web-UI: Configure Temp controller in scenes
+        * Rest2-API: Solve issue with switching scenes on/off fromm APP
+        * Global: Change article number of temperature controller to the correct one
+        * IDevice: Insert read function to get temperature limit groups
+        * Support for temperature controller and low level transmitter
+        * ConfigItem: Realized float config field for temperature controller in sensor and actuator area
+        * SceneManager: Set the init value of temperature controller actuator in scenes
+        * StatusRequest: Sending status request to new devices after registration
+        * Sensor-Message: Add sensor message temerature stop and start
+        * Web-UI: Set init values for temperature controller
+        * DF-Provider: remove special handling for L&B
+        * Server: Remove unused log
+        * Migrator: Set pid of enviroment devices to the new sensor pid (+6000)
+        * WebUI: Bugfixes 12.04
+        * exchanged realpath by readlink -f
 
 4.1.11
     - HP2 poweroff fix
