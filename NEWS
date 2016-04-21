@@ -43,6 +43,9 @@ Revision history for HomePilot
     - networkmgr: allow switching between ip configs
     - hp2sm: improve recipe for development
     - networkmgr: removed DAD check
+    - busybox: configure udhcpc to background
+    - ledctrl: move both ledplays into one
+    - wpa-supplicant: wait up to 20s for the process to stop
     - hp2sm
         * network manager added
         * add new dependencies for NetworkMgr within HP(2) Service Manager
