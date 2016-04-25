@@ -101,6 +101,14 @@ Revision history for HomePilot
         * Migrator: Set pid of enviroment devices to the new sensor pid (+6000)
         * WebUI: Bugfixes 12.04
         * exchanged realpath by readlink -f
+        * Texts: Insert new texts files.
+        * NetworkManager: Remove old network manager und insert interface to new network manager in WEB-UI
+        * Network manager: commit a temporary version for new network manager.
+        * Web-UI: implement network manager UI
+        * NetworkManager: remove network manager and interfaces to WEB-UI
+        * provide new texts for supported countries
+        * Gradle: Remove gradle copybin task
+        * Remove start script from xml file
 
 4.1.11
     - HP2 poweroff fix
