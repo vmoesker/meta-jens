@@ -15,7 +15,7 @@ RDEPENDS_${PN} += "zway-blob"
 
 inherit record-installed-app gradlenative
 
-SRCREV="e0a3db198b01163124d35eb8422123b779300ca6"
+SRCREV="f37822e0a64d093a379d1478d4f8ad9c5cb0fa7d"
 PV = "4.0+git${SRCPV}"
 SRC_URI = "\
     git://git@bitbucket.org/rdm-dev/hp-blob.git;protocol=ssh;branch=jethro-bodensee \
@@ -50,10 +50,11 @@ INST_DEST_PREFIX="/opt/homepilot"
 SVC_SERVICES="${sysconfdir}/daemontools/service"
 
 do_install_append () {
-        # create homepilot user dir
+    # create homepilot user dir
 	install -o homepilot -g users -m 0755 -d ${D}${HOMEPILOT_USER_HOME}
 	install -o homepilot -g users -m 0755 -d ${D}${HOMEPILOT_USER_HOME}/bin
 	install -o homepilot -g users -m 0755 ${WORKDIR}/init_appdir.sh ${D}${HOMEPILOT_USER_HOME}/bin/init_appdir.sh
+	install -o homepilot -g users -m 0755 -d ${D}${INST_DEST_PREFIX}/bin
 
         # Install some gpg stuff
         install -o homepilot -g users -m 0700 -d ${D}${HOMEPILOT_USER_HOME}/.gpg
