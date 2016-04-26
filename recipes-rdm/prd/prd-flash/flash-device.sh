@@ -129,7 +129,7 @@ then
     DEVICE_PREFIX="/dev/${ROOT_DEV_NAME}${ROOT_DEV_SEP}"
     ROOTDEV=`mount | grep "on / type" | sed -e 's/ on.*//'`
 
-    if [ $(echo ${ROOTDEV} | egrep "${ROOT_DEV_NAME}${ROOT_DEV_SEP}2\$") ]
+    if [ $(echo ${ROOTDEV} | egrep "${ROOT_DEV_SEP}2\$") ]
     then
 	REGULAR=Y
 	logger "Updating phase 1"
@@ -161,7 +161,7 @@ then
 
 	logger "Requesting reboot"
 	reboot
-    elif [ $(echo ${ROOTDEV} | egrep "${ROOT_DEV_NAME}${ROOT_DEV_SEP}3\$") ]
+    elif [ $(echo ${ROOTDEV} | egrep "${ROOT_DEV_SEP}3\$") ]
     then
 	RECOVERY=Y
 	logger "Updating phase 2"
@@ -220,7 +220,7 @@ then
 		mkdir -p /run/media/${ROOT_DEV_NAME}${ROOT_DEV_SEP}3
 		mount -o bind / /run/media/${ROOT_DEV_NAME}${ROOT_DEV_SEP}3
 		cp /run/media/${ROOT_DEV_NAME}${ROOT_DEV_SEP}3/etc/wpa_supplicant.conf /data/.shadow/.etc/wpa_supplicant.conf.new
-		perl -le 'open(my $fh, "<", "/data/.shadow/.etc/wpa_supplicant.conf"); my $cnt; { local $/; $cnt = <$fh> }; $cnt =~ m/^(network=\{[^}]+\})/ms; print $1' >> /data/.shadow/.etc/wpa_supplicant.conf.new
+		perl -le 'open(my $fh, "<", "/data/.shadow/.etc/wpa_supplicant.conf"); my $cnt; { local $/; $cnt = <$fh> }; $cnt =~ m/.*^(network=\{[^}]+\})/ms; print $1' >> /data/.shadow/.etc/wpa_supplicant.conf.new
 		test -f /etc/wpa_supplicant.conf.new && mv /etc/wpa_supplicant.conf.new /etc/wpa_supplicant.conf
 		umount /run/media/${ROOT_DEV_NAME}${ROOT_DEV_SEP}3
 	fi
