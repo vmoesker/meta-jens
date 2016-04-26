@@ -1,6 +1,6 @@
 Revision history for HomePilot
 
-4.2.0
+4.2.0 2016-04-26
     - Introduction new network manager
         * rdm-images: add dnsmasq with resolvconf support
         * conf/machine: define default network interfaces
@@ -109,6 +109,7 @@ Revision history for HomePilot
         * provide new texts for supported countries
         * Gradle: Remove gradle copybin task
         * Remove start script from xml file
+        * Web-UI: Solve problem to initialize ConfigDeviceItem class
 
 4.1.11
     - HP2 poweroff fix
