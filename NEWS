@@ -55,6 +55,8 @@ Revision history for HomePilot
         * diagnosis: remove deprecated tools
         * networkmgr: allow switching between ip configs
         * networkmgr: send error if the device is unknown
+        * added support for reading ip config of inactive devices
+        * fix double active devices
     - DuoFern-Service
         * Support of temperature controller
     - hp-blob
