@@ -1,5 +1,13 @@
 Revision history for HomePilot
 
+4.2.1 2016-04-28
+    - hp2sm: add DateTime::Format::Duration as dependency
+    - hp2sm
+        * added support for reading ip config of inactive devices
+        * fix double active devices
+        * networkmgr: fix flags in list_network
+        * mediaplayer/services: improve services/system uptime
+
 4.2.0 2016-04-26
     - Introduction new network manager
         * rdm-images: add dnsmasq with resolvconf support
@@ -55,8 +63,6 @@ Revision history for HomePilot
         * diagnosis: remove deprecated tools
         * networkmgr: allow switching between ip configs
         * networkmgr: send error if the device is unknown
-        * added support for reading ip config of inactive devices
-        * fix double active devices
     - DuoFern-Service
         * Support of temperature controller
     - hp-blob
