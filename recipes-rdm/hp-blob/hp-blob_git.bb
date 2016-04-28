@@ -24,8 +24,6 @@ SRC_URI = "\
     file://homepilot.run \
     file://homepilot-log.run \
     file://homepilot.sh \
-    file://homepilot-network-manager.run \
-    file://homepilot-network-manager-log.run \
     file://homepilot-backup-restore.run \
     file://homepilot-backup-restore-log.run \
     file://init_appdir.sh \
@@ -65,8 +63,6 @@ do_install_append () {
 
 	# Install all the init-scripts
 	# 1 Create all the folders
-	install -d ${D}${SVC_SERVICES}/homepilot-network-manager
-	install -d ${D}${SVC_SERVICES}/homepilot-network-manager/log
 	install -d ${D}${SVC_SERVICES}/homepilot-backup-restore
 	install -d ${D}${SVC_SERVICES}/homepilot-backup-restore/log
 	install -d ${D}${SVC_SERVICES}/dfservice
@@ -75,8 +71,6 @@ do_install_append () {
 	install -d ${D}${SVC_SERVICES}/homepilot/log
 
 	# 2 Move all the run-files
-	install -m 0755 ${WORKDIR}/homepilot-network-manager.run ${D}${SVC_SERVICES}/homepilot-network-manager/run
-	install -m 0755 ${WORKDIR}/homepilot-network-manager-log.run ${D}${SVC_SERVICES}/homepilot-network-manager/log/run
 	install -m 0755 ${WORKDIR}/homepilot-backup-restore.run ${D}${SVC_SERVICES}/homepilot-backup-restore/run
 	install -m 0755 ${WORKDIR}/homepilot-backup-restore-log.run ${D}${SVC_SERVICES}/homepilot-backup-restore/log/run
 	install -m 0755 ${WORKDIR}/dfservice.run ${D}${SVC_SERVICES}/dfservice/run
@@ -88,7 +82,6 @@ do_install_append () {
 	# 3 Adjust parameters
 	sed -i -e "s,@HOMEPILOT_BASE@,${INST_DEST_PREFIX},g" -e "s,@JAVA_ELF@,${JAVA_ELF},g" \
 	    -e "s,@HOMEPILOT_USER_HOME@,${HOMEPILOT_USER_HOME},g" -e "s,@HOMEPILOT_USER@,${HOMEPILOT_USER},g" \
-	    ${D}${SVC_SERVICES}/homepilot-network-manager/run \
 	    ${D}${SVC_SERVICES}/homepilot-backup-restore/run \
 	    ${D}${SVC_SERVICES}/dfservice/run \
 	    ${D}${SVC_SERVICES}/homepilot/run \
