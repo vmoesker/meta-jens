@@ -3,6 +3,8 @@ Revision history for HomePilot
 4.2.2
      - hp-blob
         * Delete IP settings when switch to dynamic mode
+     - hp2sm
+        *  Style harmonization using Perl::Tidy
 
 4.2.1 2016-04-28
     - hp2sm: add DateTime::Format::Duration as dependency
