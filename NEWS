@@ -1,10 +1,12 @@
 Revision history for HomePilot
 
 4.2.2
-     - hp-blob
-        * Delete IP settings when switch to dynamic mode
-     - hp2sm
-        *  Style harmonization using Perl::Tidy
+    - wpa-supplicant: removed pre-configured network 
+    - hp-blob
+       * Delete IP settings when switch to dynamic mode
+    - hp2sm
+        * Style harmonization using Perl::Tidy
+        * networkmgr: stop using the first network for scanning
 
 4.2.1 2016-04-28
     - hp2sm: add DateTime::Format::Duration as dependency
