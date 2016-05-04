@@ -2,8 +2,15 @@ Revision history for HomePilot
 
 4.2.2
     - wpa-supplicant: removed pre-configured network 
+    - init-ifupdown: improve regexp to search networks
+    - busybox-ifplugd: increase delay after link down
     - hp-blob
-       * Delete IP settings when switch to dynamic mode
+        * Delete IP settings when switch to dynamic mode
+        * Web-UI: Remove one Button with new save function
+        * DF-Provider: send battery value from smoke detector everytime to application
+        * Web-UI: Insert popup warning when storing new wlan network
+        * Web-UI: Insert error message in case of failed ip configuration
+        * Web-UI: Show popup message when changing ip configurations
     - hp2sm
         * Style harmonization using Perl::Tidy
         * networkmgr: stop using the first network for scanning
