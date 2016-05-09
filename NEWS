@@ -1,6 +1,12 @@
 Revision history for HomePilot
 
-4.2.2
+4.2.3
+    - hp2sm
+        * developer: fix led heartbeat on bohr
+        * diagnosis: use tar with relative paths
+        * networkmgr: add /info
+
+4.2.2 2016-05-04
     - wpa-supplicant: removed pre-configured network 
     - init-ifupdown: improve regexp to search networks
     - busybox-ifplugd: increase delay after link down
