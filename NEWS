@@ -1,6 +1,8 @@
 Revision history for HomePilot
 
 4.2.3
+    - hp-blob
+        * fix webui access to networkmgr via WRC
     - hp2sm
         * developer: fix led heartbeat on bohr
         * diagnosis: use tar with relative paths
