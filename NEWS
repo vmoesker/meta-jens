@@ -7,6 +7,8 @@ Revision history for HomePilot
         * developer: fix led heartbeat on bohr
         * diagnosis: use tar with relative paths
         * networkmgr: add /info
+        * developer webui: move led and zw into plugins
+        * networkmgr: improve 1a46c4e
 
 4.2.2 2016-05-04
     - wpa-supplicant: removed pre-configured network 
