@@ -1,8 +1,9 @@
 Revision history for HomePilot
 
-4.2.3
+4.2.3 2016-05-12
     - hp-blob
         * fix webui access to networkmgr via WRC
+        * AdapterDeviceSensor: Add meter data off second temperatur if not exists.
     - hp2sm
         * developer: fix led heartbeat on bohr
         * diagnosis: use tar with relative paths
