@@ -1,5 +1,15 @@
 Revision history for HomePilot
 
+4.2.4 2016-05-xx
+    - hp-blob
+        * fixed non working hostname readout
+        * NetworkManagerJava: Remove unused Interfaces
+        * Put new interface function calls to rest api
+        * NetworkData: Fix problem with empty wifi gateway field in rest API.
+        * Web-UI: Put uid to registration link
+        * NetworkData: Calculate broadcast ip address
+        * Web-UI: Show ip address in footer of the Web-UI
+
 4.2.3 2016-05-12
     - hp-blob
         * fix webui access to networkmgr via WRC
