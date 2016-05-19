@@ -16,6 +16,10 @@ Revision history for HomePilot
         * WebUI: cameracontroller fix
         * remove unused .bak file
         * hp-backup-restore: replace ledctrl by errhlp
+    - hp2sm
+        * networkmgr: use the first network to save the user configuration
+        * networkmgr: improve d3a6fa6 and fc515b9
+        * networkmgr: fix network id in list_networks
 
 4.2.3 2016-05-12
     - hp-blob
