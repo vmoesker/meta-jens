@@ -15,7 +15,7 @@ RDEPENDS_${PN} += "zway-blob"
 
 inherit record-installed-app gradlenative
 
-SRCREV="e2b52fbe179982f29732d1e6c9c988fd3b4a8bfa"
+SRCREV="b294fcfe729ef02a8dc3eb3d2ccf018caed4ffc3"
 PV = "4.0+git${SRCPV}"
 SRC_URI = "\
     git://git@bitbucket.org/rdm-dev/hp-blob.git;protocol=ssh;branch=jethro-bodensee \
