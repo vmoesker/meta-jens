@@ -16,6 +16,8 @@ Revision history for HomePilot
         * WebUI: cameracontroller fix
         * remove unused .bak file
         * hp-backup-restore: replace ledctrl by errhlp
+        * AdapterMeter: Don't set the timestamp on battery update for z-wave door window sensor
+        * Web-UI: Set the spinner during changing the nodename
     - hp2sm
         * networkmgr: use the first network to save the user configuration
         * networkmgr: improve d3a6fa6 and fc515b9
