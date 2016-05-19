@@ -1,6 +1,6 @@
 Revision history for HomePilot
 
-4.2.4 2016-05-xx
+4.2.4 2016-05-19
     - hp-blob
         * fixed non working hostname readout
         * NetworkManagerJava: Remove unused Interfaces
@@ -9,6 +9,13 @@ Revision history for HomePilot
         * Web-UI: Put uid to registration link
         * NetworkData: Calculate broadcast ip address
         * Web-UI: Show ip address in footer of the Web-UI
+        * SensorActionRegistrationCheck: Solve problem with wrong command from scene, when temerarturController is involved.
+        * Web-UI: Fix problems with scenes after automatic adaption of the scene.
+        * Migrator: Solve Nullpointer exception when directory of splitted sensor devices not present.
+        * Migrator: Solve error with missing adaption of offset in conditional astro job.
+        * WebUI: cameracontroller fix
+        * remove unused .bak file
+        * hp-backup-restore: replace ledctrl by errhlp
 
 4.2.3 2016-05-12
     - hp-blob
