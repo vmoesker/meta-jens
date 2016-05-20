@@ -16,9 +16,13 @@ RDEPENDS_${PN} += "zway-blob"
 inherit record-installed-app gradlenative
 
 SRCREV="b294fcfe729ef02a8dc3eb3d2ccf018caed4ffc3"
+SRCBRANCH="jethro-bodensee"
+SRCREPO="${PN}"
+SRCUSER="rdm-dev"
 PV = "4.0+git${SRCPV}"
+
 SRC_URI = "\
-    git://git@bitbucket.org/rdm-dev/hp-blob.git;protocol=ssh;branch=jethro-bodensee \
+    git://git@bitbucket.org/${SRCUSER}/${SRCREPO}.git;protocol=ssh;branch=${SRCBRANCH} \
     file://dfservice.run \
     file://dfservice-log.run \
     file://homepilot.run \
