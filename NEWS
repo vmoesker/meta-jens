@@ -1,5 +1,11 @@
 Revision history for HomePilot
 
+4.2.5 2016-05-24
+    - hp-blob: improve recipe for development
+    - hp2sm
+        * networkmgr: add key_mgmt to network block
+        * networkmgr: fix missing essid in GET config
+
 4.2.4 2016-05-19
     - hp-blob
         * fixed non working hostname readout
