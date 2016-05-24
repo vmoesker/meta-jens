@@ -9,6 +9,7 @@ Revision history for HomePilot
         * Web-UI: Solve index issue in scenes with temperature controller
         * Web-UI: Remove E-mail context by switching tabs in system formular
         * StatusRequest: Change handler of DF status request during booting
+        * fixed broken scenes with heating controller
     - hp2sm
         * networkmgr: add key_mgmt to network block
         * networkmgr: fix missing essid in GET config
