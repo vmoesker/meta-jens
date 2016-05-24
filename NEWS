@@ -1,7 +1,11 @@
 Revision history for HomePilot
 
 4.2.5 2016-05-24
-    - hp-blob: improve recipe for development
+    - hp-blob
+        * improve recipe for development
+        * Web-UI: docking configuration icon to the bottom of the web ui
+        * Web-UI: enhance vertical size
+        * Textfiles: Networkmanager
     - hp2sm
         * networkmgr: add key_mgmt to network block
         * networkmgr: fix missing essid in GET config
