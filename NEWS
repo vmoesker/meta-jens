@@ -10,6 +10,7 @@ Revision history for HomePilot
         * Web-UI: Remove E-mail context by switching tabs in system formular
         * StatusRequest: Change handler of DF status request during booting
         * fixed broken scenes with heating controller
+        * CoreDeviceManager: Solve deadlock during changing a config parameter
     - hp2sm
         * networkmgr: add key_mgmt to network block
         * networkmgr: fix missing essid in GET config
