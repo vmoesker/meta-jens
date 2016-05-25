@@ -14,6 +14,7 @@ Revision history for HomePilot
     - hp2sm
         * networkmgr: add key_mgmt to network block
         * networkmgr: fix missing essid in GET config
+    - nginx: removed /camera_de.pdf redirect
 
 4.2.4 2016-05-19
     - hp-blob
