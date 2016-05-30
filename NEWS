@@ -1,5 +1,9 @@
 Revision history for HomePilot
 
+4.2.7 2016-06-01
+    - hp2sm
+        * networkmgr: apply nodename to all network interfaces
+
 4.2.6 2016-05-25
     - hp-blob
         * CoreDeviceManager: Solve deadlock during changing a config parameter
