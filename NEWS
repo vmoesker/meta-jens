@@ -4,6 +4,8 @@ Revision history for HomePilot
     - hp2sm
         * networkmgr: apply nodename to all network interfaces
     - hp-blob
+        * Web-UI: Fix special characters in wifi ssid, pw not working
+        * Web-UI: Adjusted width of favorite device tiles
         * Web-UI: Allow only inputs in the range of 4 to 40 degrees for sensor config
         * DF-Provider: Insert waiting function after DF command was sent
         * Web-UI: Repair automatic button handling
