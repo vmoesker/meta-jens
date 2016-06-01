@@ -1,6 +1,7 @@
 Revision history for HomePilot
 
 4.2.7 2016-06-01
+    - errhlp: disable the error led
     - hp2sm
         * networkmgr: apply nodename to all network interfaces
     - hp-blob
@@ -9,7 +10,11 @@ Revision history for HomePilot
         * Web-UI: Allow only inputs in the range of 4 to 40 degrees for sensor config
         * DF-Provider: Insert waiting function after DF command was sent
         * Web-UI: Repair automatic button handling
-        * ameraDeviceProvider: Get the correct uid from homepilot for camera pictures
+        * CameraDeviceProvider: Get the correct uid from homepilot for camera pictures
+        * DF-Devices: Definition of wind, rain and sun program in status capabilities
+        * Status handler: Definition of wind, rain and sun program in status capabilities
+    - duofern-service
+        * Sun-program for dimmer: Change bit position for sun program state
 
 4.2.6 2016-05-25
     - hp-blob
