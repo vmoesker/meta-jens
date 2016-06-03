@@ -8,6 +8,7 @@ Revision history for HomePilot
     - hp-blob
         * networkmanager: fixed special character issue for wlan config
         * adjusted favorite tiles to device tiles
+        * ZWaveProvider: Remove configuration of wakeup time for FTK
 
 4.2.7 2016-06-01
     - errhlp: disable the error led
