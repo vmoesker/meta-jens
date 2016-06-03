@@ -7,6 +7,7 @@ Revision history for HomePilot
         * networkmgr: add wpa2-psk routes using body parameters
     - hp-blob
         * networkmanager: fixed special character issue for wlan config
+        * adjusted favorite tiles to device tiles
 
 4.2.7 2016-06-01
     - errhlp: disable the error led
