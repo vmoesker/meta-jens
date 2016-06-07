@@ -10,10 +10,6 @@ SRCREV_html = "f5cd9dc38fe3b2d58a48242fcf224a738b311610"
 
 PACKAGES_prepend = "${PN}-favs ${PN}-legal ${PN}-manual "
 
-EXTRA_OECONF_append = "\
-    --with-http_stub_status_module \
-"
-
 do_install_append () {
 	install -d ${D}${localstatedir}/lib/nginx/
 	install -d ${D}${sysconfdir}/default/volatiles
