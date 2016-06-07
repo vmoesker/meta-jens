@@ -9,8 +9,15 @@ Revision history for HomePilot
         * networkmanager: fixed special character issue for wlan config
         * adjusted favorite tiles to device tiles
         * ZWaveProvider: Remove configuration of wakeup time for FTK
+        * Web-UI: Adjustment of wlan input formular
+        * ZWaveProvider: Solve problem with setting of wakeup interval
+        * DF-Provider: Support of PushButton command
     - zway: disabled vdev support
     - busybox/ifplugd: fix wlan boot up issue
+    - nginx: cleanup nginx configuration
+    - nginx: configure proxy timeouts for the root location (fix backup issue)
+    - nginx: disable http_stub_status_module
+    - prd-flash: improve regex to merge wpa_supplicant.conf
 
 4.2.7 2016-06-01
     - errhlp: disable the error led
