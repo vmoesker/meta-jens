@@ -12,6 +12,8 @@ Revision history for HomePilot
         * Web-UI: Adjustment of wlan input formular
         * ZWaveProvider: Solve problem with setting of wakeup interval
         * DF-Provider: Support of PushButton command
+        * adapted favorite device/scene placement to two columns
+        * removed favorite container size calculation
     - zway: disabled vdev support
     - busybox/ifplugd: fix wlan boot up issue
     - nginx: cleanup nginx configuration
