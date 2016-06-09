@@ -1,0 +1,16 @@
+#!/bin/sh
+
+search="mmc0: Timeout"
+while true
+do
+    mmc_new=$(dmesg | grep "$search" | tail -1)
+    if [ -n "$mmc_new"  ] && [ "$mmc_old" != "$mmc_new" ]
+    then
+        logger -s "Apply mmc0 timeout workaround"
+        modprobe -r -f 8189es && sleep 10 && modprobe 8189es || reboot
+        ifdown wlan0
+        ifup wlan0
+        mmc_old=$(dmesg | grep "$search" | tail -1)
+    fi
+    sleep 15m
+done

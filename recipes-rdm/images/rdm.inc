@@ -37,6 +37,10 @@ RDM_BASE_INSTALL = "\
 	hp2sm \
 	hp2sm-ethtool \
 "
+
+RDM_BASE_INSTALL_append_curie = "\
+	wa-mmc-timeout \
+"
 RDM_ESSENTIALS_append_bohr = "\
 	ledctrl \
 "
