@@ -15,12 +15,15 @@ Revision history for HomePilot
         * DF-Provider: Support of PushButton command
         * adapted favorite device/scene placement to two columns
         * removed favorite container size calculation
+        * Web-UI: Change the commands when slider bottons are pressed for blade function
+        * Web-UI: New concept for config text input field when input not valid
     - zway: disabled vdev support
     - busybox/ifplugd: fix wlan boot up issue
     - nginx: cleanup nginx configuration
     - nginx: configure proxy timeouts for the root location (fix backup issue)
     - nginx: disable http_stub_status_module
     - prd-flash: improve regex to merge wpa_supplicant.conf
+    - add workaround for mmc0 timeouts
 
 4.2.7 2016-06-01
     - errhlp: disable the error led
