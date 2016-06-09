@@ -1,10 +1,11 @@
 Revision history for HomePilot
 
-4.2.8 2016-06-xx
+4.2.8 2016-06-09
     - hp2sm
         * networkmgr: fix leading and trailing spaces in ssid's
         * networkmgr: fix backslashes and quotes in ssid's
         * networkmgr: add wpa2-psk routes using body parameters
+        * networkmgr: don't disable active network interfaces
     - hp-blob
         * networkmanager: fixed special character issue for wlan config
         * adjusted favorite tiles to device tiles
