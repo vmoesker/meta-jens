@@ -1,5 +1,10 @@
 Revision history for HomePilot
 
+4.2.9 2016-06-13
+    - wa-mmc-timeout: fix startup
+    - hp-blob
+        * SceneHandler: Remove queue entry when provider throw an exception
+
 4.2.8 2016-06-09
     - hp2sm
         * networkmgr: fix leading and trailing spaces in ssid's
