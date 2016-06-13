@@ -16,5 +16,5 @@ do_install () {
     install -d ${D}${sysconfdir}/init.d
     install -m 0755 ${WORKDIR}/wa-mmc-timeout-init.sh ${D}${sysconfdir}/init.d/wa-mmc-timeout
 
-    update-rc.d -r ${D} wa-mmc-timeout start 99 5 .
+    update-rc.d -r ${D} wa-mmc-timeout start 98 5 .
 }
