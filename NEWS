@@ -1,5 +1,12 @@
 Revision history for HomePilot
 
+4.2.10 2016-06-28
+    - hp-blob
+        * SacManager: Insert properties for the new temperature controller
+        * Simulation: Add commands for temperature controller
+        * EnvAutomationManager: Special handling for dawn and dusk automation
+        * SacManager: Handle end event when conditional automation inactive
+
 4.2.9 2016-06-13
     - wa-mmc-timeout: fix startup
     - hp-blob
