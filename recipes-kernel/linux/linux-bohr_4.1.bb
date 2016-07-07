@@ -20,6 +20,7 @@ SRCBRANCH = "bohr_4.1.18"
 SRC_URI = "git://github.com/${SRCREPO}/linux-curie.git;branch=${SRCBRANCH};rev=${REV} \
 	   file://defconfig \
 	   file://omit-to-optimize-some-printf.patch \
+	   file://net-mv643xx-disable-tso-by-default.patch \
           "
 
 # patches for hp
