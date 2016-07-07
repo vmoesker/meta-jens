@@ -1,5 +1,8 @@
 Revision history for HomePilot
 
+4.2.11 2016-07-07
+    - linux-bohr: disable mv643xx_eth tso by default
+
 4.2.10 2016-06-28
     - hp-blob
         * SacManager: Insert properties for the new temperature controller
