@@ -1,4 +1,7 @@
 Revision history for HomePilot
+4.3.0
+    - bump minor version for jethro (ijsselmeer) to 4.3
+    - changed recipes to jethro-ijsselmeer
 
 4.2.11 2016-07-07
     - linux-bohr: disable mv643xx_eth tso by default
