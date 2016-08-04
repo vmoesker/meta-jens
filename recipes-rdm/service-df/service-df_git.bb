@@ -10,7 +10,7 @@ DEPENDS = "libxml2 libftdi"
 SRCREV="eb485a683773beab5b9677c049467881f0a822fe"
 PV = "1.2.0+git${SRCPV}"
 
-SRC_URI = "git://git@bitbucket.org/rdm-dev/DuoFern-Service.git;protocol=ssh;branch=jethro-bodensee"
+SRC_URI = "git://git@bitbucket.org/rdm-dev/DuoFern-Service.git;protocol=ssh;branch=jethro-ijsselmeer"
 
 S = "${WORKDIR}/git"
 

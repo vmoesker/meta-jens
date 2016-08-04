@@ -1,7 +1,7 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 SRC_URI_append = "\
-    git://git@bitbucket.org/rdm-dev/nginx-html.git;protocol=ssh;branch=master;name=html;destsuffix=html \
+    git://git@bitbucket.org/rdm-dev/nginx-html.git;protocol=ssh;branch=jethro-ijsselmeer;name=html;destsuffix=html \
     file://nginx-logrotate.conf \
     file://nginx-varlib.volatiles \
 "

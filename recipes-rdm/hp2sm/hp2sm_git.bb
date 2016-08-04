@@ -39,7 +39,7 @@ RDEPENDS_${PN}-dev += "test-leaktrace-perl"
 RDEPENDS_${PN}-dev += "test-memory-cycle-perl"
 
 SRCREV="3817c316239dc6dfc6d888e95c1cf1da47af3b4e"
-SRCBRANCH="jethro-bodensee"
+SRCBRANCH="jethro-ijsselmeer"
 SRCREPO="${PN}"
 SRCUSER="rdm-dev"
 PV = "0.1.0+git${SRCPV}"
