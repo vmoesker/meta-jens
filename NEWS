@@ -9,6 +9,7 @@ Revision history for HomePilot
         * AwningSensor: Add sensor property to device
         * WebUI: Change logic to controll button for manualoverride
         * SensorStateManager: Handle old sensor state files to set all states correctly
+        * ZWaveProvider: Insert filter for exception output to prevent spam
 
 4.2.11 2016-07-07
     - linux-bohr: disable mv643xx_eth tso by default
