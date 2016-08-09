@@ -1,8 +1,10 @@
 Revision history for HomePilot
 
-4.3.0
+4.3.0 2016-08-09
     - bump minor version for jethro (ijsselmeer) to 4.3
     - changed recipes to jethro-ijsselmeer
+    - wa-mmc-timeout: improve startup and support bohr
+    - images: move udev-rules-bohr to base-tools
     - hp-blob
         * Web-UI: Insert label to configure device controls
         * DFProvider: Ignore status messages during boot
@@ -10,6 +12,14 @@ Revision history for HomePilot
         * WebUI: Change logic to controll button for manualoverride
         * SensorStateManager: Handle old sensor state files to set all states correctly
         * ZWaveProvider: Insert filter for exception output to prevent spam
+        * Simulation: Add new devices for '6-fach Wandtaster'
+        * DFProvider: Add new devices for '6-fach Wandtaster' (battery and 230 V)
+        * CoreDeviceManager: Set icon for actuator of '6-fach Wandtaster'
+        * WebUI: Insert new texts for new devices
+        * HPServer: Adaption of TriggerManager for new devices
+        * WebUI: on/off switch - corrected size and alignment in order to avoid right side cut off and missplacements
+    - DuoFern-Service
+        *  Add devices for '6-fach Wandtaster' in variants of battery and 230 volt
 
 4.2.11 2016-07-07
     - linux-bohr: disable mv643xx_eth tso by default
