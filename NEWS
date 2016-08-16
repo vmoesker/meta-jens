@@ -1,5 +1,19 @@
 Revision history for HomePilot
 
+4.3.1
+    - hp-blob
+        * DuoFernDispatcher: Catch exception when set devices to reachable or unreachable
+        * WebUI: Re-Insert function to set the position of switch_io
+        * Added support for FUP Sensor feature
+        * Modechange DFProvider for FUP
+        * File handler for FUP devices
+        * Set icon for sensor FUP devices
+        * Filter FUP sensor devices in raw list
+        * Simulation: Add FUP radio transmitter A7 to simulation
+        * DFProvider: Define new Capability for FUP
+        * WebUI: Insert button to activate FUP sensor functionality
+        * WebUI: Open registation dialogue when FUP sensor button pressed
+
 4.3.0 2016-08-09
     - bump minor version for jethro (ijsselmeer) to 4.3
     - changed recipes to jethro-ijsselmeer
