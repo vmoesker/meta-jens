@@ -1,6 +1,6 @@
 Revision history for HomePilot
 
-4.3.1
+4.3.1 2016-08-17
     - hp-blob
         * DuoFernDispatcher: Catch exception when set devices to reachable or unreachable
         * WebUI: Re-Insert function to set the position of switch_io
@@ -13,6 +13,11 @@ Revision history for HomePilot
         * DFProvider: Define new Capability for FUP
         * WebUI: Insert button to activate FUP sensor functionality
         * WebUI: Open registation dialogue when FUP sensor button pressed
+        * DFProvider: Fix: Remove unused config commands for FUP
+        * DFProvider: Fix: Take class Booleanvalue for boolean capabilities
+        * DFProvider: Fix: Invert sensor functionality with mode state switch
+        * WebUI: Fix problem with empty device combox when transmitter dialogue opened
+
 
 4.3.0 2016-08-09
     - bump minor version for jethro (ijsselmeer) to 4.3
