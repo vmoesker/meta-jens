@@ -1,6 +1,6 @@
 Revision history for HomePilot
 
-4.3.1 2016-08-17
+4.3.1 2016-08-18
     - hp-blob
         * DuoFernDispatcher: Catch exception when set devices to reachable or unreachable
         * WebUI: Re-Insert function to set the position of switch_io
@@ -17,7 +17,9 @@ Revision history for HomePilot
         * DFProvider: Fix: Take class Booleanvalue for boolean capabilities
         * DFProvider: Fix: Invert sensor functionality with mode state switch
         * WebUI: Fix problem with empty device combox when transmitter dialogue opened
-
+        * AdapterDevice: Fix: Change logic of step down and step up for dimmers
+        * Migrator: Fix: Insert filter for splitter that FUP device splited
+        * AdapterDevice: Fix: Remove mapping from command up to increment and from command down to decrement
 
 4.3.0 2016-08-09
     - bump minor version for jethro (ijsselmeer) to 4.3
