@@ -1,11 +1,14 @@
 Revision history for HomePilot
 
-4.3.3
+4.3.3 2016-08-24
     - hp-blob
         * Scenemanager: Remove entry from dawn/dusk scheduler when condition not valid
         * WebUI: Save email config when enable switch changed
         * WebUi: Insert new language files for multi channel taster and FUP
         * DFProvider: Don't change value of modus state if file exists and sensor functionallity will be activated again
+        * removed ntp config methods from JAVA code
+        * removed comments containing update.sh
+        * deleted unreferenced helper scripts
 
 4.3.2 2016-08-18
     - hp-blob
