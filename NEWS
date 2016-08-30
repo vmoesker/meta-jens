@@ -1,5 +1,13 @@
 Revision history for HomePilot
 
+4.3.4
+    - hp-blob
+        * CameraDeviceProvider: Solve problem with missing unreachable cameras after reboot of homepilot
+        * CameraDeviceProvider: Don't remove unreachable cameras when unregister dialogue is opened
+        * ZWProvider: Update battery value also if value is zero
+        * AdapterMeter: Send sensor message directly to AdapterMeter.sync method
+        * TriggerManager: Catch errors in loop during initialisation
+
 4.3.3 2016-08-24
     - hp-blob
         * Scenemanager: Remove entry from dawn/dusk scheduler when condition not valid
