@@ -1,6 +1,11 @@
 Revision history for HomePilot
 
-4.3.4
+4.3.5 2016-09-xx
+    - hp-blob
+        * CameraDeviceProvider: Add cameras only in register mode
+        * CameraDeviceProvider: Don't request a new image from camera when camera is not reachable
+
+4.3.4 2016-08-31
     - hp-blob
         * CameraDeviceProvider: Solve problem with missing unreachable cameras after reboot of homepilot
         * CameraDeviceProvider: Don't remove unreachable cameras when unregister dialogue is opened
