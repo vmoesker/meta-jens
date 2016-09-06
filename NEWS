@@ -4,6 +4,10 @@ Revision history for HomePilot
     - hp-blob
         * CameraDeviceProvider: Add cameras only in register mode
         * CameraDeviceProvider: Don't request a new image from camera when camera is not reachable
+    - hp2sm
+        * systemmanagement: remove beta update channel
+        * systemmanagement: fix empty update channel
+        * systemmanagement: use Update::Status->is_running
 
 4.3.4 2016-08-31
     - hp-blob
