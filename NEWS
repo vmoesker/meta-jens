@@ -8,6 +8,8 @@ Revision history for HomePilot
         * systemmanagement: remove beta update channel
         * systemmanagement: fix empty update channel
         * systemmanagement: use Update::Status->is_running
+    - DuoFern-Service
+        * DF-Service: Insert command reset and reset all to device two channel actuator
 
 4.3.4 2016-08-31
     - hp-blob
