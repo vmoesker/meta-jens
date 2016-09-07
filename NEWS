@@ -2,6 +2,11 @@ Revision history for HomePilot
 
 4.3.5 2016-09-xx
     - hp-blob
+        * WebUI: Set parameter only if parameters.length > 0 in addaction method
+        * SBDevice: Insert Java dokumentation and replace tabs with four spaces
+        * SBDevice: Set init value of strings article, serial and product name
+        * HP-Server: Replace tabs with 4 spaces in ServerBoxInitHelper and insert Java documentation.
+        * HP-Server: Start WebServer at least
         * CameraDeviceProvider: Add cameras only in register mode
         * CameraDeviceProvider: Don't request a new image from camera when camera is not reachable
     - hp2sm
