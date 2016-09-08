@@ -2,19 +2,21 @@ Revision history for HomePilot
 
 4.3.5 2016-09-xx
     - hp-blob
+        * CameraDeviceProvider: Add cameras only in register mode
+        * CameraDeviceProvider: Don't request a new image from camera when camera is not reachable
         * WebUI: Set parameter only if parameters.length > 0 in addaction method
         * SBDevice: Insert Java dokumentation and replace tabs with four spaces
         * SBDevice: Set init value of strings article, serial and product name
         * HP-Server: Replace tabs with 4 spaces in ServerBoxInitHelper and insert Java documentation.
         * HP-Server: Start WebServer at least
-        * CameraDeviceProvider: Add cameras only in register mode
-        * CameraDeviceProvider: Don't request a new image from camera when camera is not reachable
     - hp2sm
         * systemmanagement: remove beta update channel
         * systemmanagement: fix empty update channel
         * systemmanagement: use Update::Status->is_running
     - DuoFern-Service
         * DF-Service: Insert command reset and reset all to device two channel actuator
+    - Poky
+        * fix dev image build error (empty libavahi-client)
 
 4.3.4 2016-08-31
     - hp-blob
