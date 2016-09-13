@@ -5,4 +5,6 @@ OPENVPN_ROUTE_UP="/opt/rdm/wrc/openvpn/route-up"
 OPENVPN_PARAMETER="--config ${OPENVPN_CONFIG} --route-up ${OPENVPN_ROUTE_UP} --script-security 2 --management /run/openvpn.sock unix --management-client-user root --management-client-group root --status /run/openvpn.status"
 test -f $OPENVPN_CONFIG || exit 100
 
+ntp-wait 2>&1 || exit 1
+
 exec openvpn $OPENVPN_PARAMETER 2>&1

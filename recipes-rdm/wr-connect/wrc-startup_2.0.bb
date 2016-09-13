@@ -12,6 +12,7 @@ SRC_URI += "file://wrc_register-log.run"
 SRC_URI += "file://wrc_register.run"
 
 RDEPENDS_${PN} += "daemontools"
+RDEPENDS_${PN} += "ntp-utils"
 RDEPENDS_${PN} += "openvpn"
 RDEPENDS_${PN} += "hp2sm-system-wrc2"
 
