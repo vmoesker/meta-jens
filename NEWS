@@ -1,5 +1,10 @@
 Revision history for HomePilot
 
+4.3.6 2016-09-22
+    - hp-blob
+        * AdapterDevice: Send for all Rollo devices the command up instead of command goto pos 0
+        * AdapterDevice: Insert Java documentation and replace tab with four spaces.
+
 4.3.5 2016-09-09
     - hp-blob
         * CameraDeviceProvider: Add cameras only in register mode
