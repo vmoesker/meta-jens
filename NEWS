@@ -1,5 +1,12 @@
 Revision history for HomePilot
 
+4.3.6 2016-09-23
+    - hp-blob
+        * AdapterDevice: Change command "goto" only if parameter is zero.
+        * DFProvider: Insert Java documentation.
+        * DFProvider: Insert Java documentation and replace tab with four spaces.
+        * DFProvider: Fake position by sending up or down commands.
+
 4.3.6 2016-09-22
     - hp-blob
         * AdapterDevice: Send for all Rollo devices the command up instead of command goto pos 0
