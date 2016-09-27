@@ -1,5 +1,17 @@
 Revision history for HomePilot
 
+4.4.0 2016-09-27
+    - hp-blob
+        * HP_Server: Remove unused code
+        * ServiceAdapter: Remove unused code.
+        * HP_Common: Remove unused code
+        * WebUI: Remove unused code.
+        * HP_Service_Api: Remove unused code
+        * HP_Server: Remove unused code.
+        * DFProvider: Remove unused code.
+        * DFDeviceProvider: Don't requests the device list twice from DF-Service.
+        * Fix Webbrowser errors on boot
+
 4.3.6 2016-09-23
     - hp-blob
         * AdapterDevice: Change command "goto" only if parameter is zero.
