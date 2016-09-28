@@ -1,5 +1,9 @@
 Revision history for HomePilot
 
+4.4.0 2016-09-28
+    - hp-blob
+        * WebUI: Remove unused disable wlan fields, because this fields would be hide
+
 4.4.0 2016-09-27
     - hp-blob
         * HP_Server: Remove unused code
