@@ -21,9 +21,6 @@ WRC_SERVICE_DIR = "${SERVICE_ROOT}/wrc"
 WRC_REGISTER_SERVICE_DIR = "${SERVICE_ROOT}/wrc_register"
 WRC_DATA_SERVICE_DIR = "${SERVICE_ROOT}/wrc_data"
 
-WRC_BASE_DIR = "/opt/rdm/wrc"
-WRC_SCRIPTS_DIR = "${WRC_BASE_DIR}/openvpn"
-
 WRC_CONFIG_DIR = "${sysconfdir}/wrc"
 
 do_install () {
@@ -47,8 +44,6 @@ do_install () {
 
     install -m 0700 -d ${D}${WRC_CONFIG_DIR}
 
-    install -d ${D}${WRC_SCRIPTS_DIR}
-    install -m 0755 ${WORKDIR}/route-up ${D}${WRC_SCRIPTS_DIR}/route-up
+    install -d ${D}${libexecdir}
+    install -m 0755 ${WORKDIR}/route-up ${D}${libexecdir}/route-up
 }
-
-FILES_${PN} += "${SERVICE_ROOT} ${WRC_BASE_DIR} ${WRC_CONFIG_DIR}"
