@@ -9,7 +9,7 @@ HP2_INSTALL = "service-df \
 	hp2sm-zway \
 	hp-blob \
         samba-base \
-        wrkeyupload \
+        wr-known-hosts \
 	hp2sm-system-wrc${WRC_VERSION} \
 	udev-hp \
 "
