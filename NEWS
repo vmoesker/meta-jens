@@ -1,6 +1,7 @@
 Revision history for HomePilot
 
 4.4.0
+    - add wrc2 api
     - hp-blob
         * HP_Server: Remove unused code
         * ServiceAdapter: Remove unused code
@@ -15,10 +16,18 @@ Revision history for HomePilot
         * WebUI: Remove old wrc1 sources
         * Java: Remove old wrc1 souces
         * WebUI: Implement state "idle" for WRC2 implementation
+        * WebUI: Implement first WRC2 registration procedure to get registration URL
+        * WebUI: Insert WRC2 state with URL to register
+        * WebUI: Insert last state of registration on WRC2
+        * WebUI: Implement state "active" of WRC2
+        * WebUI: implement WRC2 state "offline"
+        * WebUI: Implement Pop up message when user starts deregistration
     - hp2sm
         * wrc2: add device data collection
         * wrc2: add wrc2 plugin
         * wrc1: remove wrc1 plugin
+        * wrc2: add wrc2 REST API
+        * service: remove wrc1 plugin
 
 4.3.6 2016-09-23
     - hp-blob
