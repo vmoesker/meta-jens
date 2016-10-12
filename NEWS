@@ -22,6 +22,8 @@ Revision history for HomePilot
         * WebUI: Implement state "active" of WRC2
         * WebUI: implement WRC2 state "offline"
         * WebUI: Implement Pop up message when user starts deregistration
+        * CoreDeviceManager: Provide only a copy of sbInitDevices not the reference
+        * Add UML Documentation to own folder
     - hp2sm
         * wrc2: add device data collection
         * wrc2: add wrc2 plugin
