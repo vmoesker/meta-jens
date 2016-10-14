@@ -205,6 +205,12 @@ then
 	logger "Cleanup deprecated xbmc folder"
 	test -d /data/.shadow/.home/xbmc/.xbmc && echo "/data/.shadow/.home/xbmc/.xbmc" >> /etc/overlay.mrproper
 
+	logger "Create backup"
+	if [ -d /var/lib/dropbear ]
+	then
+		test -d /data/.dropbear || cp -r /var/lib/dropbear /data/.dropbear
+	fi
+
 	if [ -f /data/.shadow/.etc/modules-load.d/wifi.conf ]
 	then
 		logger "Migrate wireless configuration"
