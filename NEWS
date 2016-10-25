@@ -2,6 +2,7 @@ Revision history for HomePilot
 
 4.4.0
     - add wrc2 api
+    - introduce new update_manifest_basename
     - prd-flash: backup host key
     - wrc-startup: add package crontab
     - hp-blob
