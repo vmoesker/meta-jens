@@ -37,6 +37,8 @@ Revision history for HomePilot
         * service: remove wrc1 plugin
         * wrc2: add update device data
         * wrc2: add check registration
+    - poky
+        * cherry pick OpenSSL CVEs
 
 4.3.6 2016-09-23
     - hp-blob
