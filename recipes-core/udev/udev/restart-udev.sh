@@ -5,8 +5,8 @@
 # Required-Stop: 
 # Default-Start:     3 5
 # Default-Stop:
-# Short-Description: restart udev to catch missing signals
+# Short-Description: re-trigger udev add to catch missing signals
 # Description:
 ### END INIT INFO
 
-/etc/init.d/udev restart
+/usr/bin/udevadm trigger -c add
