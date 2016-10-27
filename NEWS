@@ -30,6 +30,12 @@ Revision history for HomePilot
         * WebUI: Remove old WRC register dialogue
         * Add article numbers for Apple or Android smartphone devices
         * WebUI: Set the correct target to open the registration link in a new tab of browser.
+        * ZWaveDeviceProvider: Insert Logging when capabilities changed in both directions
+        * ZWaveDeviceProvider: Catch exception for every device not for complete device list
+        * ZWavedeviceProvider: Catch exception of refreshCapabilities during initalization and paring process
+        * ZWaveDeviceProvider: Optimized log output for out of bound error message
+        * CoreDeviceManager: Don't register a device in data base twice
+        * HP_Server: Extend the actor runtime to up to 255 seconds
     - hp2sm
         * wrc2: add device data collection
         * wrc2: add wrc2 plugin
@@ -40,6 +46,8 @@ Revision history for HomePilot
         * wrc2: add check registration
     - poky
         * cherry pick OpenSSL CVEs
+    - DuoFern-Service
+        * Extend the actor runtime ro up to 255 seconds
 
 4.3.6 2016-09-23
     - hp-blob
