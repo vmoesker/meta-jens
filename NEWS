@@ -5,6 +5,7 @@ Revision history for HomePilot
     - introduce new update_manifest_basename
     - prd-flash: backup host key
     - wrc-startup: add package crontab
+    - use lokal fork of System-Image-Update
     - hp-blob
         * HP_Server: Remove unused code
         * ServiceAdapter: Remove unused code
@@ -48,6 +49,8 @@ Revision history for HomePilot
         * cherry pick OpenSSL CVEs
     - DuoFern-Service
         * Extend the actor runtime ro up to 255 seconds
+    - System-Image-Update
+        * added version dependend user_agent
 
 4.3.6 2016-09-23
     - hp-blob
