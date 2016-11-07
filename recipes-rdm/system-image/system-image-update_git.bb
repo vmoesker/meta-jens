@@ -11,7 +11,7 @@ HOMEPAGE=	"https://github.com/rehsack/System-Image-Update"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Artistic-1.0;md5=cda03bbdc3c1951996392b872397b798 \
 file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
 
-SRC_URI = "git://github.com/rehsack/System-Image-Update.git;rev=57b109846393c03feb71b5d0edfd48742aafbb1f \
+SRC_URI = "git://github.com/rdm-dev/System-Image-Update.git;rev=2692bda354323736e8134e79e8b583963bce6dc2 \
            file://run \
            file://log.run \
 	   file://sysimg_update.json \
