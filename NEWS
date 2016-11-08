@@ -43,6 +43,7 @@ Revision history for HomePilot
         * CameraProvider and ZwaveDeviceProvider: Fix force removing issue
         * DFDeviceProvider: Set minimum value if input is lower than minimum
         * WebUI: Set relative URLs in REST interface for WRC2
+        * Fix deadlock by incomming status events
     - hp2sm
         * wrc2: add device data collection
         * wrc2: add wrc2 plugin
