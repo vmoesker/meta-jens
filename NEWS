@@ -6,6 +6,7 @@ Revision history for HomePilot
     - prd-flash: backup host key
     - wrc-startup: add package crontab
     - use lokal fork of System-Image-Update
+    - remove wrc_register service
     - hp-blob
         * HP_Server: Remove unused code
         * ServiceAdapter: Remove unused code
@@ -37,6 +38,10 @@ Revision history for HomePilot
         * ZWaveDeviceProvider: Optimized log output for out of bound error message
         * CoreDeviceManager: Don't register a device in data base twice
         * HP_Server: Extend the actor runtime to up to 255 seconds
+        * ZWaveDeviceProvider: Set Wakup interval every day
+        * WebUI: Check WRC access with new URL
+        * CameraProvider and ZwaveDeviceProvider: Fix force removing issue
+        * DFDeviceProvider: Set minimum value if input is lower than minimum
     - hp2sm
         * wrc2: add device data collection
         * wrc2: add wrc2 plugin
