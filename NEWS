@@ -1,6 +1,6 @@
 Revision history for HomePilot
 
-4.4.0
+4.4.0 2016-11-09
     - add wrc2 api
     - introduce new update_manifest_basename
     - prd-flash: backup host key
@@ -46,6 +46,7 @@ Revision history for HomePilot
         * WebUI: Set relative URLs in REST interface for WRC2
         * Fix deadlock by incomming status events
         * DFDeviceProvider: Reduce synchronized time to prevent deadlocks
+        * DFDeviceProvider: Remove waiting loop between DuoFern commands
     - hp2sm
         * wrc2: add device data collection
         * wrc2: add wrc2 plugin
