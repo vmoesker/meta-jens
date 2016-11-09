@@ -15,7 +15,7 @@ RDEPENDS_${PN} += "zway-blob"
 
 inherit record-installed-app gradlenative
 
-SRCREV="2b46389465958fad351f49d07135540b079c1bd8"
+SRCREV="63d3ed00c4db13168a50369fdb6881f2fcd70aeb"
 SRCBRANCH="jethro-mittelmeer"
 SRCREPO="${PN}"
 SRCUSER="rdm-dev"
