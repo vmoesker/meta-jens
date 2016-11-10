@@ -199,7 +199,6 @@ then
 	test -d /var/lib/collectd && rm -rf "/var/lib/collectd"
 
 	logger "Cleanup services"
-	test -d /data/.shadow/.etc/daemontools/service && echo "/data/.shadow/.etc/daemontools/service" >> /etc/overlay.mrproper
 	test -f /data/.shadow/.etc/sysimg_update.json && echo "/data/.shadow/.etc/sysimg_update.json" >> /etc/overlay.mrproper
 
 	logger "Cleanup deprecated xbmc folder"
