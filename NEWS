@@ -1,5 +1,9 @@
 Revision history for HomePilot
 
+4.4.1 2016-11-10
+    - prd-flash: cleanup known_hosts
+    - prd-flash: remove cleanup daemontools/service
+
 4.4.0 2016-11-09
     - add wrc2 api
     - introduce new update_manifest_basename
