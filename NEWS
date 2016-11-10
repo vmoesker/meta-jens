@@ -52,6 +52,7 @@ Revision history for HomePilot
         * DFDeviceProvider: Reduce synchronized time to prevent deadlocks
         * DFDeviceProvider: Remove waiting loop between DuoFern commands
     - hp2sm
+        * networkmgr: removed support for domain, search parameters (fixes HPBLOB-1994)
         * wrc2: add device data collection
         * wrc2: add wrc2 plugin
         * wrc1: remove wrc1 plugin
