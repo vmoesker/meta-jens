@@ -205,6 +205,9 @@ then
 	logger "Cleanup deprecated xbmc folder"
 	test -d /data/.shadow/.home/xbmc/.xbmc && echo "/data/.shadow/.home/xbmc/.xbmc" >> /etc/overlay.mrproper
 
+	logger "Cleanup known_hosts"
+	test -f /data/.shadow/.home/root/.ssh/known_hosts && echo "/data/.shadow/.home/root/.ssh/known_hosts" >> /etc/overlay.mrproper
+
 	logger "Create backup"
 	if [ -d /var/lib/dropbear ]
 	then
