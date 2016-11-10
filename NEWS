@@ -1,5 +1,11 @@
 Revision history for HomePilot
 
+4.4.2
+    - DuoFern-Service
+        * DF-Service: print status messages from UWS to Log file
+    - hp2sm
+        * networkmgr: removed support for domain, search parameters
+
 4.4.1 2016-11-10
     - prd-flash: cleanup known_hosts
     - prd-flash: remove cleanup daemontools/service
@@ -52,7 +58,6 @@ Revision history for HomePilot
         * DFDeviceProvider: Reduce synchronized time to prevent deadlocks
         * DFDeviceProvider: Remove waiting loop between DuoFern commands
     - hp2sm
-        * networkmgr: removed support for domain, search parameters (fixes HPBLOB-1994)
         * wrc2: add device data collection
         * wrc2: add wrc2 plugin
         * wrc1: remove wrc1 plugin
