@@ -5,6 +5,9 @@ Revision history for HomePilot
         * DF-Service: print status messages from UWS to Log file
     - hp2sm
         * networkmgr: removed support for domain, search parameters
+    - hp-blob
+        * CameraDeviceProvider: Inform application without synchronized about motion detection event
+
 
 4.4.1 2016-11-10
     - prd-flash: cleanup known_hosts
