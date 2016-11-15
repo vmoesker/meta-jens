@@ -6,8 +6,8 @@ Revision history for HomePilot
     - hp2sm
         * networkmgr: removed support for domain, search parameters
     - hp-blob
-        * CameraDeviceProvider: Inform application without synchronized about motion detection event
-
+        * CameraDeviceProvider: Inform application without synchronized about motion detection event 
+        * SacList and SacStateManager: Synchronize get methods to avoid Thread change between contains and get operation
 
 4.4.1 2016-11-10
     - prd-flash: cleanup known_hosts
