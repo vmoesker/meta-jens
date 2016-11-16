@@ -1,7 +1,18 @@
-# HP2 rules, Radio devices
-ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0403", ATTR{idProduct}=="6001", ATTR{manufacturer}!="Rademacher", RUN += "/etc/udev/scripts/update_tty_zwave.sh", GROUP="dialout"
-ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0658", ATTR{idProduct}=="0200", RUN += "/etc/udev/scripts/update_tty_zwave.sh", GROUP="dialout"
-ACTION=="remove", SUBSYSTEM=="tty", RUN += "/etc/udev/scripts/update_tty_zwave.sh"
+# Z-Wave old white stick
+ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", ATTRS{manufacturer}!="Rademacher", GOTO="hp_zw_start"
 
-ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0403", ATTR{idProduct}=="6001", ATTRS{manufacturer}=="Rademacher", RUN += "/etc/udev/scripts/update_tty_df.sh", GROUP="dialout"
-ACTION=="remove", SUBSYSTEM=="tty", RUN += "/etc/udev/scripts/update_tty_df.sh"
+# Z-Wave new blue stick
+ATTRS{idVendor}=="0658", ATTRS{idProduct}=="0200", GOTO="hp_zw_start"
+
+GOTO="hp_zw_end"
+
+LABEL="hp_zw_start"
+# set permissions
+SUBSYSTEM=="usb", ACTION=="add", SUBSYSTEM=="usb", GROUP="dialout"
+# add symlink and enable led
+SUBSYSTEM=="tty", ACTION=="add", TEST!="/dev/ttyZWave", SYMLINK+="ttyZWave", RUN+="/bin/sh -c '. /usr/lib/ledctrl/ledctrl && led_zwave'"
+
+LABEL="hp_zw_end"
+
+# DuoFern stick - set permissions and enable led
+SUBSYSTEM=="usb", ACTION=="add", ATTR{idVendor}=="0403", ATTR{idProduct}=="6001", ATTR{manufacturer}=="Rademacher", GROUP="dialout", RUN+="/bin/sh -c '. /usr/lib/ledctrl/ledctrl && led_duofern'"
