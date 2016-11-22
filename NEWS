@@ -1,5 +1,9 @@
 Revision history for HomePilot
 
+4.4.3
+    - hp2sm
+        * systemmanagement: validate timezone
+
 4.4.2 2016-11-16
     - add iptables rules
     - simplified udev rules for z-wave and df-stick
