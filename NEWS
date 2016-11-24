@@ -1,8 +1,10 @@
 Revision history for HomePilot
 
-4.4.3
+4.4.3 2016-11-24
+    - wrc-startup: disable openvpn timestamps
     - hp2sm
         * systemmanagement: validate timezone
+        * wrc: decrease debugging messages
     - hp-blob
         * Give every thread a name and synchronized method getRawDevices()
         * SensorActionManager: Removed unused Code and synchronized
@@ -10,6 +12,7 @@ Revision history for HomePilot
         * SbDevice: JSON request issue fixed
         * HPServer: ConcurrentModification bugs (AbstractGenericKeyedCollection, DeviceCollection)
         * SacStateManager: Fix for "ERROR SacStateManager" problem
+        * WebUI: Remove Info icon
 
 4.4.2 2016-11-16
     - add iptables rules
