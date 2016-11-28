@@ -10,11 +10,12 @@ SRC_URI += "file://wrc.run"
 SRC_URI += "file://wrc_data-log.run"
 SRC_URI += "file://wrc_data.run"
 
+RDEPENDS_${PN} += "bash"
 RDEPENDS_${PN} += "daemontools"
+RDEPENDS_${PN} += "hp2sm-system-wrc2"
 RDEPENDS_${PN} += "iptables"
 RDEPENDS_${PN} += "ntp-utils"
 RDEPENDS_${PN} += "openvpn"
-RDEPENDS_${PN} += "hp2sm-system-wrc2"
 
 SERVICE_ROOT = "${sysconfdir}/daemontools/service"
 WRC_SERVICE_DIR = "${SERVICE_ROOT}/wrc"
