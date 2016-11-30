@@ -1,5 +1,23 @@
 Revision history for HomePilot
 
+4.4.4 2016-11-30
+    - wrc-startup: configure openvpn connect-retry
+    - wrc-startup: add startup delay and reorder dependencies
+    - iptables: block outgoing udp traffic on tun+
+    - hp-blob
+        * SensorActionValidationManager: Remove synchronized
+        * DFSimulation: Enable Sun_start and Sun_Stop event for env-device (69) and tube actuator (42)
+        * ProcessDispatcher: Remove unused execute method
+        * ConfigController: Remove unused initiateCreateBackup method
+        * ScheduleManager: Remove unused code
+        * ServerboxInitHelper: Remove unused CheckForUpdateExercise
+        * ZWaveDeviceProvider: Don't get values from deregistered devices
+        * DuoFernFUPFileHandler: Change HashMap to ConcurrenHashMap
+        * CoreDeviceManager: Provides only copy of device lists instead of references
+        * WebUI: update link to release notes
+        * WRC2: adapted wordings after MM/PM review
+        * WebUI: move WRC2 deregister button to center aligned
+
 4.4.3 2016-11-24
     - wrc-startup: disable openvpn timestamps
     - hp2sm
