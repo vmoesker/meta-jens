@@ -23,6 +23,7 @@ PV = "4.0+git${SRCPV}"
 
 SRC_URI = "\
     git://git@bitbucket.org/${SRCUSER}/${SRCREPO}.git;protocol=ssh;branch=${SRCBRANCH} \
+    file://log4j-use-production-environment.patch \
     file://dfservice.run \
     file://dfservice-log.run \
     file://homepilot.run \

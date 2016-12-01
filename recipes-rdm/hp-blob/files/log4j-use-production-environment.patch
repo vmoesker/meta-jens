@@ -1,0 +1,28 @@
+diff --git a/HomePilot_Migrator/src/main/resources/log4j.properties b/HomePilot_Migrator/src/main/resources/log4j.properties
+index 4fe904c..0271267 100644
+--- a/HomePilot_Migrator/src/main/resources/log4j.properties
++++ b/HomePilot_Migrator/src/main/resources/log4j.properties
+@@ -1,7 +1,7 @@
+ # Debug
+-log4j.rootLogger = INFO, CON, STDFILE
++# log4j.rootLogger = INFO, CON, STDFILE
+ # Production
+-# log4j.rootLogger = INFO, STDFILE
++log4j.rootLogger = INFO, STDFILE
+ 
+ log4j.appender.STDFILE=org.apache.log4j.RollingFileAppender
+ log4j.appender.STDFILE.File=/var/log/hp2/migrator1.log
+diff --git a/HomePilot_Server/src/main/resources/log4j.properties b/HomePilot_Server/src/main/resources/log4j.properties
+index d1e3416..f969069 100644
+--- a/HomePilot_Server/src/main/resources/log4j.properties
++++ b/HomePilot_Server/src/main/resources/log4j.properties
+@@ -1,7 +1,7 @@
+ # Debug
+-log4j.rootLogger = INFO, CON, STDFILE
++# log4j.rootLogger = INFO, CON, STDFILE
+ # Production
+-# log4j.rootLogger = INFO, STDFILE
++log4j.rootLogger = INFO, STDFILE
+ 
+ log4j.appender.STDFILE=org.apache.log4j.RollingFileAppender
+ log4j.appender.STDFILE.File=/var/log/hp2/server.log
