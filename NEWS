@@ -1,5 +1,14 @@
 Revision history for HomePilot
 
+4.4.5
+    - configure logging to support thread dumps for hp-blob
+    - hp-blob
+        * ZWaveDeviceProvider: Start parameter requests from Z-Way after HP is initialized
+        * CoreDeviceConfigManager: Change ZWave Init sequence
+        * hp-migrator/server: update log4j properties
+    - hp2sm
+        * diagnosis: add thread dump support
+
 4.4.4 2016-11-30
     - wrc-startup: configure openvpn connect-retry
     - wrc-startup: add startup delay and reorder dependencies
