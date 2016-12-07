@@ -10,6 +10,8 @@ Revision history for HomePilot
         * AbstractMeteringProxy: Remove Thread functionality
         * ZWaveDeviecProvider: Request battery value once a day
         * ZWaveDeviecProvider: Dont start ZWTaskManager if Z-Wave is not available
+        * SceneManager: Fixing mail issue and issue with rain automation
+        * WebUI: Fix some issues with slider and automatic browser adaption
     - hp2sm
         * diagnosis: add thread dump support
         * wrc: skip startup delay on user actions
