@@ -2,7 +2,8 @@ Revision history for HomePilot
 
 4.4.6
     - prd-flash: fix file permissions for host ssh key
-
+    - hp-blob
+        * Center spinner and buttons of WRC2 registration
 4.4.5 2016-12-07
     - configure logging to support thread dumps for hp-blob
     - wrc-startup: remap-usr1 and startup delay
