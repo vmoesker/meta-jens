@@ -4,6 +4,10 @@ Revision history for HomePilot
     - prd-flash: fix file permissions for host ssh key
     - hp-blob
         * Center spinner and buttons of WRC2 registration
+        * Replace all System.out and System.err by corresponding Logger calls
+        * CoreDeviceManager: Deadlock fix
+        * DecoratedSensorAction: Fix problem with range triggered dawn and dusk automations
+
 4.4.5 2016-12-07
     - configure logging to support thread dumps for hp-blob
     - wrc-startup: remap-usr1 and startup delay
