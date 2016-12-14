@@ -7,7 +7,7 @@ Revision history for HomePilot
         * Replace all System.out and System.err by corresponding Logger calls
         * CoreDeviceManager: Deadlock fix
         * DecoratedSensorAction: Fix problem with range triggered dawn and dusk automations
-
+        * Insert new text files for WRC2
 4.4.5 2016-12-07
     - configure logging to support thread dumps for hp-blob
     - wrc-startup: remap-usr1 and startup delay
