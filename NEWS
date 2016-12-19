@@ -1,5 +1,9 @@
 Revision history for HomePilot
 
+4.4.7 2016-12-19
+    - hp-blob
+        * WebUI: Fix problem with displaying time field in automation tile
+
 4.4.6 2016-12-16
     - prd-flash: fix file permissions for host ssh key
     - remove wrc2-test package for hp2sm
