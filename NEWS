@@ -1,5 +1,10 @@
 Revision history for HomePilot
 
+4.4.8 2017-01-11
+    - hp-blob
+        * ZWaveDeviceProvider: Fake restore value of Danfoss temperature after closing automation finished
+        * Undo changes of range limit with calculated Astro times
+
 4.4.7 2016-12-19
     - hp-blob
         * WebUI: Fix problem with displaying time field in automation tile
