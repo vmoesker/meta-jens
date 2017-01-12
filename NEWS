@@ -1,5 +1,9 @@
 Revision history for HomePilot
 
+4.4.9 2017-01-12
+    - hp-blob
+        * CoreDeviceManager: Keep dbDevices data and data base in sync
+
 4.4.8 2017-01-11
     - hp-blob
         * ZWaveDeviceProvider: Fake restore value of Danfoss temperature after closing automation finished
