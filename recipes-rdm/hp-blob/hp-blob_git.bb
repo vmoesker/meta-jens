@@ -4,19 +4,18 @@ LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://${THISDIR}/files/license.txt;md5=3ebe3464e841ddbf115af1f7019017c5"
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
-DEPENDS = "zway-blob hp2-base rakudo-star"
+DEPENDS = "zway-blob hp2-base"
 RDEPENDS_${PN} += "daemontools"
 RDEPENDS_${PN} += "gnupg"
 RDEPENDS_${PN} += "hp2-base"
 RDEPENDS_${PN} += "hp2sm-system-date"
-RDEPENDS_${PN} += "rakudo-star"
 RDEPENDS_${PN} += "service-df"
 RDEPENDS_${PN} += "zway-blob"
 
 inherit record-installed-app gradlenative
 
-SRCREV="a565ba3c41dec67a2f3a57b2762cd4824357f803"
-SRCBRANCH="jethro-mittelmeer"
+SRCREV="4ab44603c8411c4ab1ad68c21ad3f85c7da225cc"
+SRCBRANCH="jethro-kiebitzsee"
 SRCREPO="${PN}"
 SRCUSER="rdm-dev"
 PV = "4.0+git${SRCPV}"
