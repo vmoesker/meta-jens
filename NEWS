@@ -13,6 +13,9 @@ Revision history for HomePilot
         * SceneManager: Synchronized scenes to update activation state immediately
         * EnvAutomationManager: Handle property latest for dawn and dusk automation
         * WebUI: Don't request a configuration value update directly after value was changed in WebUI
+        * WebUI: Update always automatic switch for in device list
+        * DFDeviceProvider: Send status update of all automations always to application
+        * WebUI: Include no device hint over LocaleObject array
 
 4.4.9 2017-01-12
     - hp-blob
