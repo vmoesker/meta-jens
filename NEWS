@@ -1,5 +1,9 @@
 Revision history for HomePilot
 
+4.5.1
+    - meta-java
+        * icedtea7-native: fix source archive checksums
+
 4.5.0
     - rakudo-star: fix SRC_URI
     - hp-blob
@@ -16,6 +20,7 @@ Revision history for HomePilot
         * WebUI: Update always automatic switch for in device list
         * DFDeviceProvider: Send status update of all automations always to application
         * WebUI: Include no device hint over LocaleObject array
+        * removed rakudo-star dependency from recipe
 
 4.4.9 2017-01-12
     - hp-blob
