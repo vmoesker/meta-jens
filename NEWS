@@ -3,6 +3,8 @@ Revision history for HomePilot
 4.5.1
     - meta-java
         * icedtea7-native: fix source archive checksums
+    - hp-blob
+        * WebUI: reduce update requests when connected via wrc2
 
 4.5.0
     - rakudo-star: fix SRC_URI
