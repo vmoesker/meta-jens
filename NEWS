@@ -5,6 +5,11 @@ Revision history for HomePilot
         * icedtea7-native: fix source archive checksums
     - hp-blob
         * WebUI: reduce update requests when connected via wrc2
+        * WebUI: Reduce Camera Image requests
+        * WebUI: Wrong link text for portal.homepilot.de
+        * Migrator: Check derby database (currently for field trial set to 1 MByte therefore refactoring will always be done)
+        * DataManagerDerby: Add logging (SQL requests)
+        * Derby: New version 10.10.2.0 -> 10.13.1.1
 
 4.5.0
     - rakudo-star: fix SRC_URI
