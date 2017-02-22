@@ -1,5 +1,10 @@
 Revision history for HomePilot
 
+4.5.2 2017-02-23
+    - wrc-startup: make ntp-wait optional
+    - hp2sm
+        * wrc: check attributes before updating device data
+
 4.5.1 2017-02-16
     - meta-java
         * icedtea7-native: fix source archive checksums
