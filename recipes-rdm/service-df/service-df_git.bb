@@ -7,10 +7,10 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 DEPENDS = "libxml2 libftdi"
 
-SRCREV="19589731d3727108dea2d92920ece443ad1dbc76"
+SRCREV="66f7b4792cf020257b829650bdcb4ddead706632"
 PV = "1.2.0+git${SRCPV}"
 
-SRC_URI = "git://git@bitbucket.org/rdm-dev/DuoFern-Service.git;protocol=ssh;branch=jethro-mittelmeer"
+SRC_URI = "git://git@bitbucket.org/rdm-dev/DuoFern-Service.git;protocol=ssh;branch=jethro-kiebitzsee"
 
 S = "${WORKDIR}/git"
 
