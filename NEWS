@@ -1,9 +1,19 @@
 Revision history for HomePilot
 
-4.5.2 2017-02-23
+4.5.2 2017-02-28
     - wrc-startup: make ntp-wait optional
+    - changed manifest to manifest-4.5.json
     - hp2sm
         * wrc: check attributes before updating device data
+        * changed manifest to manifest-4.5.json
+    - hp-blob
+        * DFDeviceProvider: Status update problem
+        * DataManagerDerby: Fix logging problem
+        * DecoratedSensorAction: Dawn/Dusk automation
+        * DFDeviceProvier: Consider only first channel for raining event
+        * ApiRequestScenesActions: Replace characters without numbers
+    - DuoFern-Service
+        * DuoFernDongleService: Avoid problem with two HP in pairing mode
 
 4.5.1 2017-02-16
     - meta-java
@@ -15,13 +25,6 @@ Revision history for HomePilot
         * Migrator: Check derby database (currently for field trial set to 1 MByte therefore refactoring will always be done)
         * DataManagerDerby: Add logging (SQL requests)
         * Derby: New version 10.10.2.0 -> 10.13.1.1
-        * DFDeviceProvider: Status update problem
-        * DataManagerDerby: Fix logging problem
-        * DecoratedSensorAction: Dawn/Dusk automation
-        * DFDeviceProvier: Consider only first channel for raining event
-        * ApiRequestScenesActions: Replace characters without numbers
-    - service-df
-        * DuoFernDongleService: Avoid problem with two HP in pairing mode
 
 4.5.0 2017-02-02
     - rakudo-star: fix SRC_URI
@@ -31,7 +34,6 @@ Revision history for HomePilot
         * AdapterDevice: Save value of position when update status partly
         * DFCapabilityHandler: Make status update to application before sending command manual mode
         * DuoFernDeviceProvider: Insert stairway functionality to device "Troll light"
-        * AdapterDevice: Save slat postion and state when fake one of these values
         * AdapterDevice: Save slat postion and state when fake one of these values
         * SceneManager: Synchronized scenes to update activation state immediately
         * EnvAutomationManager: Handle property latest for dawn and dusk automation
