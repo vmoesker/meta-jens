@@ -15,6 +15,13 @@ Revision history for HomePilot
         * Migrator: Check derby database (currently for field trial set to 1 MByte therefore refactoring will always be done)
         * DataManagerDerby: Add logging (SQL requests)
         * Derby: New version 10.10.2.0 -> 10.13.1.1
+        * DFDeviceProvider: Status update problem
+        * DataManagerDerby: Fix logging problem
+        * DecoratedSensorAction: Dawn/Dusk automation
+        * DFDeviceProvier: Consider only first channel for raining event
+        * ApiRequestScenesActions: Replace characters without numbers
+    - service-df
+        * DuoFernDongleService: Avoid problem with two HP in pairing mode
 
 4.5.0 2017-02-02
     - rakudo-star: fix SRC_URI
