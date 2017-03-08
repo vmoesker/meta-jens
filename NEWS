@@ -3,6 +3,12 @@ Revision history for HomePilot
 4.5.3
     - update script: removed obsolete cleanups and fix whitespace
     - hp2sm: get wifi/config: catch unavailable wlan0 device
+    - hp-blob
+        * Migrator: Change limit for DB reorganization to 10MB
+        * DFDeviceProvider: Catch exception in case of wrong length of Funkcode
+        * HPServer: Changes for new Help & FAQ Button
+        * WebUI: Changes for new Help & FAQ Button
+        * Texts: Changes for new Help & FAQ Button
 
 4.5.2 2017-02-28
     - wrc-startup: make ntp-wait optional
