@@ -1,6 +1,6 @@
 Revision history for HomePilot
 
-4.5.3
+4.5.3 2017-03-09
     - update script: removed obsolete cleanups and fix whitespace
     - hp2sm: get wifi/config: catch unavailable wlan0 device
     - hp-blob
