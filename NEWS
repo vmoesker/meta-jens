@@ -218,9 +218,6 @@ Revision history for HomePilot
         * DFProvider: Insert Java documentation.
         * DFProvider: Insert Java documentation and replace tab with four spaces.
         * DFProvider: Fake position by sending up or down commands.
-
-4.3.6 2016-09-22
-    - hp-blob
         * AdapterDevice: Send for all Rollo devices the command up instead of command goto pos 0
         * AdapterDevice: Insert Java documentation and replace tab with four spaces.
 
