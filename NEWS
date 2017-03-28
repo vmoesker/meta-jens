@@ -8,6 +8,8 @@ Revision history for HomePilot
         * Smartphones: Stop using old UID
         * Smartphones: Add try/catch blocks to avoid crashing of detection threads.
         * Migrator: Reduce database allways to check last changes
+    - hp2sm
+        * fix multiple migrator instances when double click save button
 
 4.5.4 2017-03-15
     - hp-blob
