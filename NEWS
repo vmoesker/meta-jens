@@ -1,5 +1,14 @@
 Revision history for HomePilot
 
+4.5.5
+    - hp-blob
+        * Migrator: Check database connection open before close it
+        * Migrator: Check if old DF-device table exists before start to read it
+        * Smartphones: Insert logging when state changed (GeoPilot)
+        * Smartphones: Stop using old UID
+        * Smartphones: Add try/catch blocks to avoid crashing of detection threads.
+        * Migrator: Reduce database allways to check last changes
+
 4.5.4 2017-03-15
     - hp-blob
         * Texts: Insert new text files (new device names, spelling & naming corrections)
