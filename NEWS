@@ -1,5 +1,8 @@
 Revision history for HomePilot
 
+4.5.7 2017-04-25
+    - no changes version built for update checks
+
 4.5.6 2017-04-13
     - hp-blob
         * Migrator: Change limit for database size to 10 MByte.
