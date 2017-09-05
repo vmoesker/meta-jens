@@ -1,5 +1,26 @@
 Revision history for HomePilot
 
+4.6.0 2017-09-05
+    - procps: add arp_ignore to sysctl.conf
+    - changed version to 4.6.0 which is the first auesee version
+    - changed manifest to manifest-@MACHINE@-4.6.json
+    - hp2sm
+        * systemmanagement: set update_manifest_basename to manifest-@MACHINE@-4.6.json
+        * wrc: fix connection state for openvpn 2.4
+    - hp-blob
+        * DFDeviceProvider: Add door window sensor device.
+        * HP-Server: Add new door window sensor device.
+    - Duofern-Service
+        * DF-Service: Define new FTK device and its sensor messages.
+    - poky
+        * openssl: Security fix CVE-2016-2179
+        * openssl: Security fix CVE-2016-8610
+    - Openembedded
+        * openvpn: 2.3.7 -> 2.3.8
+        * openvpn: 2.3.8 -> 2.3.9
+        * openvpn: 2.3.9 -> 2.4.2
+        * openvpn: 2.4.2 -> 2.4.3
+
 4.5.7 2017-04-25
     - no changes version built for update checks
 
