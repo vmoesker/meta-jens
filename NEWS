@@ -1,12 +1,14 @@
 Revision history for HomePilot
 
-4.6.0 2017-09-05
+4.6.0 2017-09-08
     - procps: add arp_ignore to sysctl.conf
     - changed version to 4.6.0 which is the first auesee version
     - changed manifest to manifest-@MACHINE@-4.6.json
+    - ntpd: add option to skip startup
     - hp2sm
         * systemmanagement: set update_manifest_basename to manifest-@MACHINE@-4.6.json
         * wrc: fix connection state for openvpn 2.4
+        * systemmanagement: add option to en-/disable ntp
     - hp-blob
         * DFDeviceProvider: Add door window sensor device.
         * HP-Server: Add new door window sensor device.
