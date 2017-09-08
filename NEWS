@@ -12,8 +12,10 @@ Revision history for HomePilot
     - hp-blob
         * DFDeviceProvider: Add door window sensor device.
         * HP-Server: Add new door window sensor device.
+        * DFDeviceProvider: Insert new dimmer device.
     - Duofern-Service
         * DF-Service: Define new FTK device and its sensor messages.
+        * DF_Service: Add new dimmer device to service.
     - poky
         * openssl: Security fix CVE-2016-2179
         * openssl: Security fix CVE-2016-8610
