@@ -3,6 +3,11 @@ Revision history for HomePilot
 4.6.1 2017-09-xx
     - hp2sm
         * system-update-image: add GET /recent_version
+    - hp-blob
+        * DFServiceSim: Add heating and door window sensor device to simulation
+        * HP-Server: Create backup into a database independent JSON format
+        * Helper-Skripte: Create backup without GPG encryption. Restore both formats
+        * Migrator: Import backup from json files into databases
 
 4.6.0 2017-09-08
     - procps: add arp_ignore to sysctl.conf
