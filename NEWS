@@ -8,7 +8,18 @@ Revision history for HomePilot
         * HP-Server: Create backup into a database independent JSON format
         * Helper-Skripte: Create backup without GPG encryption. Restore both formats
         * Migrator: Import backup from json files into databases
-
+        * DFDeviceProvider: Insert new heating controller device
+        * HP-Server: Add new heating controller device
+        * DFDeviceProvider: Implement special handler for battery devices
+        * DFDeviceProvider: Implement closing automation for heating controller
+        * SceneAction: Add device group to action in scenes
+        * HP-Server: Block update to pacific firmware over application.
+        * Web-UI: Insert update confirmation for pacific update
+        * Web-UI: Create a backup before starting firmware update to pacific firmware
+        * Web-UI: Change link to system page to solve cache problem of browsers
+    - Duofern-Service
+        * DF-Service: Add device, command, parameter and statuses of HSA device     
+   
 4.6.0 2017-09-08
     - procps: add arp_ignore to sysctl.conf
     - changed version to 4.6.0 which is the first auesee version
