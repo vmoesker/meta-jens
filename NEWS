@@ -1,6 +1,7 @@
 Revision history for HomePilot
 
 4.6.1 2017-09-xx
+    - hp-blob: add temporary backup test
     - hp2sm
         * system-update-image: add GET /recent_version
     - hp-blob
@@ -17,9 +18,10 @@ Revision history for HomePilot
         * Web-UI: Insert update confirmation for pacific update
         * Web-UI: Create a backup before starting firmware update to pacific firmware
         * Web-UI: Change link to system page to solve cache problem of browsers
+        * Backup: Change handling with execution flag.
     - Duofern-Service
-        * DF-Service: Add device, command, parameter and statuses of HSA device     
-   
+        * DF-Service: Add device, command, parameter and statuses of HSA device
+
 4.6.0 2017-09-08
     - procps: add arp_ignore to sysctl.conf
     - changed version to 4.6.0 which is the first auesee version
