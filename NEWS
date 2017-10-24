@@ -1,6 +1,6 @@
 Revision history for HomePilot
 
-4.6.1 2017-09-xx
+4.6.2 2017-10-24
     - hp-blob: add temporary backup test
     - hp2sm
         * system-update-image: add GET /recent_version
@@ -21,6 +21,9 @@ Revision history for HomePilot
         * Backup: Change handling with execution flag.
     - Duofern-Service
         * DF-Service: Add device, command, parameter and statuses of HSA device
+
+4.6.1 2017-10-23
+    - incorrect build due to missing some changed from meta-jens - obsoleted
 
 4.6.0 2017-09-08
     - procps: add arp_ignore to sysctl.conf
