@@ -1,4 +1,12 @@
 Revision history for HomePilot
+4.6.3 2017-11-14
+    - poky
+        * wpa_supplicant: fix WPA2 key replay security bug
+    - openembedded
+        * dnsmasq: upgrade to 2.78, fix several CVEs
+    - hp-blob
+        * HP-Server: Fix problem with unknown sensor messages for mails.
+        * BackupManagerDerby: Fix parsing issue from derby export.
 
 4.6.2 2017-10-24
     - hp-blob: add temporary backup test
