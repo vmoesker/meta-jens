@@ -25,7 +25,6 @@ RDM_BASE_INSTALL = "\
 	sudo \
 	nginx \
 	nginx-legal \
-	nginx-manual \
 	statgrab \
 	saidar \
 	crda \
