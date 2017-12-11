@@ -1,14 +1,14 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 SRC_URI_append = "\
-    git://git@bitbucket.org/rdm-dev/nginx-html.git;protocol=ssh;branch=jethro-ijsselmeer;name=html;destsuffix=html \
+    git://git@bitbucket.org/rdm-dev/nginx-html.git;protocol=ssh;branch=jethro-auesee;name=html;destsuffix=html \
     file://nginx-logrotate.conf \
     file://nginx-varlib.volatiles \
 "
 
-SRCREV_html = "f5cd9dc38fe3b2d58a48242fcf224a738b311610"
+SRCREV_html = "3de3d274174787a2e39eb155779763c3b19a82c0"
 
-PACKAGES_prepend = "${PN}-favs ${PN}-legal ${PN}-manual "
+PACKAGES_prepend = "${PN}-favs ${PN}-legal "
 
 do_install_append () {
 	install -d ${D}${localstatedir}/lib/nginx/
@@ -27,10 +27,7 @@ do_install_append () {
 	install -o www -g www-data -m 0755 -d ${D}${localstatedir}/www/localhost/legal
 	install -o www -g www-data -m 0644 ${WORKDIR}/html/legal/* ${D}${localstatedir}/www/localhost/legal
 
-	install -o www -g www-data -m 0755 -d ${D}${localstatedir}/www/localhost/manual
-	install -o www -g www-data -m 0644 ${WORKDIR}/html/manual/* ${D}${localstatedir}/www/localhost/manual
 }
 
 FILES_${PN}-favs = "${localstatedir}/www/localhost/favs"
 FILES_${PN}-legal = "${localstatedir}/www/localhost/legal"
-FILES_${PN}-manual = "${localstatedir}/www/localhost/manual"
