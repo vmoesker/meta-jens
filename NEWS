@@ -1,4 +1,8 @@
 Revision history for HomePilot
+
+4.6.4
+    - nginx: remove manuals
+
 4.6.3 2017-11-14
     - poky
         * wpa_supplicant: fix WPA2 key replay security bug
