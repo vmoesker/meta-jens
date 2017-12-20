@@ -6,7 +6,7 @@ SRC_URI_append = "\
     file://nginx-varlib.volatiles \
 "
 
-SRCREV_html = "3de3d274174787a2e39eb155779763c3b19a82c0"
+SRCREV_html = "33027b29f14b08d97249704c3ad4a2572b64b962"
 
 PACKAGES_prepend = "${PN}-favs ${PN}-legal "
 
