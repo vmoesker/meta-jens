@@ -1,7 +1,14 @@
 Revision history for HomePilot
 
-4.6.4
-    - nginx: remove manuals
+4.6.4 2017-12-21
+    - nginx
+        * remove manuals
+        * updated RDM logos
+    - hp-blob
+        * updated RDM logos
+        * Migrator: Rename sonsor state files with old closing message ID to the new one.
+        * WebUI: Change backup extention of new backup file.
+        * removed temporary backup test
 
 4.6.3 2017-11-14
     - poky
