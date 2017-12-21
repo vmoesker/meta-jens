@@ -9,6 +9,7 @@ Revision history for HomePilot
         * Migrator: Rename sonsor state files with old closing message ID to the new one.
         * WebUI: Change backup extention of new backup file.
         * removed temporary backup test
+        * DFDeviceProvider: Support Increment and Decrement commands
 
 4.6.3 2017-11-14
     - poky
