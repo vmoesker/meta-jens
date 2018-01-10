@@ -7,7 +7,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 DEPENDS = "libxml2 libftdi"
 
-SRCREV="5fbfce8855c1138edb8a5f789166dbeaebf41309"
+SRCREV="bb462e2eb56a1ac422922d2d72b5f90504b68231"
 PV = "1.2.0+git${SRCPV}"
 
 SRC_URI = "git://git@bitbucket.org/rdm-dev/DuoFern-Service.git;protocol=ssh;branch=jethro-auesee"
