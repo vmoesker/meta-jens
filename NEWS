@@ -1,4 +1,8 @@
 Revision history for HomePilot
+4.6.6 2018-02-26
+    - hp-blob
+        * DFDeviceProvider: Fake UP and DOWN command for dimmers in different way as rollo shutters
+        * updated the texts for the new devices hsa, ftk, dimmer and pacific update dialogs
 
 4.6.5 2018-01-10
     - hp-blob
